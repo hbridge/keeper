@@ -35,6 +35,19 @@
   [self configureCollectionView];
 }
 
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  const CGFloat CellsPerRow = 3.0;
+  CGFloat itemWidth = (self.view.frame.size.width / CellsPerRow) - (CellsPerRow - 1.0);
+  CGSize itemSize = CGSizeMake(itemWidth, itemWidth);
+  if (!CGSizeEqualToSize(itemSize, self.flowLayout.itemSize)) {
+    self.flowLayout.itemSize = itemSize;
+    [self.flowLayout invalidateLayout];
+  }
+  
+}
+
 - (void)observeNotifications
 {
   [[NSNotificationCenter defaultCenter] addObserver:self
