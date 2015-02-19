@@ -11,6 +11,8 @@
 @interface DFKeeperConstants : NSObject
 
 extern NSString *const DFPhotosChangedNotification;
+extern NSString *const DFFirebaseRootURLString;
+
 
 + (UIColor *)BarBackgroundColor;
 + (UIColor *)BarForegroundColor;

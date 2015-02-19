@@ -26,6 +26,7 @@
 #import <CocoaLumberjack/DDLog.h>
 #import "DFLogConfig.h"
 #import "DFKeeperConstants.h"
+#import "DFTypedefs.h"
 #endif
 
 #endif

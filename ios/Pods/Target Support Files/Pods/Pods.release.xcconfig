@@ -1,7 +1,7 @@
 FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/Firebase"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/Firebase" "${PODS_ROOT}/Headers/Public/SAMGradientView" "${PODS_ROOT}/Headers/Public/UIColor+BFPaperColors"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CocoaLumberjack" -isystem "${PODS_ROOT}/Headers/Public/Firebase" -isystem "${PODS_ROOT}/Headers/Public/SAMGradientView" -isystem "${PODS_ROOT}/Headers/Public/UIColor+BFPaperColors"
-OTHER_LDFLAGS = -ObjC -l"Pods-CocoaLumberjack" -l"Pods-Firebase" -l"Pods-SAMGradientView" -l"Pods-UIColor+BFPaperColors" -l"c++" -l"icucore" -framework "CFNetwork" -framework "CoreGraphics" -framework "Firebase" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/Firebase" "${PODS_ROOT}/Headers/Public/SAMGradientView" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/UIColor+BFPaperColors"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CocoaLumberjack" -isystem "${PODS_ROOT}/Headers/Public/Firebase" -isystem "${PODS_ROOT}/Headers/Public/SAMGradientView" -isystem "${PODS_ROOT}/Headers/Public/SVProgressHUD" -isystem "${PODS_ROOT}/Headers/Public/UIColor+BFPaperColors"
+OTHER_LDFLAGS = -ObjC -l"Pods-CocoaLumberjack" -l"Pods-Firebase" -l"Pods-SAMGradientView" -l"Pods-SVProgressHUD" -l"Pods-UIColor+BFPaperColors" -l"c++" -l"icucore" -framework "CFNetwork" -framework "CoreGraphics" -framework "Firebase" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods

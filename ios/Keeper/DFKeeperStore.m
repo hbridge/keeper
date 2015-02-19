@@ -36,24 +36,10 @@
 {
   self = [super init];
   if (self) {
-    self.baseRef = [[Firebase alloc] initWithUrl:@"https://blazing-heat-8620.firebaseio.com"];
+    self.baseRef = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
     self.photosRef = [_baseRef childByAppendingPath:@"photos"];
-    [self login];
   }
   return self;
-}
-
-- (void)login
-{
-  self.user = @"hbridge@gmail.com";
-  [self.photosRef authUser:self.user password:@"duffyhenry"
-       withCompletionBlock:^(NSError *error, FAuthData *authData) {
-         if (error) {
-           DDLogVerbose(@"%@ auth error: %@", self.class, error);
-         } else {
-           DDLogVerbose(@"%@ user authed authData:%@", self.class, authData);
-         }
-       }];
 }
 
 - (void)storePhoto:(DFKeeperPhoto *)photo

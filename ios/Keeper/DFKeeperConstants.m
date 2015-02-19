@@ -10,6 +10,7 @@
 #import <UIColor+BFPaperColors/UIColor+BFPaperColors.h>
 
 NSString *const DFPhotosChangedNotification = @"com.duffyapp.DFPhotosChangedNotification";
+NSString *const DFFirebaseRootURLString = @"https://blazing-heat-8620.firebaseio.com";
 
 @implementation DFKeeperConstants
 

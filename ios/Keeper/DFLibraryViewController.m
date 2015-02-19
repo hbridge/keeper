@@ -10,6 +10,7 @@
 #import "DFUIKit.h"
 #import "DFRootViewController.h"
 #import "DFKeeperStore.h"
+#import "DFLoginViewController.h"
 
 @interface DFLibraryViewController ()
 
@@ -64,6 +65,19 @@
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                target:self
                                                action:@selector(addButtonPressed:)]];
+  
+  self.navigationItem.leftBarButtonItems = @[
+                                             [[UIBarButtonItem alloc]
+                                              initWithImage:[UIImage imageNamed:@"Assets/Icons/FilterBarButton"]
+                                              style:UIBarButtonItemStylePlain
+                                              target:self
+                                              action:@selector(filterButtonPressed:)],
+                                             [[UIBarButtonItem alloc]
+                                              initWithImage:[UIImage imageNamed:@"Assets/Icons/SettingsBarButton"]
+                                              style:UIBarButtonItemStylePlain
+                                              target:self
+                                              action:@selector(settingsButtonPressed:)],
+                                             ];
 }
 
 - (void)configureCollectionView
@@ -115,6 +129,25 @@
 - (void)addButtonPressed:(id)sender
 {
   [[DFRootViewController rootViewController] showCamera];
+}
+
+- (void)filterButtonPressed:(id)sender
+{
+  
+}
+
+- (void)settingsButtonPressed:(id)sender
+{
+  DFAlertController *alertController = [DFAlertController alertControllerWithTitle:nil
+                                                                           message:nil
+                                                                    preferredStyle:DFAlertControllerStyleActionSheet];
+  [alertController addAction:[DFAlertAction
+                              actionWithTitle:@"Logout"
+                              style:DFAlertActionStyleDestructive
+                              handler:^(DFAlertAction *action) {
+                                [DFLoginViewController logoutWithParentViewController:self];
+                              }]];
+   [alertController showWithParentViewController:self animated:YES completion:nil];
 }
 
 

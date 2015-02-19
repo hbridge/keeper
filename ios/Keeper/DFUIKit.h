@@ -12,5 +12,6 @@
 #import "DFNavigationController.h"
 #import "UINib+DFHelpers.h"
 #import "DFImageCollectionViewCell.h"
+#import "DFAlertController.h"
 
 #endif

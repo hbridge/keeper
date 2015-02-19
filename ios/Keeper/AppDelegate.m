@@ -11,6 +11,7 @@
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <CocoaLumberjack/DDFileLogger.h>
 #import "DFRootViewController.h"
+#import "DFLoginViewController.h"
 
 
 @interface AppDelegate ()
@@ -44,6 +45,13 @@
 {
   DFRootViewController *rvc = [[DFRootViewController alloc] init];
   self.window.rootViewController = rvc;
+  dispatch_async(dispatch_get_main_queue(), ^{
+    if (![DFLoginViewController isUserLoggedIn]) {
+      DDLogInfo(@"User not logged in, showing login");
+      DFLoginViewController *loginVC = [[DFLoginViewController alloc] init];
+      [self.window.rootViewController presentViewController:loginVC animated:YES completion:nil];
+    }
+  });
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

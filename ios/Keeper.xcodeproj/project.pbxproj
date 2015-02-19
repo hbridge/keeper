@@ -34,6 +34,11 @@
 		5A99502B1A968DC900468484 /* DFImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950291A968DC900468484 /* DFImageCollectionViewCell.m */; };
 		5A99502C1A968DC900468484 /* DFImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A99502A1A968DC900468484 /* DFImageCollectionViewCell.xib */; };
 		5A99502F1A96983800468484 /* UINib+DFHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99502E1A96983800468484 /* UINib+DFHelpers.m */; };
+		5A9950331A969FC500468484 /* DFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950311A969FC500468484 /* DFLoginViewController.m */; };
+		5A9950341A969FC500468484 /* DFLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A9950321A969FC500468484 /* DFLoginViewController.xib */; };
+		5A9950371A96A47D00468484 /* DFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950361A96A47D00468484 /* DFAlertController.m */; };
+		5A99503B1A96A4EE00468484 /* DFAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99503A1A96A4EE00468484 /* DFAlertAction.m */; };
+		5A99503E1A96A51F00468484 /* DFTypedefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99503D1A96A51F00468484 /* DFTypedefs.m */; };
 		DC2A7B9402905231BE306701 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88AD2FD4651BA4B4CAD0AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +105,15 @@
 		5A99502A1A968DC900468484 /* DFImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		5A99502D1A96983800468484 /* UINib+DFHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINib+DFHelpers.h"; sourceTree = "<group>"; };
 		5A99502E1A96983800468484 /* UINib+DFHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINib+DFHelpers.m"; sourceTree = "<group>"; };
+		5A9950301A969FC500468484 /* DFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLoginViewController.h; sourceTree = "<group>"; };
+		5A9950311A969FC500468484 /* DFLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFLoginViewController.m; sourceTree = "<group>"; };
+		5A9950321A969FC500468484 /* DFLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFLoginViewController.xib; sourceTree = "<group>"; };
+		5A9950351A96A47D00468484 /* DFAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFAlertController.h; sourceTree = "<group>"; };
+		5A9950361A96A47D00468484 /* DFAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFAlertController.m; sourceTree = "<group>"; };
+		5A9950391A96A4EE00468484 /* DFAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFAlertAction.h; sourceTree = "<group>"; };
+		5A99503A1A96A4EE00468484 /* DFAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFAlertAction.m; sourceTree = "<group>"; };
+		5A99503C1A96A51F00468484 /* DFTypedefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTypedefs.h; sourceTree = "<group>"; };
+		5A99503D1A96A51F00468484 /* DFTypedefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTypedefs.m; sourceTree = "<group>"; };
 		C5EA541A400364F5B9C2B943 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F8622FA142075D9EFE24176B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +164,7 @@
 				5A8EB8CD1A9153F00033C540 /* AppDelegate.m */,
 				5A99500C1A96598F00468484 /* DFRootViewController.h */,
 				5A99500D1A96598F00468484 /* DFRootViewController.m */,
+				5A9950381A96A49300468484 /* Login */,
 				5A9950051A964B3200468484 /* Configuration */,
 				5A99500B1A96549900468484 /* Library */,
 				5A9950041A964B2000468484 /* Camera */,
@@ -247,6 +262,8 @@
 		5A9950151A965BAB00468484 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5A99503C1A96A51F00468484 /* DFTypedefs.h */,
+				5A99503D1A96A51F00468484 /* DFTypedefs.m */,
 				5A99501C1A965D9E00468484 /* UI Components */,
 				5A9950191A965BD500468484 /* DFKeeperConstants.h */,
 				5A99501A1A965BD500468484 /* DFKeeperConstants.m */,
@@ -258,6 +275,10 @@
 			isa = PBXGroup;
 			children = (
 				5A9950201A965E9300468484 /* DFUIKit.h */,
+				5A9950351A96A47D00468484 /* DFAlertController.h */,
+				5A9950361A96A47D00468484 /* DFAlertController.m */,
+				5A9950391A96A4EE00468484 /* DFAlertAction.h */,
+				5A99503A1A96A4EE00468484 /* DFAlertAction.m */,
 				5A99501D1A965DFA00468484 /* DFNavigationController.h */,
 				5A99501E1A965DFA00468484 /* DFNavigationController.m */,
 				5A9950281A968DC900468484 /* DFImageCollectionViewCell.h */,
@@ -276,6 +297,16 @@
 				5A9950261A967F0E00468484 /* DFKeeperPhoto.m */,
 			);
 			name = Database;
+			sourceTree = "<group>";
+		};
+		5A9950381A96A49300468484 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5A9950301A969FC500468484 /* DFLoginViewController.h */,
+				5A9950311A969FC500468484 /* DFLoginViewController.m */,
+				5A9950321A969FC500468484 /* DFLoginViewController.xib */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 		5E08625285BE9D00A627685E /* Frameworks */ = {
@@ -377,6 +408,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A9950341A969FC500468484 /* DFLoginViewController.xib in Resources */,
 				5A8EB9061A9160D80033C540 /* Podfile in Resources */,
 				5A8EB9121A92838E0033C540 /* Assets in Resources */,
 				5A8EB8F91A915E030033C540 /* DFCameraOverlayView.xib in Resources */,
@@ -434,6 +466,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A99503B1A96A4EE00468484 /* DFAlertAction.m in Sources */,
+				5A99503E1A96A51F00468484 /* DFTypedefs.m in Sources */,
 				5A9950141A965AC700468484 /* DFOverlayViewController.m in Sources */,
 				5A8EB9011A915FE00033C540 /* UIImage+DFHelpers.m in Sources */,
 				5A8EB8FB1A915E030033C540 /* DBMotionManager.m in Sources */,
@@ -443,9 +477,11 @@
 				5A99501F1A965DFA00468484 /* DFNavigationController.m in Sources */,
 				5A99502B1A968DC900468484 /* DFImageCollectionViewCell.m in Sources */,
 				5A8EB8FE1A915FCE0033C540 /* NSDateFormatter+DFPhotoDateFormatters.m in Sources */,
+				5A9950371A96A47D00468484 /* DFAlertController.m in Sources */,
 				5A8EB8F81A915E030033C540 /* DFCameraOverlayView.m in Sources */,
 				5A8EB90F1A91628C0033C540 /* DFLogConfig.m in Sources */,
 				5A8EB8F71A915E030033C540 /* DFCameraViewController.m in Sources */,
+				5A9950331A969FC500468484 /* DFLoginViewController.m in Sources */,
 				5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */,
 				5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */,
 				5A8EB8FA1A915E030033C540 /* DFAVCameraViewController.m in Sources */,
