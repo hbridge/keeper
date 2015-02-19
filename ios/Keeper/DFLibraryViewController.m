@@ -146,6 +146,7 @@
                               style:DFAlertActionStyleDestructive
                               handler:^(DFAlertAction *action) {
                                 [DFLoginViewController logoutWithParentViewController:self];
+                                abort();
                               }]];
    [alertController showWithParentViewController:self animated:YES completion:nil];
 }
