@@ -24,6 +24,12 @@
 #define COCOAPODS_VERSION_MINOR_CocoaLumberjack_Extensions 9
 #define COCOAPODS_VERSION_PATCH_CocoaLumberjack_Extensions 2
 
+// Firebase
+#define COCOAPODS_POD_AVAILABLE_Firebase
+#define COCOAPODS_VERSION_MAJOR_Firebase 2
+#define COCOAPODS_VERSION_MINOR_Firebase 2
+#define COCOAPODS_VERSION_PATCH_Firebase 0
+
 // SAMGradientView
 #define COCOAPODS_POD_AVAILABLE_SAMGradientView
 #define COCOAPODS_VERSION_MAJOR_SAMGradientView 0
@@ -35,11 +41,4 @@
 #define COCOAPODS_VERSION_MAJOR_UIColor_BFPaperColors 1
 #define COCOAPODS_VERSION_MINOR_UIColor_BFPaperColors 3
 #define COCOAPODS_VERSION_PATCH_UIColor_BFPaperColors 1
-
-// couchbase-lite-ios
-#define COCOAPODS_POD_AVAILABLE_couchbase_lite_ios
-// This library does not follow semantic-versioning,
-// so we were not able to define version macros.
-// Please contact the author.
-// Version: 1.0.3.1.
 

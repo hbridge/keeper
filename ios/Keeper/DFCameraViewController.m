@@ -9,6 +9,7 @@
 #import "DFCameraViewController.h"
 #import "DFCameraOverlayView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "DFKeeperStore.h"
 
 static NSString *const DFStrandCameraHelpWasShown = @"DFStrandCameraHelpWasShown";
 static NSString *const DFStrandCameraJoinableHelpWasShown = @"DFStrandCameraJoinableHelpWasShown";
@@ -268,6 +269,10 @@ const unsigned int SavePromptMinPhotos = 3;
      withMetadata:(NSDictionary *)metadata
       retryNumber:(int)retryNumber
 {
+  DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] init];
+  photo.image = image;
+  photo.metadata = metadata;
+  [[DFKeeperStore sharedStore] storePhoto:photo];
 }
 
 - (void)galleryButtonPressed:(id)sender

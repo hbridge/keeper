@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DFLibraryViewController : UIViewController
+@interface DFLibraryViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end

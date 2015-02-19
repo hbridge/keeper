@@ -15,5 +15,5 @@ inhibit_all_warnings!
 
 pod 'SAMGradientView', '~> 0.2'
 pod 'CocoaLumberjack', '~> 1.9'
-pod 'couchbase-lite-ios', '~> 1.0'
+pod 'Firebase', '~> 2.2'
 pod 'UIColor+BFPaperColors', '~> 1.3'

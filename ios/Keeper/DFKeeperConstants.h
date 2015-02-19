@@ -10,6 +10,8 @@
 
 @interface DFKeeperConstants : NSObject
 
+extern NSString *const DFPhotosChangedNotification;
+
 + (UIColor *)BarBackgroundColor;
 + (UIColor *)BarForegroundColor;
 + (UIStatusBarStyle)DefaultStatusBarStyle;

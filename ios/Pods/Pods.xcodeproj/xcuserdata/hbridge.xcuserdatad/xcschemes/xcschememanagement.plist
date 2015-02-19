@@ -9,17 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Firebase.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SAMGradientView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-UIColor+BFPaperColors.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-couchbase-lite-ios.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0A9FBCAED8CFC55921033BDD</key>
+		<key>016AC0258764631AEB6CBA5B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>58FB594F5BDA6D66C296FCDA</key>
+		<key>80F1089E29C5AB02962A4415</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9F474BAB54AB63D8B7DC288C</key>
+		<key>ABB9BF42A9D284B5BB2489F9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A779F3EF4DAC67BBB6626686</key>
+		<key>AE9BE0259DCAF3F1E73FC485</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E822199B35C2514032B162FA</key>
+		<key>C312EB7813498AF8F831F0DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

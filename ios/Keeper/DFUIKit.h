@@ -10,5 +10,7 @@
 #define Keeper_DFUIKit_h
 
 #import "DFNavigationController.h"
+#import "UINib+DFHelpers.h"
+#import "DFImageCollectionViewCell.h"
 
 #endif

@@ -29,6 +29,11 @@
 		5A9950141A965AC700468484 /* DFOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950131A965AC700468484 /* DFOverlayViewController.m */; };
 		5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99501A1A965BD500468484 /* DFKeeperConstants.m */; };
 		5A99501F1A965DFA00468484 /* DFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99501E1A965DFA00468484 /* DFNavigationController.m */; };
+		5A9950231A9662E300468484 /* DFKeeperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950221A9662E300468484 /* DFKeeperStore.m */; };
+		5A9950271A967F0E00468484 /* DFKeeperPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950261A967F0E00468484 /* DFKeeperPhoto.m */; };
+		5A99502B1A968DC900468484 /* DFImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950291A968DC900468484 /* DFImageCollectionViewCell.m */; };
+		5A99502C1A968DC900468484 /* DFImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A99502A1A968DC900468484 /* DFImageCollectionViewCell.xib */; };
+		5A99502F1A96983800468484 /* UINib+DFHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99502E1A96983800468484 /* UINib+DFHelpers.m */; };
 		DC2A7B9402905231BE306701 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88AD2FD4651BA4B4CAD0AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +91,15 @@
 		5A99501D1A965DFA00468484 /* DFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNavigationController.h; sourceTree = "<group>"; };
 		5A99501E1A965DFA00468484 /* DFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFNavigationController.m; sourceTree = "<group>"; };
 		5A9950201A965E9300468484 /* DFUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFUIKit.h; sourceTree = "<group>"; };
+		5A9950211A9662E300468484 /* DFKeeperStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperStore.h; sourceTree = "<group>"; };
+		5A9950221A9662E300468484 /* DFKeeperStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperStore.m; sourceTree = "<group>"; };
+		5A9950251A967F0E00468484 /* DFKeeperPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperPhoto.h; sourceTree = "<group>"; };
+		5A9950261A967F0E00468484 /* DFKeeperPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperPhoto.m; sourceTree = "<group>"; };
+		5A9950281A968DC900468484 /* DFImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageCollectionViewCell.h; sourceTree = "<group>"; };
+		5A9950291A968DC900468484 /* DFImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageCollectionViewCell.m; sourceTree = "<group>"; };
+		5A99502A1A968DC900468484 /* DFImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		5A99502D1A96983800468484 /* UINib+DFHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINib+DFHelpers.h"; sourceTree = "<group>"; };
+		5A99502E1A96983800468484 /* UINib+DFHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINib+DFHelpers.m"; sourceTree = "<group>"; };
 		C5EA541A400364F5B9C2B943 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F8622FA142075D9EFE24176B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,9 +153,10 @@
 				5A9950051A964B3200468484 /* Configuration */,
 				5A99500B1A96549900468484 /* Library */,
 				5A9950041A964B2000468484 /* Camera */,
+				5A9950241A9662ED00468484 /* Database */,
+				5A9950151A965BAB00468484 /* Common */,
 				5A8EB9021A915FE90033C540 /* Utils */,
 				5A8EB8D51A9153F00033C540 /* Images.xcassets */,
-				5A9950151A965BAB00468484 /* Common */,
 				5A8EB9111A92838E0033C540 /* Assets */,
 				5A8EB9051A9160D80033C540 /* Podfile */,
 				5A8EB8C81A9153F00033C540 /* Supporting Files */,
@@ -188,6 +203,8 @@
 				5A8EB9001A915FE00033C540 /* UIImage+DFHelpers.m */,
 				5A8EB90A1A91612C0033C540 /* UIView+DFExtensions.h */,
 				5A8EB90B1A91612C0033C540 /* UIView+DFExtensions.m */,
+				5A99502D1A96983800468484 /* UINib+DFHelpers.h */,
+				5A99502E1A96983800468484 /* UINib+DFHelpers.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -243,8 +260,22 @@
 				5A9950201A965E9300468484 /* DFUIKit.h */,
 				5A99501D1A965DFA00468484 /* DFNavigationController.h */,
 				5A99501E1A965DFA00468484 /* DFNavigationController.m */,
+				5A9950281A968DC900468484 /* DFImageCollectionViewCell.h */,
+				5A9950291A968DC900468484 /* DFImageCollectionViewCell.m */,
+				5A99502A1A968DC900468484 /* DFImageCollectionViewCell.xib */,
 			);
 			name = "UI Components";
+			sourceTree = "<group>";
+		};
+		5A9950241A9662ED00468484 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				5A9950211A9662E300468484 /* DFKeeperStore.h */,
+				5A9950221A9662E300468484 /* DFKeeperStore.m */,
+				5A9950251A967F0E00468484 /* DFKeeperPhoto.h */,
+				5A9950261A967F0E00468484 /* DFKeeperPhoto.m */,
+			);
+			name = Database;
 			sourceTree = "<group>";
 		};
 		5E08625285BE9D00A627685E /* Frameworks */ = {
@@ -349,6 +380,7 @@
 				5A8EB9061A9160D80033C540 /* Podfile in Resources */,
 				5A8EB9121A92838E0033C540 /* Assets in Resources */,
 				5A8EB8F91A915E030033C540 /* DFCameraOverlayView.xib in Resources */,
+				5A99502C1A968DC900468484 /* DFImageCollectionViewCell.xib in Resources */,
 				5A8EB8D91A9153F00033C540 /* LaunchScreen.xib in Resources */,
 				5A8EB8D61A9153F00033C540 /* Images.xcassets in Resources */,
 				5A99500A1A96548F00468484 /* DFLibraryViewController.xib in Resources */,
@@ -407,7 +439,9 @@
 				5A8EB8FB1A915E030033C540 /* DBMotionManager.m in Sources */,
 				5A99500E1A96598F00468484 /* DFRootViewController.m in Sources */,
 				5A8EB90C1A91612C0033C540 /* UIView+DFExtensions.m in Sources */,
+				5A99502F1A96983800468484 /* UINib+DFHelpers.m in Sources */,
 				5A99501F1A965DFA00468484 /* DFNavigationController.m in Sources */,
+				5A99502B1A968DC900468484 /* DFImageCollectionViewCell.m in Sources */,
 				5A8EB8FE1A915FCE0033C540 /* NSDateFormatter+DFPhotoDateFormatters.m in Sources */,
 				5A8EB8F81A915E030033C540 /* DFCameraOverlayView.m in Sources */,
 				5A8EB90F1A91628C0033C540 /* DFLogConfig.m in Sources */,
@@ -415,6 +449,8 @@
 				5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */,
 				5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */,
 				5A8EB8FA1A915E030033C540 /* DFAVCameraViewController.m in Sources */,
+				5A9950271A967F0E00468484 /* DFKeeperPhoto.m in Sources */,
+				5A9950231A9662E300468484 /* DFKeeperStore.m in Sources */,
 				5A9950091A96548F00468484 /* DFLibraryViewController.m in Sources */,
 				5A8EB8CB1A9153F00033C540 /* main.m in Sources */,
 			);

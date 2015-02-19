@@ -9,6 +9,8 @@
 #import "DFKeeperConstants.h"
 #import <UIColor+BFPaperColors/UIColor+BFPaperColors.h>
 
+NSString *const DFPhotosChangedNotification = @"com.duffyapp.DFPhotosChangedNotification";
+
 @implementation DFKeeperConstants
 
 + (UIColor *)BarBackgroundColor
