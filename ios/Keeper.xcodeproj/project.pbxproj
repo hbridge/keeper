@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5A8EB8CB1A9153F00033C540 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CA1A9153F00033C540 /* main.m */; };
 		5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CD1A9153F00033C540 /* AppDelegate.m */; };
-		5A8EB8D41A9153F00033C540 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A8EB8D21A9153F00033C540 /* Main.storyboard */; };
 		5A8EB8D61A9153F00033C540 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A8EB8D51A9153F00033C540 /* Images.xcassets */; };
 		5A8EB8D91A9153F00033C540 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A8EB8D71A9153F00033C540 /* LaunchScreen.xib */; };
 		5A8EB8E51A9153F00033C540 /* KeeperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8E41A9153F00033C540 /* KeeperTests.m */; };
@@ -24,6 +23,12 @@
 		5A8EB90C1A91612C0033C540 /* UIView+DFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB90B1A91612C0033C540 /* UIView+DFExtensions.m */; };
 		5A8EB90F1A91628C0033C540 /* DFLogConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB90E1A91628C0033C540 /* DFLogConfig.m */; };
 		5A8EB9121A92838E0033C540 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 5A8EB9111A92838E0033C540 /* Assets */; };
+		5A9950091A96548F00468484 /* DFLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950071A96548F00468484 /* DFLibraryViewController.m */; };
+		5A99500A1A96548F00468484 /* DFLibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A9950081A96548F00468484 /* DFLibraryViewController.xib */; };
+		5A99500E1A96598F00468484 /* DFRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99500D1A96598F00468484 /* DFRootViewController.m */; };
+		5A9950141A965AC700468484 /* DFOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950131A965AC700468484 /* DFOverlayViewController.m */; };
+		5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99501A1A965BD500468484 /* DFKeeperConstants.m */; };
+		5A99501F1A965DFA00468484 /* DFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99501E1A965DFA00468484 /* DFNavigationController.m */; };
 		DC2A7B9402905231BE306701 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88AD2FD4651BA4B4CAD0AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +49,6 @@
 		5A8EB8CA1A9153F00033C540 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A8EB8CC1A9153F00033C540 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A8EB8CD1A9153F00033C540 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5A8EB8D31A9153F00033C540 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5A8EB8D51A9153F00033C540 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5A8EB8D81A9153F00033C540 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5A8EB8DE1A9153F00033C540 /* KeeperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeeperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +74,18 @@
 		5A8EB90E1A91628C0033C540 /* DFLogConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFLogConfig.m; sourceTree = "<group>"; };
 		5A8EB9101A9163330033C540 /* KeeperPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeeperPrefixHeader.pch; sourceTree = "<group>"; };
 		5A8EB9111A92838E0033C540 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets; sourceTree = "<group>"; };
+		5A9950061A96548F00468484 /* DFLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLibraryViewController.h; sourceTree = "<group>"; };
+		5A9950071A96548F00468484 /* DFLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFLibraryViewController.m; sourceTree = "<group>"; };
+		5A9950081A96548F00468484 /* DFLibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFLibraryViewController.xib; sourceTree = "<group>"; };
+		5A99500C1A96598F00468484 /* DFRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFRootViewController.h; sourceTree = "<group>"; };
+		5A99500D1A96598F00468484 /* DFRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFRootViewController.m; sourceTree = "<group>"; };
+		5A9950121A965AC700468484 /* DFOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFOverlayViewController.h; sourceTree = "<group>"; };
+		5A9950131A965AC700468484 /* DFOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFOverlayViewController.m; sourceTree = "<group>"; };
+		5A9950191A965BD500468484 /* DFKeeperConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperConstants.h; sourceTree = "<group>"; };
+		5A99501A1A965BD500468484 /* DFKeeperConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperConstants.m; sourceTree = "<group>"; };
+		5A99501D1A965DFA00468484 /* DFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNavigationController.h; sourceTree = "<group>"; };
+		5A99501E1A965DFA00468484 /* DFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFNavigationController.m; sourceTree = "<group>"; };
+		5A9950201A965E9300468484 /* DFUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFUIKit.h; sourceTree = "<group>"; };
 		C5EA541A400364F5B9C2B943 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F8622FA142075D9EFE24176B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,14 +134,14 @@
 			children = (
 				5A8EB8CC1A9153F00033C540 /* AppDelegate.h */,
 				5A8EB8CD1A9153F00033C540 /* AppDelegate.m */,
+				5A99500C1A96598F00468484 /* DFRootViewController.h */,
+				5A99500D1A96598F00468484 /* DFRootViewController.m */,
 				5A9950051A964B3200468484 /* Configuration */,
+				5A99500B1A96549900468484 /* Library */,
 				5A9950041A964B2000468484 /* Camera */,
 				5A8EB9021A915FE90033C540 /* Utils */,
-				5A8EB8F51A915E030033C540 /* DBMotionManager.h */,
-				5A8EB8F61A915E030033C540 /* DBMotionManager.m */,
-				5A8EB8D21A9153F00033C540 /* Main.storyboard */,
 				5A8EB8D51A9153F00033C540 /* Images.xcassets */,
-				5A8EB8D71A9153F00033C540 /* LaunchScreen.xib */,
+				5A9950151A965BAB00468484 /* Common */,
 				5A8EB9111A92838E0033C540 /* Assets */,
 				5A8EB9051A9160D80033C540 /* Podfile */,
 				5A8EB8C81A9153F00033C540 /* Supporting Files */,
@@ -136,6 +152,7 @@
 		5A8EB8C81A9153F00033C540 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5A8EB8D71A9153F00033C540 /* LaunchScreen.xib */,
 				5A8EB8C91A9153F00033C540 /* Info.plist */,
 				5A8EB8CA1A9153F00033C540 /* main.m */,
 				5A8EB9101A9163330033C540 /* KeeperPrefixHeader.pch */,
@@ -163,6 +180,8 @@
 		5A8EB9021A915FE90033C540 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5A9950121A965AC700468484 /* DFOverlayViewController.h */,
+				5A9950131A965AC700468484 /* DFOverlayViewController.m */,
 				5A8EB8FC1A915FCE0033C540 /* NSDateFormatter+DFPhotoDateFormatters.h */,
 				5A8EB8FD1A915FCE0033C540 /* NSDateFormatter+DFPhotoDateFormatters.m */,
 				5A8EB8FF1A915FE00033C540 /* UIImage+DFHelpers.h */,
@@ -183,6 +202,8 @@
 				5A8EB8F21A915E030033C540 /* DFCameraOverlayView.xib */,
 				5A8EB8F31A915E030033C540 /* DFAVCameraViewController.h */,
 				5A8EB8F41A915E030033C540 /* DFAVCameraViewController.m */,
+				5A8EB8F51A915E030033C540 /* DBMotionManager.h */,
+				5A8EB8F61A915E030033C540 /* DBMotionManager.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -194,6 +215,36 @@
 				5A8EB90E1A91628C0033C540 /* DFLogConfig.m */,
 			);
 			name = Configuration;
+			sourceTree = "<group>";
+		};
+		5A99500B1A96549900468484 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				5A9950061A96548F00468484 /* DFLibraryViewController.h */,
+				5A9950071A96548F00468484 /* DFLibraryViewController.m */,
+				5A9950081A96548F00468484 /* DFLibraryViewController.xib */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		5A9950151A965BAB00468484 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5A99501C1A965D9E00468484 /* UI Components */,
+				5A9950191A965BD500468484 /* DFKeeperConstants.h */,
+				5A99501A1A965BD500468484 /* DFKeeperConstants.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		5A99501C1A965D9E00468484 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				5A9950201A965E9300468484 /* DFUIKit.h */,
+				5A99501D1A965DFA00468484 /* DFNavigationController.h */,
+				5A99501E1A965DFA00468484 /* DFNavigationController.m */,
+			);
+			name = "UI Components";
 			sourceTree = "<group>";
 		};
 		5E08625285BE9D00A627685E /* Frameworks */ = {
@@ -298,9 +349,9 @@
 				5A8EB9061A9160D80033C540 /* Podfile in Resources */,
 				5A8EB9121A92838E0033C540 /* Assets in Resources */,
 				5A8EB8F91A915E030033C540 /* DFCameraOverlayView.xib in Resources */,
-				5A8EB8D41A9153F00033C540 /* Main.storyboard in Resources */,
 				5A8EB8D91A9153F00033C540 /* LaunchScreen.xib in Resources */,
 				5A8EB8D61A9153F00033C540 /* Images.xcassets in Resources */,
+				5A99500A1A96548F00468484 /* DFLibraryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,15 +402,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A9950141A965AC700468484 /* DFOverlayViewController.m in Sources */,
 				5A8EB9011A915FE00033C540 /* UIImage+DFHelpers.m in Sources */,
 				5A8EB8FB1A915E030033C540 /* DBMotionManager.m in Sources */,
+				5A99500E1A96598F00468484 /* DFRootViewController.m in Sources */,
 				5A8EB90C1A91612C0033C540 /* UIView+DFExtensions.m in Sources */,
+				5A99501F1A965DFA00468484 /* DFNavigationController.m in Sources */,
 				5A8EB8FE1A915FCE0033C540 /* NSDateFormatter+DFPhotoDateFormatters.m in Sources */,
 				5A8EB8F81A915E030033C540 /* DFCameraOverlayView.m in Sources */,
 				5A8EB90F1A91628C0033C540 /* DFLogConfig.m in Sources */,
 				5A8EB8F71A915E030033C540 /* DFCameraViewController.m in Sources */,
+				5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */,
 				5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */,
 				5A8EB8FA1A915E030033C540 /* DFAVCameraViewController.m in Sources */,
+				5A9950091A96548F00468484 /* DFLibraryViewController.m in Sources */,
 				5A8EB8CB1A9153F00033C540 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,14 +439,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5A8EB8D21A9153F00033C540 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5A8EB8D31A9153F00033C540 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5A8EB8D71A9153F00033C540 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -270,6 +270,11 @@ const unsigned int SavePromptMinPhotos = 3;
 {
 }
 
+- (void)galleryButtonPressed:(id)sender
+{
+  
+}
+
 
 
 @end

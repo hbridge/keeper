@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-UIColor+BFPaperColors.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-couchbase-lite-ios.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>060FDE56EB0ABBFB632FCF3A</key>
+		<key>0A9FBCAED8CFC55921033BDD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0FF362F51CAA19807D80EFAC</key>
+		<key>58FB594F5BDA6D66C296FCDA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>12818F689F2CC503341A52BF</key>
+		<key>9F474BAB54AB63D8B7DC288C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>367BEB73BA9CF326971FD406</key>
+		<key>A779F3EF4DAC67BBB6626686</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E822199B35C2514032B162FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

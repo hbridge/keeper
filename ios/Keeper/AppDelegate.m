@@ -10,6 +10,7 @@
 #import <CocoaLumberjack/DDASLLogger.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <CocoaLumberjack/DDFileLogger.h>
+#import "DFRootViewController.h"
 
 
 @interface AppDelegate ()
@@ -22,8 +23,27 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  // Override point for customization after application launch.
+  [self configureLogs];
+  [self configureUI];
+
   return YES;
+}
+
+- (void)configureUI
+{
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  [self.window makeKeyAndVisible];
+  
+  if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
+    // only create views etc if we're not being launched in the background
+    [self showMainView];
+  }
+}
+
+- (void)showMainView
+{
+  DFRootViewController *rvc = [[DFRootViewController alloc] init];
+  self.window.rootViewController = rvc;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
