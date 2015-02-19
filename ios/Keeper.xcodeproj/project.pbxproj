@@ -483,6 +483,7 @@
 			baseConfigurationReference = F8622FA142075D9EFE24176B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = Keeper/KeeperPrefixHeader.pch;
 				INFOPLIST_FILE = Keeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -496,6 +497,7 @@
 			baseConfigurationReference = C5EA541A400364F5B9C2B943 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = Keeper/KeeperPrefixHeader.pch;
 				INFOPLIST_FILE = Keeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

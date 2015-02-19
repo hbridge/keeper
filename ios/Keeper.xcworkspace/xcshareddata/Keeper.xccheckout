@@ -6,31 +6,35 @@
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>8D21FF84-B169-48DE-8DC2-3474F6682645</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Keeper</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>FF92DAC397099317DBC9FE4BB456C809D220365C</key>
-		<string>https://github.com/hbridge/Duffy.git</string>
+		<key>A1AE32ADCF18193A9E185BBFCA6C1EC6CB3ECD75</key>
+		<string>https://github.com/hbridge/keeper.git</string>
 	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios/Keeper.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>FF92DAC397099317DBC9FE4BB456C809D220365C</key>
-		<string>Duffy/</string>
+		<key>A1AE32ADCF18193A9E185BBFCA6C1EC6CB3ECD75</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/hbridge/Duffy.git</string>
+	<string>https://github.com/hbridge/keeper.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>FF92DAC397099317DBC9FE4BB456C809D220365C</string>
+	<string>A1AE32ADCF18193A9E185BBFCA6C1EC6CB3ECD75</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FF92DAC397099317DBC9FE4BB456C809D220365C</string>
+			<string>A1AE32ADCF18193A9E185BBFCA6C1EC6CB3ECD75</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Duffy</string>
+			<string>keeper</string>
 		</dict>
 	</array>
 </dict>
