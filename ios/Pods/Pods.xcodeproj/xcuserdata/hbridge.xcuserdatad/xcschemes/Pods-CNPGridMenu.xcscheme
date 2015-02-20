@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "676ADA9B1CD91ED1DD5E76F9"
-               BuildableName = "libPods-UIColor+BFPaperColors.a"
-               BlueprintName = "Pods-UIColor+BFPaperColors"
+               BlueprintIdentifier = "262A18C390D02FF20C466C2B"
+               BuildableName = "libPods-CNPGridMenu.a"
+               BlueprintName = "Pods-CNPGridMenu"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

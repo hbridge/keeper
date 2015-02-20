@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "DFAVCameraViewController.h"
+#import <CNPGridMenu/CNPGridMenu.h>
 
 @class DFCameraOverlayView;
 
-@interface DFCameraViewController : DFAVCameraViewController <DFAVCameraViewControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UIAlertViewDelegate>
+@interface DFCameraViewController : DFAVCameraViewController <DFAVCameraViewControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, CNPGridMenuDelegate>
 
 @property (nonatomic, readonly, retain) DFCameraOverlayView *customCameraOverlayView;
 

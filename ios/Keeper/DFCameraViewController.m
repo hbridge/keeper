@@ -27,6 +27,10 @@ const unsigned int SavePromptMinPhotos = 3;
 @property (nonatomic, retain) NSTimer *updateUITimer;
 @property (nonatomic, retain) NSDate *lastWifiPromptDate;
 
+
+@property (nonatomic, retain) UIImage* lastImageCaptured;
+@property (nonatomic, retain) NSDictionary *lastMetadataCaptured;
+
 @end
 
 @implementation DFCameraViewController
@@ -236,9 +240,49 @@ const unsigned int SavePromptMinPhotos = 3;
 {
   DDLogInfo(@"%@ image captured", [self.class description]);
   
+  CNPGridMenu *gridMenu = [[CNPGridMenu alloc] initWithMenuItems:
+  @[
+    [DFCameraViewController gridMenuItemWithTitle:@"Document"],
+    [DFCameraViewController gridMenuItemWithTitle:@"Receipt"],
+    [DFCameraViewController gridMenuItemWithTitle:@"Architecture"],
+    [DFCameraViewController gridMenuItemWithTitle:@"Card"],
+    [DFCameraViewController gridMenuItemWithTitle:@"Note"],
+    [DFCameraViewController gridMenuItemWithTitle:@"Art"],
+    [DFCameraViewController gridMenuItemWithTitle:@"Buy"],
+    [DFCameraViewController gridMenuItemWithTitle:@"Clothing"],
+    [DFCameraViewController gridMenuItemWithTitle:@"Screenshot"],
+    ]];
   
-  [self saveImage:image withMetadata:metadata retryNumber:0];
-  [self animateImageCaptured:image];
+  gridMenu.delegate = self;
+  [self presentGridMenu:gridMenu animated:YES completion:nil];
+  
+  self.lastImageCaptured = image;
+  self.lastMetadataCaptured = metadata;
+}
+
++ (CNPGridMenuItem *)gridMenuItemWithTitle:(NSString *)title
+{
+  CNPGridMenuItem *item = [CNPGridMenuItem new];
+  item.title = title;
+  NSString *imagePath = [NSString stringWithFormat:@"Assets/Icons/%@GridIcon", title];
+  item.icon = [UIImage imageNamed:imagePath];
+  return item;
+}
+
+- (void)gridMenuDidTapOnBackground:(CNPGridMenu *)menu
+{
+  DDLogInfo(@"tapped menu bg");
+  [self dismissGridMenuAnimated:YES completion:nil];
+}
+
+- (void)gridMenu:(CNPGridMenu *)menu didTapOnItem:(CNPGridMenuItem *)item
+{
+  [self saveImage:self.lastImageCaptured
+             text:item.title
+     withMetadata:self.lastMetadataCaptured
+      retryNumber:0];
+  [self dismissGridMenuAnimated:YES completion:nil];
+  DDLogInfo(@"tapped category: %@", item.title);
 }
 
 - (void)animateImageCaptured:(UIImage *)image{
@@ -266,11 +310,13 @@ const unsigned int SavePromptMinPhotos = 3;
 }
 
 - (void)saveImage:(UIImage *)image
+             text:(NSString *)text
      withMetadata:(NSDictionary *)metadata
       retryNumber:(int)retryNumber
 {
   DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] init];
   photo.image = image;
+  photo.text = text;
   photo.metadata = metadata;
   [[DFKeeperStore sharedStore] storePhoto:photo];
 }
