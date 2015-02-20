@@ -148,6 +148,11 @@
                                 [DFLoginViewController logoutWithParentViewController:self];
                                 abort();
                               }]];
+  [alertController addAction:[DFAlertAction
+                              actionWithTitle:@"Cancel"
+                              style:DFAlertActionStyleCancel
+                              handler:^(DFAlertAction *action) {
+                              }]];
    [alertController showWithParentViewController:self animated:YES completion:nil];
 }
 
