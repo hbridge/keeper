@@ -35,6 +35,8 @@
   self = [super init];
   if (!self) return nil;
   
+  if (![snapshot.value isKindOfClass:[FDataSnapshot class]]) return self;
+  
   //key
   self.key = snapshot.key;
   

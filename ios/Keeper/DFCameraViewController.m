@@ -12,6 +12,7 @@
 #import "DFKeeperStore.h"
 #import "UIImage+Resize.h"
 #import "DFUser.h"
+#import "DFCategoryConstants.h"
 
 static NSString *const DFStrandCameraHelpWasShown = @"DFStrandCameraHelpWasShown";
 static NSString *const DFStrandCameraJoinableHelpWasShown = @"DFStrandCameraJoinableHelpWasShown";
@@ -242,33 +243,20 @@ const unsigned int SavePromptMinPhotos = 3;
 {
   DDLogInfo(@"%@ image captured", [self.class description]);
   
-  CNPGridMenu *gridMenu = [[CNPGridMenu alloc] initWithMenuItems:
-  @[
-    [DFCameraViewController gridMenuItemWithTitle:@"Document"],
-    [DFCameraViewController gridMenuItemWithTitle:@"Receipt"],
-    [DFCameraViewController gridMenuItemWithTitle:@"Architecture"],
-    [DFCameraViewController gridMenuItemWithTitle:@"Card"],
-    [DFCameraViewController gridMenuItemWithTitle:@"Note"],
-    [DFCameraViewController gridMenuItemWithTitle:@"Art"],
-    [DFCameraViewController gridMenuItemWithTitle:@"Buy"],
-    [DFCameraViewController gridMenuItemWithTitle:@"Clothing"],
-    [DFCameraViewController gridMenuItemWithTitle:@"Screenshot"],
-    ]];
+  NSArray *items =
+  [[DFCategoryConstants defaultCategoryNames] arrayByMappingObjectsWithBlock:^id(NSString *title) {
+    CNPGridMenuItem *item = [CNPGridMenuItem new];
+    item.title = title;
+    item.icon = [DFCategoryConstants gridIconForCategory:title];
+    return item;
+  }];
+  CNPGridMenu *gridMenu = [[CNPGridMenu alloc] initWithMenuItems:items];
   
   gridMenu.delegate = self;
   [self presentGridMenu:gridMenu animated:YES completion:nil];
   
   self.lastImageCaptured = image;
   self.lastMetadataCaptured = metadata;
-}
-
-+ (CNPGridMenuItem *)gridMenuItemWithTitle:(NSString *)title
-{
-  CNPGridMenuItem *item = [CNPGridMenuItem new];
-  item.title = title;
-  NSString *imagePath = [NSString stringWithFormat:@"Assets/Icons/%@GridIcon", title];
-  item.icon = [UIImage imageNamed:imagePath];
-  return item;
 }
 
 - (void)gridMenuDidTapOnBackground:(CNPGridMenu *)menu

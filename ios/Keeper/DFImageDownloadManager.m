@@ -113,17 +113,23 @@ static DFImageDownloadManager *defaultManager;
    withPriority:queuePriority
    executeBlockOnce:^id{
      @autoreleasepool {
+       NSMutableDictionary *result = [NSMutableDictionary new];
        dispatch_semaphore_t downloadSem = dispatch_semaphore_create(0);
        DFKeeperImage __block *keeperImage = nil;
        [[self.imageDataRef childByAppendingPath:key]
         observeSingleEventOfType:FEventTypeValue
         withBlock:^(FDataSnapshot *snapshot) {
-          keeperImage = [[DFKeeperImage alloc] initWithSnapshot:snapshot];
+          if (![snapshot isEqual:[NSNull null]]) {
+            keeperImage = [[DFKeeperImage alloc] initWithSnapshot:snapshot];
+          } else {
+            result[@"error"] = [NSError errorWithDomain:@"com.duffyapp.keeper"
+                                                   code:-404
+                                               userInfo:@{NSLocalizedDescriptionKey : @"The image couldn't be found"}];
+          }
           dispatch_semaphore_signal(downloadSem);
        }];
        dispatch_semaphore_wait(downloadSem, DISPATCH_TIME_FOREVER);
        
-       NSMutableDictionary *result = [NSMutableDictionary new];
        if (keeperImage) {
          UIImage *image = [keeperImage UIImage];
          if (image) {

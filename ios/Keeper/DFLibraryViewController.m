@@ -12,6 +12,7 @@
 #import "DFKeeperStore.h"
 #import "DFLoginViewController.h"
 #import "DFImageManager.h"
+#import "DFKeeperPhotoViewController.h"
 
 @interface DFLibraryViewController ()
 
@@ -163,6 +164,13 @@
                               handler:^(DFAlertAction *action) {
                               }]];
    [alertController showWithParentViewController:self animated:YES completion:nil];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  DFKeeperPhotoViewController *pvc = [[DFKeeperPhotoViewController alloc] init];
+  pvc.photo = self.allPhotos[indexPath.row];
+  [self.navigationController pushViewController:pvc animated:YES];
 }
 
 

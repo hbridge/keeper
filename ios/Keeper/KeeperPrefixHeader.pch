@@ -28,6 +28,7 @@
 #import "DFKeeperConstants.h"
 #import "DFTypedefs.h"
 #import "NSString+DFHelpers.h"
+#import "NSArray+DFHelpers.h"
 
 #endif
 
