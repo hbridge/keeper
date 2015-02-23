@@ -63,14 +63,27 @@
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     self.allPhotos = [NSMutableArray new];
-    [[self.photosRef queryOrderedByChild:@"saveDate"] observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-      DFKeeperPhoto *keeperPhoto = [[DFKeeperPhoto alloc] initWithSnapshot:snapshot];
-      [self.allPhotos addObject:keeperPhoto];
-      dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
-                                                            object:self];
-      });
-    }];
+    [[[self.photosRef queryOrderedByChild:@"user"]
+      queryEqualToValue:[DFUser loggedInUser]]
+     observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+       DFKeeperPhoto *keeperPhoto = [[DFKeeperPhoto alloc] initWithSnapshot:snapshot];
+       
+       // add the photo at the right spot in the array
+       BOOL inserted = NO;
+       for (NSUInteger i = 0; i < self.allPhotos.count; i++) {
+         if ([keeperPhoto.saveDate timeIntervalSinceDate:[self.allPhotos[i] saveDate]] >= 0) {
+           [self.allPhotos insertObject:keeperPhoto atIndex:i];
+           inserted = YES;
+           break;
+         }
+       }
+       if (!inserted)
+         [self.allPhotos addObject:keeperPhoto];
+       dispatch_async(dispatch_get_main_queue(), ^{
+         [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
+                                                             object:self];
+       });
+     }];
     [[self.photosRef queryOrderedByKey] observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
       for (NSUInteger i = 0; i < self.allPhotos.count; i++) {
         DFKeeperPhoto *photo = self.allPhotos[i];
@@ -82,7 +95,7 @@
                                                             object:self];
       }
     }];
-
+    
   });
   return [self.allPhotos copy];
 }
