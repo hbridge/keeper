@@ -14,6 +14,7 @@
 #import "DFImageManager.h"
 #import "DFKeeperPhotoViewController.h"
 #import "DFCategoryConstants.h"
+#import "DFAnalytics.h"
 
 @interface DFLibraryViewController ()
 
@@ -38,6 +39,12 @@
   
   [self configureNav];
   [self configureCollectionView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [DFAnalytics logViewController:self appearedWithParameters:nil];
 }
 
 - (void)viewDidLayoutSubviews
@@ -171,6 +178,8 @@
 - (void)gridMenuDidTapOnBackground:(CNPGridMenu *)menu
 {
   [self dismissGridMenuAnimated:YES completion:nil];
+  [DFAnalytics logEvent:DFAnalyticsEventLibraryFiltered
+         withParameters:@{@"category" : @"cancelled"}];
 }
 
 - (void)gridMenu:(CNPGridMenu *)menu didTapOnItem:(CNPGridMenuItem *)item
@@ -180,6 +189,8 @@
   libraryVC.categoryFilter = category;
   [self dismissGridMenuAnimated:YES completion:nil];
   [self.navigationController pushViewController:libraryVC animated:NO];
+  [DFAnalytics logEvent:DFAnalyticsEventLibraryFiltered
+         withParameters:@{@"category" : category}];
 }
 
 - (void)settingsButtonPressed:(id)sender
@@ -207,6 +218,8 @@
   DFKeeperPhotoViewController *pvc = [[DFKeeperPhotoViewController alloc] init];
   pvc.photo = self.allPhotos[indexPath.row];
   [self.navigationController pushViewController:pvc animated:YES];
+  [DFAnalytics logEvent:DFAnalyticsEventLibraryPhotoTapped
+         withParameters:@{@"categoryFilter" : self.categoryFilter ? self.categoryFilter : @"none"}];
 }
 
 

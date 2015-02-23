@@ -54,6 +54,18 @@
 #define COCOAPODS_VERSION_MINOR_Firebase 2
 #define COCOAPODS_VERSION_PATCH_Firebase 0
 
+// HockeySDK
+#define COCOAPODS_POD_AVAILABLE_HockeySDK
+#define COCOAPODS_VERSION_MAJOR_HockeySDK 3
+#define COCOAPODS_VERSION_MINOR_HockeySDK 6
+#define COCOAPODS_VERSION_PATCH_HockeySDK 2
+
+// Localytics
+#define COCOAPODS_POD_AVAILABLE_Localytics
+#define COCOAPODS_VERSION_MAJOR_Localytics 3
+#define COCOAPODS_VERSION_MINOR_Localytics 1
+#define COCOAPODS_VERSION_PATCH_Localytics 0
+
 // SAMGradientView
 #define COCOAPODS_POD_AVAILABLE_SAMGradientView
 #define COCOAPODS_VERSION_MAJOR_SAMGradientView 0

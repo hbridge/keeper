@@ -1,5 +1,5 @@
 #include "Pods-CNPGridMenu.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/CNPGridMenu" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CNPGridMenu" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/Firebase" "${PODS_ROOT}/Headers/Public/SAMGradientView" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/UIColor+BFPaperColors"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/CNPGridMenu" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CNPGridMenu" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/Firebase" "${PODS_ROOT}/Headers/Public/HockeySDK" "${PODS_ROOT}/Headers/Public/Localytics" "${PODS_ROOT}/Headers/Public/SAMGradientView" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/UIColor+BFPaperColors"
 OTHER_LDFLAGS = -ObjC
 PODS_ROOT = ${SRCROOT}

@@ -20,6 +20,7 @@
 		5A677D5E1A9BD8030060B55D /* DFKeeperPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A677D5C1A9BD8030060B55D /* DFKeeperPhotoViewController.xib */; };
 		5A677D611A9BDA2F0060B55D /* DFCategoryConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D601A9BDA2F0060B55D /* DFCategoryConstants.m */; };
 		5A677D641A9BDB2B0060B55D /* NSArray+DFHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D631A9BDB2B0060B55D /* NSArray+DFHelpers.m */; };
+		5A677D671A9BEC2D0060B55D /* DFAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D661A9BEC2D0060B55D /* DFAnalytics.m */; };
 		5A8EB8CB1A9153F00033C540 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CA1A9153F00033C540 /* main.m */; };
 		5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CD1A9153F00033C540 /* AppDelegate.m */; };
 		5A8EB8D61A9153F00033C540 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A8EB8D51A9153F00033C540 /* Images.xcassets */; };
@@ -97,6 +98,8 @@
 		5A677D601A9BDA2F0060B55D /* DFCategoryConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCategoryConstants.m; sourceTree = "<group>"; };
 		5A677D621A9BDB2B0060B55D /* NSArray+DFHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DFHelpers.h"; sourceTree = "<group>"; };
 		5A677D631A9BDB2B0060B55D /* NSArray+DFHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DFHelpers.m"; sourceTree = "<group>"; };
+		5A677D651A9BEC2D0060B55D /* DFAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFAnalytics.h; sourceTree = "<group>"; };
+		5A677D661A9BEC2D0060B55D /* DFAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFAnalytics.m; sourceTree = "<group>"; };
 		5A8EB8C51A9153F00033C540 /* Keeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8EB8C91A9153F00033C540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A8EB8CA1A9153F00033C540 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 				5A8EB8CD1A9153F00033C540 /* AppDelegate.m */,
 				5A99500C1A96598F00468484 /* DFRootViewController.h */,
 				5A99500D1A96598F00468484 /* DFRootViewController.m */,
+				5A677D651A9BEC2D0060B55D /* DFAnalytics.h */,
+				5A677D661A9BEC2D0060B55D /* DFAnalytics.m */,
 				5A9950381A96A49300468484 /* Login */,
 				5A9950051A964B3200468484 /* Configuration */,
 				5A99500B1A96549900468484 /* Library */,
@@ -596,6 +601,7 @@
 				5A9950331A969FC500468484 /* DFLoginViewController.m in Sources */,
 				5A9950511A97E44A00468484 /* DFDeferredCompletionScheduler.m in Sources */,
 				5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */,
+				5A677D671A9BEC2D0060B55D /* DFAnalytics.m in Sources */,
 				5A99504D1A97E44A00468484 /* DFImageDiskCache.m in Sources */,
 				5A1C6A1D1A9B9F8300A43A07 /* NSString+DFHelpers.m in Sources */,
 				5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */,

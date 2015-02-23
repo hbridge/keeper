@@ -13,6 +13,7 @@
 #import "UIImage+Resize.h"
 #import "DFUser.h"
 #import "DFCategoryConstants.h"
+#import "DFAnalytics.h"
 
 static NSString *const DFStrandCameraHelpWasShown = @"DFStrandCameraHelpWasShown";
 static NSString *const DFStrandCameraJoinableHelpWasShown = @"DFStrandCameraJoinableHelpWasShown";
@@ -95,6 +96,7 @@ const unsigned int SavePromptMinPhotos = 3;
 {
   [super viewDidAppear:animated];
   [self viewDidBecomeActive];
+  [DFAnalytics logViewController:self appearedWithParameters:nil];
 }
 
 
@@ -263,6 +265,8 @@ const unsigned int SavePromptMinPhotos = 3;
 {
   DDLogInfo(@"tapped menu bg");
   [self dismissGridMenuAnimated:YES completion:nil];
+  [DFAnalytics logEvent:DFAnalyticsEventPhotoTaken
+         withParameters:@{@"result" : @"cancelled" }];
 }
 
 - (void)gridMenu:(CNPGridMenu *)menu didTapOnItem:(CNPGridMenuItem *)item
@@ -272,6 +276,10 @@ const unsigned int SavePromptMinPhotos = 3;
      withMetadata:self.lastMetadataCaptured
       retryNumber:0];
   [self dismissGridMenuAnimated:YES completion:nil];
+  [DFAnalytics logEvent:DFAnalyticsEventPhotoTaken
+         withParameters:@{
+                          @"category" : item.title,
+                          }];
   DDLogInfo(@"tapped category: %@", item.title);
 }
 
