@@ -24,10 +24,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [self printSimulatorInfo];
   [self configureLogs];
   [self configureUI];
 
   return YES;
+}
+
+- (void)printSimulatorInfo
+{
+#if TARGET_IPHONE_SIMULATOR
+  NSLog(@"Simulator build running from: %@", [ [NSBundle mainBundle] bundleURL] );
+  NSLog(@"Simulator User Docs: %@", [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                                            inDomains:NSUserDomainMask]
+                                     lastObject]);
+#endif
 }
 
 - (void)configureUI

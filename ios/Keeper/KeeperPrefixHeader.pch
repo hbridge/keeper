@@ -27,6 +27,8 @@
 #import "DFLogConfig.h"
 #import "DFKeeperConstants.h"
 #import "DFTypedefs.h"
+#import "NSString+DFHelpers.h"
+
 #endif
 
 #endif

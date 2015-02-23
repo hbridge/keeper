@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <Firebase/Firebase.h>
 #import "DFKeeperPhoto.h"
+#import "DFKeeperImage.h"
 
 @interface DFKeeperStore : NSObject
 
 + (DFKeeperStore *)sharedStore;
 
-- (void)storePhoto:(DFKeeperPhoto *)photo;
+- (void)savePhoto:(DFKeeperPhoto *)photo;
 - (NSArray *)photos;
+- (void)storeImage:(DFKeeperImage *)image forPhoto:(DFKeeperPhoto *)photo;
 
 @end

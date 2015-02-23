@@ -8,6 +8,7 @@
 
 #import "DFKeeperPhoto.h"
 #import "NSDateFormatter+DFPhotoDateFormatters.h"
+#import "DFImageManager.h"
 
 @implementation DFKeeperPhoto
 
@@ -19,12 +20,6 @@
   NSDateFormatter *dateFormatter = [NSDateFormatter DjangoDateFormatter];
   dict[@"saveDate"] = [dateFormatter stringFromDate:self.saveDate];
   
-  // store image data
-  NSData *imageData = UIImageJPEGRepresentation(self.image, 0.7);
-  NSString *stringEncodedImageData =
-  [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-  if (stringEncodedImageData)
-    dict[@"image"] = stringEncodedImageData;
   return dict;
 }
 
@@ -33,7 +28,8 @@
   return @[
            @"user",
            @"text",
-           @"metadata"
+           @"metadata",
+           @"imageKey",
            ];
 }
 
@@ -54,14 +50,6 @@
   
   //Date
   self.saveDate = [[NSDateFormatter DjangoDateFormatter] dateFromString:snapshot.value[@"saveDate"]];
-  
-  //image
-  NSString *imageDataString = snapshot.value[@"image"];
-  if (imageDataString) {
-    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:imageDataString
-                                                            options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    self.image = [UIImage imageWithData:imageData];
-  }
   
   return self;
 }

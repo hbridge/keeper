@@ -11,6 +11,7 @@
 #import "DFRootViewController.h"
 #import "DFKeeperStore.h"
 #import "DFLoginViewController.h"
+#import "DFImageManager.h"
 
 @interface DFLibraryViewController ()
 
@@ -118,7 +119,15 @@
                                      forIndexPath:indexPath];
   
   DFKeeperPhoto *photo = [self.allPhotos objectAtIndex:indexPath.row];
-  cell.imageView.image = photo.image;
+  [[DFImageManager sharedManager] imageForKey:photo.imageKey
+                                    pointSize:self.flowLayout.itemSize
+                                  contentMode:DFImageRequestContentModeAspectFill
+                                 deliveryMode:DFImageRequestOptionsDeliveryModeFastFormat
+                                   completion:^(UIImage *image) {
+                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                       cell.imageView.image = image;
+                                     });
+                                   }];
   
   return cell;
 }

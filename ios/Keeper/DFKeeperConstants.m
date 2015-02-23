@@ -12,6 +12,10 @@
 NSString *const DFPhotosChangedNotification = @"com.duffyapp.DFPhotosChangedNotification";
 NSString *const DFFirebaseRootURLString = @"https://blazing-heat-8620.firebaseio.com";
 
+
+const CGFloat DFKeeperPhotoDefaultThumbnailSize = 157.0;
+const CGFloat DFKeeperPhotoHighQualityMaxLength = 1920.0;
+
 @implementation DFKeeperConstants
 
 + (UIColor *)BarBackgroundColor

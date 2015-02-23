@@ -13,6 +13,8 @@
 extern NSString *const DFPhotosChangedNotification;
 extern NSString *const DFFirebaseRootURLString;
 
+extern const CGFloat DFKeeperPhotoDefaultThumbnailSize;
+extern const CGFloat DFKeeperPhotoHighQualityMaxLength;
 
 + (UIColor *)BarBackgroundColor;
 + (UIColor *)BarForegroundColor;

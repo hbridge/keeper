@@ -1,9 +1,6 @@
 
-// User type
-typedef UInt64 DFUserIDType;
 
 // Photo types
-typedef UInt64 DFPhotoIDType;
 typedef NS_OPTIONS(unsigned int, DFImageType) {
   DFImageNone,
   DFImageFull,
