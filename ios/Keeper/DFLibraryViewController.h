@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CNPGridMenu/CNPGridMenu.h>
 
-@interface DFLibraryViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface DFLibraryViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, CNPGridMenuDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;

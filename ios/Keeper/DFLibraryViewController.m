@@ -13,10 +13,12 @@
 #import "DFLoginViewController.h"
 #import "DFImageManager.h"
 #import "DFKeeperPhotoViewController.h"
+#import "DFCategoryConstants.h"
 
 @interface DFLibraryViewController ()
 
 @property (nonatomic, retain) NSArray *allPhotos;
+@property (nonatomic, retain) NSString *categoryFilter;
 
 @end
 
@@ -62,24 +64,29 @@
 
 - (void)configureNav
 {
-  self.navigationItem.title = @"Library";
+  if (self.categoryFilter) {
+    self.navigationItem.title = self.categoryFilter;
+  } else {
+    self.navigationItem.title = @"Library";
+    self.navigationItem.leftBarButtonItems = @[
+                                               [[UIBarButtonItem alloc]
+                                                initWithImage:[UIImage imageNamed:@"Assets/Icons/FilterBarButton"]
+                                                style:UIBarButtonItemStylePlain
+                                                target:self
+                                                action:@selector(filterButtonPressed:)],
+                                               [[UIBarButtonItem alloc]
+                                                initWithImage:[UIImage imageNamed:@"Assets/Icons/SettingsBarButton"]
+                                                style:UIBarButtonItemStylePlain
+                                                target:self
+                                                action:@selector(settingsButtonPressed:)],
+                                               ];
+
+  }
+
   self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                target:self
                                                action:@selector(addButtonPressed:)]];
-  
-  self.navigationItem.leftBarButtonItems = @[
-                                             [[UIBarButtonItem alloc]
-                                              initWithImage:[UIImage imageNamed:@"Assets/Icons/FilterBarButton"]
-                                              style:UIBarButtonItemStylePlain
-                                              target:self
-                                              action:@selector(filterButtonPressed:)],
-                                             [[UIBarButtonItem alloc]
-                                              initWithImage:[UIImage imageNamed:@"Assets/Icons/SettingsBarButton"]
-                                              style:UIBarButtonItemStylePlain
-                                              target:self
-                                              action:@selector(settingsButtonPressed:)],
-                                             ];
 }
 
 - (void)configureCollectionView
@@ -96,6 +103,11 @@
 {
   dispatch_async(dispatch_get_main_queue(), ^{
     self.allPhotos = [[DFKeeperStore sharedStore] photos];
+    if ([self.categoryFilter isNotEmpty]) {
+      self.allPhotos = [self.allPhotos objectsPassingTestBlock:^BOOL(DFKeeperPhoto *photo) {
+        return [photo.text isEqual:self.categoryFilter];
+      }];
+    }
     [self.collectionView reloadData];
   });
 }
@@ -143,7 +155,31 @@
 
 - (void)filterButtonPressed:(id)sender
 {
+  NSArray *items =
+  [[DFCategoryConstants defaultCategoryNames] arrayByMappingObjectsWithBlock:^id(NSString *title) {
+    CNPGridMenuItem *item = [CNPGridMenuItem new];
+    item.title = title;
+    item.icon = [DFCategoryConstants gridIconForCategory:title];
+    return item;
+  }];
+  CNPGridMenu *gridMenu = [[CNPGridMenu alloc] initWithMenuItems:items];
   
+  gridMenu.delegate = self;
+  [self presentGridMenu:gridMenu animated:YES completion:nil];
+}
+
+- (void)gridMenuDidTapOnBackground:(CNPGridMenu *)menu
+{
+  [self dismissGridMenuAnimated:YES completion:nil];
+}
+
+- (void)gridMenu:(CNPGridMenu *)menu didTapOnItem:(CNPGridMenuItem *)item
+{
+  NSString *category = item.title;
+  DFLibraryViewController *libraryVC = [[DFLibraryViewController alloc] init];
+  libraryVC.categoryFilter = category;
+  [self dismissGridMenuAnimated:YES completion:nil];
+  [self.navigationController pushViewController:libraryVC animated:NO];
 }
 
 - (void)settingsButtonPressed:(id)sender
