@@ -145,7 +145,10 @@
                                  deliveryMode:DFImageRequestOptionsDeliveryModeFastFormat
                                    completion:^(UIImage *image) {
                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                       cell.imageView.image = image;
+                                       if ([[collectionView indexPathForCell:cell] isEqual:indexPath]) {
+                                         // make sure we're setting the right image for the cell
+                                         cell.imageView.image = image;
+                                       }
                                      });
                                    }];
   
