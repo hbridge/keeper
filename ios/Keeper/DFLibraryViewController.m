@@ -20,6 +20,7 @@
 
 @property (nonatomic, retain) NSArray *allPhotos;
 @property (nonatomic, retain) NSString *categoryFilter;
+@property (nonatomic, retain) DFCategorizeController *categorizeController;
 
 @end
 
@@ -165,35 +166,27 @@
 
 - (void)filterButtonPressed:(id)sender
 {
-  NSArray *items =
-  [[DFCategoryConstants defaultCategoryNames] arrayByMappingObjectsWithBlock:^id(NSString *title) {
-    CNPGridMenuItem *item = [CNPGridMenuItem new];
-    item.title = title;
-    item.icon = [DFCategoryConstants gridIconForCategory:title];
-    return item;
-  }];
-  CNPGridMenu *gridMenu = [[CNPGridMenu alloc] initWithMenuItems:items];
+  self.categorizeController = [[DFCategorizeController alloc] init];
+  self.categorizeController.delegate = self;
+  [self.categorizeController presentInViewController:self];
+}
+
+- (void)categorizeController:(DFCategorizeController *)cateogrizeController
+       didFinishWithCategory:(NSString *)category
+{
+  [self dismissGridMenuAnimated:YES completion:nil];
+  NSString *categoryToLog = category;
+  if (category) {
+    DFLibraryViewController *libraryVC = [[DFLibraryViewController alloc] init];
+    libraryVC.categoryFilter = category;
+    [self dismissGridMenuAnimated:YES completion:nil];
+    [self.navigationController pushViewController:libraryVC animated:NO];
+  } else {
+    categoryToLog = @"cancelled";
+  }
   
-  gridMenu.delegate = self;
-  [self presentGridMenu:gridMenu animated:YES completion:nil];
-}
-
-- (void)gridMenuDidTapOnBackground:(CNPGridMenu *)menu
-{
-  [self dismissGridMenuAnimated:YES completion:nil];
   [DFAnalytics logEvent:DFAnalyticsEventLibraryFiltered
-         withParameters:@{@"category" : @"cancelled"}];
-}
-
-- (void)gridMenu:(CNPGridMenu *)menu didTapOnItem:(CNPGridMenuItem *)item
-{
-  NSString *category = item.title;
-  DFLibraryViewController *libraryVC = [[DFLibraryViewController alloc] init];
-  libraryVC.categoryFilter = category;
-  [self dismissGridMenuAnimated:YES completion:nil];
-  [self.navigationController pushViewController:libraryVC animated:NO];
-  [DFAnalytics logEvent:DFAnalyticsEventLibraryFiltered
-         withParameters:@{@"category" : category}];
+         withParameters:@{@"category" : categoryToLog}];
 }
 
 - (void)settingsButtonPressed:(id)sender

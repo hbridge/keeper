@@ -21,6 +21,7 @@
 		5A677D611A9BDA2F0060B55D /* DFCategoryConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D601A9BDA2F0060B55D /* DFCategoryConstants.m */; };
 		5A677D641A9BDB2B0060B55D /* NSArray+DFHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D631A9BDB2B0060B55D /* NSArray+DFHelpers.m */; };
 		5A677D671A9BEC2D0060B55D /* DFAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D661A9BEC2D0060B55D /* DFAnalytics.m */; };
+		5A6DED931A9D08920038EF9F /* DFCategorizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6DED921A9D08920038EF9F /* DFCategorizeController.m */; };
 		5A8EB8CB1A9153F00033C540 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CA1A9153F00033C540 /* main.m */; };
 		5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CD1A9153F00033C540 /* AppDelegate.m */; };
 		5A8EB8D61A9153F00033C540 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A8EB8D51A9153F00033C540 /* Images.xcassets */; };
@@ -102,6 +103,8 @@
 		5A677D661A9BEC2D0060B55D /* DFAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFAnalytics.m; sourceTree = "<group>"; };
 		5A677D681A9BF1F70060B55D /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
 		5A6DED901A9D074D0038EF9F /* DFMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFMacros.h; sourceTree = "<group>"; };
+		5A6DED911A9D08920038EF9F /* DFCategorizeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCategorizeController.h; sourceTree = "<group>"; };
+		5A6DED921A9D08920038EF9F /* DFCategorizeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCategorizeController.m; sourceTree = "<group>"; };
 		5A8EB8C51A9153F00033C540 /* Keeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8EB8C91A9153F00033C540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A8EB8CA1A9153F00033C540 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -349,6 +352,8 @@
 				5A677D5A1A9BD8030060B55D /* DFKeeperPhotoViewController.h */,
 				5A677D5B1A9BD8030060B55D /* DFKeeperPhotoViewController.m */,
 				5A677D5C1A9BD8030060B55D /* DFKeeperPhotoViewController.xib */,
+				5A6DED911A9D08920038EF9F /* DFCategorizeController.h */,
+				5A6DED921A9D08920038EF9F /* DFCategorizeController.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -637,6 +642,7 @@
 				5A9950091A96548F00468484 /* DFLibraryViewController.m in Sources */,
 				5A8EB8CB1A9153F00033C540 /* main.m in Sources */,
 				5A677D591A9BD5190060B55D /* DFUser.m in Sources */,
+				5A6DED931A9D08920038EF9F /* DFCategorizeController.m in Sources */,
 				5A1C6A0D1A9B97E600A43A07 /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

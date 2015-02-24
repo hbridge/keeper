@@ -15,4 +15,6 @@
 
 @property (nonatomic, retain) DFKeeperPhoto *photo;
 
+@property (weak, nonatomic) IBOutlet UIButton *categoryButtonPressed;
+
 @end
