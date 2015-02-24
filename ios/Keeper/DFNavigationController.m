@@ -84,5 +84,17 @@
   [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)viewWillLayoutSubviews
+{
+  [super viewWillLayoutSubviews];
+  self.navigationBar.frame = CGRectMake(0, 0, self.navigationBar.frame.size.width, 64.0);
+}
+
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  self.navigationBar.frame = CGRectMake(0, 0, self.navigationBar.frame.size.width, 64.0);
+}
+
 
 @end
