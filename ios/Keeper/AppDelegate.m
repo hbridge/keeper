@@ -50,7 +50,7 @@
                                                          delegate:nil];
 #else
   [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"802dc9c36f5afedf300ef4a70382bd78"
-                                                         delegate:self];
+                                                         delegate:nil];
 #endif
   
   [[BITHockeyManager sharedHockeyManager] startManager];
