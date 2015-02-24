@@ -325,7 +325,7 @@ const unsigned int SavePromptMinPhotos = 3;
                                                resizedImageWithContentMode:UIViewContentModeScaleAspectFit
                                                bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
                                                interpolationQuality:kCGInterpolationDefault]];
-                                [[DFKeeperStore sharedStore] storeImage:imageRecord forPhoto:photo];
+  [[DFKeeperStore sharedStore] storeImage:imageRecord forPhoto:photo];
 }
 
 - (void)galleryButtonPressed:(id)sender
