@@ -14,6 +14,7 @@
 #import "DFUser.h"
 #import "DFCategoryConstants.h"
 #import "DFAnalytics.h"
+#import "DFRootViewController.h"
 
 static NSString *const DFStrandCameraHelpWasShown = @"DFStrandCameraHelpWasShown";
 static NSString *const DFStrandCameraJoinableHelpWasShown = @"DFStrandCameraJoinableHelpWasShown";
@@ -330,9 +331,18 @@ const unsigned int SavePromptMinPhotos = 3;
 
 - (void)galleryButtonPressed:(id)sender
 {
-  
+  [[DFRootViewController rootViewController] showLibrary];
 }
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+  return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate
+{
+  return NO;
+}
 
 
 @end

@@ -10,6 +10,8 @@
 #import "DFImageManager.h"
 #import "DFCategoryConstants.h"
 #import "UIImage+Resize.h"
+#import "DFRootViewController.h"
+#import "DFAnalytics.h"
 
 @interface DFKeeperPhotoViewController ()
 
@@ -22,6 +24,19 @@
   
   if (self.photo)
     [self reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [DFAnalytics logViewController:self appearedWithParameters:@{@"category" : self.photo.text}];
+  [[DFRootViewController rootViewController] setSwipingEnabled:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  [[DFRootViewController rootViewController] setSwipingEnabled:YES];
 }
 
 - (void)setPhoto:(DFKeeperPhoto *)photo

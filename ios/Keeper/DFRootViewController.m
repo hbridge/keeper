@@ -9,6 +9,7 @@
 #import "DFRootViewController.h"
 #import "DFOverlayViewController.h"
 #import "DFUIKit.h"
+#import "DFKeeperPhotoViewController.h"
 
 @interface DFRootViewController ()
 
@@ -240,4 +241,15 @@ willTransitionToViewControllers:(NSArray *)pendingViewControllers
     }
   }
 }
+
+- (BOOL)shouldAutorotate
+{
+  if (self.pageViewController.viewControllers.firstObject == self.libraryNavController
+      && [[self.libraryNavController.viewControllers.lastObject class]
+          isSubclassOfClass:[DFKeeperPhotoViewController class]]) return YES;
+  
+  return NO;
+}
+
+
 @end
