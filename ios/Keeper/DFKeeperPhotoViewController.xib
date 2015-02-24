@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DFKeeperPhotoViewController">
             <connections>
-                <outlet property="categoryButtonPressed" destination="Hez-Cv-yki" id="6me-Xm-wOK"/>
                 <outlet property="imageView" destination="TgM-0v-NSV" id="fN8-Ns-1EZ"/>
                 <outlet property="tagButton" destination="Hez-Cv-yki" id="Qkt-zO-avU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -27,6 +26,9 @@
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="categoryButtonPressed:" destination="-1" eventType="touchUpInside" id="h4M-rk-VxW"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

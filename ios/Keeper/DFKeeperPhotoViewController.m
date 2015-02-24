@@ -12,8 +12,11 @@
 #import "UIImage+Resize.h"
 #import "DFRootViewController.h"
 #import "DFAnalytics.h"
+#import "DFKeeperStore.h"
 
 @interface DFKeeperPhotoViewController ()
+
+@property (nonatomic, retain) DFCategorizeController *categorizeController;
 
 @end
 
@@ -60,6 +63,11 @@
      });
    }];
   
+  [self reloadCategory];
+}
+
+- (void)reloadCategory
+{
   UIImage *icon = [DFCategoryConstants gridIconForCategory:self.photo.category];
   if (!icon) icon = [DFCategoryConstants defaultGridIcon];
   [self.tagButton setImage:[icon thumbnailImage:20
@@ -68,6 +76,21 @@
                            interpolationQuality:kCGInterpolationDefault]
                   forState:UIControlStateNormal];
   [self.tagButton setTitle:self.photo.category forState:UIControlStateNormal];
+}
+
+- (IBAction)categoryButtonPressed:(id)sender {
+  self.categorizeController = [DFCategorizeController new];
+  self.categorizeController.delegate = self;
+  [self.categorizeController presentInViewController:self];
+}
+
+- (void)categorizeController:(DFCategorizeController *)cateogrizeController didFinishWithCategory:(NSString *)category
+{
+  if (category) {
+    self.photo.category = category;
+    [[DFKeeperStore sharedStore] savePhoto:self.photo];
+    [self reloadCategory];
+  }
 }
 
 @end

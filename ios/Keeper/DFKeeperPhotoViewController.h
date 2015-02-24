@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "DFKeeperPhoto.h"
+#import "DFCategorizeController.h"
 
-@interface DFKeeperPhotoViewController : UIViewController
+
+@interface DFKeeperPhotoViewController : UIViewController <DFCategorizeControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *tagButton;
 
 @property (nonatomic, retain) DFKeeperPhoto *photo;
 
-@property (weak, nonatomic) IBOutlet UIButton *categoryButtonPressed;
+- (IBAction)categoryButtonPressed:(id)sender;
 
 @end

@@ -42,6 +42,7 @@
 - (void)gridMenu:(CNPGridMenu *)menu didTapOnItem:(CNPGridMenuItem *)item
 {
   NSString *category = item.title;
+  [self.presentingViewController dismissGridMenuAnimated:YES completion:nil];
   [self.delegate categorizeController:self didFinishWithCategory:category];
 }
 
