@@ -100,6 +100,7 @@
 		5A677D631A9BDB2B0060B55D /* NSArray+DFHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DFHelpers.m"; sourceTree = "<group>"; };
 		5A677D651A9BEC2D0060B55D /* DFAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFAnalytics.h; sourceTree = "<group>"; };
 		5A677D661A9BEC2D0060B55D /* DFAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFAnalytics.m; sourceTree = "<group>"; };
+		5A677D681A9BF1F70060B55D /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
 		5A8EB8C51A9153F00033C540 /* Keeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8EB8C91A9153F00033C540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A8EB8CA1A9153F00033C540 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -257,6 +258,7 @@
 		5A8EB8C81A9153F00033C540 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5A677D681A9BF1F70060B55D /* Beta.xcconfig */,
 				5A8EB8D71A9153F00033C540 /* LaunchScreen.xib */,
 				5A8EB8C91A9153F00033C540 /* Info.plist */,
 				5A8EB8CA1A9153F00033C540 /* main.m */,
@@ -486,6 +488,7 @@
 				TargetAttributes = {
 					5A8EB8C41A9153F00033C540 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = KTS292CQN5;
 					};
 					5A8EB8DD1A9153F00033C540 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -650,6 +653,72 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5A677D691A9BF2A40060B55D /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Beta;
+		};
+		5A677D6A1A9BF2A40060B55D /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A677D681A9BF1F70060B55D /* Beta.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Old Fashioned Software, LLC";
+				GCC_PREFIX_HEADER = Keeper/KeeperPrefixHeader.pch;
+				INFOPLIST_FILE = Keeper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3c720a78-adce-4dd1-85a1-1b0a2edccada";
+			};
+			name = Beta;
+		};
+		5A677D6B1A9BF2A40060B55D /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KeeperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Keeper.app/Keeper";
+			};
+			name = Beta;
+		};
 		5A8EB8E61A9153F00033C540 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -693,6 +762,7 @@
 		};
 		5A8EB8E71A9153F00033C540 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A677D681A9BF1F70060B55D /* Beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -796,6 +866,7 @@
 			buildConfigurations = (
 				5A8EB8E61A9153F00033C540 /* Debug */,
 				5A8EB8E71A9153F00033C540 /* Release */,
+				5A677D691A9BF2A40060B55D /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -805,6 +876,7 @@
 			buildConfigurations = (
 				5A8EB8E91A9153F00033C540 /* Debug */,
 				5A8EB8EA1A9153F00033C540 /* Release */,
+				5A677D6A1A9BF2A40060B55D /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -814,6 +886,7 @@
 			buildConfigurations = (
 				5A8EB8EC1A9153F00033C540 /* Debug */,
 				5A8EB8ED1A9153F00033C540 /* Release */,
+				5A677D6B1A9BF2A40060B55D /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

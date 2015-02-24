@@ -1,0 +1,13 @@
+//
+//  Debug.xcconfig
+//  Strand
+//
+//  Created by Henry Bridge on 7/14/14.
+//  Copyright (c) 2014 Duffy Inc. All rights reserved.
+//
+
+#include "Pods/Target Support Files/Pods/Pods.beta.xcconfig"
+EMPTY_STRING =
+APP_BUNDLE_DISPLAY_NAME_SUFFIX = $(EMPTY_STRING) Beta
+APP_BUNDLE_ID_SUFFIX = Beta
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) BETA=1
