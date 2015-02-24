@@ -70,11 +70,14 @@
 {
   UIImage *icon = [DFCategoryConstants gridIconForCategory:self.photo.category];
   if (!icon) icon = [DFCategoryConstants defaultGridIcon];
-  [self.tagButton setImage:[icon thumbnailImage:20
-                              transparentBorder:0
-                                   cornerRadius:0
-                           interpolationQuality:kCGInterpolationDefault]
+  UIImage *resizedIcon = [icon thumbnailImage:self.tagButton.titleLabel.font.pointSize
+                            transparentBorder:0
+                                  cornerRadius:0
+                          interpolationQuality:kCGInterpolationDefault];
+
+  [self.tagButton setImage:[resizedIcon imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                   forState:UIControlStateNormal];
+                          
   [self.tagButton setTitle:self.photo.category forState:UIControlStateNormal];
 }
 
