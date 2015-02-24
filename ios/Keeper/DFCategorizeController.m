@@ -35,16 +35,39 @@
 
 - (void)gridMenuDidTapOnBackground:(CNPGridMenu *)menu
 {
-  [self.presentingViewController dismissGridMenuAnimated:YES completion:nil];
-  [self.delegate categorizeController:self didFinishWithCategory:nil];
+  [self categorySelected:nil];
 }
 
 - (void)gridMenu:(CNPGridMenu *)menu didTapOnItem:(CNPGridMenuItem *)item
 {
   NSString *category = item.title;
+  
+  if ([category isEqualToString:@"Other"]) {
+    UIAlertView *otherAlert = [[UIAlertView alloc] initWithTitle:@"Other Category"
+                                                         message:nil
+                                                        delegate:self
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles:@"OK", nil];
+    otherAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [otherAlert show];
+  } else {
+    [self categorySelected:category];
+  }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  NSString *category = [[alertView textFieldAtIndex:0] text];
+  [self categorySelected:category];
+}
+
+- (void)categorySelected:(NSString *)category
+{
   [self.presentingViewController dismissGridMenuAnimated:YES completion:nil];
   [self.delegate categorizeController:self didFinishWithCategory:category];
 }
+
+
 
 
 @end

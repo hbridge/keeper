@@ -22,7 +22,7 @@
 @end
 
 
-@interface DFCategorizeController : NSObject <CNPGridMenuDelegate>
+@interface DFCategorizeController : NSObject <CNPGridMenuDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak) NSObject<DFCategorizeControllerDelegate> *delegate;
 

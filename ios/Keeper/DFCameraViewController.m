@@ -35,6 +35,7 @@ const unsigned int SavePromptMinPhotos = 3;
 
 @property (nonatomic, retain) UIImage* lastImageCaptured;
 @property (nonatomic, retain) NSDictionary *lastMetadataCaptured;
+@property (nonatomic, retain) DFCategorizeController *categorizeController;
 
 @end
 
@@ -246,43 +247,28 @@ const unsigned int SavePromptMinPhotos = 3;
 {
   DDLogInfo(@"%@ image captured", [self.class description]);
   
-  NSArray *items =
-  [[DFCategoryConstants defaultCategoryNames] arrayByMappingObjectsWithBlock:^id(NSString *title) {
-    CNPGridMenuItem *item = [CNPGridMenuItem new];
-    item.title = title;
-    item.icon = [DFCategoryConstants gridIconForCategory:title];
-    return item;
-  }];
-  CNPGridMenu *gridMenu = [[CNPGridMenu alloc] initWithMenuItems:items];
-  gridMenu.blurEffectStyle = CNPBlurEffectStyleExtraLight;
-  
-  gridMenu.delegate = self;
-  [self presentGridMenu:gridMenu animated:YES completion:nil];
+  self.categorizeController = [DFCategorizeController new];
+  self.categorizeController.delegate = self;
+  [self.categorizeController presentInViewController:self];
   
   self.lastImageCaptured = image;
   self.lastMetadataCaptured = metadata;
 }
 
-- (void)gridMenuDidTapOnBackground:(CNPGridMenu *)menu
+- (void)categorizeController:(DFCategorizeController *)cateogrizeController
+       didFinishWithCategory:(NSString *)category
 {
-  DDLogInfo(@"tapped menu bg");
-  [self dismissGridMenuAnimated:YES completion:nil];
+  if (category) {
+    [self saveImage:self.lastImageCaptured
+               text:category
+       withMetadata:self.lastMetadataCaptured
+        retryNumber:0];
+    [self dismissGridMenuAnimated:YES completion:nil];
+  }
+  
   [DFAnalytics logEvent:DFAnalyticsEventPhotoTaken
-         withParameters:@{@"result" : @"cancelled" }];
-}
+         withParameters:@{@"category" : category ? category : @"cancelled" }];
 
-- (void)gridMenu:(CNPGridMenu *)menu didTapOnItem:(CNPGridMenuItem *)item
-{
-  [self saveImage:self.lastImageCaptured
-             text:item.title
-     withMetadata:self.lastMetadataCaptured
-      retryNumber:0];
-  [self dismissGridMenuAnimated:YES completion:nil];
-  [DFAnalytics logEvent:DFAnalyticsEventPhotoTaken
-         withParameters:@{
-                          @"category" : item.title,
-                          }];
-  DDLogInfo(@"tapped category: %@", item.title);
 }
 
 - (void)animateImageCaptured:(UIImage *)image{

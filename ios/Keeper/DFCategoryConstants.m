@@ -21,14 +21,15 @@
            @"Art",
            @"Buy",
            @"Clothing",
-           @"Gadget",
+           @"Other",
            ];
 }
 
 + (UIImage *)gridIconForCategory:(NSString *)name
 {
   NSString *imagePath = [NSString stringWithFormat:@"Assets/Icons/%@GridIcon", name];
-  return[UIImage imageNamed:imagePath];
+  UIImage *image = [UIImage imageNamed:imagePath];
+  return image ? image : [self defaultGridIcon];
 }
 
 + (UIImage *)defaultGridIcon
