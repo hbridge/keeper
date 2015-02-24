@@ -1,7 +1,8 @@
 # Keeper
 
-# Feb 24 2015 (2)
+# Feb 24 2015 (2-3)
 
+- Support for "Other" category tags
 - Fix rotation bugs
 
 # Feb 23 2015 (1)
