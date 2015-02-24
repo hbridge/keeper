@@ -254,6 +254,7 @@ const unsigned int SavePromptMinPhotos = 3;
     return item;
   }];
   CNPGridMenu *gridMenu = [[CNPGridMenu alloc] initWithMenuItems:items];
+  gridMenu.blurEffectStyle = CNPBlurEffectStyleExtraLight;
   
   gridMenu.delegate = self;
   [self presentGridMenu:gridMenu animated:YES completion:nil];
