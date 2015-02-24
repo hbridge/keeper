@@ -27,6 +27,7 @@
 {
   return @[
            @"user",
+           @"category",
            @"text",
            @"metadata",
            @"imageKey",

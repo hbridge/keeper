@@ -315,7 +315,7 @@ const unsigned int SavePromptMinPhotos = 3;
       retryNumber:(int)retryNumber
 {
   DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] init];
-  photo.text = text;
+  photo.category = text;
   photo.metadata = metadata;
   photo.saveDate = [NSDate date];
   photo.user = [DFUser loggedInUser];

@@ -29,7 +29,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [DFAnalytics logViewController:self appearedWithParameters:@{@"category" : self.photo.text}];
+  [DFAnalytics logViewController:self appearedWithParameters:@{@"category" : NonNull(self.photo.category)}];
   [[DFRootViewController rootViewController] setSwipingEnabled:NO];
 }
 
@@ -60,14 +60,14 @@
      });
    }];
   
-  UIImage *icon = [DFCategoryConstants gridIconForCategory:self.photo.text];
+  UIImage *icon = [DFCategoryConstants gridIconForCategory:self.photo.category];
   if (!icon) icon = [DFCategoryConstants defaultGridIcon];
   [self.tagButton setImage:[icon thumbnailImage:20
                               transparentBorder:0
                                    cornerRadius:0
                            interpolationQuality:kCGInterpolationDefault]
                   forState:UIControlStateNormal];
-  [self.tagButton setTitle:self.photo.text forState:UIControlStateNormal];
+  [self.tagButton setTitle:self.photo.category forState:UIControlStateNormal];
 }
 
 @end

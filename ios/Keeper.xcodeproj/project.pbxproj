@@ -101,6 +101,7 @@
 		5A677D651A9BEC2D0060B55D /* DFAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFAnalytics.h; sourceTree = "<group>"; };
 		5A677D661A9BEC2D0060B55D /* DFAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFAnalytics.m; sourceTree = "<group>"; };
 		5A677D681A9BF1F70060B55D /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
+		5A6DED901A9D074D0038EF9F /* DFMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFMacros.h; sourceTree = "<group>"; };
 		5A8EB8C51A9153F00033C540 /* Keeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8EB8C91A9153F00033C540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A8EB8CA1A9153F00033C540 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -289,6 +290,7 @@
 		5A8EB9021A915FE90033C540 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5A6DED901A9D074D0038EF9F /* DFMacros.h */,
 				5A677D621A9BDB2B0060B55D /* NSArray+DFHelpers.h */,
 				5A677D631A9BDB2B0060B55D /* NSArray+DFHelpers.m */,
 				5A1C6A1B1A9B9F8300A43A07 /* NSString+DFHelpers.h */,

@@ -112,7 +112,7 @@
     self.allPhotos = [[DFKeeperStore sharedStore] photos];
     if ([self.categoryFilter isNotEmpty]) {
       self.allPhotos = [self.allPhotos objectsPassingTestBlock:^BOOL(DFKeeperPhoto *photo) {
-        return [photo.text isEqual:self.categoryFilter];
+        return [photo.category isEqual:self.categoryFilter];
       }];
     }
     [self.collectionView reloadData];

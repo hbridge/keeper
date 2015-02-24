@@ -29,6 +29,7 @@
 #import "DFTypedefs.h"
 #import "NSString+DFHelpers.h"
 #import "NSArray+DFHelpers.h"
+#import "DFMacros.h"
 
 #endif
 
