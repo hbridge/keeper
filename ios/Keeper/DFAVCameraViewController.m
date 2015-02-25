@@ -46,10 +46,8 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-  if (!TARGET_IPHONE_SIMULATOR) {
-    [self createCaptureSession];
-  }
+
+  [self createCaptureSession];
   [self.session startRunning];
 }
 
@@ -134,7 +132,10 @@
 }
 
 - (void)createCaptureSession
-{  
+{
+  if (TARGET_IPHONE_SIMULATOR) {
+    return;
+  }
   DDLogInfo(@"%@ creating new capture session.", [self.class description]);
   
   // remove old session and views if necessary
