@@ -65,6 +65,8 @@
     DFLoginViewController *login = [[DFLoginViewController alloc] init];
     [parentViewController presentViewController:login animated:YES completion:nil];
   });
+  NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+  [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 }
 
 @end
