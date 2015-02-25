@@ -15,6 +15,8 @@
 #import "DFCategoryConstants.h"
 #import "DFAnalytics.h"
 #import "DFRootViewController.h"
+#import "DFUIKit.h"
+#import "DFAssetLibraryHelper.h"
 
 static NSString *const DFStrandCameraHelpWasShown = @"DFStrandCameraHelpWasShown";
 static NSString *const DFStrandCameraJoinableHelpWasShown = @"DFStrandCameraJoinableHelpWasShown";
@@ -255,6 +257,45 @@ const unsigned int SavePromptMinPhotos = 3;
   self.lastMetadataCaptured = metadata;
 }
 
+NSString *const DFPreferenceKeyAutosave = @"AutosaveToCameraRoll";
+NSString *const DFPreferenceYes = @"Yes";
+NSString *const DFPreferenceNo = @"No";
+
+
+- (void)autosaveToCameraRoll:(UIImage *)image metadata:(NSDictionary *)metadata
+{
+  NSString *autosaveSetting = [[NSUserDefaults standardUserDefaults] objectForKey:DFPreferenceKeyAutosave];
+  if (!autosaveSetting) {
+    DFAlertController *alertController = [DFAlertController
+                                          alertControllerWithTitle:@"Autosave to Camera Roll?"
+                                          message:@"Would you like photos you take in Keeper "
+                                          "to automatically save to your camera roll?"
+                                          preferredStyle:DFAlertControllerStyleAlert];
+    [alertController addAction:[DFAlertAction
+                                actionWithTitle:@"Not Now"
+                                style:DFAlertActionStyleCancel
+                                handler:^(DFAlertAction *action) {
+                                  [[NSUserDefaults standardUserDefaults]
+                                   setObject:DFPreferenceNo
+                                   forKey:DFPreferenceKeyAutosave];
+                                  [[NSUserDefaults standardUserDefaults] synchronize];
+                                }]];
+    [alertController addAction:[DFAlertAction
+                                actionWithTitle:@"Yes"
+                                style:DFAlertActionStyleDefault
+                                handler:^(DFAlertAction *action) {
+                                  [[NSUserDefaults standardUserDefaults]
+                                   setObject:DFPreferenceYes
+                                   forKey:DFPreferenceKeyAutosave];
+                                  [[NSUserDefaults standardUserDefaults] synchronize];
+                                  [self autosaveToCameraRoll:image metadata:metadata];
+                                }]];
+    [alertController showWithParentViewController:self animated:YES completion:nil];
+  } else if ([autosaveSetting isEqual:DFPreferenceYes]) {
+    [DFAssetLibraryHelper saveImageToCameraRoll:image withMetadata:metadata completion:nil];
+  }
+}
+
 - (void)categorizeController:(DFCategorizeController *)cateogrizeController
        didFinishWithCategory:(NSString *)category
 {
@@ -263,8 +304,9 @@ const unsigned int SavePromptMinPhotos = 3;
                text:category
        withMetadata:self.lastMetadataCaptured
         retryNumber:0];
-    [self dismissGridMenuAnimated:YES completion:nil];
+    [self autosaveToCameraRoll:self.lastImageCaptured metadata:self.lastMetadataCaptured];
   }
+  
   
   [DFAnalytics logEvent:DFAnalyticsEventPhotoTaken
          withParameters:@{@"category" : category ? category : @"cancelled" }];
