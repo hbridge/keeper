@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "DFImageManagerRequest.h"
+#import "DFKeeperPhoto.h"
 
 @interface DFImageManager : NSObject
 
 typedef void (^SetImageCompletion)(NSError *error);
 
 + (DFImageManager *)sharedManager;
-
 
 // convenience method, converts points (logical size) to screen pixel size
 - (void)imageForKey:(NSString *)imageKey
@@ -37,6 +37,6 @@ typedef void (^SetImageCompletion)(NSError *error);
                        targetSize:(CGSize)size
                       contentMode:(DFImageRequestContentMode)contentMode;
 - (void)clearCache;
-
+- (void)setImageChanged:(NSString *)imageKey;
 
 @end

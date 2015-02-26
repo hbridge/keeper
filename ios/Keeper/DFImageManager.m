@@ -28,7 +28,7 @@
 
 @end
 
-static BOOL logRouting = YES;
+static BOOL logRouting = NO;
 
 @implementation DFImageManager
 
@@ -364,7 +364,7 @@ static BOOL logRouting = YES;
     }
     dispatch_async(queue, ^{
       UIImage *image = loadBlock();
-      
+    
       if (!image
           && request.imageType == DFImageFull
           && request.deliveryMode == DFImageRequestOptionsDeliveryModeOpportunistic) {
@@ -433,6 +433,12 @@ static BOOL logRouting = YES;
   }
   
   dispatch_semaphore_signal(self.deferredCompletionSchedulerSemaphore);
+}
+
+- (void)setImageChanged:(NSString *)imageKey
+{
+  [self clearCache];
+  [[DFImageDiskCache sharedStore] setImage:nil type:DFImageFull forKey:imageKey completion:nil];
 }
 
 
