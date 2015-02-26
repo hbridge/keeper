@@ -277,7 +277,7 @@ const unsigned int SavePromptMinPhotos = 3;
                                 actionWithTitle:@"Yes"
                                 style:DFAlertActionStyleDefault
                                 handler:^(DFAlertAction *action) {
-                                  [DFSettingsManager setObject:DFSettingValueNo forSetting:DFSettingAutoSaveToCameraRoll];
+                                  [DFSettingsManager setObject:DFSettingValueYes forSetting:DFSettingAutoSaveToCameraRoll];
                                   [self autosaveToCameraRoll:image metadata:metadata];
                                 }]];
     [alertController showWithParentViewController:self animated:YES completion:nil];
