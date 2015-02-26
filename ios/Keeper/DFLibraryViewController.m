@@ -15,6 +15,7 @@
 #import "DFKeeperPhotoViewController.h"
 #import "DFCategoryConstants.h"
 #import "DFAnalytics.h"
+#import "DFSettingsManager.h"
 
 @interface DFLibraryViewController ()
 
@@ -194,6 +195,18 @@
   DFAlertController *alertController = [DFAlertController alertControllerWithTitle:nil
                                                                            message:nil
                                                                     preferredStyle:DFAlertControllerStyleActionSheet];
+  
+  // Auto Save Setting
+  NSString *autoSaveString;
+  NSString *autoSavePref = [DFSettingsManager objectForSetting:DFSettingAutoSaveToCameraRoll];
+  NSString *opposteSettingValue;
+  if ([autoSavePref isEqualToString:DFSettingValueYes]) {
+    autoSaveString = @"Disable Save to Camera Roll";
+    opposteSettingValue = DFSettingValueNo;
+  } else {
+    autoSaveString = @"Enable Save to Camera Roll";
+    opposteSettingValue = DFSettingValueYes;
+  }
   [alertController addAction:[DFAlertAction
                               actionWithTitle:@"Logout"
                               style:DFAlertActionStyleDestructive
@@ -202,6 +215,13 @@
                                 abort();
                               }]];
   [alertController addAction:[DFAlertAction
+                              actionWithTitle:autoSaveString
+                              style:DFAlertActionStyleDefault
+                              handler:^(DFAlertAction *action) {
+                                [DFSettingsManager setObject:opposteSettingValue
+                                                  forSetting:DFSettingAutoSaveToCameraRoll];
+                              }]];
+   [alertController addAction:[DFAlertAction
                               actionWithTitle:@"Cancel"
                               style:DFAlertActionStyleCancel
                               handler:^(DFAlertAction *action) {

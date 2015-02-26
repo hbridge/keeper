@@ -23,6 +23,7 @@
 		5A677D671A9BEC2D0060B55D /* DFAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D661A9BEC2D0060B55D /* DFAnalytics.m */; };
 		5A6DED931A9D08920038EF9F /* DFCategorizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6DED921A9D08920038EF9F /* DFCategorizeController.m */; };
 		5A6DED961A9E6C890038EF9F /* DFAssetLibraryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6DED951A9E6C890038EF9F /* DFAssetLibraryHelper.m */; };
+		5A88B7E41A9FBC020008F548 /* DFSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A88B7E31A9FBC020008F548 /* DFSettingsManager.m */; };
 		5A8EB8CB1A9153F00033C540 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CA1A9153F00033C540 /* main.m */; };
 		5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CD1A9153F00033C540 /* AppDelegate.m */; };
 		5A8EB8D61A9153F00033C540 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A8EB8D51A9153F00033C540 /* Images.xcassets */; };
@@ -108,6 +109,8 @@
 		5A6DED921A9D08920038EF9F /* DFCategorizeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCategorizeController.m; sourceTree = "<group>"; };
 		5A6DED941A9E6C890038EF9F /* DFAssetLibraryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFAssetLibraryHelper.h; sourceTree = "<group>"; };
 		5A6DED951A9E6C890038EF9F /* DFAssetLibraryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFAssetLibraryHelper.m; sourceTree = "<group>"; };
+		5A88B7E21A9FBC020008F548 /* DFSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFSettingsManager.h; sourceTree = "<group>"; };
+		5A88B7E31A9FBC020008F548 /* DFSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSettingsManager.m; sourceTree = "<group>"; };
 		5A8EB8C51A9153F00033C540 /* Keeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8EB8C91A9153F00033C540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A8EB8CA1A9153F00033C540 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -217,6 +220,15 @@
 			name = ThirdParty;
 			sourceTree = "<group>";
 		};
+		5A88B7E11A9FBBDA0008F548 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5A88B7E21A9FBC020008F548 /* DFSettingsManager.h */,
+				5A88B7E31A9FBC020008F548 /* DFSettingsManager.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		5A8EB8BC1A9153F00033C540 = {
 			isa = PBXGroup;
 			children = (
@@ -253,7 +265,7 @@
 				5A9950241A9662ED00468484 /* Database */,
 				5A9950151A965BAB00468484 /* Common */,
 				5A8EB9021A915FE90033C540 /* Utils */,
-				5A99503F1A97913800468484 /* ImageManager */,
+				5A88B7E11A9FBBDA0008F548 /* Settings */,
 				5A1C6A111A9B981F00A43A07 /* ThirdParty */,
 				5A8EB8D51A9153F00033C540 /* Images.xcassets */,
 				5A8EB9111A92838E0033C540 /* Assets */,
@@ -366,6 +378,7 @@
 		5A9950151A965BAB00468484 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5A99503F1A97913800468484 /* ImageManager */,
 				5A99503C1A96A51F00468484 /* DFTypedefs.h */,
 				5A99503D1A96A51F00468484 /* DFTypedefs.m */,
 				5A99501C1A965D9E00468484 /* UI Components */,
@@ -615,6 +628,7 @@
 				5A8EB9011A915FE00033C540 /* UIImage+DFHelpers.m in Sources */,
 				5A8EB8FB1A915E030033C540 /* DBMotionManager.m in Sources */,
 				5A99500E1A96598F00468484 /* DFRootViewController.m in Sources */,
+				5A88B7E41A9FBC020008F548 /* DFSettingsManager.m in Sources */,
 				5A8EB90C1A91612C0033C540 /* UIView+DFExtensions.m in Sources */,
 				5A6DED961A9E6C890038EF9F /* DFAssetLibraryHelper.m in Sources */,
 				5A677D611A9BDA2F0060B55D /* DFCategoryConstants.m in Sources */,

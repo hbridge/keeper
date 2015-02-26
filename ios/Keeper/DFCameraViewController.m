@@ -17,6 +17,7 @@
 #import "DFRootViewController.h"
 #import "DFUIKit.h"
 #import "DFAssetLibraryHelper.h"
+#import "DFSettingsManager.h"
 
 static NSString *const DFStrandCameraHelpWasShown = @"DFStrandCameraHelpWasShown";
 static NSString *const DFStrandCameraJoinableHelpWasShown = @"DFStrandCameraJoinableHelpWasShown";
@@ -257,14 +258,9 @@ const unsigned int SavePromptMinPhotos = 3;
   self.lastMetadataCaptured = metadata;
 }
 
-NSString *const DFPreferenceKeyAutosave = @"AutosaveToCameraRoll";
-NSString *const DFPreferenceYes = @"Yes";
-NSString *const DFPreferenceNo = @"No";
-
-
 - (void)autosaveToCameraRoll:(UIImage *)image metadata:(NSDictionary *)metadata
 {
-  NSString *autosaveSetting = [[NSUserDefaults standardUserDefaults] objectForKey:DFPreferenceKeyAutosave];
+  NSString *autosaveSetting = [DFSettingsManager objectForSetting:DFSettingAutoSaveToCameraRoll];
   if (!autosaveSetting) {
     DFAlertController *alertController = [DFAlertController
                                           alertControllerWithTitle:@"Autosave to Camera Roll?"
@@ -275,23 +271,17 @@ NSString *const DFPreferenceNo = @"No";
                                 actionWithTitle:@"Not Now"
                                 style:DFAlertActionStyleCancel
                                 handler:^(DFAlertAction *action) {
-                                  [[NSUserDefaults standardUserDefaults]
-                                   setObject:DFPreferenceNo
-                                   forKey:DFPreferenceKeyAutosave];
-                                  [[NSUserDefaults standardUserDefaults] synchronize];
+                                  [DFSettingsManager setObject:DFSettingValueNo forSetting:DFSettingAutoSaveToCameraRoll];
                                 }]];
     [alertController addAction:[DFAlertAction
                                 actionWithTitle:@"Yes"
                                 style:DFAlertActionStyleDefault
                                 handler:^(DFAlertAction *action) {
-                                  [[NSUserDefaults standardUserDefaults]
-                                   setObject:DFPreferenceYes
-                                   forKey:DFPreferenceKeyAutosave];
-                                  [[NSUserDefaults standardUserDefaults] synchronize];
+                                  [DFSettingsManager setObject:DFSettingValueNo forSetting:DFSettingAutoSaveToCameraRoll];
                                   [self autosaveToCameraRoll:image metadata:metadata];
                                 }]];
     [alertController showWithParentViewController:self animated:YES completion:nil];
-  } else if ([autosaveSetting isEqual:DFPreferenceYes]) {
+  } else if ([autosaveSetting isEqual:DFSettingValueYes]) {
     [DFAssetLibraryHelper saveImageToCameraRoll:image withMetadata:metadata completion:nil];
   }
 }
