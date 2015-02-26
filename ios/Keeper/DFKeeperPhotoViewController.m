@@ -15,6 +15,7 @@
 #import "DFKeeperStore.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "DFUIKit.h"
+#import "UIImage+DFHelpers.h"
 
 @interface DFKeeperPhotoViewController ()
 
@@ -62,6 +63,7 @@
    completion:^(UIImage *image) {
      dispatch_async(dispatch_get_main_queue(), ^{
        self.imageView.image = image;
+       DDLogVerbose(@"image oreintation: %@", @(image.imageOrientation));
      });
    }];
   
@@ -116,6 +118,15 @@
                 [self.navigationController popViewControllerAnimated:YES];
               }]];
   [alertController showWithParentViewController:self animated:YES completion:nil];
+}
+
+- (IBAction)rotateButtonPressed:(id)sender {
+  UIImageOrientation newOrientation = [self.imageView.image orientationRotatedLeft];
+  DDLogVerbose(@"orientation old:%d new:%d", (int)self.imageView.image.imageOrientation,
+               (int)newOrientation);
+  self.imageView.image = [[UIImage alloc] initWithCGImage:self.imageView.image.CGImage
+                                                    scale:1.0
+                                              orientation:newOrientation];
 }
 
 

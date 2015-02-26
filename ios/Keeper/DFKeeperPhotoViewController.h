@@ -19,5 +19,6 @@
 
 - (IBAction)categoryButtonPressed:(id)sender;
 - (IBAction)deleteButtonPressed:(id)sender;
+- (IBAction)rotateButtonPressed:(id)sender;
 
 @end
