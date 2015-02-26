@@ -75,9 +75,9 @@
   
   // store the completion block for the request
   NSMutableArray *completionBlocksForRequest = self.requestObjectsToCompletions[requestObject];
-  DDLogVerbose(@"%@ request: %@ has %d completion blocks ahead in queue.", self.class,
-               requestObject,
-               (int)completionBlocksForRequest.count);
+//  DDLogVerbose(@"%@ request: %@ has %d completion blocks ahead in queue.", self.class,
+//               requestObject,
+//               (int)completionBlocksForRequest.count);
   if (!completionBlocksForRequest) completionBlocksForRequest = [NSMutableArray new];
   [completionBlocksForRequest addObject:completionBlock];
   self.requestObjectsToCompletions[requestObject] = completionBlocksForRequest;
@@ -99,7 +99,7 @@
     executeOnceOperation =
     [NSBlockOperation blockOperationWithBlock:^{
       id result = executeOnceBlock();
-      DDLogVerbose(@"%@ executeOnceResult: %@", [DFDeferredCompletionScheduler class], result);
+      //DDLogVerbose(@"%@ executeOnceResult: %@", [DFDeferredCompletionScheduler class], result);
       [weakSelf executeDeferredCompletionsWithResult:result forRequest:requestObject];
     }];
     executeOnceOperation.queuePriority = priority;
@@ -130,10 +130,10 @@
   dispatch_semaphore_wait(self.schedulerSemaphore, DISPATCH_TIME_FOREVER);
   
   NSMutableArray *deferredHandlers = self.requestObjectsToCompletions[requestObject];
-  DDLogVerbose(@"%@ executing %@ blocks for request %@",
-               [DFDeferredCompletionScheduler class],
-               @(deferredHandlers.count),
-               requestObject);
+//  DDLogVerbose(@"%@ executing %@ blocks for request %@",
+//               [DFDeferredCompletionScheduler class],
+//               @(deferredHandlers.count),
+//               requestObject);
   for (DFDeferredCompletionBlock completionBlock in deferredHandlers) {
     dispatch_async(dispatch_get_main_queue(), ^{
       completionBlock(result);
