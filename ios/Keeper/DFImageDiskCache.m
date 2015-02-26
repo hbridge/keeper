@@ -106,6 +106,18 @@ static DFImageDiskCache *defaultStore;
   }];
 }
 
+- (void)removeFromDBImageForType:(DFImageType)type forKey:(NSString *)key
+{
+  [self.dbQueue inDatabase:^(FMDatabase *db) {
+    [db executeUpdate:@"DELETE FROM downloadedImages WHERE image_type=(?) AND photo_key=(?)",
+     @(type),
+     key];
+    DDLogInfo(@"%@ setting cached photo %@ type:%@", self.class,
+              key,
+              type == DFImageFull ? @"full" : @"thumbnail");
+  }];
+}
+
 - (NSMutableSet *)cachedImageKeysForType:(DFImageType)type
 {
   return self.idsByImageTypeCache[@(type)];
@@ -157,25 +169,38 @@ static DFImageDiskCache *defaultStore;
   NSURL *url = [DFImageDiskCache localURLForPhotoKey:key type:type];
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     @autoreleasepool {
-      BOOL writeSuccessful = NO;
-      NSData *data = UIImageJPEGRepresentation(image, 0.75);
-      if (data) {
-        writeSuccessful = [data writeToURL:url atomically:YES];
-      }
-      
-      if (writeSuccessful) {
-        // Record that we've written this file out
-        NSMutableSet *photoKeys = self.idsByImageTypeCache[@(type)];
-        [photoKeys addObject:key];
-        [self addToDBImageForType:type forKey:key];
-        if (completion) completion(nil);
+      if (image) {
+        BOOL writeSuccessful = NO;
+        NSData *data = UIImageJPEGRepresentation(image, 0.75);
+        if (data) {
+          writeSuccessful = [data writeToURL:url atomically:YES];
+        }
+        
+        if (writeSuccessful) {
+          // Record that we've written this file out
+          NSMutableSet *photoKeys = self.idsByImageTypeCache[@(type)];
+          [photoKeys addObject:key];
+          [self addToDBImageForType:type forKey:key];
+          if (completion) completion(nil);
+        } else {
+          NSString *description = [NSString stringWithFormat:@"%@ writing %@ bytes failed.",
+                                   self.class,
+                                   @(data.length)];
+          if (completion) completion([NSError errorWithDomain:@"com.duffyapp.strand"
+                                                         code:-1030
+                                                     userInfo:@{NSLocalizedDescriptionKey : description}]);
+        }
       } else {
-        NSString *description = [NSString stringWithFormat:@"%@ writing %@ bytes failed.",
-                                       self.class,
-                                       @(data.length)];
-        if (completion) completion([NSError errorWithDomain:@"com.duffyapp.strand"
-                                                       code:-1030
-                                                   userInfo:@{NSLocalizedDescriptionKey : description}]);
+        NSError *error;
+        NSFileManager *fm = [NSFileManager defaultManager];
+        [fm removeItemAtURL:url error:&error];
+        if (error) {
+          DDLogError(@"%@ couldn't delete cached image:%@", self.class, error);
+        } else {
+          NSMutableSet *photoKeys = self.idsByImageTypeCache[@(type)];
+          [photoKeys removeObject:key];
+          [self removeFromDBImageForType:type forKey:key];
+        }
       }
     }
   });
