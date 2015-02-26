@@ -49,6 +49,8 @@
                                                cancelButtonTitle:@"Cancel"
                                                otherButtonTitles:@"OK", nil];
     otherAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [[otherAlert textFieldAtIndex:0] setAutocapitalizationType:UITextAutocapitalizationTypeWords];
+    [[otherAlert textFieldAtIndex:0] setAutocorrectionType:UITextAutocorrectionTypeYes];
     [otherAlert show];
   } else {
     [self categorySelected:category];
@@ -58,7 +60,8 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
   NSString *category = [[alertView textFieldAtIndex:0] text];
-  [self categorySelected:category];
+  if([category isNotEmpty] && buttonIndex != alertView.cancelButtonIndex)
+    [self categorySelected:category];
 }
 
 - (void)categorySelected:(NSString *)category
@@ -66,8 +69,5 @@
   [self.presentingViewController dismissGridMenuAnimated:YES completion:nil];
   [self.delegate categorizeController:self didFinishWithCategory:category];
 }
-
-
-
 
 @end
