@@ -46,4 +46,15 @@
     return exifOrientation;
 }
 
+- (UIImageOrientation)orientationRotatedLeft
+{
+  if (self.imageOrientation == UIImageOrientationDown) return UIImageOrientationRight;
+  if (self.imageOrientation == UIImageOrientationRight) return UIImageOrientationUp;
+  if (self.imageOrientation == UIImageOrientationUp) return UIImageOrientationLeft;
+  if (self.imageOrientation == UIImageOrientationLeft) return UIImageOrientationDown;
+  
+  DDLogWarn(@"couldn't rotate: %d", (int)self.imageOrientation);
+  return UIImageOrientationUp;
+}
+
 @end

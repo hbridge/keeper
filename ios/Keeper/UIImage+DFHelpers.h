@@ -12,5 +12,6 @@
 
 
 - (int)CGImageOrientation;
+- (UIImageOrientation)orientationRotatedLeft;
 
 @end
