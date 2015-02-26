@@ -13,6 +13,8 @@
 #import "DFRootViewController.h"
 #import "DFAnalytics.h"
 #import "DFKeeperStore.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "DFUIKit.h"
 
 @interface DFKeeperPhotoViewController ()
 
@@ -70,7 +72,7 @@
 {
   UIImage *icon = [DFCategoryConstants gridIconForCategory:self.photo.category];
   if (!icon) icon = [DFCategoryConstants defaultGridIcon];
-  UIImage *resizedIcon = [icon thumbnailImage:self.tagButton.titleLabel.font.pointSize
+  UIImage *resizedIcon = [icon thumbnailImage:20
                             transparentBorder:0
                                   cornerRadius:0
                           interpolationQuality:kCGInterpolationDefault];
@@ -95,5 +97,26 @@
     [self reloadCategory];
   }
 }
+
+- (IBAction)deleteButtonPressed:(id)sender {
+  DFAlertController *alertController = [DFAlertController
+                                        alertControllerWithTitle:nil
+                                        message:nil
+                                        preferredStyle:DFAlertControllerStyleActionSheet];
+  [alertController addAction:[DFAlertAction actionWithTitle:@"Cancel"
+                                                      style:DFAlertActionStyleCancel
+                                                    handler:nil]];
+  [alertController
+   addAction:[DFAlertAction
+              actionWithTitle:@"Delete"
+              style:DFAlertActionStyleDestructive
+              handler:^(DFAlertAction *action) {
+                [[DFKeeperStore sharedStore] deletePhoto:self.photo];
+                [SVProgressHUD showSuccessWithStatus:@"Deleted"];
+                [self.navigationController popViewControllerAnimated:YES];
+              }]];
+  [alertController showWithParentViewController:self animated:YES completion:nil];
+}
+
 
 @end

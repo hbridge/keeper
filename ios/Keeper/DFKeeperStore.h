@@ -16,6 +16,7 @@
 + (DFKeeperStore *)sharedStore;
 
 - (void)savePhoto:(DFKeeperPhoto *)photo;
+- (void)deletePhoto:(DFKeeperPhoto *)photo;
 - (NSArray *)photos;
 - (void)storeImage:(DFKeeperImage *)image forPhoto:(DFKeeperPhoto *)photo;
 

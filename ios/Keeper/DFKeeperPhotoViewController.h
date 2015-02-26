@@ -18,5 +18,6 @@
 @property (nonatomic, retain) DFKeeperPhoto *photo;
 
 - (IBAction)categoryButtonPressed:(id)sender;
+- (IBAction)deleteButtonPressed:(id)sender;
 
 @end

@@ -58,6 +58,14 @@
   [photoRef setValue:photoDict];
 }
 
+- (void)deletePhoto:(DFKeeperPhoto *)photo
+{
+  Firebase *photoRef = [self.photosRef childByAppendingPath:photo.key];
+  Firebase *imageRef = [self.imageDataRef childByAppendingPath:photo.imageKey];
+  [photoRef setValue:nil];
+  [imageRef setValue:nil];
+}
+
 - (NSArray *)photos
 {
   static dispatch_once_t onceToken;
@@ -85,12 +93,18 @@
        });
      }];
     [[self.photosRef queryOrderedByKey] observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-      for (NSUInteger i = 0; i < self.allPhotos.count; i++) {
-        DFKeeperPhoto *photo = self.allPhotos[i];
-        if ([photo.key isEqual:snapshot.key]) {
-          DFKeeperPhoto *newPhoto = [[DFKeeperPhoto alloc] initWithSnapshot:snapshot];
-          [self.allPhotos replaceObjectAtIndex:i withObject:newPhoto];
-        }
+      NSUInteger photoIndex = [self indexOfPhotoWithKey:snapshot.key];
+      if (photoIndex != NSNotFound) {
+        DFKeeperPhoto *newPhoto = [[DFKeeperPhoto alloc] initWithSnapshot:snapshot];
+        [self.allPhotos replaceObjectAtIndex:photoIndex withObject:newPhoto];
+        [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
+                                                            object:self];
+      }
+    }];
+    [[self.photosRef queryOrderedByKey] observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
+      NSUInteger photoIndex = [self indexOfPhotoWithKey:snapshot.key];
+      if (photoIndex != NSNotFound) {
+        [self.allPhotos removeObjectAtIndex:photoIndex];
         [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
                                                             object:self];
       }
@@ -98,6 +112,17 @@
     
   });
   return [self.allPhotos copy];
+}
+
+- (NSUInteger)indexOfPhotoWithKey:(NSString *)key
+{
+  for (NSUInteger i = 0; i < self.allPhotos.count; i++) {
+    DFKeeperPhoto *photo = self.allPhotos[i];
+    if ([photo.key isEqual:key]) {
+      return i;
+    }
+  }
+  return NSNotFound;
 }
 
 
@@ -113,6 +138,7 @@
   photo.imageKey = image.key;
   [self savePhoto:photo];
 }
+
 
 
 
