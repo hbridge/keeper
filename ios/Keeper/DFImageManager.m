@@ -279,10 +279,11 @@ static BOOL logRouting = NO;
      fetchImageForKey:request.key
      completion:^(UIImage *image, NSError *error) {
        result = image;
-       [[DFImageDiskCache sharedStore] setImage:image
-                                           type:request.imageType
-                                         forKey:request.key
-                                 completion:nil];
+       if (image)
+         [[DFImageDiskCache sharedStore] setImage:image
+                                             type:request.imageType
+                                           forKey:request.key
+                                       completion:nil];
        dispatch_semaphore_signal(downloadSema);
      }];
     
