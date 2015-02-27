@@ -13,5 +13,6 @@
 #import "UINib+DFHelpers.h"
 #import "DFImageCollectionViewCell.h"
 #import "DFAlertController.h"
+#import "UIAlertView+DFHelpers.h"
 
 #endif

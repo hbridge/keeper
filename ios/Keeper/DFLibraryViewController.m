@@ -16,6 +16,8 @@
 #import "DFCategoryConstants.h"
 #import "DFAnalytics.h"
 #import "DFSettingsManager.h"
+#import "DFDiagnosticInfoMailComposeController.h"
+#import "DFLogs.h"
 
 @interface DFLibraryViewController ()
 
@@ -203,6 +205,36 @@
                               handler:^(DFAlertAction *action) {
                                 [DFLoginViewController logoutWithParentViewController:self];
                                 abort();
+                              }]];
+  
+  // send logs
+  [alertController addAction:[DFAlertAction
+                              actionWithTitle:@"Send Logs"
+                              style:DFAlertActionStyleDefault
+                              handler:^(DFAlertAction *action) {
+                                #if TARGET_IPHONE_SIMULATOR
+                                NSData *logData = [DFLogs aggregatedLogData];
+                                NSString *filePath;
+                                NSArray * paths = NSSearchPathForDirectoriesInDomains (NSDesktopDirectory, NSUserDomainMask, YES);
+                                if (paths.firstObject) {
+                                  NSArray *pathComponents = [(NSString *)paths.firstObject pathComponents];
+                                  if ([pathComponents[1] isEqualToString:@"Users"]) {
+                                    filePath = [NSString stringWithFormat:@"/Users/%@/Desktop/%@.log",
+                                                pathComponents[2], [NSDate date]];
+                                    
+                                  }
+                                }
+                                [logData writeToFile:filePath atomically:NO];
+                                [UIAlertView showSimpleAlertWithTitle:@"Copied To Desktop"
+                                                        formatMessage:@"Log data has been copied to your desktop."];
+                                
+                                #else
+                                DFDiagnosticInfoMailComposeController *mailComposer =
+                                [[DFDiagnosticInfoMailComposeController alloc] initWithMailType:DFMailTypeIssue];
+                                if (mailComposer) { // if the user hasn't setup email, this will come back nil
+                                  [self presentViewController:mailComposer animated:YES completion:nil];
+                                }
+                               #endif
                               }]];
   
   // Auto Save
