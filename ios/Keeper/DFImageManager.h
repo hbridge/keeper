@@ -40,7 +40,7 @@ typedef void (^SetImageCompletion)(NSError *error);
 - (void)setImageChanged:(NSString *)imageKey;
 
 - (void)setImage:(UIImage *)image forKey:(NSString *)key;
-- (void)resumeUploads;
+- (void)performForegroundOperations;
 
 
 @end

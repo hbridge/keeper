@@ -114,7 +114,7 @@
 {
   [[[self.photosRef queryOrderedByChild:@"user"]
     queryEqualToValue:[DFUser loggedInUser]]
-   observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+   observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
      NSMutableArray *photos = [NSMutableArray new];
      for (FDataSnapshot *photoSnapshot in snapshot.children) {
        DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] initWithSnapshot:photoSnapshot];

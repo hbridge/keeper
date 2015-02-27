@@ -17,6 +17,7 @@
 @interface DFImageUploadManager()
 
 @property (strong, nonatomic) NSURLSession *session;
+@property (nonatomic, retain) NSMutableSet *uploadsInProgress;
 @property (strong, nonatomic) FMDatabase *db;
 @property (strong, nonatomic) FMDatabaseQueue *dbQueue;
 
@@ -45,6 +46,7 @@
   self = [super init];
   if (self) {
     [self initDB];
+    _uploadsInProgress = [[NSMutableSet alloc] init];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration
                                                 backgroundSessionConfigurationWithIdentifier:BackgroundSessionUploadIdentifier];
     configuration.HTTPMaximumConnectionsPerHost = 1; // only upload one file at a time
@@ -54,6 +56,13 @@
 }
 
 - (void)uploadImageFile:(NSURL *)imageFile forKey:(NSString *)key {
+  if ([self isUploadInProgress:key]) return;
+  if (![[NSFileManager defaultManager] fileExistsAtPath:[imageFile path]]) {
+    DDLogError(@"%@ asked to upload non-existent file: %@", self.class, imageFile);
+    return;
+  }
+  DDLogInfo(@"%@ queing for upload %@", self.class, key);
+  
   AWSS3GetPreSignedURLRequest *getPreSignedURLRequest = [AWSS3GetPreSignedURLRequest new];
   getPreSignedURLRequest.bucket = S3BucketName;
   getPreSignedURLRequest.key = key;
@@ -100,6 +109,7 @@
   }else {
     DDLogError(@"S3 upload error: %@", error);
   }
+  [self setKey:task.taskDescription inProgress:NO];
 }
 
 - (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
@@ -112,6 +122,29 @@
   }
   
   DDLogInfo(@"%@ completion handler invoked, background upload task has finished.", self.class);
+}
+
+#pragma mark - Upload in progress
+
+NSString *const syncToken = @"sync";
+
+- (void)setKey:(NSString *)key inProgress:(BOOL)inProgress
+{
+  @synchronized(syncToken) {
+    if (inProgress)
+      [self.uploadsInProgress addObject:key];
+    else
+      [self.uploadsInProgress removeObject:key];
+  }
+}
+
+- (BOOL)isUploadInProgress:(NSString *)key
+{
+  BOOL result;
+  @synchronized(syncToken) {
+    result = [self.uploadsInProgress containsObject:key];
+  }
+  return result;
 }
 
 #pragma mark - Upload DB

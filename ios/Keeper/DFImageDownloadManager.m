@@ -65,10 +65,7 @@ static DFImageDownloadManager *defaultManager;
 
 - (void)observeNotifications
 {
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(fetchNewImages)
-                                               name:DFPhotosChangedNotification
-                                             object:nil];
+
 }
 
 - (void)fetchNewImages
