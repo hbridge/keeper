@@ -217,6 +217,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
       [[DFImageManager sharedManager] saveImage:self.lastPickedImage
                                        category:category
                                    withMetadata:self.lastPickedMetadata];
+      self.lastPickedImage = nil;
+      self.lastPickedMetadata = nil;
     } else {
       DFLibraryViewController *libraryVC = [[DFLibraryViewController alloc] init];
       libraryVC.categoryFilter = category;
