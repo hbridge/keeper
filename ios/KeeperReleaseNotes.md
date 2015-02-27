@@ -1,5 +1,10 @@
 # Keeper
 
+# Feb 27 2015 (6)
+
+- Edit category speed dial! Tap on a blank category to set it, or edit your categories from settings.
+- Poor man's rotation for photos: it'll rotate it temporarily so you can see it in the right orientation, but it doesn't save the rotation permanently.
+
 # Feb 26 2015 (5)
 
 - Autosave to camera roll (app will ask after you take a photo, or open settings from the library)
