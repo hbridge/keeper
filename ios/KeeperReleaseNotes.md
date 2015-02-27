@@ -3,6 +3,7 @@
 # Feb 27 2015 (6-10)
 
 - Edit category speed dial! Tap on a blank category to set it, or edit your categories from settings.
+- Import photos from your camera roll
 - Poor man's rotation for photos: it'll rotate it temporarily so you can see it in the right orientation, but it doesn't save the rotation permanently.
 - Upload image data to S3 instead of Firebase DB
 - Send in diagnostic logs
