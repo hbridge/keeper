@@ -38,5 +38,6 @@ typedef void (^SetImageCompletion)(NSError *error);
 - (void)loadDownloadedImagesCache;
 - (BOOL)canServeRequest:(DFImageManagerRequest *)request;
 - (UIImage *)fullImageForKey:(NSString *)key;
+- (NSURL *)urlForFullImageWithKey:(NSString *)key;
 
 @end

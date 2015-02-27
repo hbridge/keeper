@@ -30,8 +30,12 @@
            @"category",
            @"text",
            @"metadata",
-           @"imageKey",
            ];
+}
+
+- (NSString *)imageKey
+{
+  return self.key;
 }
 
 - (instancetype)initWithSnapshot:(FDataSnapshot *)snapshot

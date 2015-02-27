@@ -13,7 +13,6 @@
 
 @property (nonatomic, retain) Firebase *baseRef;
 @property (nonatomic, retain) Firebase *photosRef;
-@property (nonatomic, retain) Firebase *imageDataRef;
 @property (nonatomic, retain) NSMutableArray *allPhotos;
 
 @end
@@ -39,7 +38,6 @@
   if (self) {
     self.baseRef = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
     self.photosRef = [_baseRef childByAppendingPath:@"photos"];
-    self.imageDataRef = [_baseRef childByAppendingPath:@"imageData"];
   }
   return self;
 }
@@ -61,9 +59,7 @@
 - (void)deletePhoto:(DFKeeperPhoto *)photo
 {
   Firebase *photoRef = [self.photosRef childByAppendingPath:photo.key];
-  Firebase *imageRef = [self.imageDataRef childByAppendingPath:photo.imageKey];
   [photoRef setValue:nil];
-  [imageRef setValue:nil];
 }
 
 - (NSArray *)photos
@@ -114,6 +110,21 @@
   return [self.allPhotos copy];
 }
 
+- (void)fetchPhotosWithCompletion:(void (^)(NSArray *))completion
+{
+  [[[self.photosRef queryOrderedByChild:@"user"]
+    queryEqualToValue:[DFUser loggedInUser]]
+   observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+     NSMutableArray *photos = [NSMutableArray new];
+     for (FDataSnapshot *photoSnapshot in snapshot.children) {
+       DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] initWithSnapshot:photoSnapshot];
+       [photos addObject:photo];
+     }
+     
+     completion(photos);
+   }];
+}
+
 - (NSUInteger)indexOfPhotoWithKey:(NSString *)key
 {
   for (NSUInteger i = 0; i < self.allPhotos.count; i++) {
@@ -124,21 +135,6 @@
   }
   return NSNotFound;
 }
-
-
-- (void)storeImage:(DFKeeperImage *)image forPhoto:(DFKeeperPhoto *)photo
-{
-  // create the image
-  image.user = [DFUser loggedInUser];
-  NSMutableDictionary *imageDict = image.dictionary.mutableCopy;
-  Firebase *imageRef = [self.imageDataRef childByAutoId];
-  [imageRef setValue:imageDict];
-  image.key = imageRef.key;
-  
-  photo.imageKey = image.key;
-  [self savePhoto:photo];
-}
-
 
 
 

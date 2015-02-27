@@ -11,6 +11,8 @@
 #import "DFImageDownloadManager.h"
 #import "DFPhotoResizer.h"
 #import <Photos/Photos.h>
+#import "DFImageUploadManager.h"
+#import "DFKeeperStore.h"
 
 @interface DFImageManager()
 
@@ -441,6 +443,33 @@ static BOOL logRouting = NO;
   [[DFImageDiskCache sharedStore] setImage:nil type:DFImageFull forKey:imageKey completion:nil];
 }
 
+- (void)setImage:(UIImage *)image forKey:(NSString *)key
+{
+  [[DFImageDiskCache sharedStore] setImage:image type:DFImageFull forKey:key completion:^(NSError *error) {
+    [[DFImageUploadManager sharedManager]
+     uploadImageFile:[[DFImageDiskCache sharedStore] urlForFullImageWithKey:key] forKey:key];
+  }];
+}
+
+- (void)resumeUploads
+{
+  DDLogInfo(@"%@ resuming uploads.", self.class);
+  [[DFKeeperStore sharedStore] fetchPhotosWithCompletion:^(NSArray *photos) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      NSArray *allPhotoKeys = [photos arrayByMappingObjectsWithBlock:^id(id input) {
+        return [input key];
+      }];
+      
+      NSMutableSet *unUploadedKeys = [[NSMutableSet alloc] initWithArray:allPhotoKeys];
+      [unUploadedKeys minusSet:[[DFImageUploadManager sharedManager] uploadedKeys]];
+      for (NSString *photoKey in unUploadedKeys) {
+        DDLogInfo(@"%@ queing for upload %@", self.class, photoKey);
+        NSURL *url = [[DFImageDiskCache sharedStore] urlForFullImageWithKey:photoKey];
+        [[DFImageUploadManager sharedManager] uploadImageFile:url forKey:photoKey];
+      }
+    });
+  }];
+}
 
 
 @end

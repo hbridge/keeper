@@ -10,6 +10,10 @@
 #import "DFKeeperStore.h"
 #import "DFImageDiskCache.h"
 #import "DFDeferredCompletionScheduler.h"
+#import <AWSiOSSDKv2/AWSCore.h>
+#import <AWSiOSSDKv2/S3.h>
+#import "DFNetworkingConstants.h"
+#import "AppDelegate.h"
 
 const NSUInteger maxConcurrentImageDownloads = 2;
 const NSUInteger maxDownloadRetries = 3;
@@ -18,6 +22,8 @@ const NSUInteger maxDownloadRetries = 3;
 
 @property (nonatomic, retain) DFDeferredCompletionScheduler *downloadScheduler;
 @property (nonatomic, retain) Firebase *imageDataRef;
+
+@property (nonatomic) NSURLSession *session;
 
 @end
 
@@ -50,6 +56,8 @@ static DFImageDownloadManager *defaultManager;
                               executionPriority:DISPATCH_QUEUE_PRIORITY_DEFAULT];
     self.imageDataRef = [[[Firebase alloc] initWithUrl:DFFirebaseRootURLString]
                          childByAppendingPath:@"imageData"];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    _session = [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:nil];
   }
   return self;
 }
@@ -115,27 +123,48 @@ static DFImageDownloadManager *defaultManager;
      @autoreleasepool {
        NSMutableDictionary *result = [NSMutableDictionary new];
        dispatch_semaphore_t downloadSem = dispatch_semaphore_create(0);
-       DFKeeperImage __block *keeperImage = nil;
-       [[self.imageDataRef childByAppendingPath:key]
-        observeSingleEventOfType:FEventTypeValue
-        withBlock:^(FDataSnapshot *snapshot) {
-          if (![snapshot isEqual:[NSNull null]]) {
-            keeperImage = [[DFKeeperImage alloc] initWithSnapshot:snapshot];
-          } else {
-            result[@"error"] = [NSError errorWithDomain:@"com.duffyapp.keeper"
-                                                   code:-404
-                                               userInfo:@{NSLocalizedDescriptionKey : @"The image couldn't be found"}];
-          }
-          dispatch_semaphore_signal(downloadSem);
-       }];
-       dispatch_semaphore_wait(downloadSem, DISPATCH_TIME_FOREVER);
+       AWSS3GetPreSignedURLRequest *getPreSignedURLRequest = [AWSS3GetPreSignedURLRequest new];
+       getPreSignedURLRequest.bucket = S3BucketName;
+       getPreSignedURLRequest.key = key;
+       getPreSignedURLRequest.HTTPMethod = AWSHTTPMethodGET;
+       getPreSignedURLRequest.expires = [NSDate dateWithTimeIntervalSinceNow:3600];
        
-       if (keeperImage) {
-         UIImage *image = [keeperImage UIImage];
-         if (image) {
-           result[@"image"] = image;
+       [[[AWSS3PreSignedURLBuilder defaultS3PreSignedURLBuilder] getPreSignedURL:getPreSignedURLRequest] continueWithBlock:^id(BFTask *task) {
+         if (task.error) {
+           DDLogError(@"Error: %@",task.error);
+         } else {
+           NSURL *presignedURL = task.result;
+           DDLogVerbose(@"download presignedURL is: \n%@", presignedURL);
+           
+           NSURLRequest *request = [NSURLRequest requestWithURL:presignedURL];
+           NSURLSessionDownloadTask *downloadTask =
+           [self.session
+            downloadTaskWithRequest:request
+            completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+              if (error) {
+                DDLogError(@"download error: %@", error);
+                result[@"error"] = error;
+              } else {
+                NSData *imageData = [NSData dataWithContentsOfURL:location];
+                UIImage *image = [UIImage imageWithData:imageData];
+                if (image)
+                  result[@"image"] = image;
+                else {
+                  DDLogError(@"%@ server returned invalid image",
+                             [DFImageDownloadManager class]);
+                  result[@"error"] = [NSError errorWithDomain:@"com.duffyapp.keeper"
+                                                         code:-1
+                                                     userInfo:@{NSLocalizedDescriptionKey : @"Server returned invalid image data"}];
+                }
+              }
+              dispatch_semaphore_signal(downloadSem);
+            }];
+           [downloadTask resume];
          }
-       }
+         return nil;
+       }];
+       
+       dispatch_semaphore_wait(downloadSem, DISPATCH_TIME_FOREVER);
        
        return result;
      }

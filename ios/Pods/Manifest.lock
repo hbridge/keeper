@@ -1,24 +1,56 @@
 PODS:
-  - CNPGridMenu (0.2.1)
+  - AWSiOSSDKv2/AWSCore (2.0.16):
+    - Bolts (~> 1.1.0)
+    - FMDB (~> 2.4)
+    - GZIP (~> 1.0.3)
+    - Mantle (~> 1.4)
+    - Reachability (~> 3.1)
+    - TMCache (~> 1.2.1)
+    - UICKeyChainStore (< 3.0)
+    - XMLDictionary (~> 1.4.0)
+  - AWSiOSSDKv2/S3 (2.0.16):
+    - AWSiOSSDKv2/AWSCore
+    - Bolts (~> 1.1.0)
+    - FMDB (~> 2.4)
+    - GZIP (~> 1.0.3)
+    - Mantle (~> 1.4)
+    - Reachability (~> 3.1)
+    - TMCache (~> 1.2.1)
+    - UICKeyChainStore (< 3.0)
+    - XMLDictionary (~> 1.4.0)
+  - Bolts (1.1.3)
+  - CNPGridMenu (0.2.2)
   - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions (= 1.9.2)
   - CocoaLumberjack/Core (1.9.2)
   - CocoaLumberjack/Extensions (1.9.2):
     - CocoaLumberjack/Core
   - Firebase (2.2.0)
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
   - FMDB/common (2.5)
   - FMDB/FTS (2.5):
     - FMDB/standard
   - FMDB/standard (2.5):
     - FMDB/common
+  - GZIP (1.0.3)
   - HockeySDK (3.6.2)
   - Localytics (3.1.0)
+  - Mantle (1.5.4):
+    - Mantle/extobjc (= 1.5.4)
+  - Mantle/extobjc (1.5.4)
+  - Reachability (3.2)
   - SAMGradientView (0.2.1)
   - SVProgressHUD (1.1.2)
+  - TMCache (1.2.3)
+  - UICKeyChainStore (2.0.4)
   - UIColor+BFPaperColors (1.3.1)
+  - XMLDictionary (1.4)
 
 DEPENDENCIES:
-  - CNPGridMenu (~> 0.2.1)
+  - AWSiOSSDKv2/AWSCore (~> 2.0)
+  - AWSiOSSDKv2/S3 (~> 2.0)
+  - CNPGridMenu (from `https://github.com/hbridge/CNPGridMenu.git`)
   - CocoaLumberjack (~> 1.9)
   - Firebase (~> 2.2)
   - FMDB/FTS (~> 2.4)
@@ -29,23 +61,36 @@ DEPENDENCIES:
   - UIColor+BFPaperColors (~> 1.3)
 
 EXTERNAL SOURCES:
+  CNPGridMenu:
+    :git: https://github.com/hbridge/CNPGridMenu.git
   HockeySDK:
     :git: https://github.com/bitstadium/HockeySDK-iOS.git
 
 CHECKOUT OPTIONS:
+  CNPGridMenu:
+    :commit: f76a5bce37c18c4358f11ca4b281bcfcfe7e8a6b
+    :git: https://github.com/hbridge/CNPGridMenu.git
   HockeySDK:
     :commit: 2ce5834c66dadbe5a521c8b275b41db7a7e4da35
     :git: https://github.com/bitstadium/HockeySDK-iOS.git
 
 SPEC CHECKSUMS:
-  CNPGridMenu: 0a8f8303cc0e141ad483d8b9bc8fdf48bfa577b6
+  AWSiOSSDKv2: bcf17afda187f45901b07369f1f59bfbc68922bc
+  Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
+  CNPGridMenu: c677e34579ac42df6477b3d49aac3229fa2cee2d
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   Firebase: e7a2ea2ffeff99f9c37028b354194dcc9718d36b
   FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
+  GZIP: f27c434ffee5e9a9b34f4e9c19e91350fa8bbde1
   HockeySDK: eba67c3eb995299b8d7aa382fcabff2749681750
   Localytics: 588e9ed57f86baadb740f4f165c22f8305c5907a
+  Mantle: d5fbaf30fbc58031223af13812c060e15934a1fe
+  Reachability: 1ef8adf5c4e3d362f96515d4278f68dad3c26930
   SAMGradientView: 37ef027b0da8b5fd85bfdfef49801b5262160998
   SVProgressHUD: da7a49e789af645d9279ffbca62318945a832438
+  TMCache: 11589ef8c40909114a5e60132711c9a559e01d97
+  UICKeyChainStore: 2399076d0950e20fe859b8f817548cf6ca542dd7
   UIColor+BFPaperColors: c7e4c6e4d82e889d507b3c2d09e6caf816529f18
+  XMLDictionary: 735e81b9a043e220b0d24e9d4f16719606f2e0fc
 
 COCOAPODS: 0.35.0

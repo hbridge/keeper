@@ -47,7 +47,11 @@ install_resource()
       ;;
   esac
 }
-          install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
+          install_resource "AWSiOSSDKv2/AWSCore/CognitoIdentity/Resources/cognito-identity-2014-06-30.json"
+                    install_resource "AWSiOSSDKv2/AWSCore/MobileAnalyticsERS/Resources/mobileanalytics-2014-06-30.json"
+                    install_resource "AWSiOSSDKv2/AWSCore/STS/Resources/sts-2011-06-15.json"
+                    install_resource "AWSiOSSDKv2/S3/Resources/s3-2006-03-01.json"
+                    install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
                     install_resource "${BUILT_PRODUCTS_DIR}/HockeySDKResources.bundle"
           
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

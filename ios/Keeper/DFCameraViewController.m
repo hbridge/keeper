@@ -18,6 +18,7 @@
 #import "DFUIKit.h"
 #import "DFAssetLibraryHelper.h"
 #import "DFSettingsManager.h"
+#import "DFImageManager.h"
 
 static NSString *const DFStrandCameraHelpWasShown = @"DFStrandCameraHelpWasShown";
 static NSString *const DFStrandCameraJoinableHelpWasShown = @"DFStrandCameraJoinableHelpWasShown";
@@ -339,13 +340,11 @@ const unsigned int SavePromptMinPhotos = 3;
   photo.user = [DFUser loggedInUser];
   [[DFKeeperStore sharedStore] savePhoto:photo];
   
-  
-  DFKeeperImage *imageRecord = [[DFKeeperImage alloc]
-                                initWithImage:[image
-                                               resizedImageWithContentMode:UIViewContentModeScaleAspectFit
-                                               bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
-                                               interpolationQuality:kCGInterpolationDefault]];
-  [[DFKeeperStore sharedStore] storeImage:imageRecord forPhoto:photo];
+  UIImage *imageToUpload = [image
+                            resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+                            bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
+                            interpolationQuality:kCGInterpolationDefault];
+  [[DFImageManager sharedManager] setImage:imageToUpload forKey:photo.imageKey];
 }
 
 - (void)galleryButtonPressed:(id)sender

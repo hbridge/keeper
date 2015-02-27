@@ -10,10 +10,13 @@
 #import <CocoaLumberjack/DDASLLogger.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <CocoaLumberjack/DDFileLogger.h>
+#import <AWSiOSSDKv2/AWSCore.h>
+#import "DFNetworkingConstants.h"
 #import "DFRootViewController.h"
 #import "DFLoginViewController.h"
 #import <HockeySDK/HockeySDK.h>
 #import "DFAnalytics.h"
+#import "DFImageManager.h"
 
 @interface AppDelegate ()
 
@@ -28,6 +31,7 @@
   [self printSimulatorInfo];
   [self configureLogs];
   [self configureHockey];
+  [self configureNetworking];
   [self configureUI];
 
   return YES;
@@ -43,6 +47,19 @@
 #endif
 }
 
+- (void)configureLogs
+{
+  [DDLog addLogger:[DDASLLogger sharedInstance]];
+  [DDLog addLogger:[DDTTYLogger sharedInstance]];
+  
+  self.fileLogger = [[DDFileLogger alloc] init];
+  self.fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+  self.fileLogger.logFileManager.maximumNumberOfLogFiles = 3; // 3 days of files
+  
+  // To simulate the amount of log data saved, use the release log level for the fileLogger
+  [DDLog addLogger:self.fileLogger withLogLevel:DFRELEASE_LOG_LEVEL];
+}
+
 - (void)configureHockey
 {
 #ifdef DEBUG
@@ -56,6 +73,15 @@
   [[BITHockeyManager sharedHockeyManager] startManager];
   [[BITHockeyManager sharedHockeyManager].authenticator
    authenticateInstallation];
+}
+
+- (void)configureNetworking
+{
+  AWSCognitoCredentialsProvider *credentialsProvider = [AWSCognitoCredentialsProvider credentialsWithRegionType:CognitoRegionType
+                                                                                                 identityPoolId:CognitoIdentityPoolId];
+  AWSServiceConfiguration *configuration = [AWSServiceConfiguration configurationWithRegion:DefaultServiceRegionType
+                                                                        credentialsProvider:credentialsProvider];
+  [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
 }
 
 
@@ -108,6 +134,7 @@
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   [DFAnalytics StartAnalyticsSession];
   [self showLoginIfNecessary];
+  [[DFImageManager sharedManager] resumeUploads];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -115,17 +142,18 @@
   [DFAnalytics CloseAnalyticsSession];
 }
 
-- (void)configureLogs
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier
+  completionHandler:(void (^)())completionHandler
 {
-  [DDLog addLogger:[DDASLLogger sharedInstance]];
-  [DDLog addLogger:[DDTTYLogger sharedInstance]];
-  
-  self.fileLogger = [[DDFileLogger alloc] init];
-  self.fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-  self.fileLogger.logFileManager.maximumNumberOfLogFiles = 3; // 3 days of files
-  
-  // To simulate the amount of log data saved, use the release log level for the fileLogger
-  [DDLog addLogger:self.fileLogger withLogLevel:DFRELEASE_LOG_LEVEL];
+  NSLog(@"%s",__PRETTY_FUNCTION__);
+  /*
+   Store the completion handler.
+   */
+  if ([identifier isEqualToString:BackgroundSessionUploadIdentifier]) {
+    self.backgroundUploadSessionCompletionHandler = completionHandler;
+  } else if ([identifier isEqualToString:BackgroundSessionDownloadIdentifier]) {
+    self.backgroundDownloadSessionCompletionHandler = completionHandler;
+  }
 }
 
 @end

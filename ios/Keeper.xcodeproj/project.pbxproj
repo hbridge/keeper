@@ -14,7 +14,6 @@
 		5A1C6A191A9B983D00A43A07 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A151A9B983D00A43A07 /* UIImage+Alpha.m */; };
 		5A1C6A1A1A9B983D00A43A07 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A171A9B983D00A43A07 /* UIImage+RoundedCorner.m */; };
 		5A1C6A1D1A9B9F8300A43A07 /* NSString+DFHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A1C1A9B9F8300A43A07 /* NSString+DFHelpers.m */; };
-		5A1C6A201A9BAE2500A43A07 /* DFKeeperImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A1F1A9BAE2500A43A07 /* DFKeeperImage.m */; };
 		5A677D591A9BD5190060B55D /* DFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D581A9BD5190060B55D /* DFUser.m */; };
 		5A677D5D1A9BD8030060B55D /* DFKeeperPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D5B1A9BD8030060B55D /* DFKeeperPhotoViewController.m */; };
 		5A677D5E1A9BD8030060B55D /* DFKeeperPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A677D5C1A9BD8030060B55D /* DFKeeperPhotoViewController.xib */; };
@@ -61,6 +60,8 @@
 		5A99504F1A97E44A00468484 /* DFImageManagerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950481A97E44A00468484 /* DFImageManagerRequest.m */; };
 		5A9950501A97E44A00468484 /* DFImageDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99504A1A97E44A00468484 /* DFImageDownloadManager.m */; };
 		5A9950511A97E44A00468484 /* DFDeferredCompletionScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99504C1A97E44A00468484 /* DFDeferredCompletionScheduler.m */; };
+		5AC04E041AA0DFF9008E44A8 /* DFImageUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */; };
+		5AC04E071AA0E64B008E44A8 /* DFNetworkingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */; };
 		DC2A7B9402905231BE306701 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88AD2FD4651BA4B4CAD0AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -90,8 +91,6 @@
 		5A1C6A171A9B983D00A43A07 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		5A1C6A1B1A9B9F8300A43A07 /* NSString+DFHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DFHelpers.h"; sourceTree = "<group>"; };
 		5A1C6A1C1A9B9F8300A43A07 /* NSString+DFHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DFHelpers.m"; sourceTree = "<group>"; };
-		5A1C6A1E1A9BAE2500A43A07 /* DFKeeperImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperImage.h; sourceTree = "<group>"; };
-		5A1C6A1F1A9BAE2500A43A07 /* DFKeeperImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperImage.m; sourceTree = "<group>"; };
 		5A677D571A9BD5190060B55D /* DFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFUser.h; sourceTree = "<group>"; };
 		5A677D581A9BD5190060B55D /* DFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFUser.m; sourceTree = "<group>"; };
 		5A677D5A1A9BD8030060B55D /* DFKeeperPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperPhotoViewController.h; sourceTree = "<group>"; };
@@ -182,6 +181,10 @@
 		5A99504B1A97E44A00468484 /* DFDeferredCompletionScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFDeferredCompletionScheduler.h; sourceTree = "<group>"; };
 		5A99504C1A97E44A00468484 /* DFDeferredCompletionScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFDeferredCompletionScheduler.m; sourceTree = "<group>"; };
 		5AAEB3271A9CDC0D00D029A6 /* KeeperReleaseNotes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = KeeperReleaseNotes.md; sourceTree = SOURCE_ROOT; };
+		5AC04E021AA0DFF9008E44A8 /* DFImageUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageUploadManager.h; sourceTree = "<group>"; };
+		5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageUploadManager.m; sourceTree = "<group>"; };
+		5AC04E051AA0E0D1008E44A8 /* DFNetworkingConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFNetworkingConstants.h; sourceTree = "<group>"; };
+		5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFNetworkingConstants.m; sourceTree = "<group>"; };
 		C5EA541A400364F5B9C2B943 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F8622FA142075D9EFE24176B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -263,6 +266,7 @@
 				5A99500B1A96549900468484 /* Library */,
 				5A9950041A964B2000468484 /* Camera */,
 				5A9950241A9662ED00468484 /* Database */,
+				5A99503F1A97913800468484 /* ImageManager */,
 				5A9950151A965BAB00468484 /* Common */,
 				5A8EB9021A915FE90033C540 /* Utils */,
 				5A88B7E11A9FBBDA0008F548 /* Settings */,
@@ -378,7 +382,6 @@
 		5A9950151A965BAB00468484 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				5A99503F1A97913800468484 /* ImageManager */,
 				5A99503C1A96A51F00468484 /* DFTypedefs.h */,
 				5A99503D1A96A51F00468484 /* DFTypedefs.m */,
 				5A99501C1A965D9E00468484 /* UI Components */,
@@ -412,8 +415,6 @@
 				5A9950221A9662E300468484 /* DFKeeperStore.m */,
 				5A9950251A967F0E00468484 /* DFKeeperPhoto.h */,
 				5A9950261A967F0E00468484 /* DFKeeperPhoto.m */,
-				5A1C6A1E1A9BAE2500A43A07 /* DFKeeperImage.h */,
-				5A1C6A1F1A9BAE2500A43A07 /* DFKeeperImage.m */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -439,10 +440,14 @@
 				5A9950461A97E44A00468484 /* DFImageManager.m */,
 				5A9950471A97E44A00468484 /* DFImageManagerRequest.h */,
 				5A9950481A97E44A00468484 /* DFImageManagerRequest.m */,
-				5A9950491A97E44A00468484 /* DFImageDownloadManager.h */,
-				5A99504A1A97E44A00468484 /* DFImageDownloadManager.m */,
 				5A99504B1A97E44A00468484 /* DFDeferredCompletionScheduler.h */,
 				5A99504C1A97E44A00468484 /* DFDeferredCompletionScheduler.m */,
+				5AC04E021AA0DFF9008E44A8 /* DFImageUploadManager.h */,
+				5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */,
+				5A9950491A97E44A00468484 /* DFImageDownloadManager.h */,
+				5A99504A1A97E44A00468484 /* DFImageDownloadManager.m */,
+				5AC04E051AA0E0D1008E44A8 /* DFNetworkingConstants.h */,
+				5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */,
 			);
 			name = ImageManager;
 			sourceTree = "<group>";
@@ -631,6 +636,7 @@
 				5A88B7E41A9FBC020008F548 /* DFSettingsManager.m in Sources */,
 				5A8EB90C1A91612C0033C540 /* UIView+DFExtensions.m in Sources */,
 				5A6DED961A9E6C890038EF9F /* DFAssetLibraryHelper.m in Sources */,
+				5AC04E071AA0E64B008E44A8 /* DFNetworkingConstants.m in Sources */,
 				5A677D611A9BDA2F0060B55D /* DFCategoryConstants.m in Sources */,
 				5A99502F1A96983800468484 /* UINib+DFHelpers.m in Sources */,
 				5A99501F1A965DFA00468484 /* DFNavigationController.m in Sources */,
@@ -651,11 +657,11 @@
 				5A99504D1A97E44A00468484 /* DFImageDiskCache.m in Sources */,
 				5A1C6A1D1A9B9F8300A43A07 /* NSString+DFHelpers.m in Sources */,
 				5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */,
-				5A1C6A201A9BAE2500A43A07 /* DFKeeperImage.m in Sources */,
 				5A8EB8FA1A915E030033C540 /* DFAVCameraViewController.m in Sources */,
 				5A677D641A9BDB2B0060B55D /* NSArray+DFHelpers.m in Sources */,
 				5A9950271A967F0E00468484 /* DFKeeperPhoto.m in Sources */,
 				5A9950231A9662E300468484 /* DFKeeperStore.m in Sources */,
+				5AC04E041AA0DFF9008E44A8 /* DFImageUploadManager.m in Sources */,
 				5A99504F1A97E44A00468484 /* DFImageManagerRequest.m in Sources */,
 				5A1C6A191A9B983D00A43A07 /* UIImage+Alpha.m in Sources */,
 				5A677D5D1A9BD8030060B55D /* DFKeeperPhotoViewController.m in Sources */,

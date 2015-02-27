@@ -368,4 +368,10 @@ static DFImageDiskCache *defaultStore;
   return [UIImage imageWithData:imageData];
 }
 
+- (NSURL *)urlForFullImageWithKey:(NSString *)key
+{
+  NSURL *url = [self.class localURLForPhotoKey:key type:DFImageFull];
+  return url;
+}
+
 @end
