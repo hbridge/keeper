@@ -13,6 +13,8 @@
 #import <Photos/Photos.h>
 #import "DFImageUploadManager.h"
 #import "DFKeeperStore.h"
+#import "DFUser.h"
+#import "UIImage+Resize.h"
 
 @interface DFImageManager()
 
@@ -446,6 +448,24 @@ static BOOL logRouting = NO;
 {
   [self clearCache];
   [[DFImageDiskCache sharedStore] setImage:nil type:DFImageFull forKey:imageKey completion:nil];
+}
+
+- (void)saveImage:(UIImage *)image
+         category:(NSString *)category
+     withMetadata:(NSDictionary *)metadata
+{
+  DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] init];
+  photo.category = category;
+  photo.metadata = metadata;
+  photo.saveDate = [NSDate date];
+  photo.user = [DFUser loggedInUser];
+  [[DFKeeperStore sharedStore] savePhoto:photo];
+  
+  UIImage *imageToUpload = [image
+                            resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+                            bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
+                            interpolationQuality:kCGInterpolationDefault];
+  [self setImage:imageToUpload forKey:photo.imageKey];
 }
 
 - (void)setImage:(UIImage *)image forKey:(NSString *)key

@@ -39,6 +39,10 @@ typedef void (^SetImageCompletion)(NSError *error);
 - (void)clearCache;
 - (void)setImageChanged:(NSString *)imageKey;
 
+
+- (void)saveImage:(UIImage *)image
+             category:(NSString *)category
+     withMetadata:(NSDictionary *)metadata;
 - (void)setImage:(UIImage *)image forKey:(NSString *)key;
 - (void)performForegroundOperations;
 

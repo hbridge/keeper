@@ -291,10 +291,9 @@ const unsigned int SavePromptMinPhotos = 3;
        didFinishWithCategory:(NSString *)category
 {
   if (category) {
-    [self saveImage:self.lastImageCaptured
-               text:category
-       withMetadata:self.lastMetadataCaptured
-        retryNumber:0];
+    [[DFImageManager sharedManager] saveImage:self.lastImageCaptured
+                                     category:category
+                                 withMetadata:self.lastMetadataCaptured];
     [self autosaveToCameraRoll:self.lastImageCaptured metadata:self.lastMetadataCaptured];
   }
   
@@ -328,24 +327,6 @@ const unsigned int SavePromptMinPhotos = 3;
   });
 }
 
-- (void)saveImage:(UIImage *)image
-             text:(NSString *)text
-     withMetadata:(NSDictionary *)metadata
-      retryNumber:(int)retryNumber
-{
-  DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] init];
-  photo.category = text;
-  photo.metadata = metadata;
-  photo.saveDate = [NSDate date];
-  photo.user = [DFUser loggedInUser];
-  [[DFKeeperStore sharedStore] savePhoto:photo];
-  
-  UIImage *imageToUpload = [image
-                            resizedImageWithContentMode:UIViewContentModeScaleAspectFit
-                            bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
-                            interpolationQuality:kCGInterpolationDefault];
-  [[DFImageManager sharedManager] setImage:imageToUpload forKey:photo.imageKey];
-}
 
 - (void)galleryButtonPressed:(id)sender
 {

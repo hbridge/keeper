@@ -24,6 +24,8 @@
 @property (nonatomic, retain) NSArray *allPhotos;
 @property (nonatomic, retain) NSString *categoryFilter;
 @property (nonatomic, retain) DFCategorizeController *categorizeController;
+@property (nonatomic, retain) UIImage *lastPickedImage;
+@property (nonatomic, retain) NSDictionary *lastPickedMetadata;
 
 @end
 
@@ -95,9 +97,16 @@
   }
 
   self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc]
-                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                               initWithImage:[UIImage imageNamed:@"Assets/Icons/CameraBarButton"]
+                                               style:UIBarButtonItemStylePlain
                                                target:self
-                                               action:@selector(addButtonPressed:)]];
+                                               action:@selector(cameraButtonPressed:)],
+                                              [[UIBarButtonItem alloc]
+                                               initWithImage:[UIImage imageNamed:@"Assets/Icons/CameraRollBarButton"]
+                                               style:UIBarButtonItemStylePlain
+                                               target:self
+                                               action:@selector(addButtonPressed:)],
+                                              ];
 }
 
 - (void)configureCollectionView
@@ -164,6 +173,30 @@
 
 - (void)addButtonPressed:(id)sender
 {
+  UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+  imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+  imagePickerController.editing = NO;
+  imagePickerController.delegate = self;
+  [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  self.lastPickedImage = info[UIImagePickerControllerOriginalImage];
+  self.lastPickedMetadata = info[UIImagePickerControllerMediaMetadata];
+  self.categorizeController = [[DFCategorizeController alloc] init];
+  self.categorizeController.delegate = self;
+  [self.categorizeController presentInViewController:picker];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)cameraButtonPressed:(id)sender
+{
   [[DFRootViewController rootViewController] showCamera];
 }
 
@@ -180,10 +213,16 @@
   [self dismissGridMenuAnimated:YES completion:nil];
   NSString *categoryToLog = category;
   if (category) {
-    DFLibraryViewController *libraryVC = [[DFLibraryViewController alloc] init];
-    libraryVC.categoryFilter = category;
-    [self dismissGridMenuAnimated:YES completion:nil];
-    [self.navigationController pushViewController:libraryVC animated:NO];
+    if (self.lastPickedImage) {
+      [[DFImageManager sharedManager] saveImage:self.lastPickedImage
+                                       category:category
+                                   withMetadata:self.lastPickedMetadata];
+    } else {
+      DFLibraryViewController *libraryVC = [[DFLibraryViewController alloc] init];
+      libraryVC.categoryFilter = category;
+      [self dismissGridMenuAnimated:YES completion:nil];
+      [self.navigationController pushViewController:libraryVC animated:NO];
+    }
   } else {
     categoryToLog = @"cancelled";
   }

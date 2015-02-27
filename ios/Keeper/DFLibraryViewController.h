@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DFCategorizeController.h"
 
-@interface DFLibraryViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, DFCategorizeControllerDelegate>
+@interface DFLibraryViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, DFCategorizeControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
