@@ -193,6 +193,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
   [self dismissViewControllerAnimated:YES completion:nil];
+  self.lastPickedImage = nil;
+  self.lastPickedMetadata = nil;
 }
 
 - (void)cameraButtonPressed:(id)sender
