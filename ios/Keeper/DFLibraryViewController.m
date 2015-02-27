@@ -196,7 +196,16 @@
                                                                            message:nil
                                                                     preferredStyle:DFAlertControllerStyleActionSheet];
   
-  // Auto Save Setting
+  //logout
+  [alertController addAction:[DFAlertAction
+                              actionWithTitle:@"Logout"
+                              style:DFAlertActionStyleDestructive
+                              handler:^(DFAlertAction *action) {
+                                [DFLoginViewController logoutWithParentViewController:self];
+                                abort();
+                              }]];
+  
+  // Auto Save
   NSString *autoSaveString;
   NSString *autoSavePref = [DFSettingsManager objectForSetting:DFSettingAutoSaveToCameraRoll];
   NSString *opposteSettingValue;
@@ -208,19 +217,24 @@
     opposteSettingValue = DFSettingValueYes;
   }
   [alertController addAction:[DFAlertAction
-                              actionWithTitle:@"Logout"
-                              style:DFAlertActionStyleDestructive
-                              handler:^(DFAlertAction *action) {
-                                [DFLoginViewController logoutWithParentViewController:self];
-                                abort();
-                              }]];
-  [alertController addAction:[DFAlertAction
                               actionWithTitle:autoSaveString
                               style:DFAlertActionStyleDefault
                               handler:^(DFAlertAction *action) {
                                 [DFSettingsManager setObject:opposteSettingValue
                                                   forSetting:DFSettingAutoSaveToCameraRoll];
                               }]];
+  
+  // Edit categories
+  [alertController addAction:[DFAlertAction
+                              actionWithTitle:@"Edit Category Speed Dial"
+                              style:DFAlertActionStyleDefault
+                              handler:^(DFAlertAction *action) {
+                                self.categorizeController = [[DFCategorizeController alloc] init];
+                                self.categorizeController.isEditModeEnabled = YES;
+                                [self.categorizeController presentInViewController:self];
+                              }]];
+  
+  // Cancel
    [alertController addAction:[DFAlertAction
                               actionWithTitle:@"Cancel"
                               style:DFAlertActionStyleCancel

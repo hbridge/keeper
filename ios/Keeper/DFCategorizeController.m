@@ -53,7 +53,8 @@ const int NumCategories = 8;
     
     [items addObject:item];
   }
-  [items addObject:[self.class otherItem]];
+  if (!self.isEditModeEnabled)
+    [items addObject:[self.class otherItem]];
   self.gridMenu.menuItems = items;
 }
 
@@ -84,7 +85,7 @@ const int NumCategories = 8;
 {
   NSString *category = item.title;
   
-  if ([category isNotEmpty]) {
+  if ([category isNotEmpty] && !self.isEditModeEnabled) {
     if ([category isEqualToString:@"Other"]) {
       [self showEnterTextAlertWithTitle:@"Other Category"
                           okButtonTitle:@"OK"
@@ -92,7 +93,7 @@ const int NumCategories = 8;
     } else {
       [self categorySelected:category];
     }
-  } else {
+  } else if ([menu.menuItems indexOfObject:item] < NumCategories){
     [self showEnterTextAlertWithTitle:@"Set Category"
                         okButtonTitle:@"Save"
                           buttonToSet:[menu.menuItems indexOfObject:item]];

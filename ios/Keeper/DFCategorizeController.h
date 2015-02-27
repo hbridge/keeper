@@ -25,6 +25,7 @@
 @interface DFCategorizeController : NSObject <CNPGridMenuDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak) NSObject<DFCategorizeControllerDelegate> *delegate;
+@property (nonatomic) BOOL isEditModeEnabled;
 
 - (void)presentInViewController:(UIViewController *)viewController;
 
