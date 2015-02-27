@@ -14,6 +14,7 @@ NSString *const DFSettingValueYes = @"Yes";
 NSString *const DFSettingValueNo = @"No";
 
 DFSettingType DFSettingAutoSaveToCameraRoll = @"autoSaveToCameraRoll";
+DFSettingType DFSettingSpeedDialCategories = @"userCategories";
 
 + (void)setObject:(id)object forSetting:(DFSettingType)setting
 {
@@ -36,5 +37,6 @@ DFSettingType DFSettingAutoSaveToCameraRoll = @"autoSaveToCameraRoll";
   [[NSUserDefaults standardUserDefaults] setBool:boolVal forKey:setting];
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
 
 @end

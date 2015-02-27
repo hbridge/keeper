@@ -12,6 +12,7 @@
 
 typedef NSString *const DFSettingType;
 extern DFSettingType DFSettingAutoSaveToCameraRoll;
+extern DFSettingType DFSettingSpeedDialCategories;
 
 extern NSString *const DFSettingValueYes;
 extern NSString *const DFSettingValueNo;

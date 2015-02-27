@@ -15,13 +15,8 @@
 
   return @[@"Document",
            @"Receipt",
-           @"Architecture",
-           @"Card",
-           @"Note",
-           @"Art",
            @"Buy",
            @"Clothing",
-           @"Other",
            ];
 }
 
