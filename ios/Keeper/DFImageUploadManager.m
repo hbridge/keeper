@@ -9,17 +9,13 @@
 #import "DFImageUploadManager.h"
 #import <AWSiOSSDKv2/AWSCore.h>
 #import <AWSiOSSDKv2/S3.h>
-#import <FMDB/FMDB.h>
 #import "DFNetworkingConstants.h"
 #import "AppDelegate.h"
-#import "DFKeeperStore.h"
 
 @interface DFImageUploadManager()
 
 @property (strong, nonatomic) NSURLSession *session;
 @property (nonatomic, retain) NSMutableSet *uploadsInProgress;
-@property (strong, nonatomic) FMDatabase *db;
-@property (strong, nonatomic) FMDatabaseQueue *dbQueue;
 
 @end
 
@@ -45,7 +41,6 @@
 {
   self = [super init];
   if (self) {
-    [self initDB];
     _uploadsInProgress = [[NSMutableSet alloc] init];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration
                                                 backgroundSessionConfigurationWithIdentifier:BackgroundSessionUploadIdentifier];
@@ -92,12 +87,9 @@
   }];
 }
 
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
-  double progress = (double)totalBytesSent / (double)totalBytesExpectedToSend;
-  DDLogVerbose(@"UploadTask progress: %lf", progress);
-}
-
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+didCompleteWithError:(NSError *)error {
   if (!error) {
     NSString *urlString = [NSString stringWithFormat:@"%@://%@%@",
                            task.currentRequest.URL.scheme,
@@ -105,7 +97,9 @@
                            task.currentRequest.URL.path
                            ];
     DDLogInfo(@"S3 upload completed %@", urlString);
-    [self addToDBImageForType:DFImageFull forKey:task.taskDescription];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:DFImageUploadedNotification
+     object:self userInfo:@{DFImageUploadedNotificationImageKey : task.taskDescription}];
   }else {
     DDLogError(@"S3 upload error: %@", error);
   }
@@ -146,65 +140,6 @@ NSString *const syncToken = @"sync";
   }
   return result;
 }
-
-#pragma mark - Upload DB
-
-- (void)initDB
-{
-  _db = [FMDatabase databaseWithPath:[self.class dbPath]];
-  
-  if (![_db open]) {
-    DDLogError(@"Error opening uploadedImages database, error code: %d", [_db lastErrorCode]);
-    _db = nil;
-  }
-  if (![_db tableExists:@"uploadedImages"]) {
-    [_db executeUpdate:@"CREATE TABLE uploadedImages (image_type NUMBER, photo_key STRING)"];
-  }
-  
-  _dbQueue = [FMDatabaseQueue databaseQueueWithPath:[self.class dbPath]];
-}
-
-+ (NSString *)dbPath
-{
-  NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-  NSURL *dbURL = [documentsURL URLByAppendingPathComponent:@"uploaded_images.db"];
-  return [dbURL path];
-}
-
-- (NSSet *)uploadedKeys
-{
-  return [[self keysFromDBForType:DFImageFull] copy];
-}
-
-- (NSMutableSet *)keysFromDBForType:(DFImageType)type
-{
-  FMResultSet *results = [self.db executeQuery:@"SELECT photo_key FROM uploadedImages WHERE image_type=(?)", @(type)];
-  NSMutableSet *resultIDs = [NSMutableSet new];
-  while ([results next]) {
-    [resultIDs addObject:[results stringForColumn:@"photo_key"]];
-  }
-  return resultIDs;
-}
-
-- (BOOL)isImageTypeCached:(DFImageType)type forKey:(NSString *)imageKey
-{
-  NSSet *ids = [self keysFromDBForType:type];
-  return [ids containsObject:imageKey];
-}
-
-- (void)addToDBImageForType:(DFImageType)type forKey:(NSString *)key
-{
-  [self.dbQueue inDatabase:^(FMDatabase *db) {
-    [db executeUpdate:@"INSERT INTO uploadedImages VALUES (?, ?)",
-     @(type),
-     key];
-    DDLogInfo(@"%@ setting uploaded photo %@ type:%@", self.class,
-              key,
-              type == DFImageFull ? @"full" : @"thumbnail");
-  }];
-}
-
-
 
 
 @end

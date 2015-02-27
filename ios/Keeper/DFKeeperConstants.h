@@ -11,6 +11,8 @@
 @interface DFKeeperConstants : NSObject
 
 extern NSString *const DFPhotosChangedNotification;
+extern NSString *const DFImageUploadedNotification;
+extern NSString *const DFImageUploadedNotificationImageKey;
 extern NSString *const DFFirebaseRootURLString;
 
 extern const CGFloat DFKeeperPhotoDefaultThumbnailSize;

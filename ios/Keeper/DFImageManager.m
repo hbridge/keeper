@@ -99,6 +99,10 @@ static BOOL logRouting = NO;
                                            selector:@selector(handleLowMemory:)
                                                name:UIApplicationDidReceiveMemoryWarningNotification
                                              object:[UIApplication sharedApplication]];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(imageUploaded:)
+                                               name:DFImageUploadedNotification
+                                             object:nil];
 }
 
 - (void)handleLowMemory:(NSNotification *)note
@@ -457,20 +461,24 @@ static BOOL logRouting = NO;
   DDLogInfo(@"%@ performing foreground ops.", self.class);
   [[DFKeeperStore sharedStore] fetchPhotosWithCompletion:^(NSArray *photos) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      NSArray *allPhotoKeys = [photos arrayByMappingObjectsWithBlock:^id(id input) {
-        return [input key];
-      }];
-      
-      NSMutableSet *unUploadedKeys = [[NSMutableSet alloc] initWithArray:allPhotoKeys];
-      [unUploadedKeys minusSet:[[DFImageUploadManager sharedManager] uploadedKeys]];
-      for (NSString *photoKey in unUploadedKeys) {
-        NSURL *url = [[DFImageDiskCache sharedStore] urlForFullImageWithKey:photoKey];
-        [[DFImageUploadManager sharedManager] uploadImageFile:url forKey:photoKey];
+      for (DFKeeperPhoto *photo in photos) {
+        if (!photo.uploaded.boolValue) {
+          NSURL *url = [[DFImageDiskCache sharedStore] urlForFullImageWithKey:photo.imageKey];
+          [[DFImageUploadManager sharedManager] uploadImageFile:url forKey:photo.imageKey];
+        }
       }
     });
     
     [[DFImageDownloadManager sharedManager] fetchNewImages];
   }];
+}
+
+- (void)imageUploaded:(NSNotification *)note
+{
+  NSString *imageKey = note.userInfo[DFImageUploadedNotificationImageKey];
+  DFKeeperPhoto *photo = [[DFKeeperStore sharedStore] photoWithImageKey:imageKey];
+  photo.uploaded = @(YES);
+  [[DFKeeperStore sharedStore] savePhoto:photo];
 }
 
 

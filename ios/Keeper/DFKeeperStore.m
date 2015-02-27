@@ -136,6 +136,23 @@
   return NSNotFound;
 }
 
+- (DFKeeperPhoto *)photoWithKey:(NSString *)key
+{
+  for (DFKeeperPhoto *photo in self.allPhotos) {
+    if ([photo.key isEqual:key]) return photo;
+  }
+  return nil;
+}
+
+- (DFKeeperPhoto *)photoWithImageKey:(NSString *)imageKey
+{
+  for (DFKeeperPhoto *photo in self.allPhotos) {
+    if ([photo.key isEqual:imageKey]
+        || [photo.imageKey isEqual:imageKey]) return photo;
+  }
+  return nil;
+}
+
 
 
 @end

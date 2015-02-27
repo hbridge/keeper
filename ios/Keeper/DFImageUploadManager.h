@@ -13,6 +13,5 @@
 + (DFImageUploadManager *)sharedManager;
 
 - (void)uploadImageFile:(NSURL *)imageFile forKey:(NSString *)key;
-- (NSSet *)uploadedKeys;
 
 @end

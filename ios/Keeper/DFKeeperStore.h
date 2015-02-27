@@ -18,5 +18,7 @@
 - (void)deletePhoto:(DFKeeperPhoto *)photo;
 - (NSArray *)photos;
 - (void)fetchPhotosWithCompletion:(void(^)(NSArray *photos))completion;
+- (DFKeeperPhoto *)photoWithKey:(NSString *)key;
+- (DFKeeperPhoto *)photoWithImageKey:(NSString *)imageKey;
 
 @end

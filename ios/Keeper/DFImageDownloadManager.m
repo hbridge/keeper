@@ -131,8 +131,6 @@ static DFImageDownloadManager *defaultManager;
            DDLogError(@"Error: %@",task.error);
          } else {
            NSURL *presignedURL = task.result;
-           DDLogVerbose(@"download presignedURL is: \n%@", presignedURL);
-           
            NSURLRequest *request = [NSURLRequest requestWithURL:presignedURL];
            NSURLSessionDownloadTask *downloadTask =
            [self.session

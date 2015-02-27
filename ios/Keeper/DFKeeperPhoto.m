@@ -30,11 +30,14 @@
            @"category",
            @"text",
            @"metadata",
+           @"imageKey",
+           @"uploaded",
            ];
 }
 
 - (NSString *)imageKey
 {
+  if (_imageKey) return _imageKey;
   return self.key;
 }
 
