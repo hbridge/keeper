@@ -454,9 +454,14 @@ static BOOL logRouting = NO;
          category:(NSString *)category
      withMetadata:(NSDictionary *)metadata
 {
+  DFKeeperImage *keeperImage = [[DFKeeperImage alloc] init];
+  keeperImage.metadata = metadata;
+  keeperImage.user = [DFUser loggedInUser];
+  [[DFKeeperStore sharedStore] saveImage:keeperImage];
+  
   DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] init];
+  photo.imageKey = keeperImage.key;
   photo.category = category;
-  photo.metadata = metadata;
   photo.saveDate = [NSDate date];
   photo.user = [DFUser loggedInUser];
   [[DFKeeperStore sharedStore] savePhoto:photo];
@@ -479,12 +484,12 @@ static BOOL logRouting = NO;
 - (void)performForegroundOperations
 {
   DDLogInfo(@"%@ performing foreground ops.", self.class);
-  [[DFKeeperStore sharedStore] fetchPhotosWithCompletion:^(NSArray *photos) {
+  [[DFKeeperStore sharedStore] fetchImagesWithCompletion:^(NSArray *images) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      for (DFKeeperPhoto *photo in photos) {
-        if (!photo.uploaded.boolValue) {
-          NSURL *url = [[DFImageDiskCache sharedStore] urlForFullImageWithKey:photo.imageKey];
-          [[DFImageUploadManager sharedManager] uploadImageFile:url forKey:photo.imageKey];
+      for (DFKeeperImage *image in images) {
+        if (!image.uploaded.boolValue) {
+          NSURL *url = [[DFImageDiskCache sharedStore] urlForFullImageWithKey:image.key];
+          [[DFImageUploadManager sharedManager] uploadImageFile:url forKey:image.key];
         }
       }
     });
@@ -496,9 +501,10 @@ static BOOL logRouting = NO;
 - (void)imageUploaded:(NSNotification *)note
 {
   NSString *imageKey = note.userInfo[DFImageUploadedNotificationImageKey];
-  DFKeeperPhoto *photo = [[DFKeeperStore sharedStore] photoWithImageKey:imageKey];
-  photo.uploaded = @(YES);
-  [[DFKeeperStore sharedStore] savePhoto:photo];
+  [[DFKeeperStore sharedStore] fetchImageWithKey:imageKey completion:^(DFKeeperImage *image) {
+    image.uploaded = @(YES);
+    [[DFKeeperStore sharedStore] saveImage:image];
+  }];
 }
 
 

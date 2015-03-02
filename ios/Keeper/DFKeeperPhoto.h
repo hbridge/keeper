@@ -17,9 +17,7 @@
 @property (nonatomic, retain) NSString *user;
 @property (nonatomic, retain) NSString *text;
 @property (nonatomic, retain) NSString *category;
-@property (nonatomic, retain) NSDictionary *metadata;
 @property (nonatomic, retain) NSString *imageKey;
-@property (nonatomic, retain) NSNumber *uploaded;
 /* calculated conversion */
 @property (nonatomic, retain) NSDate *saveDate;
 

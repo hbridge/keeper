@@ -13,6 +13,7 @@
 
 @property (nonatomic, retain) Firebase *baseRef;
 @property (nonatomic, retain) Firebase *photosRef;
+@property (nonatomic, retain) Firebase *imageDataRef;
 @property (nonatomic, retain) NSMutableArray *allPhotos;
 
 @end
@@ -38,6 +39,7 @@
   if (self) {
     self.baseRef = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
     self.photosRef = [_baseRef childByAppendingPath:@"photos"];
+    self.imageDataRef = [_baseRef childByAppendingPath:@"imageData"];
   }
   return self;
 }
@@ -54,6 +56,19 @@
     photo.key = photoRef.key;
   }
   [photoRef setValue:photoDict];
+}
+
+- (void)saveImage:(DFKeeperImage *)image
+{
+  Firebase *imageRef = self.imageDataRef;
+  if ([image.key isNotEmpty]) {
+    imageRef = [self.imageDataRef childByAppendingPath:image.key];
+  } else {
+    imageRef = [self.imageDataRef childByAutoId];
+    image.key = imageRef.key;
+  }
+  
+  [imageRef setValue:[image dictionary]];
 }
 
 - (void)deletePhoto:(DFKeeperPhoto *)photo
@@ -125,6 +140,21 @@
    }];
 }
 
+- (void)fetchImagesWithCompletion:(void (^)(NSArray *images))completion
+{
+  [[[self.imageDataRef queryOrderedByChild:@"user"]
+    queryEqualToValue:[DFUser loggedInUser]]
+   observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+     NSMutableArray *images = [NSMutableArray new];
+     for (FDataSnapshot *photoSnapshot in snapshot.children) {
+       DFKeeperImage *image = [[DFKeeperImage alloc] initWithSnapshot:photoSnapshot];
+       [images addObject:image];
+     }
+     
+     completion(images);
+   }];
+}
+
 - (NSUInteger)indexOfPhotoWithKey:(NSString *)key
 {
   for (NSUInteger i = 0; i < self.allPhotos.count; i++) {
@@ -153,6 +183,14 @@
   return nil;
 }
 
+- (void)fetchImageWithKey:(NSString *)key
+                          completion:(void (^)(DFKeeperImage *image))completion
+{
+  Firebase *imageRef = [self.imageDataRef childByAppendingPath:key];
+  [imageRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    completion([[DFKeeperImage alloc] initWithSnapshot:snapshot]);
+  }];
+}
 
 
 @end

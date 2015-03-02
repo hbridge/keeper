@@ -29,9 +29,7 @@
            @"user",
            @"category",
            @"text",
-           @"metadata",
            @"imageKey",
-           @"uploaded",
            ];
 }
 
