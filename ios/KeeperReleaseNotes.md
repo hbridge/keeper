@@ -1,5 +1,11 @@
 # Keeper
 
+# Mar 3 2015 (12)
+
+- Switch to using a search bar for filtering images by category
+- Image rotation is now saved
+- Jewelry category icon ;)
+
 # Feb 27 2015 (6-10)
 
 - Edit category speed dial! Tap on a blank category to set it, or edit your categories from settings.
