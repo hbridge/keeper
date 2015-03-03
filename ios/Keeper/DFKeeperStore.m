@@ -112,6 +112,7 @@
       NSUInteger photoIndex = [self indexOfPhotoWithKey:snapshot.key];
       if (photoIndex != NSNotFound) {
         DFKeeperPhoto *newPhoto = [[DFKeeperPhoto alloc] initWithSnapshot:snapshot];
+        [self.categorySet addObject:newPhoto.category];
         [self.allPhotos replaceObjectAtIndex:photoIndex withObject:newPhoto];
         [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
                                                             object:self];

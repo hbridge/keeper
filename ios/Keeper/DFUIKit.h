@@ -14,5 +14,6 @@
 #import "DFImageCollectionViewCell.h"
 #import "DFAlertController.h"
 #import "UIAlertView+DFHelpers.h"
+#import "UIViewController+DFKeyboardObserving.h"
 
 #endif

@@ -54,6 +54,13 @@
 {
   [super viewDidAppear:animated];
   [DFAnalytics logViewController:self appearedWithParameters:nil];
+  [self setAutomaticallyAdjustFrameOnKeyboardChange:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  [self setAutomaticallyAdjustFrameOnKeyboardChange:NO];
 }
 
 - (void)viewDidLayoutSubviews
@@ -349,7 +356,5 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
   [DFAnalytics logEvent:DFAnalyticsEventLibraryFiltered
          withParameters:@{@"category" : query}];
 }
-
-
 
 @end
