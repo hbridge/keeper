@@ -25,5 +25,6 @@
 - (DFKeeperPhoto *)photoWithImageKey:(NSString *)imageKey;
 - (void)fetchImageWithKey:(NSString *)key
                           completion:(void (^)(DFKeeperImage *image))completion;
+- (NSArray *)allCategories;
 
 @end

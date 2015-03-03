@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="collectionView" destination="PaC-XL-Fyk" id="7dY-cx-zso"/>
                 <outlet property="flowLayout" destination="6bm-z0-aZf" id="Xfv-Jj-itO"/>
+                <outlet property="searchBar" destination="znH-Jw-1fM" id="DHm-hj-YgP"/>
+                <outlet property="searchTableView" destination="W92-Zp-2od" id="KqP-bC-xQ9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="PaC-XL-Fyk">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                    <rect key="frame" x="0.0" y="44" width="320" height="460"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="6bm-z0-aZf">
                         <size key="itemSize" width="106" height="106"/>
@@ -27,13 +29,29 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="znH-Jw-1fM">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="W92-Zp-2od">
+                    <rect key="frame" x="0.0" y="44" width="320" height="460"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="W92-Zp-2od" secondAttribute="bottom" id="2i0-rz-v5N"/>
+                <constraint firstItem="PaC-XL-Fyk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" priority="700" id="2sm-Yo-XDu"/>
                 <constraint firstAttribute="trailing" secondItem="PaC-XL-Fyk" secondAttribute="trailing" id="457-89-Vf9"/>
                 <constraint firstItem="PaC-XL-Fyk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="591-NR-fDz"/>
+                <constraint firstItem="PaC-XL-Fyk" firstAttribute="top" secondItem="znH-Jw-1fM" secondAttribute="bottom" id="N1I-jJ-0ow"/>
+                <constraint firstAttribute="trailing" secondItem="W92-Zp-2od" secondAttribute="trailing" id="Obq-Ud-bgI"/>
+                <constraint firstAttribute="trailing" secondItem="znH-Jw-1fM" secondAttribute="trailing" id="Wpy-dA-ZWP"/>
+                <constraint firstItem="znH-Jw-1fM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="b7D-V2-cYG"/>
+                <constraint firstItem="W92-Zp-2od" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bRL-bl-HeE"/>
                 <constraint firstAttribute="bottom" secondItem="PaC-XL-Fyk" secondAttribute="bottom" id="bnq-CM-KDu"/>
-                <constraint firstItem="PaC-XL-Fyk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qou-ne-UKb"/>
+                <constraint firstItem="znH-Jw-1fM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hoe-ja-v8r"/>
+                <constraint firstItem="W92-Zp-2od" firstAttribute="top" secondItem="znH-Jw-1fM" secondAttribute="bottom" id="uKy-CJ-RHu"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

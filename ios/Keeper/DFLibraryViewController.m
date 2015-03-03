@@ -27,6 +27,7 @@
 @property (nonatomic, retain) DFCategorizeController *categorizeController;
 @property (nonatomic, retain) UIImage *lastPickedImage;
 @property (nonatomic, retain) NSDictionary *lastPickedMetadata;
+@property (nonatomic, retain) DFKeeperSearchController *searchController;
 
 @end
 
@@ -46,6 +47,7 @@
   
   [self configureNav];
   [self configureCollectionView];
+  [self configureSearch];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -84,11 +86,6 @@
     self.navigationItem.title = @"Library";
     self.navigationItem.leftBarButtonItems = @[
                                                [[UIBarButtonItem alloc]
-                                                initWithImage:[UIImage imageNamed:@"Assets/Icons/FilterBarButton"]
-                                                style:UIBarButtonItemStylePlain
-                                                target:self
-                                                action:@selector(filterButtonPressed:)],
-                                               [[UIBarButtonItem alloc]
                                                 initWithImage:[UIImage imageNamed:@"Assets/Icons/SettingsBarButton"]
                                                 style:UIBarButtonItemStylePlain
                                                 target:self
@@ -117,6 +114,18 @@
   [self.collectionView registerNib:[UINib nibForClass:[DFImageCollectionViewCell class]]
         forCellWithReuseIdentifier:@"cell"];
   [self reloadData];
+}
+
+- (void)configureSearch
+{
+  if ([self.categoryFilter isNotEmpty]) {
+    [self.searchBar removeFromSuperview];
+  } else {
+    self.searchController = [[DFKeeperSearchController alloc] init];
+    self.searchController.searchBar = self.searchBar;
+    self.searchController.tableView = self.searchTableView;
+    self.searchController.delegate = self;
+  }
 }
 
 
@@ -220,7 +229,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
        didFinishWithCategory:(NSString *)category
 {
   [self dismissGridMenuAnimated:YES completion:nil];
-  NSString *categoryToLog = category;
   if (category) {
     if (self.lastPickedImage) {
       [[DFImageManager sharedManager] saveImage:self.lastPickedImage
@@ -228,18 +236,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                                    withMetadata:self.lastPickedMetadata];
       self.lastPickedImage = nil;
       self.lastPickedMetadata = nil;
-    } else {
-      DFLibraryViewController *libraryVC = [[DFLibraryViewController alloc] init];
-      libraryVC.categoryFilter = category;
-      [self dismissGridMenuAnimated:YES completion:nil];
-      [self.navigationController pushViewController:libraryVC animated:NO];
     }
-  } else {
-    categoryToLog = @"cancelled";
   }
-  
-  [DFAnalytics logEvent:DFAnalyticsEventLibraryFiltered
-         withParameters:@{@"category" : categoryToLog}];
 }
 
 - (void)settingsButtonPressed:(id)sender
@@ -333,6 +331,25 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
   [DFAnalytics logEvent:DFAnalyticsEventLibraryPhotoTapped
          withParameters:@{@"categoryFilter" : self.categoryFilter ? self.categoryFilter : @"none"}];
 }
+
+#pragma mark - Search Delegate
+
+- (void)searchControllerDidCancel:(DFKeeperSearchController *)searchController
+{
+  
+}
+
+- (void)searchController:(DFKeeperSearchController *)searchController
+      completedWithQuery:(NSString *)query
+                 results:(NSArray *)keeperPhotos
+{
+  DFLibraryViewController *libraryVC = [[DFLibraryViewController alloc] init];
+  libraryVC.categoryFilter = query;
+  [self.navigationController pushViewController:libraryVC animated:YES];
+  [DFAnalytics logEvent:DFAnalyticsEventLibraryFiltered
+         withParameters:@{@"category" : query}];
+}
+
 
 
 @end

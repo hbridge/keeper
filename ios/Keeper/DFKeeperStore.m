@@ -15,6 +15,7 @@
 @property (nonatomic, retain) Firebase *photosRef;
 @property (nonatomic, retain) Firebase *imageDataRef;
 @property (nonatomic, retain) NSMutableArray *allPhotos;
+@property (nonatomic, retain) NSMutableSet *categorySet;
 
 @end
 
@@ -40,6 +41,7 @@
     self.baseRef = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
     self.photosRef = [_baseRef childByAppendingPath:@"photos"];
     self.imageDataRef = [_baseRef childByAppendingPath:@"imageData"];
+    self.categorySet = [NSMutableSet new];
   }
   return self;
 }
@@ -86,6 +88,9 @@
       queryEqualToValue:[DFUser loggedInUser]]
      observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
        DFKeeperPhoto *keeperPhoto = [[DFKeeperPhoto alloc] initWithSnapshot:snapshot];
+       
+       // keep track of the category
+       [self.categorySet addObject:keeperPhoto.category];
        
        // add the photo at the right spot in the array
        BOOL inserted = NO;
@@ -192,5 +197,14 @@
   }];
 }
 
+
+- (NSArray *)allCategories
+{
+  NSArray *categoryArray = [[self.categorySet allObjects]
+                            sortedArrayUsingComparator:^NSComparisonResult(NSString *cat1, NSString *cat2) {
+                              return [cat1 compare:cat2];
+  }];
+  return categoryArray;
+}
 
 @end
