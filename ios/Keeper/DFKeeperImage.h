@@ -15,4 +15,7 @@
 @property (nonatomic, retain) NSDictionary *metadata;
 @property (nonatomic, retain) NSNumber *uploaded;
 
+// calculated properties
+@property (nonatomic, retain) NSNumber *orientation;
+
 @end

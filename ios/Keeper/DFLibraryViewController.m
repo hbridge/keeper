@@ -18,6 +18,7 @@
 #import "DFSettingsManager.h"
 #import "DFDiagnosticInfoMailComposeController.h"
 #import "DFLogs.h"
+#import "DFAssetLibraryHelper.h"
 
 @interface DFLibraryViewController ()
 
@@ -184,10 +185,16 @@
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   self.lastPickedImage = info[UIImagePickerControllerOriginalImage];
-  self.lastPickedMetadata = info[UIImagePickerControllerMediaMetadata];
-  self.categorizeController = [[DFCategorizeController alloc] init];
-  self.categorizeController.delegate = self;
-  [self.categorizeController presentInViewController:picker];
+  NSURL *assetURL = info[UIImagePickerControllerReferenceURL];
+  
+  [DFAssetLibraryHelper fetchMetadataDictForAssetWithURL:assetURL completion:^(NSDictionary *metadata) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      self.lastPickedMetadata = metadata;
+      self.categorizeController = [[DFCategorizeController alloc] init];
+      self.categorizeController.delegate = self;
+      [self.categorizeController presentInViewController:picker];
+    });
+  }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

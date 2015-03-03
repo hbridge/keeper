@@ -16,6 +16,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "DFUIKit.h"
 #import "UIImage+DFHelpers.h"
+#import "DFKeeperStore.h"
 
 @interface DFKeeperPhotoViewController ()
 
@@ -63,7 +64,6 @@
    completion:^(UIImage *image) {
      dispatch_async(dispatch_get_main_queue(), ^{
        self.imageView.image = image;
-       DDLogVerbose(@"image oreintation: %@", @(image.imageOrientation));
      });
    }];
   
@@ -121,13 +121,24 @@
 }
 
 - (IBAction)rotateButtonPressed:(id)sender {
-  UIImageOrientation newOrientation = [self.imageView.image orientationRotatedLeft];
-  DDLogVerbose(@"orientation old:%d new:%d", (int)self.imageView.image.imageOrientation,
-               (int)newOrientation);
-  self.imageView.image = [[UIImage alloc] initWithCGImage:self.imageView.image.CGImage
-                                                    scale:1.0
-                                              orientation:newOrientation];
+  // fetch the correct image orientation from the DFKeeperImage
+  [[DFKeeperStore sharedStore]
+   fetchImageWithKey:self.photo.imageKey
+   completion:^(DFKeeperImage *image) {
+     // rotate in UI
+     UIImageOrientation newOrientation = [self.imageView.image orientationRotatedLeft];
+     UIImage *rotatedImage = [[UIImage alloc] initWithCGImage:self.imageView.image.CGImage
+                                                        scale:1.0
+                                                  orientation:newOrientation];
+     self.imageView.image = rotatedImage;
+     
+     // Write the new image rotation locally and to the server
+     int newExifOrientation = [UIImage exifImageOrientationLeftFromOrientation:image.orientation.intValue];
+     DDLogVerbose(@"cgImageOrientation old:%d new:%d", image.orientation.intValue,
+                  newExifOrientation);
+     [[DFImageManager sharedManager] setExifOrientation:newExifOrientation
+                                               forImage:image.key];
+   }];
 }
-
 
 @end

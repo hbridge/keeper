@@ -13,5 +13,6 @@
 
 - (int)CGImageOrientation;
 - (UIImageOrientation)orientationRotatedLeft;
++ (int)exifImageOrientationLeftFromOrientation:(int)currentOrientation;
 
 @end

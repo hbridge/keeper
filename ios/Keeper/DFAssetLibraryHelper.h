@@ -14,4 +14,7 @@
                  withMetadata:(NSDictionary *)metadata
                    completion:(void(^)(NSURL *assetURL, NSError *error))completion;
 
++ (void)fetchMetadataDictForAssetWithURL:(NSURL *)assetURL
+                              completion:(void(^)(NSDictionary *metadata))completion;
+
 @end

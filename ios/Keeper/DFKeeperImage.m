@@ -20,6 +20,17 @@
            ];
 }
 
+- (NSNumber *)orientation
+{
+  return self.metadata[@"Orientation"];
+}
+
+- (void)setOrientation:(NSNumber *)orientation
+{
+  NSMutableDictionary *mutableMetadata = [self.metadata mutableCopy];
+  mutableMetadata[@"Orientation"] = orientation;
+  self.metadata = mutableMetadata;
+}
 
 
 @end

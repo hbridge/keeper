@@ -10,6 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <ImageIO/ImageIO.h>
 #import "UIImage+DFHelpers.h"
+#import "NSDictionary+DFJSON.h"
 
 @implementation DFAssetLibraryHelper
 
@@ -37,6 +38,8 @@ static ALAssetsLibrary *assetsLibrary;
                                      }];
   });
 }
+
+
 
 + (void)addOrientationToMetadata:(NSMutableDictionary *)metadata forImage:(UIImage *)image
 {
@@ -86,5 +89,19 @@ static ALAssetsLibrary *assetsLibrary;
    {
    }];
 }
+
++ (void)fetchMetadataDictForAssetWithURL:(NSURL *)assetURL completion:(void(^)(NSDictionary *metadata))completion
+{
+  ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+  [assetsLibrary assetForURL:assetURL
+                 resultBlock:^(ALAsset *asset) {
+                   NSDictionary *metadata = asset.defaultRepresentation.metadata;
+                   completion([metadata dictionaryWithNonJSONRemoved]);
+                 } failureBlock:^(NSError *error) {
+                   DDLogError(@"%@ failed to fetch metadata for asset:%@", self, error);
+                   completion(nil);
+                 }];
+}
+
 
 @end

@@ -57,4 +57,15 @@
   return UIImageOrientationUp;
 }
 
+
++ (int)exifImageOrientationLeftFromOrientation:(int)currentOrientation
+{
+  if (currentOrientation == 1) return 8;
+  if (currentOrientation == 8) return 3;
+  if (currentOrientation == 3) return 6;
+  if (currentOrientation == 6) return 1;
+  return 1;
+}
+
+
 @end

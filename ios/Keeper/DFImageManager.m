@@ -334,6 +334,21 @@ static BOOL logRouting = NO;
 }
 
 
+- (void)clearCacheForImage:(NSString *)imageKey
+{
+  dispatch_semaphore_wait(self.imageRequestCacheSemaphore, DISPATCH_TIME_FOREVER);
+  DDLogInfo(@"%@ clearing cache results for: %@", self.class, imageKey);
+  NSMutableArray *keysToRemove = [NSMutableArray new];
+  for (DFImageManagerRequest *request in _imageRequestCache) {
+    if ([request.key isEqual:imageKey]) {
+      [keysToRemove addObject:request];
+    }
+  }
+  [_imageRequestCache removeObjectsForKeys:keysToRemove];
+  
+  dispatch_semaphore_signal(self.imageRequestCacheSemaphore);
+}
+
 #pragma mark - Deferred completion logic
 
 - (void)scheduleDeferredCompletion:(ImageLoadCompletionBlock)completion
@@ -457,6 +472,7 @@ static BOOL logRouting = NO;
   DFKeeperImage *keeperImage = [[DFKeeperImage alloc] init];
   keeperImage.metadata = metadata;
   keeperImage.user = [DFUser loggedInUser];
+  keeperImage.orientation = @(1); // all photos we save will be up orientated after the resize
   [[DFKeeperStore sharedStore] saveImage:keeperImage];
   
   DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] init];
@@ -470,14 +486,53 @@ static BOOL logRouting = NO;
                             resizedImageWithContentMode:UIViewContentModeScaleAspectFit
                             bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
                             interpolationQuality:kCGInterpolationDefault];
-  [self setImage:imageToUpload forKey:photo.imageKey];
+  [self setImage:imageToUpload forKey:photo.imageKey completion:nil];
 }
 
-- (void)setImage:(UIImage *)image forKey:(NSString *)key
+- (void)setImage:(UIImage *)image forKey:(NSString *)key completion:(DFVoidBlock)completion
 {
   [[DFImageDiskCache sharedStore] setImage:image type:DFImageFull forKey:key completion:^(NSError *error) {
+    [self clearCacheForImage:key];
     [[DFImageUploadManager sharedManager]
      uploadImageFile:[[DFImageDiskCache sharedStore] urlForFullImageWithKey:key] forKey:key];
+    if (completion) completion();
+  }];
+}
+
+- (void)setExifOrientation:(int)orientation forImage:(NSString *)imageKey
+{
+  // save the new image orientation remotely to the server
+  [[DFKeeperStore sharedStore] fetchImageWithKey:imageKey completion:^(DFKeeperImage *image) {
+    image.orientation = @(orientation);
+    [[DFKeeperStore sharedStore] saveImage:image];
+  }];
+  
+  NSURL *fileUrl = [[DFImageDiskCache sharedStore] urlForFullImageWithKey:imageKey];
+  CGImageSourceRef sourceRef = CGImageSourceCreateWithURL((__bridge CFURLRef)fileUrl,
+                                                         NULL);
+  // get get old properties and create new properties
+  CFDictionaryRef oldProperties = CGImageSourceCopyPropertiesAtIndex(sourceRef,0, NULL);
+  NSMutableDictionary *newProperties = [(__bridge NSDictionary *)oldProperties mutableCopy];
+  newProperties[@"Orientation"] = @(orientation);
+  CFRelease(oldProperties);
+  
+  // create data for new image including new properties
+  NSMutableData *newData = [[NSMutableData alloc] init];
+  CGImageDestinationRef destRef = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)newData,
+                                                                   CGImageSourceGetType(sourceRef),
+                                                                   1,
+                                                                   NULL);
+  CGImageDestinationAddImageFromSource(destRef, sourceRef, 0, (__bridge CFDictionaryRef)newProperties);
+  CGImageDestinationFinalize(destRef);
+  CFRelease(destRef);
+  CFRelease(sourceRef);
+  
+  // set the new result image locally
+  UIImage *newImage = [[UIImage alloc] initWithData:newData];
+  [self setImage:newImage forKey:imageKey completion:^{
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:DFPhotosChangedNotification
+     object:nil userInfo:nil];
   }];
 }
 
