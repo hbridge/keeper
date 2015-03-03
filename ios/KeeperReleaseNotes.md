@@ -1,6 +1,6 @@
 # Keeper
 
-# Mar 3 2015 (12-13)
+# Mar 3 2015 (12-14)
 
 - Switch to using a search bar for filtering images by category
 - Image rotation is now saved
