@@ -10,7 +10,7 @@
                 <outlet property="collectionView" destination="PaC-XL-Fyk" id="7dY-cx-zso"/>
                 <outlet property="flowLayout" destination="6bm-z0-aZf" id="Xfv-Jj-itO"/>
                 <outlet property="searchBar" destination="znH-Jw-1fM" id="DHm-hj-YgP"/>
-                <outlet property="searchTableView" destination="W92-Zp-2od" id="KqP-bC-xQ9"/>
+                <outlet property="tableView" destination="W92-Zp-2od" id="aff-2i-rzi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

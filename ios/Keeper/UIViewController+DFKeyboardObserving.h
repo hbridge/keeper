@@ -14,5 +14,6 @@
                 otherAnimationsBlock:(DFVoidBlock)otherAnimationsBlock;
 
 - (void)setAutomaticallyAdjustFrameOnKeyboardChange:(BOOL)autoAdjust;
+- (void)setAutomaticallyAdjustTableViewFrameOnKeyboardChange:(BOOL)autoAdjust;
 
 @end

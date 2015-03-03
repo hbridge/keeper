@@ -50,18 +50,25 @@
   [self configureSearch];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  if (![self.categoryFilter isNotEmpty])
+    [self setAutomaticallyAdjustTableViewFrameOnKeyboardChange:YES];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [DFAnalytics logViewController:self appearedWithParameters:nil];
-  [self setAutomaticallyAdjustFrameOnKeyboardChange:YES];
+  [DFAnalytics logViewController:self appearedWithParameters:nil];  
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-  [super viewDidDisappear:animated];
-  [self setAutomaticallyAdjustFrameOnKeyboardChange:NO];
+  [super viewWillDisappear:animated];
+  [self setAutomaticallyAdjustTableViewFrameOnKeyboardChange:NO];
 }
+
 
 - (void)viewDidLayoutSubviews
 {
@@ -130,7 +137,7 @@
   } else {
     self.searchController = [[DFKeeperSearchController alloc] init];
     self.searchController.searchBar = self.searchBar;
-    self.searchController.tableView = self.searchTableView;
+    self.searchController.tableView = self.tableView;
     self.searchController.delegate = self;
   }
 }
