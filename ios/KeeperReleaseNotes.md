@@ -1,5 +1,9 @@
 # Keeper
 
+# Mar 4 2015 (15)
+
+- Support for automatically importing screenshots
+
 # Mar 3 2015 (12-14)
 
 - Switch to using a search bar for filtering images by category
