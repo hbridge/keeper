@@ -7,8 +7,14 @@
 //
 
 #import "DFKeeperObject.h"
+#import "DFKeeperStore.h"
 
 @implementation DFKeeperObject
+
++ (NSString *)objectsPath
+{
+  return @"";
+}
 
 - (NSDictionary *)dictionary
 {
@@ -37,6 +43,14 @@
   
   return self;
 }
+
+- (Firebase *)firebaseRef
+{
+  Firebase *objectsRef = [[[DFKeeperStore sharedStore] baseRef] childByAppendingPath:[self.class objectsPath]];
+  return [objectsRef childByAppendingPath:self.key];
+}
+
+
 
 
 @end

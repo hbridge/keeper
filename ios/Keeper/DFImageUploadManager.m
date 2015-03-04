@@ -107,13 +107,14 @@ didCompleteWithError:(NSError *)error {
 }
 
 - (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
-  
+  #ifndef TARGET_OS_EMBEDDED
   AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
   if (appDelegate.backgroundUploadSessionCompletionHandler) {
     void (^completionHandler)() = appDelegate.backgroundUploadSessionCompletionHandler;
     appDelegate.backgroundUploadSessionCompletionHandler = nil;
     completionHandler();
   }
+  #endif
   
   DDLogInfo(@"%@ completion handler invoked, background upload task has finished.", self.class);
 }

@@ -11,7 +11,6 @@
 
 @interface DFKeeperStore()
 
-@property (nonatomic, retain) Firebase *baseRef;
 @property (nonatomic, retain) Firebase *photosRef;
 @property (nonatomic, retain) Firebase *imageDataRef;
 @property (nonatomic, retain) NSMutableArray *allPhotos;
@@ -38,10 +37,11 @@
 {
   self = [super init];
   if (self) {
-    self.baseRef = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
+    _baseRef = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
     self.photosRef = [_baseRef childByAppendingPath:@"photos"];
     self.imageDataRef = [_baseRef childByAppendingPath:@"imageData"];
     self.categorySet = [NSMutableSet new];
+    [self observePhotos];
   }
   return self;
 }
@@ -79,7 +79,7 @@
   [photoRef setValue:nil];
 }
 
-- (NSArray *)photos
+- (void)observePhotos
 {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
@@ -126,9 +126,12 @@
                                                             object:self];
       }
     }];
-    
   });
-  return [self.allPhotos copy];
+}
+
+- (NSArray *)photos
+{
+    return [self.allPhotos copy];
 }
 
 - (void)fetchPhotosWithCompletion:(void (^)(NSArray *))completion

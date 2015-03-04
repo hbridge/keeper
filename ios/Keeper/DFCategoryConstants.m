@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Duffy Inc. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "DFCategoryConstants.h"
 
 @implementation DFCategoryConstants

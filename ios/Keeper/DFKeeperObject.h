@@ -14,8 +14,11 @@
 @property (nonatomic, retain) NSString *key;
 
 + (NSArray *)directMappingKeys;
++ (NSString *)objectsPath;
 - (instancetype)initWithSnapshot:(FDataSnapshot *)snapshot;
 - (NSDictionary *)dictionary;
+
+- (Firebase *)firebaseRef;
 
 
 @end

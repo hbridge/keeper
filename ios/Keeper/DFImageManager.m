@@ -97,10 +97,12 @@ static BOOL logRouting = NO;
 
 - (void)observeNotifications
 {
+  #ifndef TARGET_OS_EMBEDDED
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(handleLowMemory:)
                                                name:UIApplicationDidReceiveMemoryWarningNotification
                                              object:[UIApplication sharedApplication]];
+  #endif
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(imageUploaded:)
                                                name:DFImageUploadedNotification
@@ -465,7 +467,7 @@ static BOOL logRouting = NO;
   [[DFImageDiskCache sharedStore] setImage:nil type:DFImageFull forKey:imageKey completion:nil];
 }
 
-- (void)saveImage:(UIImage *)image
+- (NSString *)saveImage:(UIImage *)image
          category:(NSString *)category
      withMetadata:(NSDictionary *)metadata
 {
@@ -487,6 +489,7 @@ static BOOL logRouting = NO;
                             bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
                             interpolationQuality:kCGInterpolationDefault];
   [self setImage:imageToUpload forKey:photo.imageKey completion:nil];
+  return keeperImage.key;
 }
 
 - (void)setImage:(UIImage *)image forKey:(NSString *)key completion:(DFVoidBlock)completion

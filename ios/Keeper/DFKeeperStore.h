@@ -13,8 +13,9 @@
 
 @interface DFKeeperStore : NSObject
 
-+ (DFKeeperStore *)sharedStore;
+@property (nonatomic, readonly, retain) Firebase *baseRef;
 
++ (DFKeeperStore *)sharedStore;
 - (void)savePhoto:(DFKeeperPhoto *)photo;
 - (void)saveImage:(DFKeeperImage *)image;
 - (void)deletePhoto:(DFKeeperPhoto *)photo;

@@ -11,6 +11,11 @@
 @implementation DFKeeperImage
 
 
++ (NSString *)objectsPath
+{
+  return @"imageData";
+}
+
 + (NSArray *)directMappingKeys
 {
   return @[

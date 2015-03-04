@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>KeeperShareExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>5A8EB8DD1A9153F00033C540</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5AA5080E1AA67147007A9375</key>
 		<dict>
 			<key>primary</key>
 			<true/>

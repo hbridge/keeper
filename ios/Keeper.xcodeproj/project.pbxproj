@@ -39,6 +39,17 @@
 		5A8EB90C1A91612C0033C540 /* UIView+DFExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB90B1A91612C0033C540 /* UIView+DFExtensions.m */; };
 		5A8EB90F1A91628C0033C540 /* DFLogConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB90E1A91628C0033C540 /* DFLogConfig.m */; };
 		5A8EB9121A92838E0033C540 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 5A8EB9111A92838E0033C540 /* Assets */; };
+		5A936C281AA67519003ACC17 /* DFCategoryConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D601A9BDA2F0060B55D /* DFCategoryConstants.m */; };
+		5A936C301AA678A4003ACC17 /* DFShareCategorizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A936C2F1AA678A4003ACC17 /* DFShareCategorizeViewController.m */; };
+		5A936C341AA67A7E003ACC17 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A936C331AA67A7E003ACC17 /* libPods.a */; };
+		5A936C371AA67DE1003ACC17 /* DFKeeperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950221A9662E300468484 /* DFKeeperStore.m */; };
+		5A936C381AA67DFE003ACC17 /* DFNetworkingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */; };
+		5A936C391AA67E0B003ACC17 /* DFKeeperPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950261A967F0E00468484 /* DFKeeperPhoto.m */; };
+		5A936C3A1AA67E0E003ACC17 /* DFKeeperImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E1A1AA513B3008E44A8 /* DFKeeperImage.m */; };
+		5A936C3B1AA67E12003ACC17 /* DFKeeperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E1D1AA51A70008E44A8 /* DFKeeperObject.m */; };
+		5A936C3C1AA67E20003ACC17 /* DFKeeperConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99501A1A965BD500468484 /* DFKeeperConstants.m */; };
+		5A936C3D1AA67E2D003ACC17 /* DFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D581A9BD5190060B55D /* DFUser.m */; };
+		5A936C3E1AA67EE4003ACC17 /* NSDateFormatter+DFPhotoDateFormatters.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8FD1A915FCE0033C540 /* NSDateFormatter+DFPhotoDateFormatters.m */; };
 		5A9950091A96548F00468484 /* DFLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950071A96548F00468484 /* DFLibraryViewController.m */; };
 		5A99500A1A96548F00468484 /* DFLibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A9950081A96548F00468484 /* DFLibraryViewController.xib */; };
 		5A99500E1A96598F00468484 /* DFRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99500D1A96598F00468484 /* DFRootViewController.m */; };
@@ -62,6 +73,9 @@
 		5A9950511A97E44A00468484 /* DFDeferredCompletionScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99504C1A97E44A00468484 /* DFDeferredCompletionScheduler.m */; };
 		5AA508071AA64AC5007A9375 /* DFKeeperSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA508061AA64AC5007A9375 /* DFKeeperSearchController.m */; };
 		5AA5080A1AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA508091AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m */; };
+		5AA508151AA67147007A9375 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA508141AA67147007A9375 /* ShareViewController.m */; };
+		5AA508171AA67147007A9375 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA508161AA67147007A9375 /* MainInterface.storyboard */; };
+		5AA5081A1AA67147007A9375 /* KeeperShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5AA5080F1AA67147007A9375 /* KeeperShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5AC04E041AA0DFF9008E44A8 /* DFImageUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */; };
 		5AC04E071AA0E64B008E44A8 /* DFNetworkingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */; };
 		5AC04E0A1AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E091AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m */; };
@@ -72,6 +86,24 @@
 		5AC04E1E1AA51A70008E44A8 /* DFKeeperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E1D1AA51A70008E44A8 /* DFKeeperObject.m */; };
 		5AC04E241AA52C17008E44A8 /* NSDictionary+DFJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E231AA52C17008E44A8 /* NSDictionary+DFJSON.m */; };
 		5AC04E281AA52C70008E44A8 /* NSArray+DFJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E271AA52C70008E44A8 /* NSArray+DFJSON.m */; };
+		5AE486EE1AA682410046C2D6 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 5A8EB9111A92838E0033C540 /* Assets */; };
+		5AE486EF1AA6826A0046C2D6 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A0C1A9B97E600A43A07 /* UIImage+Resize.m */; };
+		5AE486F01AA6826A0046C2D6 /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A131A9B983D00A43A07 /* UIImageEffects.m */; };
+		5AE486F11AA6826A0046C2D6 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A151A9B983D00A43A07 /* UIImage+Alpha.m */; };
+		5AE486F21AA6826A0046C2D6 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A171A9B983D00A43A07 /* UIImage+RoundedCorner.m */; };
+		5AE486F71AA7741C0046C2D6 /* DFLogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E0F1AA10CC5008E44A8 /* DFLogs.m */; };
+		5AE486F81AA7742D0046C2D6 /* DFLogConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB90E1A91628C0033C540 /* DFLogConfig.m */; };
+		5AE486FB1AA7782D0046C2D6 /* DFExifHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE486FA1AA7782D0046C2D6 /* DFExifHelper.m */; };
+		5AE486FC1AA7782D0046C2D6 /* DFExifHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE486FA1AA7782D0046C2D6 /* DFExifHelper.m */; };
+		5AE486FD1AA77AB70046C2D6 /* DFImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950461A97E44A00468484 /* DFImageManager.m */; };
+		5AE486FE1AA77C040046C2D6 /* DFImageDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950441A97E44A00468484 /* DFImageDiskCache.m */; };
+		5AE486FF1AA77C160046C2D6 /* DFImageManagerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950481A97E44A00468484 /* DFImageManagerRequest.m */; };
+		5AE487001AA77C160046C2D6 /* DFDeferredCompletionScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99504C1A97E44A00468484 /* DFDeferredCompletionScheduler.m */; };
+		5AE487011AA77C160046C2D6 /* DFImageUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */; };
+		5AE487021AA77C160046C2D6 /* DFImageDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99504A1A97E44A00468484 /* DFImageDownloadManager.m */; };
+		5AE487031AA77C620046C2D6 /* DFPhotoResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A091A9B978500A43A07 /* DFPhotoResizer.m */; };
+		5AE487041AA77C690046C2D6 /* DFCGRectHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A0F1A9B97F600A43A07 /* DFCGRectHelpers.m */; };
+		5AE487051AA790A60046C2D6 /* NSString+DFHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A1C1A9B9F8300A43A07 /* NSString+DFHelpers.m */; };
 		DC2A7B9402905231BE306701 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88AD2FD4651BA4B4CAD0AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -83,7 +115,28 @@
 			remoteGlobalIDString = 5A8EB8C41A9153F00033C540;
 			remoteInfo = Keeper;
 		};
+		5AA508181AA67147007A9375 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A8EB8BD1A9153F00033C540 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5AA5080E1AA67147007A9375;
+			remoteInfo = KeeperShareExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5AA5081F1AA67147007A9375 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5AA5081A1AA67147007A9375 /* KeeperShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2E88AD2FD4651BA4B4CAD0AA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +203,11 @@
 		5A8EB90E1A91628C0033C540 /* DFLogConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFLogConfig.m; sourceTree = "<group>"; };
 		5A8EB9101A9163330033C540 /* KeeperPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeeperPrefixHeader.pch; sourceTree = "<group>"; };
 		5A8EB9111A92838E0033C540 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets; sourceTree = "<group>"; };
+		5A936C2E1AA678A4003ACC17 /* DFShareCategorizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFShareCategorizeViewController.h; sourceTree = "<group>"; };
+		5A936C2F1AA678A4003ACC17 /* DFShareCategorizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFShareCategorizeViewController.m; sourceTree = "<group>"; };
+		5A936C311AA67A2D003ACC17 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		5A936C331AA67A7E003ACC17 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		5A936C351AA67B76003ACC17 /* ShareExtensionPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareExtensionPrefixHeader.pch; sourceTree = "<group>"; };
 		5A9950061A96548F00468484 /* DFLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLibraryViewController.h; sourceTree = "<group>"; };
 		5A9950071A96548F00468484 /* DFLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFLibraryViewController.m; sourceTree = "<group>"; };
 		5A9950081A96548F00468484 /* DFLibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFLibraryViewController.xib; sourceTree = "<group>"; };
@@ -194,6 +252,11 @@
 		5AA508061AA64AC5007A9375 /* DFKeeperSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperSearchController.m; sourceTree = "<group>"; };
 		5AA508081AA662D7007A9375 /* UIViewController+DFKeyboardObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DFKeyboardObserving.h"; sourceTree = "<group>"; };
 		5AA508091AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DFKeyboardObserving.m"; sourceTree = "<group>"; };
+		5AA5080F1AA67147007A9375 /* KeeperShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KeeperShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AA508121AA67147007A9375 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5AA508131AA67147007A9375 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		5AA508141AA67147007A9375 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		5AA508161AA67147007A9375 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		5AAEB3271A9CDC0D00D029A6 /* KeeperReleaseNotes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = KeeperReleaseNotes.md; sourceTree = SOURCE_ROOT; };
 		5AC04E021AA0DFF9008E44A8 /* DFImageUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageUploadManager.h; sourceTree = "<group>"; };
 		5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageUploadManager.m; sourceTree = "<group>"; };
@@ -216,6 +279,10 @@
 		5AC04E251AA52C62008E44A8 /* DFJSONConvertible.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFJSONConvertible.h; sourceTree = "<group>"; };
 		5AC04E261AA52C70008E44A8 /* NSArray+DFJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DFJSON.h"; sourceTree = "<group>"; };
 		5AC04E271AA52C70008E44A8 /* NSArray+DFJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DFJSON.m"; sourceTree = "<group>"; };
+		5AE486F91AA7782D0046C2D6 /* DFExifHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFExifHelper.h; sourceTree = "<group>"; };
+		5AE486FA1AA7782D0046C2D6 /* DFExifHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFExifHelper.m; sourceTree = "<group>"; };
+		5AE487061AA796BC0046C2D6 /* Keeper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Keeper.entitlements; sourceTree = "<group>"; };
+		5AE487071AA797FF0046C2D6 /* KeeperShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeeperShareExtension.entitlements; sourceTree = "<group>"; };
 		C5EA541A400364F5B9C2B943 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F8622FA142075D9EFE24176B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,6 +300,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5AA5080C1AA67147007A9375 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A936C341AA67A7E003ACC17 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +343,7 @@
 			children = (
 				5A8EB8C71A9153F00033C540 /* Keeper */,
 				5A8EB8E11A9153F00033C540 /* KeeperTests */,
+				5AA508101AA67147007A9375 /* KeeperShareExtension */,
 				5A8EB8C61A9153F00033C540 /* Products */,
 				B96DB4C7716DE9720D96B442 /* Pods */,
 				5E08625285BE9D00A627685E /* Frameworks */,
@@ -279,6 +355,7 @@
 			children = (
 				5A8EB8C51A9153F00033C540 /* Keeper.app */,
 				5A8EB8DE1A9153F00033C540 /* KeeperTests.xctest */,
+				5AA5080F1AA67147007A9375 /* KeeperShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,6 +363,7 @@
 		5A8EB8C71A9153F00033C540 /* Keeper */ = {
 			isa = PBXGroup;
 			children = (
+				5AE487061AA796BC0046C2D6 /* Keeper.entitlements */,
 				5A8EB8CC1A9153F00033C540 /* AppDelegate.h */,
 				5A8EB8CD1A9153F00033C540 /* AppDelegate.m */,
 				5A99500C1A96598F00468484 /* DFRootViewController.h */,
@@ -369,6 +447,8 @@
 				5A99502E1A96983800468484 /* UINib+DFHelpers.m */,
 				5A6DED941A9E6C890038EF9F /* DFAssetLibraryHelper.h */,
 				5A6DED951A9E6C890038EF9F /* DFAssetLibraryHelper.m */,
+				5AE486F91AA7782D0046C2D6 /* DFExifHelper.h */,
+				5AE486FA1AA7782D0046C2D6 /* DFExifHelper.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -420,6 +500,8 @@
 		5A9950151A965BAB00468484 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5AC04E051AA0E0D1008E44A8 /* DFNetworkingConstants.h */,
+				5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */,
 				5AC04E0B1AA10CA3008E44A8 /* DFAppInfo.h */,
 				5AC04E0C1AA10CA3008E44A8 /* DFAppInfo.m */,
 				5AC04E081AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.h */,
@@ -498,15 +580,38 @@
 				5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */,
 				5A9950491A97E44A00468484 /* DFImageDownloadManager.h */,
 				5A99504A1A97E44A00468484 /* DFImageDownloadManager.m */,
-				5AC04E051AA0E0D1008E44A8 /* DFNetworkingConstants.h */,
-				5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */,
 			);
 			name = ImageManager;
+			sourceTree = "<group>";
+		};
+		5AA508101AA67147007A9375 /* KeeperShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				5AE487071AA797FF0046C2D6 /* KeeperShareExtension.entitlements */,
+				5AA508131AA67147007A9375 /* ShareViewController.h */,
+				5AA508141AA67147007A9375 /* ShareViewController.m */,
+				5AA508161AA67147007A9375 /* MainInterface.storyboard */,
+				5A936C2E1AA678A4003ACC17 /* DFShareCategorizeViewController.h */,
+				5A936C2F1AA678A4003ACC17 /* DFShareCategorizeViewController.m */,
+				5AA508111AA67147007A9375 /* Supporting Files */,
+			);
+			path = KeeperShareExtension;
+			sourceTree = "<group>";
+		};
+		5AA508111AA67147007A9375 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5AA508121AA67147007A9375 /* Info.plist */,
+				5A936C351AA67B76003ACC17 /* ShareExtensionPrefixHeader.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		5E08625285BE9D00A627685E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5A936C331AA67A7E003ACC17 /* libPods.a */,
+				5A936C311AA67A2D003ACC17 /* libPods.a */,
 				2E88AD2FD4651BA4B4CAD0AA /* libPods.a */,
 			);
 			name = Frameworks;
@@ -534,10 +639,12 @@
 				5AAEB3281A9CDEDB00D029A6 /* ShellScript */,
 				5A8EB8C31A9153F00033C540 /* Resources */,
 				C1677CD592E16AFE26954767 /* Copy Pods Resources */,
+				5AA5081F1AA67147007A9375 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5AA508191AA67147007A9375 /* PBXTargetDependency */,
 			);
 			name = Keeper;
 			productName = Keeper;
@@ -562,6 +669,23 @@
 			productReference = 5A8EB8DE1A9153F00033C540 /* KeeperTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		5AA5080E1AA67147007A9375 /* KeeperShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5AA5081B1AA67147007A9375 /* Build configuration list for PBXNativeTarget "KeeperShareExtension" */;
+			buildPhases = (
+				5AA5080B1AA67147007A9375 /* Sources */,
+				5AA5080C1AA67147007A9375 /* Frameworks */,
+				5AA5080D1AA67147007A9375 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeeperShareExtension;
+			productName = KeeperShareExtension;
+			productReference = 5AA5080F1AA67147007A9375 /* KeeperShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -574,10 +698,24 @@
 					5A8EB8C41A9153F00033C540 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = KTS292CQN5;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					5A8EB8DD1A9153F00033C540 = {
 						CreatedOnToolsVersion = 6.1.1;
 						TestTargetID = 5A8EB8C41A9153F00033C540;
+					};
+					5AA5080E1AA67147007A9375 = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = KTS292CQN5;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -596,6 +734,7 @@
 			targets = (
 				5A8EB8C41A9153F00033C540 /* Keeper */,
 				5A8EB8DD1A9153F00033C540 /* KeeperTests */,
+				5AA5080E1AA67147007A9375 /* KeeperShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -621,6 +760,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5AA5080D1AA67147007A9375 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AA508171AA67147007A9375 /* MainInterface.storyboard in Resources */,
+				5AE486EE1AA682410046C2D6 /* Assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +848,7 @@
 				5A1C6A181A9B983D00A43A07 /* UIImageEffects.m in Sources */,
 				5A9950371A96A47D00468484 /* DFAlertController.m in Sources */,
 				5A8EB8F81A915E030033C540 /* DFCameraOverlayView.m in Sources */,
+				5AE486FB1AA7782D0046C2D6 /* DFExifHelper.m in Sources */,
 				5A1C6A101A9B97F600A43A07 /* DFCGRectHelpers.m in Sources */,
 				5AC04E281AA52C70008E44A8 /* NSArray+DFJSON.m in Sources */,
 				5A1C6A0A1A9B978500A43A07 /* DFPhotoResizer.m in Sources */,
@@ -743,6 +892,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5AA5080B1AA67147007A9375 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A936C3B1AA67E12003ACC17 /* DFKeeperObject.m in Sources */,
+				5AE486FC1AA7782D0046C2D6 /* DFExifHelper.m in Sources */,
+				5AE486F21AA6826A0046C2D6 /* UIImage+RoundedCorner.m in Sources */,
+				5AE486FD1AA77AB70046C2D6 /* DFImageManager.m in Sources */,
+				5AE486F71AA7741C0046C2D6 /* DFLogs.m in Sources */,
+				5AA508151AA67147007A9375 /* ShareViewController.m in Sources */,
+				5AE487051AA790A60046C2D6 /* NSString+DFHelpers.m in Sources */,
+				5A936C3A1AA67E0E003ACC17 /* DFKeeperImage.m in Sources */,
+				5A936C381AA67DFE003ACC17 /* DFNetworkingConstants.m in Sources */,
+				5AE486F11AA6826A0046C2D6 /* UIImage+Alpha.m in Sources */,
+				5A936C3D1AA67E2D003ACC17 /* DFUser.m in Sources */,
+				5AE486F01AA6826A0046C2D6 /* UIImageEffects.m in Sources */,
+				5AE486EF1AA6826A0046C2D6 /* UIImage+Resize.m in Sources */,
+				5A936C391AA67E0B003ACC17 /* DFKeeperPhoto.m in Sources */,
+				5AE487031AA77C620046C2D6 /* DFPhotoResizer.m in Sources */,
+				5A936C3C1AA67E20003ACC17 /* DFKeeperConstants.m in Sources */,
+				5AE487011AA77C160046C2D6 /* DFImageUploadManager.m in Sources */,
+				5AE487001AA77C160046C2D6 /* DFDeferredCompletionScheduler.m in Sources */,
+				5AE487041AA77C690046C2D6 /* DFCGRectHelpers.m in Sources */,
+				5A936C371AA67DE1003ACC17 /* DFKeeperStore.m in Sources */,
+				5A936C281AA67519003ACC17 /* DFCategoryConstants.m in Sources */,
+				5AE486FF1AA77C160046C2D6 /* DFImageManagerRequest.m in Sources */,
+				5AE487021AA77C160046C2D6 /* DFImageDownloadManager.m in Sources */,
+				5A936C3E1AA67EE4003ACC17 /* NSDateFormatter+DFPhotoDateFormatters.m in Sources */,
+				5AE486FE1AA77C040046C2D6 /* DFImageDiskCache.m in Sources */,
+				5A936C301AA678A4003ACC17 /* DFShareCategorizeViewController.m in Sources */,
+				5AE486F81AA7742D0046C2D6 /* DFLogConfig.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -750,6 +933,11 @@
 			isa = PBXTargetDependency;
 			target = 5A8EB8C41A9153F00033C540 /* Keeper */;
 			targetProxy = 5A8EB8DF1A9153F00033C540 /* PBXContainerItemProxy */;
+		};
+		5AA508191AA67147007A9375 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5AA5080E1AA67147007A9375 /* KeeperShareExtension */;
+			targetProxy = 5AA508181AA67147007A9375 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -806,14 +994,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Old Fashioned Software, LLC";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Old Fashioned Software, LLC";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = Keeper/KeeperPrefixHeader.pch;
 				INFOPLIST_FILE = Keeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3c720a78-adce-4dd1-85a1-1b0a2edccada";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Beta;
 		};
@@ -922,7 +1110,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "564794ce-9bb2-4aa8-bb66-649abd4980ca";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -977,6 +1165,67 @@
 			};
 			name = Release;
 		};
+		5AA5081C1AA67147007A9375 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8622FA142075D9EFE24176B /* Pods.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = KeeperShareExtension/ShareExtensionPrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KeeperShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5AA5081D1AA67147007A9375 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5EA541A400364F5B9C2B943 /* Pods.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = KeeperShareExtension/ShareExtensionPrefixHeader.pch;
+				INFOPLIST_FILE = KeeperShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		5AA5081E1AA67147007A9375 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A677D681A9BF1F70060B55D /* Beta.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = KeeperShareExtension/ShareExtensionPrefixHeader.pch;
+				INFOPLIST_FILE = KeeperShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Beta;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1006,6 +1255,16 @@
 				5A8EB8EC1A9153F00033C540 /* Debug */,
 				5A8EB8ED1A9153F00033C540 /* Release */,
 				5A677D6B1A9BF2A40060B55D /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5AA5081B1AA67147007A9375 /* Build configuration list for PBXNativeTarget "KeeperShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AA5081C1AA67147007A9375 /* Debug */,
+				5AA5081D1AA67147007A9375 /* Release */,
+				5AA5081E1AA67147007A9375 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
