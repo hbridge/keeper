@@ -15,6 +15,8 @@
 #import "DFKeeperStore.h"
 #import "DFUser.h"
 #import "UIImage+Resize.h"
+#import "DFSettingsManager.h"
+#import "DFImageDataHelper.h"
 
 @interface DFImageManager()
 
@@ -104,6 +106,10 @@ static BOOL logRouting = NO;
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(imageUploaded:)
                                                name:DFImageUploadedNotification
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(newScreenshot:)
+                                               name:DFNewScreenshotNotification
                                              object:nil];
 }
 
@@ -486,7 +492,11 @@ static BOOL logRouting = NO;
                             resizedImageWithContentMode:UIViewContentModeScaleAspectFit
                             bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
                             interpolationQuality:kCGInterpolationDefault];
-  [self setImage:imageToUpload forKey:photo.imageKey completion:nil];
+  [self setImage:imageToUpload forKey:photo.imageKey completion:^{
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:DFPhotosChangedNotification
+     object:nil userInfo:nil];
+  }];
 }
 
 - (void)setImage:(UIImage *)image forKey:(NSString *)key completion:(DFVoidBlock)completion
@@ -560,6 +570,26 @@ static BOOL logRouting = NO;
     image.uploaded = @(YES);
     [[DFKeeperStore sharedStore] saveImage:image];
   }];
+}
+
+- (void)newScreenshot:(NSNotification *)note
+{
+  NSSet *newScrenshotIds = note.userInfo[DFNewScreenshotNotificationIdentifiersSetKey];
+  if ([DFSettingsManager isSettingEnabled:DFSettingAutoImportScreenshots]) {
+    PHFetchResult *assets = [PHAsset fetchAssetsWithLocalIdentifiers:newScrenshotIds.allObjects options:nil];
+    for (PHAsset *asset in assets) {
+      PHImageRequestOptions *requestOptions = [PHImageRequestOptions new];
+      requestOptions.synchronous = YES;
+      [[PHImageManager defaultManager]
+       requestImageDataForAsset:asset
+       options:requestOptions
+       resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+         NSDictionary *metadata = [DFImageDataHelper metadataForImageData:imageData];
+         UIImage *image = [UIImage imageWithData:imageData];
+         [self saveImage:image category:@"Screenshot" withMetadata:metadata];
+       }];
+    }
+  }
 }
 
 

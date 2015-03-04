@@ -12,6 +12,7 @@
 
 typedef NSString *const DFSettingType;
 extern DFSettingType DFSettingAutoSaveToCameraRoll;
+extern DFSettingType DFSettingAutoImportScreenshots;
 extern DFSettingType DFSettingSpeedDialCategories;
 
 extern NSString *const DFSettingValueYes;
@@ -21,7 +22,6 @@ extern NSString *const DFSettingValueNo;
 + (void)setObject:(id)object forSetting:(DFSettingType)setting;
 + (id)objectForSetting:(DFSettingType)setting;
 
-+ (BOOL)boolForSetting:(DFSettingType)setting;
-+ (void)setBool:(BOOL)boolVal forSetting:(DFSettingType)setting;
++ (BOOL)isSettingEnabled:(DFSettingType)setting;
 
 @end

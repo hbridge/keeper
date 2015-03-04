@@ -17,6 +17,7 @@
 #import <HockeySDK/HockeySDK.h>
 #import "DFAnalytics.h"
 #import "DFImageManager.h"
+#import "DFCameraRollScanManager.h"
 
 @interface AppDelegate ()
 
@@ -135,6 +136,7 @@
   [DFAnalytics StartAnalyticsSession];
   [self showLoginIfNecessary];
   [[DFImageManager sharedManager] performForegroundOperations];
+  [[DFCameraRollScanManager sharedManager] scan];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

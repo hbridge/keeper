@@ -14,6 +14,10 @@
 		5A1C6A191A9B983D00A43A07 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A151A9B983D00A43A07 /* UIImage+Alpha.m */; };
 		5A1C6A1A1A9B983D00A43A07 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A171A9B983D00A43A07 /* UIImage+RoundedCorner.m */; };
 		5A1C6A1D1A9B9F8300A43A07 /* NSString+DFHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A1C1A9B9F8300A43A07 /* NSString+DFHelpers.m */; };
+		5A387C131AA79FEA00DCB601 /* DFCameraRollScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C121AA79FEA00DCB601 /* DFCameraRollScanManager.m */; };
+		5A387C161AA7AD0100DCB601 /* DFCameraRollScanDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C151AA7AD0100DCB601 /* DFCameraRollScanDB.m */; };
+		5A387C1E1AA7BB0400DCB601 /* DFSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C1D1AA7BB0400DCB601 /* DFSettingsViewController.m */; };
+		5A387C221AA7BFF400DCB601 /* DFImageDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C211AA7BFF400DCB601 /* DFImageDataHelper.m */; };
 		5A677D591A9BD5190060B55D /* DFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D581A9BD5190060B55D /* DFUser.m */; };
 		5A677D5D1A9BD8030060B55D /* DFKeeperPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D5B1A9BD8030060B55D /* DFKeeperPhotoViewController.m */; };
 		5A677D5E1A9BD8030060B55D /* DFKeeperPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A677D5C1A9BD8030060B55D /* DFKeeperPhotoViewController.xib */; };
@@ -101,6 +105,14 @@
 		5A1C6A171A9B983D00A43A07 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		5A1C6A1B1A9B9F8300A43A07 /* NSString+DFHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DFHelpers.h"; sourceTree = "<group>"; };
 		5A1C6A1C1A9B9F8300A43A07 /* NSString+DFHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DFHelpers.m"; sourceTree = "<group>"; };
+		5A387C111AA79FEA00DCB601 /* DFCameraRollScanManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCameraRollScanManager.h; sourceTree = "<group>"; };
+		5A387C121AA79FEA00DCB601 /* DFCameraRollScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCameraRollScanManager.m; sourceTree = "<group>"; };
+		5A387C141AA7AD0100DCB601 /* DFCameraRollScanDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCameraRollScanDB.h; sourceTree = "<group>"; };
+		5A387C151AA7AD0100DCB601 /* DFCameraRollScanDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCameraRollScanDB.m; sourceTree = "<group>"; };
+		5A387C1C1AA7BB0400DCB601 /* DFSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFSettingsViewController.h; sourceTree = "<group>"; };
+		5A387C1D1AA7BB0400DCB601 /* DFSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSettingsViewController.m; sourceTree = "<group>"; };
+		5A387C201AA7BFF400DCB601 /* DFImageDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageDataHelper.h; sourceTree = "<group>"; };
+		5A387C211AA7BFF400DCB601 /* DFImageDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageDataHelper.m; sourceTree = "<group>"; };
 		5A677D571A9BD5190060B55D /* DFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFUser.h; sourceTree = "<group>"; };
 		5A677D581A9BD5190060B55D /* DFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFUser.m; sourceTree = "<group>"; };
 		5A677D5A1A9BD8030060B55D /* DFKeeperPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperPhotoViewController.h; sourceTree = "<group>"; };
@@ -254,9 +266,11 @@
 			name = ThirdParty;
 			sourceTree = "<group>";
 		};
-		5A88B7E11A9FBBDA0008F548 /* Settings */ = {
+		5A387C1F1AA7BCE000DCB601 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				5A387C1C1AA7BB0400DCB601 /* DFSettingsViewController.h */,
+				5A387C1D1AA7BB0400DCB601 /* DFSettingsViewController.m */,
 				5A88B7E21A9FBC020008F548 /* DFSettingsManager.h */,
 				5A88B7E31A9FBC020008F548 /* DFSettingsManager.m */,
 			);
@@ -295,12 +309,12 @@
 				5A9950381A96A49300468484 /* Login */,
 				5A9950051A964B3200468484 /* Configuration */,
 				5A99500B1A96549900468484 /* Library */,
+				5A387C1F1AA7BCE000DCB601 /* Settings */,
 				5A9950041A964B2000468484 /* Camera */,
 				5A9950241A9662ED00468484 /* Database */,
 				5A99503F1A97913800468484 /* ImageManager */,
 				5A9950151A965BAB00468484 /* Common */,
 				5A8EB9021A915FE90033C540 /* Utils */,
-				5A88B7E11A9FBBDA0008F548 /* Settings */,
 				5A1C6A111A9B981F00A43A07 /* ThirdParty */,
 				5A8EB8D51A9153F00033C540 /* Images.xcassets */,
 				5A8EB9111A92838E0033C540 /* Assets */,
@@ -420,6 +434,8 @@
 		5A9950151A965BAB00468484 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5A387C201AA7BFF400DCB601 /* DFImageDataHelper.h */,
+				5A387C211AA7BFF400DCB601 /* DFImageDataHelper.m */,
 				5AC04E0B1AA10CA3008E44A8 /* DFAppInfo.h */,
 				5AC04E0C1AA10CA3008E44A8 /* DFAppInfo.m */,
 				5AC04E081AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.h */,
@@ -467,6 +483,10 @@
 				5A9950261A967F0E00468484 /* DFKeeperPhoto.m */,
 				5AC04E191AA513B3008E44A8 /* DFKeeperImage.h */,
 				5AC04E1A1AA513B3008E44A8 /* DFKeeperImage.m */,
+				5A387C111AA79FEA00DCB601 /* DFCameraRollScanManager.h */,
+				5A387C121AA79FEA00DCB601 /* DFCameraRollScanManager.m */,
+				5A387C141AA7AD0100DCB601 /* DFCameraRollScanDB.h */,
+				5A387C151AA7AD0100DCB601 /* DFCameraRollScanDB.m */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -693,6 +713,7 @@
 				5A6DED961A9E6C890038EF9F /* DFAssetLibraryHelper.m in Sources */,
 				5AC04E071AA0E64B008E44A8 /* DFNetworkingConstants.m in Sources */,
 				5A677D611A9BDA2F0060B55D /* DFCategoryConstants.m in Sources */,
+				5A387C131AA79FEA00DCB601 /* DFCameraRollScanManager.m in Sources */,
 				5A99502F1A96983800468484 /* UINib+DFHelpers.m in Sources */,
 				5A99501F1A965DFA00468484 /* DFNavigationController.m in Sources */,
 				5A99502B1A968DC900468484 /* DFImageCollectionViewCell.m in Sources */,
@@ -707,6 +728,7 @@
 				5A8EB8F71A915E030033C540 /* DFCameraViewController.m in Sources */,
 				5A9950501A97E44A00468484 /* DFImageDownloadManager.m in Sources */,
 				5A9950331A969FC500468484 /* DFLoginViewController.m in Sources */,
+				5A387C1E1AA7BB0400DCB601 /* DFSettingsViewController.m in Sources */,
 				5A9950511A97E44A00468484 /* DFDeferredCompletionScheduler.m in Sources */,
 				5AA508071AA64AC5007A9375 /* DFKeeperSearchController.m in Sources */,
 				5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */,
@@ -718,11 +740,13 @@
 				5A677D641A9BDB2B0060B55D /* NSArray+DFHelpers.m in Sources */,
 				5AA5080A1AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m in Sources */,
 				5A9950271A967F0E00468484 /* DFKeeperPhoto.m in Sources */,
+				5A387C221AA7BFF400DCB601 /* DFImageDataHelper.m in Sources */,
 				5AC04E131AA10D26008E44A8 /* UIAlertView+DFHelpers.m in Sources */,
 				5A9950231A9662E300468484 /* DFKeeperStore.m in Sources */,
 				5AC04E1E1AA51A70008E44A8 /* DFKeeperObject.m in Sources */,
 				5AC04E0A1AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m in Sources */,
 				5AC04E041AA0DFF9008E44A8 /* DFImageUploadManager.m in Sources */,
+				5A387C161AA7AD0100DCB601 /* DFCameraRollScanDB.m in Sources */,
 				5A99504F1A97E44A00468484 /* DFImageManagerRequest.m in Sources */,
 				5AC04E0D1AA10CA3008E44A8 /* DFAppInfo.m in Sources */,
 				5A1C6A191A9B983D00A43A07 /* UIImage+Alpha.m in Sources */,

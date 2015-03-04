@@ -15,10 +15,10 @@
 #import "DFKeeperPhotoViewController.h"
 #import "DFCategoryConstants.h"
 #import "DFAnalytics.h"
-#import "DFSettingsManager.h"
-#import "DFDiagnosticInfoMailComposeController.h"
-#import "DFLogs.h"
 #import "DFAssetLibraryHelper.h"
+#import "DFSettingsViewController.h"
+#import "DFSettingsManager.h"
+#import <Photos/Photos.h>
 
 @interface DFLibraryViewController ()
 
@@ -60,7 +60,36 @@
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [DFAnalytics logViewController:self appearedWithParameters:nil];  
+  [self upsellScreenshotAutoImport];
+    [DFAnalytics logViewController:self appearedWithParameters:nil];
+}
+
+- (void)upsellScreenshotAutoImport
+{
+  if (![DFSettingsManager objectForSetting:DFSettingAutoImportScreenshots]
+      && [PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
+    DFAlertController *promptForAutoImport =
+    [DFAlertController
+     alertControllerWithTitle:@"Import Screenshots?"
+     message:@"Would you like Keeper to import any screenshots you take in the future automatically?"
+     preferredStyle:DFAlertControllerStyleAlert];
+    [promptForAutoImport addAction:[DFAlertAction
+                                    actionWithTitle:@"Not Now"
+                                    style:DFAlertActionStyleCancel
+                                    handler:^(DFAlertAction *action) {
+                                      [DFSettingsManager setObject:DFSettingValueNo
+                                                        forSetting:DFSettingAutoImportScreenshots];
+                                    }]];
+    [promptForAutoImport addAction:[DFAlertAction
+                                    actionWithTitle:@"Yes"
+                                    style:DFAlertActionStyleDefault
+                                    handler:^(DFAlertAction *action) {
+                                      [DFSettingsManager setObject:DFSettingValueYes
+                                                        forSetting:DFSettingAutoImportScreenshots];
+                                    }]];
+    [promptForAutoImport showWithParentViewController:self animated:YES completion:nil];
+  }
+  
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -258,85 +287,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 - (void)settingsButtonPressed:(id)sender
 {
-  DFAlertController *alertController = [DFAlertController alertControllerWithTitle:nil
-                                                                           message:nil
-                                                                    preferredStyle:DFAlertControllerStyleActionSheet];
-  
-  //logout
-  [alertController addAction:[DFAlertAction
-                              actionWithTitle:@"Logout"
-                              style:DFAlertActionStyleDestructive
-                              handler:^(DFAlertAction *action) {
-                                [DFLoginViewController logoutWithParentViewController:self];
-                                abort();
-                              }]];
-  
-  // send logs
-  [alertController addAction:[DFAlertAction
-                              actionWithTitle:@"Send Logs"
-                              style:DFAlertActionStyleDefault
-                              handler:^(DFAlertAction *action) {
-                                #if TARGET_IPHONE_SIMULATOR
-                                NSData *logData = [DFLogs aggregatedLogData];
-                                NSString *filePath;
-                                NSArray * paths = NSSearchPathForDirectoriesInDomains (NSDesktopDirectory, NSUserDomainMask, YES);
-                                if (paths.firstObject) {
-                                  NSArray *pathComponents = [(NSString *)paths.firstObject pathComponents];
-                                  if ([pathComponents[1] isEqualToString:@"Users"]) {
-                                    filePath = [NSString stringWithFormat:@"/Users/%@/Desktop/%@.log",
-                                                pathComponents[2], [NSDate date]];
-                                    
-                                  }
-                                }
-                                [logData writeToFile:filePath atomically:NO];
-                                [UIAlertView showSimpleAlertWithTitle:@"Copied To Desktop"
-                                                        formatMessage:@"Log data has been copied to your desktop."];
-                                
-                                #else
-                                DFDiagnosticInfoMailComposeController *mailComposer =
-                                [[DFDiagnosticInfoMailComposeController alloc] initWithMailType:DFMailTypeIssue];
-                                if (mailComposer) { // if the user hasn't setup email, this will come back nil
-                                  [self presentViewController:mailComposer animated:YES completion:nil];
-                                }
-                               #endif
-                              }]];
-  
-  // Auto Save
-  NSString *autoSaveString;
-  NSString *autoSavePref = [DFSettingsManager objectForSetting:DFSettingAutoSaveToCameraRoll];
-  NSString *opposteSettingValue;
-  if ([autoSavePref isEqualToString:DFSettingValueYes]) {
-    autoSaveString = @"Disable Save to Camera Roll";
-    opposteSettingValue = DFSettingValueNo;
-  } else {
-    autoSaveString = @"Enable Save to Camera Roll";
-    opposteSettingValue = DFSettingValueYes;
-  }
-  [alertController addAction:[DFAlertAction
-                              actionWithTitle:autoSaveString
-                              style:DFAlertActionStyleDefault
-                              handler:^(DFAlertAction *action) {
-                                [DFSettingsManager setObject:opposteSettingValue
-                                                  forSetting:DFSettingAutoSaveToCameraRoll];
-                              }]];
-  
-  // Edit categories
-  [alertController addAction:[DFAlertAction
-                              actionWithTitle:@"Edit Category Speed Dial"
-                              style:DFAlertActionStyleDefault
-                              handler:^(DFAlertAction *action) {
-                                self.categorizeController = [[DFCategorizeController alloc] init];
-                                self.categorizeController.isEditModeEnabled = YES;
-                                [self.categorizeController presentInViewController:self];
-                              }]];
-  
-  // Cancel
-   [alertController addAction:[DFAlertAction
-                              actionWithTitle:@"Cancel"
-                              style:DFAlertActionStyleCancel
-                              handler:^(DFAlertAction *action) {
-                              }]];
-   [alertController showWithParentViewController:self animated:YES completion:nil];
+  [DFSettingsViewController presentInViewController:self];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

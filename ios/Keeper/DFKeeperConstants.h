@@ -10,10 +10,13 @@
 
 @interface DFKeeperConstants : NSObject
 
+extern NSString *const DFFirebaseRootURLString;
 extern NSString *const DFPhotosChangedNotification;
 extern NSString *const DFImageUploadedNotification;
 extern NSString *const DFImageUploadedNotificationImageKey;
-extern NSString *const DFFirebaseRootURLString;
+extern NSString *const DFNewScreenshotNotification;
+extern NSString *const DFNewScreenshotNotificationIdentifiersSetKey;
+
 
 extern const CGFloat DFKeeperPhotoDefaultThumbnailSize;
 extern const CGFloat DFKeeperPhotoHighQualityMaxLength;

@@ -9,10 +9,12 @@
 #import "DFKeeperConstants.h"
 #import <UIColor+BFPaperColors/UIColor+BFPaperColors.h>
 
+NSString *const DFFirebaseRootURLString = @"https://blazing-heat-8620.firebaseio.com";
 NSString *const DFPhotosChangedNotification = @"com.duffyapp.DFPhotosChangedNotification";
 NSString *const DFImageUploadedNotification = @"com.duffyapp.DFImageUploadedNotification";
 NSString *const DFImageUploadedNotificationImageKey = @"imageKey";
-NSString *const DFFirebaseRootURLString = @"https://blazing-heat-8620.firebaseio.com";
+NSString *const DFNewScreenshotNotification = @"com.duffyapp.DFNewScreenshotNotification";
+NSString *const DFNewScreenshotNotificationIdentifiersSetKey = @"assetIdentifiers";
 
 
 const CGFloat DFKeeperPhotoDefaultThumbnailSize = 157.0;

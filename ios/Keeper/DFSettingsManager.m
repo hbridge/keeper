@@ -7,6 +7,7 @@
 //
 
 #import "DFSettingsManager.h"
+#import "DFAnalytics.h"
 
 @implementation DFSettingsManager
 
@@ -14,12 +15,22 @@ NSString *const DFSettingValueYes = @"Yes";
 NSString *const DFSettingValueNo = @"No";
 
 DFSettingType DFSettingAutoSaveToCameraRoll = @"autoSaveToCameraRoll";
+DFSettingType DFSettingAutoImportScreenshots = @"autoImportScreenshots";
 DFSettingType DFSettingSpeedDialCategories = @"userCategories";
 
 + (void)setObject:(id)object forSetting:(DFSettingType)setting
 {
+  NSObject *oldValue = [[NSUserDefaults standardUserDefaults] objectForKey:setting];
   [[NSUserDefaults standardUserDefaults] setObject:object forKey:setting];
   [[NSUserDefaults standardUserDefaults] synchronize];
+
+  // log the change
+  NSString *changeToLog = [NSString stringWithFormat:@"%@ -> %@", oldValue, object];
+  [DFAnalytics logEvent:DFAnalyticsEventSettingChanged
+         withParameters:@{
+                          @"setting" : setting,
+                          @"valueChange" : changeToLog
+                          }];
 }
 
 + (id)objectForSetting:(DFSettingType)setting
@@ -27,16 +38,9 @@ DFSettingType DFSettingSpeedDialCategories = @"userCategories";
   return [[NSUserDefaults standardUserDefaults] valueForKey:setting];
 }
 
-+ (BOOL)boolForSetting:(DFSettingType)setting
++ (BOOL)isSettingEnabled:(DFSettingType)setting
 {
-  return [[NSUserDefaults standardUserDefaults] boolForKey:setting];
+  return [[self objectForSetting:setting] isEqual:DFSettingValueYes];
 }
-
-+ (void)setBool:(BOOL)boolVal forSetting:(DFSettingType)setting
-{
-  [[NSUserDefaults standardUserDefaults] setBool:boolVal forKey:setting];
-  [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 
 @end
