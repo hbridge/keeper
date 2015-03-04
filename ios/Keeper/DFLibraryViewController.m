@@ -250,6 +250,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                                    withMetadata:self.lastPickedMetadata];
       self.lastPickedImage = nil;
       self.lastPickedMetadata = nil;
+      [DFAnalytics logEvent:DFAnalyticsEventPhotoImported
+             withParameters:@{@"category" : category}];
     }
   }
 }

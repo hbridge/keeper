@@ -24,6 +24,7 @@ extern const int DFMessageComposeResultCouldntStart;
 
 typedef NSString *const DFAnalyticsEventType;
 extern DFAnalyticsEventType DFAnalyticsEventPhotoTaken;
+extern DFAnalyticsEventType DFAnalyticsEventPhotoImported;
 extern DFAnalyticsEventType DFAnalyticsEventLibraryPhotoTapped;
 extern DFAnalyticsEventType DFAnalyticsEventLibraryFiltered;
 

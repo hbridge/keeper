@@ -32,6 +32,7 @@ NSString* const DFAnalyticsValueResultAborted = @"aborted";
 NSString* const ParentViewControllerKey = @"parentView";
 
 DFAnalyticsEventType DFAnalyticsEventPhotoTaken = @"PhotoTaken";
+DFAnalyticsEventType DFAnalyticsEventPhotoImported = @"PhotoImported";
 DFAnalyticsEventType DFAnalyticsEventLibraryPhotoTapped = @"LibraryPhotoTapped";
 DFAnalyticsEventType DFAnalyticsEventLibraryFiltered = @"LibraryFiltered";
 
