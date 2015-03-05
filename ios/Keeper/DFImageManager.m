@@ -17,6 +17,7 @@
 #import "UIImage+Resize.h"
 #import "DFSettingsManager.h"
 #import "DFImageDataHelper.h"
+#import "DFImageImportManager.h"
 
 @interface DFImageManager()
 
@@ -481,21 +482,19 @@ static BOOL logRouting = NO;
   keeperImage.orientation = @(1); // all photos we save will be up orientated after the resize
   [[DFKeeperStore sharedStore] saveImage:keeperImage];
   
-  DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] init];
-  photo.imageKey = keeperImage.key;
-  photo.category = category;
-  photo.saveDate = [NSDate date];
-  photo.user = [DFUser loggedInUser];
-  [[DFKeeperStore sharedStore] savePhoto:photo];
-  
   UIImage *imageToUpload = [image
                             resizedImageWithContentMode:UIViewContentModeScaleAspectFit
                             bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
                             interpolationQuality:kCGInterpolationDefault];
-  [self setImage:imageToUpload forKey:photo.imageKey completion:^{
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:DFPhotosChangedNotification
-     object:nil userInfo:nil];
+  [self setImage:imageToUpload forKey:keeperImage.key completion:^{
+    // don't create the photo until apfter the image has been stored, this way views won't reload
+    // until the image is there
+    DFKeeperPhoto *photo = [[DFKeeperPhoto alloc] init];
+    photo.imageKey = keeperImage.key;
+    photo.category = category;
+    photo.saveDate = [NSDate date];
+    photo.user = [DFUser loggedInUser];
+    [[DFKeeperStore sharedStore] savePhoto:photo];
   }];
 }
 
@@ -561,6 +560,7 @@ static BOOL logRouting = NO;
     
     [[DFImageDownloadManager sharedManager] fetchNewImages];
   }];
+  [[DFImageImportManager sharedManager] resumeImports];
 }
 
 - (void)imageUploaded:(NSNotification *)note
@@ -578,19 +578,11 @@ static BOOL logRouting = NO;
 {
   NSSet *newScrenshotIds = note.userInfo[DFNewScreenshotNotificationIdentifiersSetKey];
   if ([DFSettingsManager isSettingEnabled:DFSettingAutoImportScreenshots]) {
-    PHFetchResult *assets = [PHAsset fetchAssetsWithLocalIdentifiers:newScrenshotIds.allObjects options:nil];
-    for (PHAsset *asset in assets) {
-      PHImageRequestOptions *requestOptions = [PHImageRequestOptions new];
-      requestOptions.synchronous = YES;
-      [[PHImageManager defaultManager]
-       requestImageDataForAsset:asset
-       options:requestOptions
-       resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
-         NSDictionary *metadata = [DFImageDataHelper metadataForImageData:imageData];
-         UIImage *image = [UIImage imageWithData:imageData];
-         [self saveImage:image category:@"Screenshot" withMetadata:metadata];
-       }];
+    NSMutableDictionary *assetsToCategories = [NSMutableDictionary new];
+    for (NSString *localIdentifier in newScrenshotIds) {
+      assetsToCategories[localIdentifier] = @"Screenshot";
     }
+    [[DFImageImportManager sharedManager] importAssetsWithIdentifiersToCategories:assetsToCategories];
   }
 }
 
