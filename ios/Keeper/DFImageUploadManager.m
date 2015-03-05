@@ -145,9 +145,12 @@ didCompleteWithError:(NSError *)error {
                            ];
     
     DDLogInfo(@"S3 upload completed %@", urlString);
+    NSDictionary *userInfo;
+    if (task.taskDescription) userInfo = @{DFImageUploadedNotificationImageKey : task.taskDescription};
     [[NSNotificationCenter defaultCenter]
      postNotificationName:DFImageUploadedNotification
-     object:self userInfo:@{DFImageUploadedNotificationImageKey : task.taskDescription}];
+     object:self
+     userInfo:userInfo];
   }else {
     DDLogError(@"S3 upload error: %@", error);
   }

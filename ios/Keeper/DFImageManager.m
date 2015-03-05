@@ -566,10 +566,12 @@ static BOOL logRouting = NO;
 - (void)imageUploaded:(NSNotification *)note
 {
   NSString *imageKey = note.userInfo[DFImageUploadedNotificationImageKey];
-  [[DFKeeperStore sharedStore] fetchImageWithKey:imageKey completion:^(DFKeeperImage *image) {
-    image.uploaded = @(YES);
-    [[DFKeeperStore sharedStore] saveImage:image];
-  }];
+  if (imageKey) {
+    [[DFKeeperStore sharedStore] fetchImageWithKey:imageKey completion:^(DFKeeperImage *image) {
+      image.uploaded = @(YES);
+      [[DFKeeperStore sharedStore] saveImage:image];
+    }];
+  }
 }
 
 - (void)newScreenshot:(NSNotification *)note
