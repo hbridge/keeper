@@ -17,6 +17,9 @@
 #import "DFAnalytics.h"
 #import "DFImageManager.h"
 #import "DFCameraRollScanManager.h"
+#import "DFNotLoggedInViewController.h"
+#import "DFNavigationController.h"
+#import "DFUserLoginManager.h"
 
 @interface AppDelegate ()
 
@@ -102,17 +105,6 @@
   self.window.rootViewController = rvc;
 }
 
-- (void)showLoginIfNecessary
-{
-  dispatch_async(dispatch_get_main_queue(), ^{
-    if (![DFLoginViewController isUserLoggedIn]) {
-      DDLogInfo(@"User not logged in, showing login");
-      DFLoginViewController *loginVC = [[DFLoginViewController alloc] init];
-      [self.window.rootViewController presentViewController:loginVC animated:YES completion:nil];
-    }
-  });
-}
-
 - (void)applicationWillResignActive:(UIApplication *)application {
   // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
   // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -133,7 +125,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   [DFAnalytics StartAnalyticsSession];
-  [self showLoginIfNecessary];
+  [[DFUserLoginManager sharedManager] observeLoginChanges];
   [[DFImageManager sharedManager] performForegroundOperations];
   [[DFCameraRollScanManager sharedManager] scan];
 }

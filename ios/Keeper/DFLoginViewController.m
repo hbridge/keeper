@@ -9,6 +9,7 @@
 #import "DFLoginViewController.h"
 #import <Firebase/Firebase.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "DFUserLoginManager.h"
 
 @interface DFLoginViewController ()
 
@@ -33,40 +34,18 @@
 
 - (void)login
 {
-  Firebase *rootBase = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
-  [rootBase authUser:self.emailTextField.text password:self.passwordTextField.text
- withCompletionBlock:^(NSError *error, FAuthData *authData) {
-   if (error) {
+  [[DFUserLoginManager sharedManager]
+   loginWithEmail:self.emailTextField.text
+   password:self.passwordTextField.text
+   success:^{
+     dispatch_async(dispatch_get_main_queue(), ^{
+       [[DFUserLoginManager sharedManager] dismissNotLoggedInControllerWithCompletion:^{
+         [SVProgressHUD showSuccessWithStatus:@"Logged in"];
+       }];
+     });
+   } failure:^(NSError *error) {
      [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-     DDLogVerbose(@"%@ auth error: %@", self.class, error);
-   } else {
-     [SVProgressHUD showSuccessWithStatus:@"Logged in"];
-     [self dismissViewControllerAnimated:YES completion:nil];
-     DDLogVerbose(@"%@ user authed authData:%@", self.class, authData);
-   }
- }];
-}
-
-+ (BOOL)isUserLoggedIn
-{
-  Firebase *ref = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
-  if (ref.authData) {
-    return YES;
-  } else {
-    return NO;
-  }
-}
-
-+ (void)logoutWithParentViewController:(UIViewController *)parentViewController
-{
-  Firebase *ref = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
-  [ref unauth];
-  dispatch_async(dispatch_get_main_queue(), ^{
-    DFLoginViewController *login = [[DFLoginViewController alloc] init];
-    [parentViewController presentViewController:login animated:YES completion:nil];
-  });
-  NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-  [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+   }];
 }
 
 @end

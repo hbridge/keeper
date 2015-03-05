@@ -67,6 +67,12 @@
 		5AA508071AA64AC5007A9375 /* DFKeeperSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA508061AA64AC5007A9375 /* DFKeeperSearchController.m */; };
 		5AA5080A1AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA508091AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m */; };
 		5AB821781AA8E93A000D5781 /* DFImageImportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB821771AA8E93A000D5781 /* DFImageImportManager.m */; };
+		5AB8217C1AA90AEF000D5781 /* DFNotLoggedInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8217A1AA90AEF000D5781 /* DFNotLoggedInViewController.m */; };
+		5AB8217D1AA90AEF000D5781 /* DFNotLoggedInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AB8217B1AA90AEF000D5781 /* DFNotLoggedInViewController.xib */; };
+		5AB821811AA90FCD000D5781 /* DFCreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB8217F1AA90FCD000D5781 /* DFCreateAccountViewController.m */; };
+		5AB821821AA90FCD000D5781 /* DFCreateAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AB821801AA90FCD000D5781 /* DFCreateAccountViewController.xib */; };
+		5AB821851AA91430000D5781 /* DFInsetTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB821841AA91430000D5781 /* DFInsetTextField.m */; };
+		5AB821881AA9178A000D5781 /* DFUserLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB821871AA9178A000D5781 /* DFUserLoginManager.m */; };
 		5AC04E041AA0DFF9008E44A8 /* DFImageUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */; };
 		5AC04E0A1AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E091AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m */; };
 		5AC04E0D1AA10CA3008E44A8 /* DFAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E0C1AA10CA3008E44A8 /* DFAppInfo.m */; };
@@ -209,6 +215,16 @@
 		5AAEB3271A9CDC0D00D029A6 /* KeeperReleaseNotes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = KeeperReleaseNotes.md; sourceTree = SOURCE_ROOT; };
 		5AB821761AA8E93A000D5781 /* DFImageImportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageImportManager.h; sourceTree = "<group>"; };
 		5AB821771AA8E93A000D5781 /* DFImageImportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageImportManager.m; sourceTree = "<group>"; };
+		5AB821791AA90AEF000D5781 /* DFNotLoggedInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNotLoggedInViewController.h; sourceTree = "<group>"; };
+		5AB8217A1AA90AEF000D5781 /* DFNotLoggedInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFNotLoggedInViewController.m; sourceTree = "<group>"; };
+		5AB8217B1AA90AEF000D5781 /* DFNotLoggedInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFNotLoggedInViewController.xib; sourceTree = "<group>"; };
+		5AB8217E1AA90FCD000D5781 /* DFCreateAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCreateAccountViewController.h; sourceTree = "<group>"; };
+		5AB8217F1AA90FCD000D5781 /* DFCreateAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCreateAccountViewController.m; sourceTree = "<group>"; };
+		5AB821801AA90FCD000D5781 /* DFCreateAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFCreateAccountViewController.xib; sourceTree = "<group>"; };
+		5AB821831AA91430000D5781 /* DFInsetTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFInsetTextField.h; sourceTree = "<group>"; };
+		5AB821841AA91430000D5781 /* DFInsetTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFInsetTextField.m; sourceTree = "<group>"; };
+		5AB821861AA9178A000D5781 /* DFUserLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFUserLoginManager.h; sourceTree = "<group>"; };
+		5AB821871AA9178A000D5781 /* DFUserLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFUserLoginManager.m; sourceTree = "<group>"; };
 		5AC04E021AA0DFF9008E44A8 /* DFImageUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageUploadManager.h; sourceTree = "<group>"; };
 		5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageUploadManager.m; sourceTree = "<group>"; };
 		5AC04E081AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFDiagnosticInfoMailComposeController.h; sourceTree = "<group>"; };
@@ -468,6 +484,8 @@
 				5A9950281A968DC900468484 /* DFImageCollectionViewCell.h */,
 				5A9950291A968DC900468484 /* DFImageCollectionViewCell.m */,
 				5A99502A1A968DC900468484 /* DFImageCollectionViewCell.xib */,
+				5AB821831AA91430000D5781 /* DFInsetTextField.h */,
+				5AB821841AA91430000D5781 /* DFInsetTextField.m */,
 			);
 			name = "UI Components";
 			sourceTree = "<group>";
@@ -494,9 +512,17 @@
 		5A9950381A96A49300468484 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				5AB821791AA90AEF000D5781 /* DFNotLoggedInViewController.h */,
+				5AB8217A1AA90AEF000D5781 /* DFNotLoggedInViewController.m */,
+				5AB8217B1AA90AEF000D5781 /* DFNotLoggedInViewController.xib */,
 				5A9950301A969FC500468484 /* DFLoginViewController.h */,
 				5A9950311A969FC500468484 /* DFLoginViewController.m */,
 				5A9950321A969FC500468484 /* DFLoginViewController.xib */,
+				5AB8217E1AA90FCD000D5781 /* DFCreateAccountViewController.h */,
+				5AB8217F1AA90FCD000D5781 /* DFCreateAccountViewController.m */,
+				5AB821801AA90FCD000D5781 /* DFCreateAccountViewController.xib */,
+				5AB821861AA9178A000D5781 /* DFUserLoginManager.h */,
+				5AB821871AA9178A000D5781 /* DFUserLoginManager.m */,
 				5A677D571A9BD5190060B55D /* DFUser.h */,
 				5A677D581A9BD5190060B55D /* DFUser.m */,
 			);
@@ -631,9 +657,11 @@
 				5A8EB9121A92838E0033C540 /* Assets in Resources */,
 				5A8EB8F91A915E030033C540 /* DFCameraOverlayView.xib in Resources */,
 				5A99502C1A968DC900468484 /* DFImageCollectionViewCell.xib in Resources */,
+				5AB821821AA90FCD000D5781 /* DFCreateAccountViewController.xib in Resources */,
 				5A8EB8D91A9153F00033C540 /* LaunchScreen.xib in Resources */,
 				5A8EB8D61A9153F00033C540 /* Images.xcassets in Resources */,
 				5A99500A1A96548F00468484 /* DFLibraryViewController.xib in Resources */,
+				5AB8217D1AA90AEF000D5781 /* DFNotLoggedInViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +725,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AB821881AA9178A000D5781 /* DFUserLoginManager.m in Sources */,
 				5A99503B1A96A4EE00468484 /* DFAlertAction.m in Sources */,
 				5AC04E1B1AA513B3008E44A8 /* DFKeeperImage.m in Sources */,
 				5AC04E241AA52C17008E44A8 /* NSDictionary+DFJSON.m in Sources */,
@@ -712,7 +741,9 @@
 				5A8EB90C1A91612C0033C540 /* UIView+DFExtensions.m in Sources */,
 				5A6DED961A9E6C890038EF9F /* DFAssetLibraryHelper.m in Sources */,
 				5A677D611A9BDA2F0060B55D /* DFCategoryConstants.m in Sources */,
+				5AB8217C1AA90AEF000D5781 /* DFNotLoggedInViewController.m in Sources */,
 				5A387C131AA79FEA00DCB601 /* DFCameraRollScanManager.m in Sources */,
+				5AB821851AA91430000D5781 /* DFInsetTextField.m in Sources */,
 				5A99502F1A96983800468484 /* UINib+DFHelpers.m in Sources */,
 				5AB821781AA8E93A000D5781 /* DFImageImportManager.m in Sources */,
 				5A99501F1A965DFA00468484 /* DFNavigationController.m in Sources */,
@@ -732,6 +763,7 @@
 				5A9950511A97E44A00468484 /* DFDeferredCompletionScheduler.m in Sources */,
 				5AA508071AA64AC5007A9375 /* DFKeeperSearchController.m in Sources */,
 				5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */,
+				5AB821811AA90FCD000D5781 /* DFCreateAccountViewController.m in Sources */,
 				5A677D671A9BEC2D0060B55D /* DFAnalytics.m in Sources */,
 				5A99504D1A97E44A00468484 /* DFImageDiskCache.m in Sources */,
 				5A1C6A1D1A9B9F8300A43A07 /* NSString+DFHelpers.m in Sources */,

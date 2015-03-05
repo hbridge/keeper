@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DFNotLoggedInViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Keeper" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlH-sR-i6p">
+                    <rect key="frame" x="62" y="270" width="197" height="28"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="23"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDU-Kc-Y79" userLabel="Button Wrapper">
+                    <rect key="frame" x="34" y="348" width="252" height="37"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TZ-ad-feI">
+                            <rect key="frame" x="183" y="0.0" width="69" height="37"/>
+                            <color key="backgroundColor" white="1" alpha="0.38" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                            <inset key="contentEdgeInsets" minX="14" minY="8" maxX="14" maxY="8"/>
+                            <state key="normal" title="Login">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="loginPressed:" destination="-1" eventType="touchUpInside" id="Ojj-Ft-QWg"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dck-66-2LM">
+                            <rect key="frame" x="0.0" y="0.0" width="143" height="37"/>
+                            <color key="backgroundColor" white="1" alpha="0.38" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                            <inset key="contentEdgeInsets" minX="14" minY="8" maxX="14" maxY="8"/>
+                            <state key="normal" title="Create Account">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="createAccountPressed:" destination="-1" eventType="touchUpInside" id="e0c-qm-RfZ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Dck-66-2LM" secondAttribute="bottom" id="648-wv-Qpv"/>
+                        <constraint firstAttribute="bottom" secondItem="7TZ-ad-feI" secondAttribute="bottom" id="NQI-4x-xix"/>
+                        <constraint firstItem="Dck-66-2LM" firstAttribute="leading" secondItem="yDU-Kc-Y79" secondAttribute="leading" id="NdA-2q-ftD"/>
+                        <constraint firstAttribute="trailing" secondItem="7TZ-ad-feI" secondAttribute="trailing" id="Th0-Wv-5MJ"/>
+                        <constraint firstItem="7TZ-ad-feI" firstAttribute="top" secondItem="yDU-Kc-Y79" secondAttribute="top" id="XgS-Qh-dIw"/>
+                        <constraint firstItem="Dck-66-2LM" firstAttribute="top" secondItem="yDU-Kc-Y79" secondAttribute="top" id="g1b-At-Fdv"/>
+                        <constraint firstItem="7TZ-ad-feI" firstAttribute="leading" secondItem="Dck-66-2LM" secondAttribute="trailing" constant="40" id="lf2-d5-wFX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="yDU-Kc-Y79" firstAttribute="top" secondItem="PlH-sR-i6p" secondAttribute="bottom" constant="50" id="IZM-uo-0Hp"/>
+                <constraint firstAttribute="centerY" secondItem="PlH-sR-i6p" secondAttribute="centerY" id="bNV-Cu-KUg"/>
+                <constraint firstAttribute="centerX" secondItem="PlH-sR-i6p" secondAttribute="centerX" id="rBh-yT-XUu"/>
+                <constraint firstAttribute="centerX" secondItem="yDU-Kc-Y79" secondAttribute="centerX" id="zit-3N-ERg"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

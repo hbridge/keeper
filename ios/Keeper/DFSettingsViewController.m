@@ -8,7 +8,7 @@
 
 #import "DFSettingsViewController.h"
 #import "DFUIKit.h"
-#import "DFLoginViewController.h"
+#import "DFUserLoginManager.h"
 #import "DFSettingsManager.h"
 #import "DFDiagnosticInfoMailComposeController.h"
 #import "DFLogs.h"
@@ -33,7 +33,7 @@ static DFCategorizeController *categorizeController;
                               actionWithTitle:@"Logout"
                               style:DFAlertActionStyleDestructive
                               handler:^(DFAlertAction *action) {
-                                [DFLoginViewController logoutWithParentViewController:presentingViewController];
+                                [[DFUserLoginManager sharedManager] logout];
                                 abort();
                               }]];
   

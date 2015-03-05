@@ -13,7 +13,4 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 - (IBAction)loginButtonPressed:(id)sender;
 
-+ (BOOL)isUserLoggedIn;
-+ (void)logoutWithParentViewController:(UIViewController *)parentViewController;
-
 @end
