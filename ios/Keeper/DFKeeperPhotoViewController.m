@@ -113,8 +113,10 @@
               actionWithTitle:@"Delete"
               style:DFAlertActionStyleDestructive
               handler:^(DFAlertAction *action) {
+                NSString *imageKey = self.photo.imageKey;
                 [[DFKeeperStore sharedStore] deletePhoto:self.photo];
                 [SVProgressHUD showSuccessWithStatus:@"Deleted"];
+                [[DFImageManager sharedManager] deleteImage:imageKey];
                 [self.navigationController popViewControllerAnimated:YES];
               }]];
   [alertController showWithParentViewController:self animated:YES completion:nil];

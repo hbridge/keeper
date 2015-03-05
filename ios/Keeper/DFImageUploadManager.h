@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DFImageUploadManager : NSObject <NSURLSessionDelegate>
+@interface DFImageUploadManager : NSObject <NSURLSessionDelegate, NSURLConnectionDataDelegate>
 
 + (DFImageUploadManager *)sharedManager;
 
 - (void)uploadImageFile:(NSURL *)imageFile forKey:(NSString *)key;
+- (void)deleteImageWithKey:(NSString *)key;
 
 @end

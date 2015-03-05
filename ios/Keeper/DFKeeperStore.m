@@ -76,7 +76,9 @@
 - (void)deletePhoto:(DFKeeperPhoto *)photo
 {
   Firebase *photoRef = [self.photosRef childByAppendingPath:photo.key];
+  Firebase *imageRef = [self.imageDataRef childByAppendingPath:photo.imageKey];
   [photoRef setValue:nil];
+  [imageRef setValue:nil];
 }
 
 - (NSArray *)photos

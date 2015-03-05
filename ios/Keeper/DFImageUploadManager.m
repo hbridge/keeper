@@ -87,6 +87,54 @@
   }];
 }
 
+- (void)deleteImageWithKey:(NSString *)key
+{
+    DDLogInfo(@"%@ deleting image with key: %@", self.class, key);
+    AWSS3GetPreSignedURLRequest *getPreSignedURLRequest = [AWSS3GetPreSignedURLRequest new];
+    getPreSignedURLRequest.bucket = S3BucketName;
+    getPreSignedURLRequest.key = key;
+    getPreSignedURLRequest.HTTPMethod = AWSHTTPMethodDELETE;
+    getPreSignedURLRequest.expires = [NSDate dateWithTimeIntervalSinceNow:3600];
+    
+    [[[AWSS3PreSignedURLBuilder defaultS3PreSignedURLBuilder] getPreSignedURL:getPreSignedURLRequest] continueWithBlock:^id(BFTask *task) {
+      if (task.error) {
+        NSLog(@"%@ task error: %@", self.class, task.error);
+      } else {
+        NSURL *presignedURL = task.result;
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:presignedURL];
+        request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+        [request setHTTPMethod:@"DELETE"];
+        
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+          [connection start];
+        });
+      }
+      return nil;
+    }];
+  
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+  NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+  NSString *urlString = [NSString stringWithFormat:@"%@://%@%@",
+                         connection.currentRequest.URL.scheme,
+                         connection.currentRequest.URL.host,
+                         connection.currentRequest.URL.path
+                         ];
+  DDLogInfo(@"S3 delete completed with response %@ for: %@",
+            @(httpResponse.statusCode),
+            urlString);
+  
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+  DDLogError(@"S3 delete failed: %@", error);
+}
+
 - (void)URLSession:(NSURLSession *)session
               task:(NSURLSessionTask *)task
 didCompleteWithError:(NSError *)error {
@@ -96,6 +144,7 @@ didCompleteWithError:(NSError *)error {
                            task.currentRequest.URL.host,
                            task.currentRequest.URL.path
                            ];
+    
     DDLogInfo(@"S3 upload completed %@", urlString);
     [[NSNotificationCenter defaultCenter]
      postNotificationName:DFImageUploadedNotification

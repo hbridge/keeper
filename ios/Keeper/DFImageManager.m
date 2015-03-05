@@ -592,5 +592,11 @@ static BOOL logRouting = NO;
   }
 }
 
+- (void)deleteImage:(NSString *)imageKey
+{
+  [self setImage:nil forKey:imageKey completion:nil];
+  [[DFImageUploadManager sharedManager] deleteImageWithKey:imageKey];
+}
+
 
 @end
