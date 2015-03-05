@@ -1,7 +1,8 @@
 # Keeper
 
-# Mar 5 2015 (16-17)
+# Mar 5 2015 (16-18)
 
+- Support for creating a keeper account from the app
 - Bug fixes
 
 # Mar 4 2015 (15)
