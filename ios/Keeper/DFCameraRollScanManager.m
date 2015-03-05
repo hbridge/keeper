@@ -50,37 +50,39 @@ const int DFCameraRollScanManagerScanVersion = 1;
 - (void)scan
 {
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    if (self.scanInProgress) return;
-    self.scanInProgress = YES;
-    PHFetchResult *allImagesFetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
-    DDLogInfo(@"%@ all images: %@", self.class, @(allImagesFetchResult.count));
-    
-    // figure out which ones we've already scanned
-    NSSet *scannedAssets = [[DFCameraRollScanDB sharedDB]
-                            scannedIdentifiersForVersion:@(DFCameraRollScanManagerScanVersion)];
-    NSMutableArray *unscannedAssets = [NSMutableArray new];
-    for (PHAsset *asset in allImagesFetchResult) {
-      if (![scannedAssets containsObject:asset.localIdentifier]) {
-        [unscannedAssets addObject:asset];
+    @autoreleasepool {
+      if (self.scanInProgress) return;
+      self.scanInProgress = YES;
+      PHFetchResult *allImagesFetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
+      DDLogInfo(@"%@ all images: %@", self.class, @(allImagesFetchResult.count));
+      
+      // figure out which ones we've already scanned
+      NSSet *scannedAssets = [[DFCameraRollScanDB sharedDB]
+                              scannedIdentifiersForVersion:@(DFCameraRollScanManagerScanVersion)];
+      NSMutableArray *unscannedAssets = [NSMutableArray new];
+      for (PHAsset *asset in allImagesFetchResult) {
+        if (![scannedAssets containsObject:asset.localIdentifier]) {
+          [unscannedAssets addObject:asset];
+        }
       }
+      
+      // scan for relevant changes
+      if (unscannedAssets.count > 0) {
+        [self.class findNewScreenshots:unscannedAssets];
+      }
+      
+      // mark assets as scanned
+      for (PHAsset *asset in unscannedAssets) {
+        [[DFCameraRollScanDB sharedDB] addScannedIdentifier:asset.localIdentifier
+                                                scanVersion:@(DFCameraRollScanManagerScanVersion)];
+      }
+      self.scanInProgress = NO;
     }
-    
-    // scan for relevant changes
-    if (unscannedAssets.count > 0) {
-      [self.class findNewScreenshots:unscannedAssets];
-    }
-    
-    // mark assets as scanned
-    for (PHAsset *asset in unscannedAssets) {
-      [[DFCameraRollScanDB sharedDB] addScannedIdentifier:asset.localIdentifier
-                                              scanVersion:@(DFCameraRollScanManagerScanVersion)];
-    }
-    self.scanInProgress = NO;
   });
 }
 
 + (void)findNewScreenshots:(NSArray *)assetsToScan
-  {
+{
   DDLogInfo(@"%@ scanning %@ assets for new screenshots", self, @(assetsToScan.count));
   NSSet *knownScreenshotIDs = [[DFCameraRollScanDB sharedDB] localIdentifiersOfScreenshots];
   NSMutableSet *newScreenshots = [NSMutableSet new];
@@ -88,14 +90,16 @@ const int DFCameraRollScanManagerScanVersion = 1;
   PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
   requestOptions.synchronous = YES;
   for (PHAsset *asset in assetsToScan) {
-    [[PHImageManager defaultManager]
-     requestImageDataForAsset:asset
-     options:requestOptions
-     resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
-       if ([dataUTI isEqual:@"public.png"]) {
-         [newScreenshots addObject:asset.localIdentifier];
-       }
-     }];
+    @autoreleasepool {
+      [[PHImageManager defaultManager]
+       requestImageDataForAsset:asset
+       options:requestOptions
+       resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+         if ([dataUTI isEqual:@"public.png"]) {
+           [newScreenshots addObject:asset.localIdentifier];
+         }
+       }];
+    }
   }
   
   [newScreenshots minusSet:knownScreenshotIDs];
