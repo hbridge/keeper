@@ -67,7 +67,6 @@
 		5AA508071AA64AC5007A9375 /* DFKeeperSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA508061AA64AC5007A9375 /* DFKeeperSearchController.m */; };
 		5AA5080A1AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA508091AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m */; };
 		5AC04E041AA0DFF9008E44A8 /* DFImageUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */; };
-		5AC04E071AA0E64B008E44A8 /* DFNetworkingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */; };
 		5AC04E0A1AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E091AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m */; };
 		5AC04E0D1AA10CA3008E44A8 /* DFAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E0C1AA10CA3008E44A8 /* DFAppInfo.m */; };
 		5AC04E101AA10CC5008E44A8 /* DFLogs.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E0F1AA10CC5008E44A8 /* DFLogs.m */; };
@@ -209,8 +208,6 @@
 		5AAEB3271A9CDC0D00D029A6 /* KeeperReleaseNotes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = KeeperReleaseNotes.md; sourceTree = SOURCE_ROOT; };
 		5AC04E021AA0DFF9008E44A8 /* DFImageUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageUploadManager.h; sourceTree = "<group>"; };
 		5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageUploadManager.m; sourceTree = "<group>"; };
-		5AC04E051AA0E0D1008E44A8 /* DFNetworkingConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFNetworkingConstants.h; sourceTree = "<group>"; };
-		5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFNetworkingConstants.m; sourceTree = "<group>"; };
 		5AC04E081AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFDiagnosticInfoMailComposeController.h; sourceTree = "<group>"; };
 		5AC04E091AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFDiagnosticInfoMailComposeController.m; sourceTree = "<group>"; };
 		5AC04E0B1AA10CA3008E44A8 /* DFAppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFAppInfo.h; sourceTree = "<group>"; };
@@ -518,8 +515,6 @@
 				5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */,
 				5A9950491A97E44A00468484 /* DFImageDownloadManager.h */,
 				5A99504A1A97E44A00468484 /* DFImageDownloadManager.m */,
-				5AC04E051AA0E0D1008E44A8 /* DFNetworkingConstants.h */,
-				5AC04E061AA0E64B008E44A8 /* DFNetworkingConstants.m */,
 			);
 			name = ImageManager;
 			sourceTree = "<group>";
@@ -711,7 +706,6 @@
 				5A88B7E41A9FBC020008F548 /* DFSettingsManager.m in Sources */,
 				5A8EB90C1A91612C0033C540 /* UIView+DFExtensions.m in Sources */,
 				5A6DED961A9E6C890038EF9F /* DFAssetLibraryHelper.m in Sources */,
-				5AC04E071AA0E64B008E44A8 /* DFNetworkingConstants.m in Sources */,
 				5A677D611A9BDA2F0060B55D /* DFCategoryConstants.m in Sources */,
 				5A387C131AA79FEA00DCB601 /* DFCameraRollScanManager.m in Sources */,
 				5A99502F1A96983800468484 /* UINib+DFHelpers.m in Sources */,

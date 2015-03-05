@@ -12,7 +12,6 @@
 #import "DFDeferredCompletionScheduler.h"
 #import <AWSiOSSDKv2/AWSCore.h>
 #import <AWSiOSSDKv2/S3.h>
-#import "DFNetworkingConstants.h"
 #import "AppDelegate.h"
 
 const NSUInteger maxConcurrentImageDownloads = 2;

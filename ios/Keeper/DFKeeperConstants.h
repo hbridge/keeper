@@ -7,10 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AWSCore.h"
 
 @interface DFKeeperConstants : NSObject
 
+#pragma mark - Networking
+
 extern NSString *const DFFirebaseRootURLString;
+extern AWSRegionType const CognitoRegionType;
+extern AWSRegionType const DefaultServiceRegionType;
+extern NSString *const CognitoIdentityPoolId;
+extern NSString *const S3BucketName;
+extern NSString *const BackgroundSessionUploadIdentifier;
+extern NSString *const BackgroundSessionDownloadIdentifier;
+
+#pragma mark - Notifications
+
 extern NSString *const DFPhotosChangedNotification;
 extern NSString *const DFImageUploadedNotification;
 extern NSString *const DFImageUploadedNotificationImageKey;

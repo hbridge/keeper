@@ -11,7 +11,6 @@
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <CocoaLumberjack/DDFileLogger.h>
 #import <AWSiOSSDKv2/AWSCore.h>
-#import "DFNetworkingConstants.h"
 #import "DFRootViewController.h"
 #import "DFLoginViewController.h"
 #import <HockeySDK/HockeySDK.h>

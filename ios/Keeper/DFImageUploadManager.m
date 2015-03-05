@@ -9,7 +9,6 @@
 #import "DFImageUploadManager.h"
 #import <AWSiOSSDKv2/AWSCore.h>
 #import <AWSiOSSDKv2/S3.h>
-#import "DFNetworkingConstants.h"
 #import "AppDelegate.h"
 
 @interface DFImageUploadManager()
