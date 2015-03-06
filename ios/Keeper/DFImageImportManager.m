@@ -16,6 +16,7 @@
 @interface DFAssetImport : RLMObject
 @property NSString *localIdentifier;
 @property NSString *category;
+@property BOOL imported;
 @end
 RLM_ARRAY_TYPE(DFAssetImport)
 @implementation DFAssetImport
@@ -46,6 +47,22 @@ RLM_ARRAY_TYPE(DFAssetImport)
   return [self sharedManager];
 }
 
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    // migrate db if necessary
+    [RLMRealm setSchemaVersion:1
+                forRealmAtPath:[self.class dbPath]
+            withMigrationBlock:^(RLMMigration *migration, NSUInteger oldSchemaVersion) {
+              if (oldSchemaVersion < 1) {
+                // nothing to do, 1-2 just added the imported property
+              }
+            }];
+  }
+  return self;
+}
+
 - (void)importAssetsWithIdentifiersToCategories:(NSDictionary *)assetsToCategories
 {
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -59,6 +76,7 @@ RLM_ARRAY_TYPE(DFAssetImport)
           DFAssetImport *assetImport = [DFAssetImport new];
           assetImport.localIdentifier = localIdentifier;
           assetImport.category = assetsToCategories[localIdentifier];
+          assetImport.imported = NO;
           [realm addObject:assetImport];
         }
         [realm commitWriteTransaction];
@@ -78,7 +96,7 @@ RLM_ARRAY_TYPE(DFAssetImport)
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
     @autoreleasepool {
       RLMRealm *realm = [RLMRealm realmWithPath:[self.class dbPath]];
-      RLMResults *assetImports = [DFAssetImport allObjectsInRealm:realm];
+      RLMResults *assetImports = [DFAssetImport objectsInRealm:realm where:@"imported = NO"];
       if (assetImports.count == 0) {
         self.isImportInProgress = NO;
         DDLogInfo(@"%@ nothing to import", self.class);
@@ -115,10 +133,10 @@ RLM_ARRAY_TYPE(DFAssetImport)
                                         withMetadata:metadata];
          }];
         
-        // remove the asset import from the DB
+        // mark the record as imported in the DB
         DDLogInfo(@"%@ imported: %@", self.class, assetImport.localIdentifier);
         [realm beginWriteTransaction];
-        [realm deleteObject:assetImport];
+        assetImport.imported = YES;
         [realm commitWriteTransaction];
       }
     }
