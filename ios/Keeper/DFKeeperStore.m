@@ -42,6 +42,7 @@
     self.photosRef = [_baseRef childByAppendingPath:@"photos"];
     self.imageDataRef = [_baseRef childByAppendingPath:@"imageData"];
     self.categorySet = [NSMutableSet new];
+    [self observeLoginChanges];
   }
   return self;
 }
@@ -81,55 +82,52 @@
   [imageRef setValue:nil];
 }
 
+- (void)observeLoginChanges
+{
+  [self.baseRef observeAuthEventWithBlock:^(FAuthData *authData) {
+    DDLogInfo(@"%@ user logged in, observing photos changes", self.class);
+    if (authData) [self observePhotosChanges];
+  }];
+}
+
+- (void)observePhotosChanges
+{
+  [self.photosRef removeAllObservers];
+  self.allPhotos = [NSMutableArray new];
+  [[[self.photosRef queryOrderedByChild:@"user"]
+    queryEqualToValue:[DFUser loggedInUser]]
+   observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+     dispatch_async(dispatch_get_main_queue(), ^{
+       self.allPhotos = [NSMutableArray new];
+       self.categorySet = [NSMutableSet new];
+       for (FDataSnapshot *photoSnapshot in snapshot.children) {
+         DFKeeperPhoto *keeperPhoto = [[DFKeeperPhoto alloc] initWithSnapshot:photoSnapshot];
+         
+         // keep track of the category
+         [self.categorySet addObject:keeperPhoto.category];
+         
+         // add the photo at the right spot in the array
+         BOOL inserted = NO;
+         for (NSUInteger i = 0; i < self.allPhotos.count; i++) {
+           if ([keeperPhoto.saveDate timeIntervalSinceDate:[self.allPhotos[i] saveDate]] >= 0) {
+             [self.allPhotos insertObject:keeperPhoto atIndex:i];
+             inserted = YES;
+             break;
+           }
+         }
+         if (!inserted)
+           [self.allPhotos addObject:keeperPhoto];
+       }
+       [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
+                                                           object:self];
+       
+     });
+     
+   }];
+}
+
 - (NSArray *)photos
 {
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    self.allPhotos = [NSMutableArray new];
-    [[[self.photosRef queryOrderedByChild:@"user"]
-      queryEqualToValue:[DFUser loggedInUser]]
-     observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-       DFKeeperPhoto *keeperPhoto = [[DFKeeperPhoto alloc] initWithSnapshot:snapshot];
-       
-       // keep track of the category
-       [self.categorySet addObject:keeperPhoto.category];
-       
-       // add the photo at the right spot in the array
-       BOOL inserted = NO;
-       for (NSUInteger i = 0; i < self.allPhotos.count; i++) {
-         if ([keeperPhoto.saveDate timeIntervalSinceDate:[self.allPhotos[i] saveDate]] >= 0) {
-           [self.allPhotos insertObject:keeperPhoto atIndex:i];
-           inserted = YES;
-           break;
-         }
-       }
-       if (!inserted)
-         [self.allPhotos addObject:keeperPhoto];
-       dispatch_async(dispatch_get_main_queue(), ^{
-         [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
-                                                             object:self];
-       });
-     }];
-    [[self.photosRef queryOrderedByKey] observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-      NSUInteger photoIndex = [self indexOfPhotoWithKey:snapshot.key];
-      if (photoIndex != NSNotFound) {
-        DFKeeperPhoto *newPhoto = [[DFKeeperPhoto alloc] initWithSnapshot:snapshot];
-        [self.categorySet addObject:newPhoto.category];
-        [self.allPhotos replaceObjectAtIndex:photoIndex withObject:newPhoto];
-        [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
-                                                            object:self];
-      }
-    }];
-    [[self.photosRef queryOrderedByKey] observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
-      NSUInteger photoIndex = [self indexOfPhotoWithKey:snapshot.key];
-      if (photoIndex != NSNotFound) {
-        [self.allPhotos removeObjectAtIndex:photoIndex];
-        [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
-                                                            object:self];
-      }
-    }];
-    
-  });
   return [self.allPhotos copy];
 }
 

@@ -73,6 +73,7 @@
 		5AB821821AA90FCD000D5781 /* DFCreateAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AB821801AA90FCD000D5781 /* DFCreateAccountViewController.xib */; };
 		5AB821851AA91430000D5781 /* DFInsetTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB821841AA91430000D5781 /* DFInsetTextField.m */; };
 		5AB821881AA9178A000D5781 /* DFUserLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB821871AA9178A000D5781 /* DFUserLoginManager.m */; };
+		5AB8218A1AAA09EE000D5781 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB821891AAA09EE000D5781 /* libc++.dylib */; };
 		5AC04E041AA0DFF9008E44A8 /* DFImageUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */; };
 		5AC04E0A1AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E091AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.m */; };
 		5AC04E0D1AA10CA3008E44A8 /* DFAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E0C1AA10CA3008E44A8 /* DFAppInfo.m */; };
@@ -225,6 +226,7 @@
 		5AB821841AA91430000D5781 /* DFInsetTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFInsetTextField.m; sourceTree = "<group>"; };
 		5AB821861AA9178A000D5781 /* DFUserLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFUserLoginManager.h; sourceTree = "<group>"; };
 		5AB821871AA9178A000D5781 /* DFUserLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFUserLoginManager.m; sourceTree = "<group>"; };
+		5AB821891AAA09EE000D5781 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		5AC04E021AA0DFF9008E44A8 /* DFImageUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageUploadManager.h; sourceTree = "<group>"; };
 		5AC04E031AA0DFF9008E44A8 /* DFImageUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageUploadManager.m; sourceTree = "<group>"; };
 		5AC04E081AA10C54008E44A8 /* DFDiagnosticInfoMailComposeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFDiagnosticInfoMailComposeController.h; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AB8218A1AAA09EE000D5781 /* libc++.dylib in Frameworks */,
 				DC2A7B9402905231BE306701 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,6 +556,7 @@
 		5E08625285BE9D00A627685E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5AB821891AAA09EE000D5781 /* libc++.dylib */,
 				2E88AD2FD4651BA4B4CAD0AA /* libPods.a */,
 			);
 			name = Frameworks;

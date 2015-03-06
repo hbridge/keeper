@@ -1,5 +1,7 @@
 # Keeper
 
+- Enable offline mode
+
 # Mar 5 2015 (16-18)
 
 - Support for creating a keeper account from the app

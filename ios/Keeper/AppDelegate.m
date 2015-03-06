@@ -85,6 +85,7 @@
   AWSServiceConfiguration *configuration = [AWSServiceConfiguration configurationWithRegion:DefaultServiceRegionType
                                                                         credentialsProvider:credentialsProvider];
   [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
+  [Firebase setOption:@"persistence" to:@YES];
 }
 
 
