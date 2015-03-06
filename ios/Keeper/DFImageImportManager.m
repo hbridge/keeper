@@ -9,6 +9,7 @@
 #import "DFImageImportManager.h"
 #import <Realm/Realm.h>
 #import <Photos/Photos.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "DFImageDataHelper.h"
 #import "DFImageManager.h"
 
@@ -61,6 +62,21 @@ RLM_ARRAY_TYPE(DFAssetImport)
             }];
   }
   return self;
+}
+
+- (void)importAssetsWithALAssetURLsToCategories:(NSDictionary *)assetURLsToCategories
+{
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSMutableDictionary *assetIdentifiersToCategories = [NSMutableDictionary new];
+    for (NSURL *assetURL in assetURLsToCategories.allKeys) {
+      PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:@[assetURL]
+                                                         options:nil] firstObject];
+      if (!asset.localIdentifier) continue;
+      assetIdentifiersToCategories[asset.localIdentifier] = assetURLsToCategories[assetURL];
+    }
+    
+    [self importAssetsWithIdentifiersToCategories:assetIdentifiersToCategories];
+  });
 }
 
 - (void)importAssetsWithIdentifiersToCategories:(NSDictionary *)assetsToCategories

@@ -11,6 +11,7 @@
 @interface DFImageImportManager : NSObject
 
 + (DFImageImportManager *)sharedManager;
+- (void)importAssetsWithALAssetURLsToCategories:(NSDictionary *)assetURLsToCategories;
 - (void)importAssetsWithIdentifiersToCategories:(NSDictionary *)assetsToCategories;
 - (void)resumeImports;
 

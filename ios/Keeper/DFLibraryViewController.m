@@ -19,14 +19,14 @@
 #import "DFSettingsViewController.h"
 #import "DFSettingsManager.h"
 #import <Photos/Photos.h>
+#import "DFImageImportManager.h"
 
 @interface DFLibraryViewController ()
 
 @property (nonatomic, retain) NSArray *allPhotos;
 @property (nonatomic, retain) NSString *categoryFilter;
 @property (nonatomic, retain) DFCategorizeController *categorizeController;
-@property (nonatomic, retain) UIImage *lastPickedImage;
-@property (nonatomic, retain) NSDictionary *lastPickedMetadata;
+@property (nonatomic, retain) NSURL *lastPickedAssetURL;
 @property (nonatomic, retain) DFKeeperSearchController *searchController;
 
 @end
@@ -236,24 +236,16 @@
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  self.lastPickedImage = info[UIImagePickerControllerOriginalImage];
-  NSURL *assetURL = info[UIImagePickerControllerReferenceURL];
-  
-  [DFAssetLibraryHelper fetchMetadataDictForAssetWithURL:assetURL completion:^(NSDictionary *metadata) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      self.lastPickedMetadata = metadata;
-      self.categorizeController = [[DFCategorizeController alloc] init];
-      self.categorizeController.delegate = self;
-      [self.categorizeController presentInViewController:picker];
-    });
-  }];
+  self.lastPickedAssetURL = info[UIImagePickerControllerReferenceURL];
+  self.categorizeController = [[DFCategorizeController alloc] init];
+  self.categorizeController.delegate = self;
+  [self.categorizeController presentInViewController:picker];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
   [self dismissViewControllerAnimated:YES completion:nil];
-  self.lastPickedImage = nil;
-  self.lastPickedMetadata = nil;
+  self.lastPickedAssetURL = nil;
 }
 
 - (void)cameraButtonPressed:(id)sender
@@ -273,12 +265,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   [self dismissGridMenuAnimated:YES completion:nil];
   if (category) {
-    if (self.lastPickedImage) {
-      [[DFImageManager sharedManager] saveImage:self.lastPickedImage
-                                       category:category
-                                   withMetadata:self.lastPickedMetadata];
-      self.lastPickedImage = nil;
-      self.lastPickedMetadata = nil;
+    if (self.lastPickedAssetURL) {
+      [[DFImageImportManager sharedManager]
+       importAssetsWithALAssetURLsToCategories:@{
+                                                 self.lastPickedAssetURL : category
+                                                 }];
+      self.lastPickedAssetURL = nil;
       [DFAnalytics logEvent:DFAnalyticsEventPhotoImported
              withParameters:@{@"category" : category}];
     }
