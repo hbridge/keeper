@@ -19,6 +19,34 @@ PODS:
     - UICKeyChainStore (< 3.0)
     - XMLDictionary (~> 1.4.0)
   - Bolts (1.1.4)
+  - BRFullTextSearch (1.0.3):
+    - BRFullTextSearch/Core (= 1.0.3)
+  - BRFullTextSearch/API (1.0.3)
+  - BRFullTextSearch/CLucene-Config (1.0.3)
+  - BRFullTextSearch/CLucene-Contribs-Lib (1.0.3):
+    - BRFullTextSearch/CLucene-Core-API
+    - BRFullTextSearch/CLucene-Shared-API
+  - BRFullTextSearch/CLucene-Core (1.0.3):
+    - BRFullTextSearch/CLucene-Core-API
+    - BRFullTextSearch/CLucene-Shared-API
+  - BRFullTextSearch/CLucene-Core-API (1.0.3):
+    - BRFullTextSearch/CLucene-Config
+  - BRFullTextSearch/CLucene-Shared (1.0.3):
+    - BRFullTextSearch/CLucene-Core-API
+    - BRFullTextSearch/CLucene-Shared-API
+  - BRFullTextSearch/CLucene-Shared-API (1.0.3):
+    - BRFullTextSearch/CLucene-Config
+  - BRFullTextSearch/Core (1.0.3):
+    - BRFullTextSearch/API
+    - BRFullTextSearch/CLucene-Contribs-Lib
+    - BRFullTextSearch/CLucene-Core
+    - BRFullTextSearch/CLucene-Shared
+    - BRFullTextSearch/Implementation-CLucene
+  - BRFullTextSearch/Implementation-CLucene (1.0.3):
+    - BRFullTextSearch/API
+    - BRFullTextSearch/CLucene-Contribs-Lib
+    - BRFullTextSearch/CLucene-Core-API
+    - BRFullTextSearch/CLucene-Shared-API
   - CNPGridMenu (0.2.2)
   - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions (= 1.9.2)
@@ -53,6 +81,7 @@ PODS:
 DEPENDENCIES:
   - AWSiOSSDKv2/AWSCore (~> 2.0)
   - AWSiOSSDKv2/S3 (~> 2.0)
+  - BRFullTextSearch (~> 1.0)
   - CNPGridMenu (from `https://github.com/hbridge/CNPGridMenu.git`)
   - CocoaLumberjack (~> 1.9)
   - Firebase (~> 2.2)
@@ -81,6 +110,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AWSiOSSDKv2: bcf17afda187f45901b07369f1f59bfbc68922bc
   Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
+  BRFullTextSearch: a2b527c2c7fae00eab16161760a8167f1ae2afdb
   CNPGridMenu: c677e34579ac42df6477b3d49aac3229fa2cee2d
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   Firebase: e7a2ea2ffeff99f9c37028b354194dcc9718d36b

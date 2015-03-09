@@ -18,6 +18,66 @@
 #define COCOAPODS_VERSION_MINOR_AWSiOSSDKv2_S3 0
 #define COCOAPODS_VERSION_PATCH_AWSiOSSDKv2_S3 16
 
+// BRFullTextSearch
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch 3
+
+// BRFullTextSearch/API
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch_API
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch_API 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch_API 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch_API 3
+
+// BRFullTextSearch/CLucene-Config
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch_CLucene_Config
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch_CLucene_Config 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch_CLucene_Config 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch_CLucene_Config 3
+
+// BRFullTextSearch/CLucene-Contribs-Lib
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch_CLucene_Contribs_Lib
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch_CLucene_Contribs_Lib 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch_CLucene_Contribs_Lib 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch_CLucene_Contribs_Lib 3
+
+// BRFullTextSearch/CLucene-Core
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch_CLucene_Core
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch_CLucene_Core 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch_CLucene_Core 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch_CLucene_Core 3
+
+// BRFullTextSearch/CLucene-Core-API
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch_CLucene_Core_API
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch_CLucene_Core_API 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch_CLucene_Core_API 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch_CLucene_Core_API 3
+
+// BRFullTextSearch/CLucene-Shared
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch_CLucene_Shared
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch_CLucene_Shared 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch_CLucene_Shared 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch_CLucene_Shared 3
+
+// BRFullTextSearch/CLucene-Shared-API
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch_CLucene_Shared_API
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch_CLucene_Shared_API 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch_CLucene_Shared_API 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch_CLucene_Shared_API 3
+
+// BRFullTextSearch/Core
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch_Core
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch_Core 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch_Core 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch_Core 3
+
+// BRFullTextSearch/Implementation-CLucene
+#define COCOAPODS_POD_AVAILABLE_BRFullTextSearch_Implementation_CLucene
+#define COCOAPODS_VERSION_MAJOR_BRFullTextSearch_Implementation_CLucene 1
+#define COCOAPODS_VERSION_MINOR_BRFullTextSearch_Implementation_CLucene 0
+#define COCOAPODS_VERSION_PATCH_BRFullTextSearch_Implementation_CLucene 3
+
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
 #define COCOAPODS_VERSION_MAJOR_Bolts 1

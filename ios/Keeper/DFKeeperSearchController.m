@@ -10,13 +10,33 @@
 #import "DFKeeperStore.h"
 #import "DFCategoryConstants.h"
 #import "UIImage+Resize.h"
+#import "DFKeeperSearchIndexManager.h"
+#import "DFImageManager.h"
+
+@interface DFKeeperSearchController()
+
+@property (nonatomic, retain) NSMutableOrderedSet *sectionTitles;
+@property (nonatomic, retain) NSArray *categoriesSection;
+@property (nonatomic, retain) NSArray *photosSection;
+
+@end
 
 @implementation DFKeeperSearchController
 
 
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    self.sectionTitles = [NSMutableOrderedSet new];
+  }
+  return self;
+}
+
 - (void)setTableView:(UITableView *)tableView
 {
   _tableView = tableView;
+  
   tableView.delegate = self;
   tableView.dataSource = self;
   
@@ -54,67 +74,160 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  [self updateSearchResults:searchText];
+  [self updateSearchResults:[searchText copy]];
 }
+
+static NSString *CategoriesSectionTitle = @"Categories";
+static NSString *PhotosSectionTitle = @"Text";
 
 - (void)updateSearchResults:(NSString *)searchText
 {
   NSArray *allCateogries = [[DFKeeperStore sharedStore] allCategories];
+  NSLog(@"updateSearchResults: %@", searchText);
   if ([searchText isNotEmpty]) {
-    self.searchResults = [allCateogries objectsPassingTestBlock:^BOOL(NSString *category) {
-      NSString *lowercaseQuery = [searchText lowercaseString];
-      NSString *lowerCaseCategory = [category lowercaseString];
-      return [lowerCaseCategory hasPrefix:lowercaseQuery];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      self.categoriesSection = [allCateogries objectsPassingTestBlock:^BOOL(NSString *category) {
+        NSString *lowercaseQuery = [searchText lowercaseString];
+        NSString *lowerCaseCategory = [category lowercaseString];
+        return [lowerCaseCategory hasPrefix:lowercaseQuery];
+      }];
+      if (self.categoriesSection.count > 0) {
+        [self.sectionTitles insertObject:CategoriesSectionTitle atIndex:0];
+      } else {
+        [self.sectionTitles removeObject:CategoriesSectionTitle];
+      }
+      [self.tableView reloadData];
+    });
+    
+    // text content
+    [[DFKeeperSearchIndexManager sharedManager]
+     keysMatchingSearch:searchText
+     completion:^(NSArray *results) {
+       dispatch_async(dispatch_get_main_queue(), ^{
+         self.photosSection = results;
+         if (self.photosSection.count > 0) {
+           [self.sectionTitles insertObject:PhotosSectionTitle atIndex:0];
+         } else {
+           [self.sectionTitles removeObject:PhotosSectionTitle];
+         }
+
+         [self.tableView reloadData];
+         DDLogVerbose(@"%@ got %@ matches for %@",
+                      self.class,
+                      @(results.count),
+                      searchText);
+       });
+     }];
   } else {
-    self.searchResults = allCateogries;
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self.sectionTitles removeAllObjects];
+      [self.sectionTitles addObject:CategoriesSectionTitle];
+      self.categoriesSection = allCateogries;
+      [self.tableView reloadData];
+    });
+    
   }
-  [self.tableView reloadData];
 }
 
 #pragma mark - TableView Datasource/Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 1;
+  return self.sectionTitles.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return self.searchResults.count;
+  if ([self.sectionTitles[section] isEqual:CategoriesSectionTitle]) {
+    return self.categoriesSection.count;
+  } else if ([self.sectionTitles[section] isEqual:PhotosSectionTitle]) {
+    return self.photosSection.count;
+  }
+  
+  return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if ([self.sectionTitles[indexPath.section] isEqual:CategoriesSectionTitle]) {
+    return [self cellForCategoryAtIndexPath:indexPath];
+  } else if ([self.sectionTitles[indexPath.section] isEqual:PhotosSectionTitle]) {
+    return [self cellForPhotoAtIndexPath:indexPath];
+  }
+  
+  [NSException raise:@"no cell" format:@"unexpected section"];
+  return nil;
+}
+
+- (UITableViewCell *)cellForCategoryAtIndexPath:(NSIndexPath *)indexPath
+{
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
   cell.tintColor = [UIColor darkTextColor];
-  NSString *category = self.searchResults[indexPath.row];
+  
+  NSString *category = self.categoriesSection[indexPath.row];
   cell.textLabel.text = category;
   cell.imageView.image = [[[DFCategoryConstants gridIconForCategory:category]
-                          thumbnailImage:20
-                          transparentBorder:0
-                          cornerRadius:0
-                          interpolationQuality:kCGInterpolationDefault]
+                           thumbnailImage:20
+                           transparentBorder:0
+                           cornerRadius:0
+                           interpolationQuality:kCGInterpolationDefault]
                           imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  return cell;
+
+}
+
+- (UITableViewCell *)cellForPhotoAtIndexPath:(NSIndexPath *)indexPath
+{
+  UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+  cell.tintColor = [UIColor darkTextColor];
+  DFKeeperSearchResult *searchResult = self.photosSection[indexPath.row];
+  cell.textLabel.text = searchResult.documentString;
+  cell.imageView.image = nil;
+  
+  DFKeeperPhoto *photo = [[DFKeeperStore sharedStore]
+                          photoWithKey:searchResult.objectKey];
+  [[DFImageManager sharedManager]
+   imageForKey:photo.imageKey
+   pointSize:cell.imageView.frame.size
+   contentMode:DFImageRequestContentModeAspectFill
+   deliveryMode:DFImageRequestOptionsDeliveryModeFastFormat
+   completion:^(UIImage *image) {
+     dispatch_async(dispatch_get_main_queue(), ^{
+       if ([[self.tableView indexPathForCell:cell] isEqual:indexPath]) {
+         DDLogVerbose(@"setting image size: %@", NSStringFromCGSize(image.size));
+         cell.imageView.clipsToBounds = YES;
+         cell.imageView.image = image;
+         [cell setNeedsLayout];
+       }
+     });
+   }];
+  
   return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-  return @"Categories";
+  return self.sectionTitles[section];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *query = self.searchResults[indexPath.row];
-  NSArray *allPhotos = [[DFKeeperStore sharedStore] photos];
-  NSArray *searchResults = [allPhotos objectsPassingTestBlock:^BOOL(DFKeeperPhoto *photo){
-    return [photo.category isEqual:query];
-  }];
-  
-  [self.delegate searchController:self
-               completedWithQuery:query
-                          results:searchResults];
+  if ([self.sectionTitles[indexPath.section] isEqual:CategoriesSectionTitle]) {
+    NSString *query = self.categoriesSection[indexPath.row];
+    NSArray *allPhotos = [[DFKeeperStore sharedStore] photos];
+    NSArray *searchResults = [allPhotos objectsPassingTestBlock:^BOOL(DFKeeperPhoto *photo){
+      return [photo.category isEqual:query];
+    }];
+    
+    [self.delegate searchController:self
+                 completedWithQuery:query
+                            results:searchResults];
+  } else if([self.sectionTitles[indexPath.section] isEqual:PhotosSectionTitle]) {
+    DFKeeperSearchResult *searchResult = self.photosSection[indexPath.row];
+    [self.delegate searchController:self
+                 completedWithQuery:self.searchBar.text
+                         selectedId:searchResult.objectKey];
+  }
 }
 
 @end

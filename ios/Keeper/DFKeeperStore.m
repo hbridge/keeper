@@ -8,6 +8,7 @@
 
 #import "DFKeeperStore.h"
 #import "DFUser.h"
+#import "DFKeeperSearchIndexManager.h"
 
 @interface DFKeeperStore()
 
@@ -76,6 +77,7 @@
 
 - (void)deletePhoto:(DFKeeperPhoto *)photo
 {
+  [[DFKeeperSearchIndexManager sharedManager] deleteIndexedDocumentForObject:photo.key];
   Firebase *photoRef = [self.photosRef childByAppendingPath:photo.key];
   Firebase *imageRef = [self.imageDataRef childByAppendingPath:photo.imageKey];
   [photoRef setValue:nil];
@@ -120,7 +122,6 @@
        }
        [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
                                                            object:self];
-       
      });
      
    }];

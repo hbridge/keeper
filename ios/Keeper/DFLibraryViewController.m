@@ -309,4 +309,16 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
          withParameters:@{@"category" : query}];
 }
 
+- (void)searchController:(DFKeeperSearchController *)searchController
+      completedWithQuery:(NSString *)query
+              selectedId:(NSString *)objectIdentifier
+{
+  DFKeeperPhotoViewController *pvc = [[DFKeeperPhotoViewController alloc] init];
+  pvc.photo = [[DFKeeperStore sharedStore] photoWithKey:objectIdentifier];
+  [self.navigationController pushViewController:pvc animated:YES];
+  [DFAnalytics logEvent:DFAnalyticsEventLibraryPhotoTapped
+         withParameters:@{@"searchQuery" : query ? query : @""}];
+}
+
+
 @end

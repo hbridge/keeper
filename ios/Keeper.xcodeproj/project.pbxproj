@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A1241951AAA5F1B0036859E /* DFKeeperSearchIndexManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1241941AAA5F1B0036859E /* DFKeeperSearchIndexManager.m */; };
 		5A1C6A0A1A9B978500A43A07 /* DFPhotoResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A091A9B978500A43A07 /* DFPhotoResizer.m */; };
 		5A1C6A0D1A9B97E600A43A07 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A0C1A9B97E600A43A07 /* UIImage+Resize.m */; };
 		5A1C6A101A9B97F600A43A07 /* DFCGRectHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A0F1A9B97F600A43A07 /* DFCGRectHelpers.m */; };
@@ -14,6 +15,7 @@
 		5A1C6A191A9B983D00A43A07 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A151A9B983D00A43A07 /* UIImage+Alpha.m */; };
 		5A1C6A1A1A9B983D00A43A07 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A171A9B983D00A43A07 /* UIImage+RoundedCorner.m */; };
 		5A1C6A1D1A9B9F8300A43A07 /* NSString+DFHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C6A1C1A9B9F8300A43A07 /* NSString+DFHelpers.m */; };
+		5A32CC7A1AAE1B270036790B /* DFKeeperSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A32CC791AAE1B270036790B /* DFKeeperSearchResult.m */; };
 		5A387C131AA79FEA00DCB601 /* DFCameraRollScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C121AA79FEA00DCB601 /* DFCameraRollScanManager.m */; };
 		5A387C161AA7AD0100DCB601 /* DFCameraRollScanDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C151AA7AD0100DCB601 /* DFCameraRollScanDB.m */; };
 		5A387C1E1AA7BB0400DCB601 /* DFSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C1D1AA7BB0400DCB601 /* DFSettingsViewController.m */; };
@@ -98,6 +100,8 @@
 
 /* Begin PBXFileReference section */
 		2E88AD2FD4651BA4B4CAD0AA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A1241931AAA5F1B0036859E /* DFKeeperSearchIndexManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperSearchIndexManager.h; sourceTree = "<group>"; };
+		5A1241941AAA5F1B0036859E /* DFKeeperSearchIndexManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperSearchIndexManager.m; sourceTree = "<group>"; };
 		5A1C6A081A9B978500A43A07 /* DFPhotoResizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPhotoResizer.h; sourceTree = "<group>"; };
 		5A1C6A091A9B978500A43A07 /* DFPhotoResizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFPhotoResizer.m; sourceTree = "<group>"; };
 		5A1C6A0B1A9B97E600A43A07 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 		5A1C6A171A9B983D00A43A07 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		5A1C6A1B1A9B9F8300A43A07 /* NSString+DFHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DFHelpers.h"; sourceTree = "<group>"; };
 		5A1C6A1C1A9B9F8300A43A07 /* NSString+DFHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DFHelpers.m"; sourceTree = "<group>"; };
+		5A32CC781AAE1B270036790B /* DFKeeperSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperSearchResult.h; sourceTree = "<group>"; };
+		5A32CC791AAE1B270036790B /* DFKeeperSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperSearchResult.m; sourceTree = "<group>"; };
 		5A387C111AA79FEA00DCB601 /* DFCameraRollScanManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCameraRollScanManager.h; sourceTree = "<group>"; };
 		5A387C121AA79FEA00DCB601 /* DFCameraRollScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCameraRollScanManager.m; sourceTree = "<group>"; };
 		5A387C141AA7AD0100DCB601 /* DFCameraRollScanDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCameraRollScanDB.h; sourceTree = "<group>"; };
@@ -446,6 +452,10 @@
 				5A677D5C1A9BD8030060B55D /* DFKeeperPhotoViewController.xib */,
 				5A6DED911A9D08920038EF9F /* DFCategorizeController.h */,
 				5A6DED921A9D08920038EF9F /* DFCategorizeController.m */,
+				5A1241931AAA5F1B0036859E /* DFKeeperSearchIndexManager.h */,
+				5A1241941AAA5F1B0036859E /* DFKeeperSearchIndexManager.m */,
+				5A32CC781AAE1B270036790B /* DFKeeperSearchResult.h */,
+				5A32CC791AAE1B270036790B /* DFKeeperSearchResult.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -767,10 +777,12 @@
 				5A9950511A97E44A00468484 /* DFDeferredCompletionScheduler.m in Sources */,
 				5AA508071AA64AC5007A9375 /* DFKeeperSearchController.m in Sources */,
 				5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */,
+				5A1241951AAA5F1B0036859E /* DFKeeperSearchIndexManager.m in Sources */,
 				5AB821811AA90FCD000D5781 /* DFCreateAccountViewController.m in Sources */,
 				5A677D671A9BEC2D0060B55D /* DFAnalytics.m in Sources */,
 				5A99504D1A97E44A00468484 /* DFImageDiskCache.m in Sources */,
 				5A1C6A1D1A9B9F8300A43A07 /* NSString+DFHelpers.m in Sources */,
+				5A32CC7A1AAE1B270036790B /* DFKeeperSearchResult.m in Sources */,
 				5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */,
 				5A8EB8FA1A915E030033C540 /* DFAVCameraViewController.m in Sources */,
 				5A677D641A9BDB2B0060B55D /* NSArray+DFHelpers.m in Sources */,
@@ -868,6 +880,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Old Fashioned Software, LLC";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Old Fashioned Software, LLC";
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PREFIX_HEADER = Keeper/KeeperPrefixHeader.pch;
 				INFOPLIST_FILE = Keeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -977,12 +990,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = Keeper/KeeperPrefixHeader.pch;
 				INFOPLIST_FILE = Keeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "564794ce-9bb2-4aa8-bb66-649abd4980ca";
+				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -994,6 +1009,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PREFIX_HEADER = Keeper/KeeperPrefixHeader.pch;
 				INFOPLIST_FILE = Keeper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

@@ -16,6 +16,9 @@
 - (void)searchController:(DFKeeperSearchController *)searchController
       completedWithQuery:(NSString *)query
                  results:(NSArray *)keeperPhotos;
+- (void)searchController:(DFKeeperSearchController *)searchController
+      completedWithQuery:(NSString *)query
+              selectedId:(NSString *)objectIdentifier;
 
 - (void)searchControllerDidCancel:(DFKeeperSearchController *)searchController;
 
@@ -25,7 +28,6 @@
 
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UISearchBar *searchBar;
-@property (nonatomic, retain) NSArray *searchResults;
 @property (nonatomic, retain) NSObject<DFKeeperSearchControllerDelegate> *delegate;
 
 @end

@@ -20,6 +20,7 @@
 #import "DFNotLoggedInViewController.h"
 #import "DFNavigationController.h"
 #import "DFUserLoginManager.h"
+#import "DFKeeperSearchIndexManager.h"
 
 @interface AppDelegate ()
 
@@ -129,6 +130,7 @@
   [[DFUserLoginManager sharedManager] observeLoginChanges];
   [[DFImageManager sharedManager] performForegroundOperations];
   [[DFCameraRollScanManager sharedManager] scan];
+  [[DFKeeperSearchIndexManager sharedManager] resumeIndexing];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
