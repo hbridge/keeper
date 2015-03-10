@@ -12,23 +12,37 @@ import datetime
 
 firebase = firebase.FirebaseApplication('https://keeper-dev.firebaseio.com', None)
 s3_base_url = 'https://duffy-keeper-dev.s3.amazonaws.com/'
-current_index_pass = 1
+min_index_date = datetime.datetime.utcnow()
 
 def main():
-    images_to_scan = []
-    all_image_data_dict = firebase.get('/imageData', None)
-    for key, image_data in all_image_data_dict.iteritems():
-        uploaded = image_data.get("uploaded", 0)    
-        index_pass = image_data.get("indexPass", 0)
-        if uploaded == True and index_pass < current_index_pass:
-            print "adding " + key + " for indexing."
-            images_to_scan.append(key)
-        
-    #do rec on each file        
-    for image_key in images_to_scan:
-        local_image_path = downloadImageKey(image_key)
-        text = recognizeText(local_image_path)
-        postToServer(image_key, text, image_data)
+    global all_photos_dict, all_imagedata_dict
+    all_photos_dict = firebase.get('/photos', None)
+    all_imagedata_dict = firebase.get('/imageData', None)
+    
+    scan_tasks = generateScanTasks()
+    for scan_task in scan_tasks:
+        performScanTask(scan_task)
+
+def generateScanTasks():
+    scan_tasks = []
+    for photo_key, photo_dict in all_photos_dict.iteritems():
+        image_key = photo_dict.get('imageKey', photo_key)
+        image_dict = all_imagedata_dict[image_key]
+        uploaded = image_dict.get('uploaded', 0)    
+        index_date = photo_dict.get('indexed', None)
+        if uploaded == True:
+            if index_date is None or index_date > min_index_date:
+                scanTask = {'image_key' : image_key, 'photo_key' : photo_key}
+                print 'adding photo: ' + photo_key + ' with image_key: ' + image_key + ' for indexing.'
+                scan_tasks.append(scanTask)
+    return scan_tasks
+
+def performScanTask(scan_task):
+    image_key = scan_task['image_key']
+    photo_key = scan_task['photo_key']
+    local_image_path = downloadImageKey(image_key)
+    text = recognizeText(local_image_path)
+    postToServer(photo_key, text, all_photos_dict[photo_key])
 
 def downloadImageKey(image_key):
     local_image_path = '/tmp/' + image_key + '.jpg'
@@ -94,15 +108,17 @@ def recognizeText(local_image_path):
         return text2
     return text
 
-def postToServer(image_key, text, image_data):
-    user = image_data.get('user', '')
+def postToServer(photo_key, text, photo_dict):
+    user = photo_dict.get('user', '')
     searchDoc = {
         'user' : user,
         'text' : text,
         'date' :  datetime.datetime.utcnow()
     }
     
-    result = firebase.put('/searchDocs/', image_key, searchDoc)
+    print 'posting: %s to searchDocs/%s',searchDoc,photo_key
+    
+    result = firebase.put('/searchDocs/', photo_key, searchDoc)
 
 if __name__ == "__main__":
    sys.exit(main())

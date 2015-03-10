@@ -177,9 +177,8 @@
   [results iterateWithBlock:^(NSUInteger index, id<BRSearchResult>result, BOOL *stop) {
     DDLogVerbose(@"For query %@ found result: %@", predicateQuery, [result valueForField:kBRSearchFieldNameValue]);
     DFKeeperSearchResult *searchResult = [[DFKeeperSearchResult alloc] init];
-    
-    DFKeeperPhoto *photoForResult = [[DFKeeperStore sharedStore] photoWithImageKey:[result identifier]];
-    searchResult.objectKey = photoForResult.key;
+    NSString *photoKey = [result identifier];
+    searchResult.objectKey = photoKey;
     searchResult.documentString = [result valueForField:kBRSearchFieldNameValue];
     [keys addObject:searchResult];
   }];
