@@ -49,6 +49,7 @@
     self.searchService = [[CLuceneSearchService alloc] initWithIndexPath:[self.class indexPath]];;
     self.searchDocsRef= [[[Firebase alloc] initWithUrl:DFFirebaseRootURLString]
                     childByAppendingPath:@"searchDocs"];
+    [self printFullIndex];
   }
   return self;
 }
@@ -124,7 +125,7 @@
   dispatch_async(self.index_queue, ^{
     NSSet *keySet = [NSSet setWithArray:keys];
     NSError *error;
-    [self.searchService removeObjectsFromIndexAndWait:BRSearchSortTypeString
+    [self.searchService removeObjectsFromIndexAndWait:BRSearchObjectTypeForString(@"?")
                                       withIdentifiers:keySet
                                                 error:&error];
     if (error)DDLogError(@"%@ error removing keys: %@", self.class, error);
@@ -176,7 +177,9 @@
   [results iterateWithBlock:^(NSUInteger index, id<BRSearchResult>result, BOOL *stop) {
     DDLogVerbose(@"For query %@ found result: %@", predicateQuery, [result valueForField:kBRSearchFieldNameValue]);
     DFKeeperSearchResult *searchResult = [[DFKeeperSearchResult alloc] init];
-    searchResult.objectKey = [result identifier];
+    
+    DFKeeperPhoto *photoForResult = [[DFKeeperStore sharedStore] photoWithImageKey:[result identifier]];
+    searchResult.objectKey = photoForResult.key;
     searchResult.documentString = [result valueForField:kBRSearchFieldNameValue];
     [keys addObject:searchResult];
   }];
