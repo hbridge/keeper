@@ -20,6 +20,8 @@
 		5A387C161AA7AD0100DCB601 /* DFCameraRollScanDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C151AA7AD0100DCB601 /* DFCameraRollScanDB.m */; };
 		5A387C1E1AA7BB0400DCB601 /* DFSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C1D1AA7BB0400DCB601 /* DFSettingsViewController.m */; };
 		5A387C221AA7BFF400DCB601 /* DFImageDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A387C211AA7BFF400DCB601 /* DFImageDataHelper.m */; };
+		5A670CB11AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A670CAF1AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.m */; };
+		5A670CB21AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A670CB01AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.xib */; };
 		5A677D591A9BD5190060B55D /* DFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D581A9BD5190060B55D /* DFUser.m */; };
 		5A677D5D1A9BD8030060B55D /* DFKeeperPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677D5B1A9BD8030060B55D /* DFKeeperPhotoViewController.m */; };
 		5A677D5E1A9BD8030060B55D /* DFKeeperPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A677D5C1A9BD8030060B55D /* DFKeeperPhotoViewController.xib */; };
@@ -126,6 +128,9 @@
 		5A387C1D1AA7BB0400DCB601 /* DFSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSettingsViewController.m; sourceTree = "<group>"; };
 		5A387C201AA7BFF400DCB601 /* DFImageDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageDataHelper.h; sourceTree = "<group>"; };
 		5A387C211AA7BFF400DCB601 /* DFImageDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageDataHelper.m; sourceTree = "<group>"; };
+		5A670CAE1AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperSearchPhotoTableViewCell.h; sourceTree = "<group>"; };
+		5A670CAF1AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperSearchPhotoTableViewCell.m; sourceTree = "<group>"; };
+		5A670CB01AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFKeeperSearchPhotoTableViewCell.xib; sourceTree = "<group>"; };
 		5A677D571A9BD5190060B55D /* DFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFUser.h; sourceTree = "<group>"; };
 		5A677D581A9BD5190060B55D /* DFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFUser.m; sourceTree = "<group>"; };
 		5A677D5A1A9BD8030060B55D /* DFKeeperPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperPhotoViewController.h; sourceTree = "<group>"; };
@@ -447,6 +452,9 @@
 				5A9950081A96548F00468484 /* DFLibraryViewController.xib */,
 				5AA508051AA64AC5007A9375 /* DFKeeperSearchController.h */,
 				5AA508061AA64AC5007A9375 /* DFKeeperSearchController.m */,
+				5A670CAE1AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.h */,
+				5A670CAF1AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.m */,
+				5A670CB01AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.xib */,
 				5A677D5A1A9BD8030060B55D /* DFKeeperPhotoViewController.h */,
 				5A677D5B1A9BD8030060B55D /* DFKeeperPhotoViewController.m */,
 				5A677D5C1A9BD8030060B55D /* DFKeeperPhotoViewController.xib */,
@@ -675,6 +683,7 @@
 				5A8EB8D91A9153F00033C540 /* LaunchScreen.xib in Resources */,
 				5A8EB8D61A9153F00033C540 /* Images.xcassets in Resources */,
 				5A99500A1A96548F00468484 /* DFLibraryViewController.xib in Resources */,
+				5A670CB21AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.xib in Resources */,
 				5AB8217D1AA90AEF000D5781 /* DFNotLoggedInViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -739,6 +748,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A670CB11AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.m in Sources */,
 				5AB821881AA9178A000D5781 /* DFUserLoginManager.m in Sources */,
 				5A99503B1A96A4EE00468484 /* DFAlertAction.m in Sources */,
 				5AC04E1B1AA513B3008E44A8 /* DFKeeperImage.m in Sources */,

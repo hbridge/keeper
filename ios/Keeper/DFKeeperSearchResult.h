@@ -13,4 +13,6 @@
 @property (nonatomic, retain) NSString *objectKey;
 @property (nonatomic, retain) NSString *documentString;
 
+- (NSAttributedString *)attributedSnippetForSearch:(NSString *)searchString baseFont:(UIFont *)baseFont;
+
 @end

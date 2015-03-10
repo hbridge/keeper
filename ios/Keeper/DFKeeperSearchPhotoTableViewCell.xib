@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="61" id="KGk-i7-Jjw" customClass="DFKeeperSearchPhotoTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qjm-9i-zK6">
+                        <rect key="frame" x="4" y="4" width="52" height="52"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="52" id="Zso-HS-qfx"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05/05/15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Zf3-xx-zdK">
+                        <rect key="frame" x="262" y="23" width="50" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="NoW-eD-YK5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keeper allows you to find text in images using OCR technology which is really cool." lineBreakMode="clip" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Rf8-p9-lou">
+                        <rect key="frame" x="64" y="8" width="194" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Qjm-9i-zK6" secondAttribute="bottom" constant="4" id="0bS-2C-TwM"/>
+                    <constraint firstItem="Zf3-xx-zdK" firstAttribute="leading" secondItem="Rf8-p9-lou" secondAttribute="trailing" constant="4" id="8ah-iJ-LYu"/>
+                    <constraint firstItem="Qjm-9i-zK6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Dzd-aC-0WL"/>
+                    <constraint firstAttribute="trailing" secondItem="Zf3-xx-zdK" secondAttribute="trailing" constant="8" id="Gj7-oO-wbi"/>
+                    <constraint firstItem="Rf8-p9-lou" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="WZK-Rq-7Xs"/>
+                    <constraint firstItem="Rf8-p9-lou" firstAttribute="centerY" secondItem="Zf3-xx-zdK" secondAttribute="centerY" id="amY-U1-5dU"/>
+                    <constraint firstAttribute="bottom" secondItem="Rf8-p9-lou" secondAttribute="bottom" constant="8" id="ayg-H7-qWa"/>
+                    <constraint firstItem="Rf8-p9-lou" firstAttribute="leading" secondItem="Qjm-9i-zK6" secondAttribute="trailing" constant="8" id="jcO-Ej-8Ex"/>
+                    <constraint firstItem="Qjm-9i-zK6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="zLN-xZ-HWI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="Zf3-xx-zdK" id="2tD-zY-eKv"/>
+                <outlet property="indextedTextLabel" destination="Rf8-p9-lou" id="Eg4-DM-Mvf"/>
+                <outlet property="photoPreviewImageView" destination="Qjm-9i-zK6" id="ACE-d3-6FI"/>
+            </connections>
+            <point key="canvasLocation" x="383" y="540.5"/>
+        </tableViewCell>
+    </objects>
+</document>

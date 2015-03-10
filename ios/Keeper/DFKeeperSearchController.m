@@ -12,6 +12,8 @@
 #import "UIImage+Resize.h"
 #import "DFKeeperSearchIndexManager.h"
 #import "DFImageManager.h"
+#import "DFKeeperSearchPhotoTableViewCell.h"
+#import "NSDateFormatter+DFPhotoDateFormatters.h"
 
 @interface DFKeeperSearchController()
 
@@ -41,6 +43,8 @@
   tableView.dataSource = self;
   
   [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+  [tableView registerNib:[UINib nibWithNibName:[[DFKeeperSearchPhotoTableViewCell class] description]
+                                        bundle:nil] forCellReuseIdentifier:@"photoCell"];
   tableView.separatorInset = UIEdgeInsetsMake(0, 50.0, 0, 0);
 }
 
@@ -178,25 +182,34 @@ static NSString *PhotosSectionTitle = @"Text";
 
 - (UITableViewCell *)cellForPhotoAtIndexPath:(NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+  DFKeeperSearchPhotoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"photoCell"];
   cell.tintColor = [UIColor darkTextColor];
   DFKeeperSearchResult *searchResult = self.photosSection[indexPath.row];
-  cell.textLabel.text = searchResult.documentString;
-  cell.imageView.image = nil;
-  
   DFKeeperPhoto *photo = [[DFKeeperStore sharedStore]
                           photoWithKey:searchResult.objectKey];
+  
+  // set the cell data
+  BOOL clearData = cell.representativeObject != photo;
+  cell.representativeObject = photo;
+  cell.indextedTextLabel.attributedText = [searchResult attributedSnippetForSearch:self.searchBar.text
+                                           baseFont:cell.indextedTextLabel.font];
+  if (clearData)
+    cell.photoPreviewImageView.image = nil;
+  static NSDateFormatter *dateFormatter = nil;
+  if (!dateFormatter) dateFormatter = [NSDateFormatter HumanDateFormatter];
+  cell.dateLabel.text = [dateFormatter stringFromDate:photo.saveDate];
+  
   [[DFImageManager sharedManager]
    imageForKey:photo.imageKey
-   pointSize:cell.imageView.frame.size
+   pointSize:cell.photoPreviewImageView.frame.size
    contentMode:DFImageRequestContentModeAspectFill
    deliveryMode:DFImageRequestOptionsDeliveryModeFastFormat
    completion:^(UIImage *image) {
      dispatch_async(dispatch_get_main_queue(), ^{
        if ([[self.tableView indexPathForCell:cell] isEqual:indexPath]) {
          DDLogVerbose(@"setting image size: %@", NSStringFromCGSize(image.size));
-         cell.imageView.clipsToBounds = YES;
-         cell.imageView.image = image;
+         cell.photoPreviewImageView.clipsToBounds = YES;
+         cell.photoPreviewImageView.image = image;
          [cell setNeedsLayout];
        }
      });
@@ -208,6 +221,17 @@ static NSString *PhotosSectionTitle = @"Text";
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
   return self.sectionTitles[section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if ([self.sectionTitles[indexPath.section] isEqual:CategoriesSectionTitle]) {
+    return 44.0;
+  } else if ([self.sectionTitles[indexPath.section] isEqual:PhotosSectionTitle]) {
+    return 61.0;
+  }
+  
+  return 44.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
