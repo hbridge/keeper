@@ -8,6 +8,7 @@ import cv2
 import cv2.cv as cv
 import sys
 import datetime
+import argparse
 
 
 firebase = firebase.FirebaseApplication('https://keeper-dev.firebaseio.com', None)
@@ -15,6 +16,14 @@ s3_base_url = 'https://duffy-keeper-dev.s3.amazonaws.com/'
 min_index_date = datetime.datetime.utcnow()
 
 def main():
+    parser = argparse.ArgumentParser(description='Run text recognition')
+    parser.add_argument('--no-upload', dest='upload', action='store_const', const=False, default=True, help="don't upload the results")
+    args = parser.parse_args()
+   
+    global Upload_Results
+    Upload_Results = args.upload
+
+    args = parser.parse_args()
     global all_photos_dict, all_imagedata_dict
     all_photos_dict = firebase.get('/photos', None)
     all_imagedata_dict = firebase.get('/imageData', None)
@@ -42,7 +51,8 @@ def performScanTask(scan_task):
     photo_key = scan_task['photo_key']
     local_image_path = downloadImageKey(image_key)
     text = recognizeText(local_image_path)
-    postToServer(photo_key, text, all_photos_dict[photo_key])
+    if Upload_Results:
+        postToServer(photo_key, text, all_photos_dict[photo_key])
 
 def downloadImageKey(image_key):
     local_image_path = '/tmp/' + image_key + '.jpg'
@@ -71,12 +81,13 @@ def recognizeText(local_image_path):
     #####################################################################################################
     api = tesseract.TessBaseAPI()
     api.Init(".","eng",tesseract.OEM_DEFAULT)
+    api.SetVariable("tessedit_write_images", "true")
     api.SetPageSegMode(tesseract.PSM_AUTO)
     height1,width1,channel1=image1.shape
-    print image1.shape
-    print image1.dtype.itemsize
+    # print image1.shape
+    # print image1.dtype.itemsize
     width_step = width*image1.dtype.itemsize
-    print width_step
+    # print width_step
     #method 1 
     iplimage = cv.CreateImageHeader((width1,height1), cv.IPL_DEPTH_8U, channel1)
     cv.SetData(iplimage, image1.tostring(),image1.dtype.itemsize * channel1 * (width1))
@@ -86,26 +97,27 @@ def recognizeText(local_image_path):
     conf=api.MeanTextConf()
     image=None
     print "..............."
-    print "Ocred Text: " + text.decode('utf-8')
-    print "Cofidence Level: %d %%"%conf
+    print "Confidence Level: %d %%"%conf    
+    print "Ocred Text: " + text.decode('utf-8').strip()
+   
 
-    #method 2:
-    cvmat_image=cv.fromarray(image1)
-    iplimage =cv.GetImage(cvmat_image)
-    print iplimage
-
-    tesseract.SetCvImage(iplimage,api)
-    #api.SetImage(m_any,width,height,channel1)
-    text2=api.GetUTF8Text()
-    conf2=api.MeanTextConf()
-    image=None
-    print "..............."
-    print "Ocred Text: " + text2.decode('utf-8')
-    print "Cofidence Level: %d %%"%conf2
-    api.End()
-    
-    if conf2 > conf:
-        return text2
+    # #method 2:
+#     cvmat_image=cv.fromarray(image1)
+#     iplimage =cv.GetImage(cvmat_image)
+#     print iplimage
+#
+#     tesseract.SetCvImage(iplimage,api)
+#     #api.SetImage(m_any,width,height,channel1)
+#     text2=api.GetUTF8Text()
+#     conf2=api.MeanTextConf()
+#     image=None
+#     print "Confidence Level: %d %%"%conf2
+#     print "Ocred Text: " + text2.decode('utf-8').strip()
+#     print "...............\n\n"
+#     api.End()
+#
+#     if conf2 > conf:
+#         return text2
     return text
 
 def postToServer(photo_key, text, photo_dict):
@@ -114,10 +126,7 @@ def postToServer(photo_key, text, photo_dict):
         'user' : user,
         'text' : text,
         'date' :  datetime.datetime.utcnow()
-    }
-    
-    print 'posting: %s to searchDocs/%s',searchDoc,photo_key
-    
+    }    
     result = firebase.put('/searchDocs/', photo_key, searchDoc)
 
 if __name__ == "__main__":
