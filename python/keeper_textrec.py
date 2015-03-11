@@ -10,8 +10,7 @@ import sys
 import datetime
 import argparse
 
-
-firebase = firebase.FirebaseApplication('https://keeper-dev.firebaseio.com', None)
+fb = firebase.FirebaseApplication('https://keeper-dev.firebaseio.com', None)
 s3_base_url = 'https://duffy-keeper-dev.s3.amazonaws.com/'
 min_index_date = datetime.datetime.utcnow()
 
@@ -23,14 +22,26 @@ def main():
     global Upload_Results
     Upload_Results = args.upload
 
-    args = parser.parse_args()
+    auth()
     global all_photos_dict, all_imagedata_dict
-    all_photos_dict = firebase.get('/photos', None)
-    all_imagedata_dict = firebase.get('/imageData', None)
+    all_photos_dict = fb.get('/photos', None)
+    all_imagedata_dict = fb.get('/imageData', None)
     
     scan_tasks = generateScanTasks()
     for scan_task in scan_tasks:
         performScanTask(scan_task)
+
+def auth():
+    authentication = firebase.FirebaseAuthentication('zElIpVVoPvzdTmVtmaYLOZ2P5vrxsMtNy0IDjQUu', 
+    'henry@duffytech.co',
+     admin=True,
+     extra={'id': 1}
+     )
+    fb.authentication = authentication
+    print authentication.extra
+    user = fb.authentication.get_user()
+    print user.firebase_auth_token
+    print 'fb.authentication.authtoken: ' + fb.authentication.get_user().firebase_auth_token
 
 def generateScanTasks():
     scan_tasks = []
@@ -127,7 +138,7 @@ def postToServer(photo_key, text, photo_dict):
         'text' : text,
         'date' :  datetime.datetime.utcnow()
     }    
-    result = firebase.put('/searchDocs/', photo_key, searchDoc)
+    result = fb.put('/searchDocs/', photo_key, searchDoc)
 
 if __name__ == "__main__":
    sys.exit(main())
