@@ -102,7 +102,15 @@ static DFNotLoggedInViewController *notLoggedInController;
        DDLogVerbose(@"%@ created account:%@", self.class, result);
        [self loginWithEmail:email
                    password:password
-                    success:success failure:failure];
+                    success:^{
+                      Firebase *userRef = [[rootBase childByAppendingPath:@"users"] childByAppendingPath:result[@"uid"]];
+                      [userRef setValue:@{
+                                          @"name" : name,
+                                          @"email" : email,
+                                          }];
+                      success();
+                    }
+                    failure:failure];
      }
    }];
 }
