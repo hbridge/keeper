@@ -39,6 +39,7 @@
                         <constraint firstAttribute="width" constant="44" id="KC5-QZ-1RO"/>
                         <constraint firstAttribute="height" constant="64" id="psc-JN-YcM"/>
                     </constraints>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="Assets/Icons/SwapCameraButton">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -50,6 +51,7 @@
                         <constraint firstAttribute="height" constant="64" id="wuU-m5-1xE"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
                     <size key="titleShadowOffset" width="0.0" height="1"/>
                     <state key="normal" image="Assets/Icons/FlashOnButton.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

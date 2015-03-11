@@ -95,7 +95,7 @@ const unsigned int SavePromptMinPhotos = 3;
 
 - (BOOL)prefersStatusBarHidden
 {
-  return YES;
+  return NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated

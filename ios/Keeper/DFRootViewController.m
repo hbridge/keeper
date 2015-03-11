@@ -37,7 +37,7 @@ static DFRootViewController *mainRootViewController;
     }
     
     mainRootViewController = self;
-    self.hideStatusBar = YES;
+    self.hideStatusBar = NO;
     _cameraViewController = [[DFCameraViewController alloc] init];
     _libraryViewController = [[DFLibraryViewController alloc] init];
     _libraryNavController = [[DFNavigationController alloc]
@@ -120,7 +120,6 @@ static DFRootViewController *mainRootViewController;
                                     direction:UIPageViewControllerNavigationDirectionForward
                                      animated:YES
                                    completion:nil];
-  self.hideStatusBar = YES;
 }
 
 #pragma mark - Page View Controller Data Source
@@ -182,17 +181,12 @@ static DFRootViewController *mainRootViewController;
    previousViewControllers:(NSArray *)previousViewControllers
        transitionCompleted:(BOOL)completed
 {
-  if (self.pageViewController.viewControllers.firstObject == _libraryNavController && finished) {
-    self.hideStatusBar = NO;
-  } else {
-    self.hideStatusBar = YES;
-  }
+
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController
 willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
-  self.hideStatusBar = YES;
 }
 
 
