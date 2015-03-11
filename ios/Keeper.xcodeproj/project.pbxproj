@@ -68,6 +68,7 @@
 		5A99504F1A97E44A00468484 /* DFImageManagerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9950481A97E44A00468484 /* DFImageManagerRequest.m */; };
 		5A9950501A97E44A00468484 /* DFImageDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99504A1A97E44A00468484 /* DFImageDownloadManager.m */; };
 		5A9950511A97E44A00468484 /* DFDeferredCompletionScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A99504C1A97E44A00468484 /* DFDeferredCompletionScheduler.m */; };
+		5A9FE0401AB0970F00B151BF /* DFSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9FE03F1AB0970F00B151BF /* DFSettings.m */; };
 		5AA508071AA64AC5007A9375 /* DFKeeperSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA508061AA64AC5007A9375 /* DFKeeperSearchController.m */; };
 		5AA5080A1AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA508091AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m */; };
 		5AB821781AA8E93A000D5781 /* DFImageImportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB821771AA8E93A000D5781 /* DFImageImportManager.m */; };
@@ -220,6 +221,8 @@
 		5A99504A1A97E44A00468484 /* DFImageDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageDownloadManager.m; sourceTree = "<group>"; };
 		5A99504B1A97E44A00468484 /* DFDeferredCompletionScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFDeferredCompletionScheduler.h; sourceTree = "<group>"; };
 		5A99504C1A97E44A00468484 /* DFDeferredCompletionScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFDeferredCompletionScheduler.m; sourceTree = "<group>"; };
+		5A9FE03E1AB0970F00B151BF /* DFSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFSettings.h; sourceTree = "<group>"; };
+		5A9FE03F1AB0970F00B151BF /* DFSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSettings.m; sourceTree = "<group>"; };
 		5AA508051AA64AC5007A9375 /* DFKeeperSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperSearchController.h; sourceTree = "<group>"; };
 		5AA508061AA64AC5007A9375 /* DFKeeperSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperSearchController.m; sourceTree = "<group>"; };
 		5AA508081AA662D7007A9375 /* UIViewController+DFKeyboardObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DFKeyboardObserving.h"; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				5A387C1D1AA7BB0400DCB601 /* DFSettingsViewController.m */,
 				5A88B7E21A9FBC020008F548 /* DFSettingsManager.h */,
 				5A88B7E31A9FBC020008F548 /* DFSettingsManager.m */,
+				5A9FE03E1AB0970F00B151BF /* DFSettings.h */,
+				5A9FE03F1AB0970F00B151BF /* DFSettings.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -781,6 +786,7 @@
 				5A1C6A0A1A9B978500A43A07 /* DFPhotoResizer.m in Sources */,
 				5A8EB90F1A91628C0033C540 /* DFLogConfig.m in Sources */,
 				5A8EB8F71A915E030033C540 /* DFCameraViewController.m in Sources */,
+				5A9FE0401AB0970F00B151BF /* DFSettings.m in Sources */,
 				5A9950501A97E44A00468484 /* DFImageDownloadManager.m in Sources */,
 				5A9950331A969FC500468484 /* DFLoginViewController.m in Sources */,
 				5A387C1E1AA7BB0400DCB601 /* DFSettingsViewController.m in Sources */,

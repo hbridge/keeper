@@ -49,6 +49,11 @@ const CGFloat DFKeeperPhotoHighQualityMaxLength = 1920.0;
   return [UIColor paperColorBlue700];
 }
 
++ (UIColor *)ButtonTintColor
+{
+  return [UIColor colorWithRed:0 green:122/255.0 blue:1.0 alpha:1.0];
+}
+
 + (UIColor *)BarForegroundColor
 {
   return [UIColor whiteColor];

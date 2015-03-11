@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FXForms/FXForms.h>
 
-@interface DFSettingsViewController : UIViewController
+@interface DFSettingsViewController : FXFormViewController
 
 + (void)presentInViewController:(UIViewController *)presentingViewController;
 

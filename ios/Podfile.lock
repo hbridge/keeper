@@ -61,6 +61,7 @@ PODS:
     - FMDB/standard
   - FMDB/standard (2.5):
     - FMDB/common
+  - FXForms (1.2.12)
   - GZIP (1.0.3)
   - HockeySDK (3.6.2)
   - Localytics (3.1.0)
@@ -86,6 +87,7 @@ DEPENDENCIES:
   - CocoaLumberjack (~> 1.9)
   - Firebase (~> 2.2)
   - FMDB/FTS (~> 2.4)
+  - FXForms (~> 1.2)
   - HockeySDK (from `https://github.com/bitstadium/HockeySDK-iOS.git`)
   - Localytics (~> 3.0)
   - Realm (~> 0.9)
@@ -115,6 +117,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   Firebase: e7a2ea2ffeff99f9c37028b354194dcc9718d36b
   FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
+  FXForms: ae90610432a0a9cbb71e0180f202d0fff375881f
   GZIP: f27c434ffee5e9a9b34f4e9c19e91350fa8bbde1
   HockeySDK: eba67c3eb995299b8d7aa382fcabff2749681750
   Localytics: 588e9ed57f86baadb740f4f165c22f8305c5907a

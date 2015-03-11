@@ -33,6 +33,7 @@ extern NSString *const DFNewScreenshotNotificationIdentifiersSetKey;
 extern const CGFloat DFKeeperPhotoDefaultThumbnailSize;
 extern const CGFloat DFKeeperPhotoHighQualityMaxLength;
 
++ (UIColor *)ButtonTintColor;
 + (UIColor *)BarBackgroundColor;
 + (UIColor *)BarForegroundColor;
 + (UIStatusBarStyle)DefaultStatusBarStyle;
