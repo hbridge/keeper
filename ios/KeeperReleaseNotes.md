@@ -1,6 +1,11 @@
 # Keeper
 
-- Enable offline mode
+# Mar 11 2015 (19)
+
+- Enable offline mode!
+- Spiffier settings screen
+- Support for text recognition results (server still in progress)
+- Improved security
 
 # Mar 5 2015 (16-18)
 
