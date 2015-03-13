@@ -123,7 +123,8 @@
        [[NSNotificationCenter defaultCenter] postNotificationName:DFPhotosChangedNotification
                                                            object:self];
      });
-     
+   } withCancelBlock:^(NSError *error) {
+     DDLogError(@"%@ error observing photos: %@", self.class, error);
    }];
 }
 
