@@ -45,8 +45,11 @@ typedef void (^SetImageCompletion)(NSError *error);
      withMetadata:(NSDictionary *)metadata;
 - (void)setImage:(UIImage *)image forKey:(NSString *)key completion:(DFVoidBlock)completion;
 - (void)performForegroundOperations;
+- (void)performLogoutOperations;
 - (void)deleteImage:(NSString *)imageKey;
 
 - (void)setExifOrientation:(int)orientation forImage:(NSString *)image;
+
+
 
 @end

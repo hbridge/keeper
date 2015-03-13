@@ -13,6 +13,15 @@
 @interface DFCameraRollScanManager : NSObject
 
 + (DFCameraRollScanManager *)sharedManager;
+
+
+typedef enum {
+  DFCameraRollScanModeNormal = 0,
+  DFCameraRollScanModeIgnoreNewScreenshots = 1, // don't look for new screenshots
+} DFCameraRollScanMode;
+
 - (void)scan;
+- (void)scanWithMode:(DFCameraRollScanMode)mode promptForAccess:(BOOL)shouldPrompt;
+- (void)reset;
 
 @end

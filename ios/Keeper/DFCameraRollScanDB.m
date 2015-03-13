@@ -56,6 +56,13 @@
   return self;
 }
 
+- (void)reset
+{
+  DDLogInfo(@"%@ resetting scan DB", self.class);
+  [_db executeUpdate:@"DROP TABLE screenshots"];
+  [_db executeUpdate:@"DROP TABLE scanned"];
+}
+
 + (NSString *)dbPath
 {
   NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];

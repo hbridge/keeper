@@ -49,6 +49,21 @@ const int DFCameraRollScanManagerScanVersion = 1;
 
 - (void)scan
 {
+  [self scanWithMode:DFCameraRollScanModeNormal promptForAccess:NO];
+}
+
+
+- (void)scanWithMode:(DFCameraRollScanMode)mode promptForAccess:(BOOL)shouldPrompt
+{
+  if ([PHPhotoLibrary authorizationStatus] != PHAuthorizationStatusAuthorized) {
+    if (shouldPrompt)
+      [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        if (status == PHAuthorizationStatusAuthorized) {
+          [self scanWithMode:mode promptForAccess:NO];
+        }
+      }];
+    return;
+  }
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     @autoreleasepool {
       if (self.scanInProgress) return;
@@ -67,7 +82,7 @@ const int DFCameraRollScanManagerScanVersion = 1;
       }
       
       // scan for relevant changes
-      if (unscannedAssets.count > 0) {
+      if (unscannedAssets.count > 0 && mode != DFCameraRollScanModeIgnoreNewScreenshots) {
         [self.class findNewScreenshots:unscannedAssets];
       }
       
@@ -113,6 +128,9 @@ const int DFCameraRollScanManagerScanVersion = 1;
   });
 }
 
-
+- (void)reset
+{
+  [[DFCameraRollScanDB sharedDB] reset];
+}
 
 @end

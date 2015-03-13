@@ -218,9 +218,23 @@
 
 + (NSString *)indexPath
 {
-  NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+  NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                                inDomains:NSUserDomainMask] lastObject];
   NSURL *dbURL = [documentsURL URLByAppendingPathComponent:@"searchindex.clucene"];
   return [dbURL path];
+}
+
+
+- (void)resetIndex
+{
+  DDLogInfo(@"%@ resetting index", self.class);
+  NSError *error;
+  [self.searchService bulkUpdateIndexAndWait:^(id<BRIndexUpdateContext> updateContext) {
+    [self.searchService removeAllObjectsFromIndex:updateContext];
+  } error:&error];
+  
+  if (error) DDLogError(@"%@ error resetting index: %@", self.class, error);
+  
 }
 
 

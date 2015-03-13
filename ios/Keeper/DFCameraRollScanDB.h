@@ -15,5 +15,6 @@
 - (void)addScreenshot:(NSString *)screnshotID withState:(NSNumber *)state;
 - (NSMutableSet *)scannedIdentifiersForVersion:(NSNumber *)version;
 - (void)addScannedIdentifier:(NSString *)identifier scanVersion:(NSNumber *)version;
+- (void)reset;
 
 @end

@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="collectionView" destination="PaC-XL-Fyk" id="7dY-cx-zso"/>
                 <outlet property="flowLayout" destination="6bm-z0-aZf" id="Xfv-Jj-itO"/>
+                <outlet property="noPhotosLabel" destination="hl6-Vy-e5s" id="ljw-At-Tf1"/>
                 <outlet property="searchBar" destination="znH-Jw-1fM" id="DHm-hj-YgP"/>
                 <outlet property="tableView" destination="W92-Zp-2od" id="aff-2i-rzi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -37,6 +38,84 @@
                     <rect key="frame" x="0.0" y="44" width="320" height="460"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hl6-Vy-e5s">
+                    <rect key="frame" x="20" y="147" width="280" height="68"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="YdR-JC-dO7"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment content="No Kept Photos">
+                            <attributes>
+                                <color key="NSColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="20" name="Helvetica"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="6">
+                                    <tabStops>
+                                        <textTab alignment="left" location="36"/>
+                                        <textTab alignment="left" location="72"/>
+                                        <textTab alignment="left" location="108"/>
+                                        <textTab alignment="left" location="144"/>
+                                        <textTab alignment="left" location="180"/>
+                                        <textTab alignment="left" location="216"/>
+                                        <textTab alignment="left" location="252"/>
+                                        <textTab alignment="left" location="288"/>
+                                        <textTab alignment="left" location="324"/>
+                                        <textTab alignment="left" location="360"/>
+                                        <textTab alignment="left" location="396"/>
+                                        <textTab alignment="left" location="432"/>
+                                    </tabStops>
+                                </paragraphStyle>
+                            </attributes>
+                        </fragment>
+                        <fragment>
+                            <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                            <attributes>
+                                <color key="NSColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="18" name="Helvetica"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="6">
+                                    <tabStops>
+                                        <textTab alignment="left" location="36"/>
+                                        <textTab alignment="left" location="72"/>
+                                        <textTab alignment="left" location="108"/>
+                                        <textTab alignment="left" location="144"/>
+                                        <textTab alignment="left" location="180"/>
+                                        <textTab alignment="left" location="216"/>
+                                        <textTab alignment="left" location="252"/>
+                                        <textTab alignment="left" location="288"/>
+                                        <textTab alignment="left" location="324"/>
+                                        <textTab alignment="left" location="360"/>
+                                        <textTab alignment="left" location="396"/>
+                                        <textTab alignment="left" location="432"/>
+                                    </tabStops>
+                                </paragraphStyle>
+                            </attributes>
+                        </fragment>
+                        <fragment content="Take a photo with the camera or import one from your camera roll to get started">
+                            <attributes>
+                                <color key="NSColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="14" name="Helvetica"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="2">
+                                    <tabStops>
+                                        <textTab alignment="left" location="36"/>
+                                        <textTab alignment="left" location="72"/>
+                                        <textTab alignment="left" location="108"/>
+                                        <textTab alignment="left" location="144"/>
+                                        <textTab alignment="left" location="180"/>
+                                        <textTab alignment="left" location="216"/>
+                                        <textTab alignment="left" location="252"/>
+                                        <textTab alignment="left" location="288"/>
+                                        <textTab alignment="left" location="324"/>
+                                        <textTab alignment="left" location="360"/>
+                                        <textTab alignment="left" location="396"/>
+                                        <textTab alignment="left" location="432"/>
+                                    </tabStops>
+                                </paragraphStyle>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -45,6 +124,7 @@
                 <constraint firstAttribute="trailing" secondItem="PaC-XL-Fyk" secondAttribute="trailing" id="457-89-Vf9"/>
                 <constraint firstItem="PaC-XL-Fyk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="591-NR-fDz"/>
                 <constraint firstItem="PaC-XL-Fyk" firstAttribute="top" secondItem="znH-Jw-1fM" secondAttribute="bottom" id="N1I-jJ-0ow"/>
+                <constraint firstItem="PaC-XL-Fyk" firstAttribute="centerX" secondItem="hl6-Vy-e5s" secondAttribute="centerX" id="NEU-GF-1hB"/>
                 <constraint firstAttribute="trailing" secondItem="W92-Zp-2od" secondAttribute="trailing" id="Obq-Ud-bgI"/>
                 <constraint firstAttribute="trailing" secondItem="znH-Jw-1fM" secondAttribute="trailing" id="Wpy-dA-ZWP"/>
                 <constraint firstItem="znH-Jw-1fM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="b7D-V2-cYG"/>
@@ -52,6 +132,7 @@
                 <constraint firstAttribute="bottom" secondItem="PaC-XL-Fyk" secondAttribute="bottom" id="bnq-CM-KDu"/>
                 <constraint firstItem="znH-Jw-1fM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hoe-ja-v8r"/>
                 <constraint firstItem="W92-Zp-2od" firstAttribute="top" secondItem="znH-Jw-1fM" secondAttribute="bottom" id="uKy-CJ-RHu"/>
+                <constraint firstItem="PaC-XL-Fyk" firstAttribute="top" secondItem="hl6-Vy-e5s" secondAttribute="top" constant="-103" id="vKS-12-V0b"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

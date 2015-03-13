@@ -20,6 +20,8 @@
 #import "DFSettingsManager.h"
 #import <Photos/Photos.h>
 #import "DFImageImportManager.h"
+#import "DFCameraRollScanManager.h"
+#import <Photos/Photos.h>
 
 @interface DFLibraryViewController ()
 
@@ -70,8 +72,8 @@
       && [PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
     DFAlertController *promptForAutoImport =
     [DFAlertController
-     alertControllerWithTitle:@"Import Screenshots?"
-     message:@"Would you like Keeper to import any screenshots you take in the future automatically?"
+     alertControllerWithTitle:@"Import Screenshots"
+     message:@"Would you like Keeper to automatically import any screenshots you take in the future?"
      preferredStyle:DFAlertControllerStyleAlert];
     [promptForAutoImport addAction:[DFAlertAction
                                     actionWithTitle:@"Not Now"
@@ -86,6 +88,11 @@
                                     handler:^(DFAlertAction *action) {
                                       [DFSettingsManager setObject:DFSettingValueYes
                                                         forSetting:DFSettingAutoImportScreenshots];
+
+                                      // our first scan should ignore new screenshots
+                                      [[DFCameraRollScanManager sharedManager]
+                                       scanWithMode:DFCameraRollScanModeIgnoreNewScreenshots
+                                       promptForAccess:YES];
                                     }]];
     [promptForAutoImport showWithParentViewController:self animated:YES completion:nil];
   }
@@ -182,7 +189,13 @@
       }];
     }
     [self.collectionView reloadData];
+    self.noPhotosLabel.hidden = (self.allPhotos.count > 0);
   });
+}
+
+- (void)setNoPhotosVisible:(BOOL)visible
+{
+  
 }
 
 #pragma mark - UICollectionView Datasource/Delegate

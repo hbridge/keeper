@@ -37,6 +37,7 @@ NSString *const DFImageUploadedNotification = @"com.duffyapp.DFImageUploadedNoti
 NSString *const DFImageUploadedNotificationImageKey = @"imageKey";
 NSString *const DFNewScreenshotNotification = @"com.duffyapp.DFNewScreenshotNotification";
 NSString *const DFNewScreenshotNotificationIdentifiersSetKey = @"assetIdentifiers";
+NSString *const DFUserLoggedOutNotification = @"com.duffyapp.DFUserLoggedOutNotification";
 
 
 const CGFloat DFKeeperPhotoDefaultThumbnailSize = 157.0;

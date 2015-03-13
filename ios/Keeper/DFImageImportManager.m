@@ -181,5 +181,14 @@ RLM_ARRAY_TYPE(DFAssetImport)
   return [dbURL path];
 }
 
+- (void)resetImports
+{
+  DDLogInfo(@"%@ resetting imports DB", self.class);
+  RLMRealm *realm = [RLMRealm realmWithPath:[self.class dbPath]];
+  [realm beginWriteTransaction];
+  [realm deleteAllObjects];
+  [realm commitWriteTransaction];
+}
+
 
 @end

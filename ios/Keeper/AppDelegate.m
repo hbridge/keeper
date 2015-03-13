@@ -37,9 +37,11 @@
   [self configureHockey];
   [self configureNetworking];
   [self configureUI];
+  [self observeNotifications];
 
   return YES;
 }
+
 
 - (void)printSimulatorInfo
 {
@@ -101,6 +103,15 @@
   }
 }
 
+- (void)observeNotifications
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(userLoggedOut:)
+                                               name:DFUserLoggedOutNotification
+                                             object:nil];
+}
+
+
 - (void)showMainView
 {
   DFRootViewController *rvc = [[DFRootViewController alloc] init];
@@ -128,9 +139,35 @@
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   [DFAnalytics StartAnalyticsSession];
   [[DFUserLoginManager sharedManager] observeLoginChanges];
-  [[DFImageManager sharedManager] performForegroundOperations];
-  [[DFCameraRollScanManager sharedManager] scan];
-  [[DFKeeperSearchIndexManager sharedManager] resumeIndexing];
+  [self performLoggedInOperations];
+ }
+
+- (void)performLoggedInOperations
+{
+  if ([[DFUserLoginManager sharedManager] isUserLoggedIn]) {
+    DDLogInfo(@"%@ performing foreground ops.", self.class);
+    [[DFImageManager sharedManager] performForegroundOperations];
+    [[DFCameraRollScanManager sharedManager] scan];
+    [[DFKeeperSearchIndexManager sharedManager] resumeIndexing];
+  } else {
+    DDLogInfo(@"%@ skipping foreground ops, user not logged in", self.class);
+    Firebase *ref = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
+    FirebaseHandle observeHandle = [ref observeAuthEventWithBlock:^(FAuthData *authData) {
+      if (authData) {
+        [ref removeAuthEventObserverWithHandle:observeHandle];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self performLoggedInOperations];
+        });
+      }
+    }];
+  }
+}
+
+- (void)userLoggedOut:(NSNotification *)note
+{
+  [[DFCameraRollScanManager sharedManager] reset];
+  [[DFImageManager sharedManager] performLogoutOperations];
+  [[DFKeeperSearchIndexManager sharedManager] resetIndex];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

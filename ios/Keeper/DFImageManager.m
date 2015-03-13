@@ -563,6 +563,12 @@ static BOOL logRouting = NO;
   [[DFImageImportManager sharedManager] resumeImports];
 }
 
+- (void)performLogoutOperations
+{
+  [[DFImageDiskCache sharedStore] clearCache];
+  [[DFImageImportManager sharedManager] resetImports];
+}
+
 - (void)imageUploaded:(NSNotification *)note
 {
   NSString *imageKey = note.userInfo[DFImageUploadedNotificationImageKey];

@@ -147,6 +147,9 @@ static DFNotLoggedInViewController *notLoggedInController;
 - (void)logout
 {
   Firebase *ref = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
+  [[NSNotificationCenter defaultCenter] postNotificationName:DFUserLoggedOutNotification object:self];
+  NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+  [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
   [ref unauth];
 }
 

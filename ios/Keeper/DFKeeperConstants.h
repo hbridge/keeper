@@ -28,6 +28,8 @@ extern NSString *const DFImageUploadedNotification;
 extern NSString *const DFImageUploadedNotificationImageKey;
 extern NSString *const DFNewScreenshotNotification;
 extern NSString *const DFNewScreenshotNotificationIdentifiersSetKey;
+extern NSString *const DFUserLoggedOutNotification;
+
 
 
 extern const CGFloat DFKeeperPhotoDefaultThumbnailSize;

@@ -14,5 +14,6 @@
 - (void)importAssetsWithALAssetURLsToCategories:(NSDictionary *)assetURLsToCategories;
 - (void)importAssetsWithIdentifiersToCategories:(NSDictionary *)assetsToCategories;
 - (void)resumeImports;
+- (void)resetImports;
 
 @end

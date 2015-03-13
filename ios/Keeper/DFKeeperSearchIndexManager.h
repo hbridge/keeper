@@ -15,5 +15,6 @@
 - (void)keysMatchingSearch:(NSString *)searchString completion:(void(^)(NSArray *results))completion;
 - (void)resumeIndexing;
 - (void)deleteIndexedDocumentForObject:(NSString *)objectKey;
+- (void)resetIndex;
 
 @end
