@@ -10,4 +10,8 @@
 
 @interface DFNotLoggedInViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *takePictureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *categorizeImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *findImageView;
+
 @end
