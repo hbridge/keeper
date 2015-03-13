@@ -31,6 +31,11 @@
   [self login];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self.emailTextField becomeFirstResponder];
+}
 
 - (void)login
 {

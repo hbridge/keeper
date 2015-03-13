@@ -28,6 +28,13 @@
   [self setButtonEnabled:NO];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self.nameTextField becomeFirstResponder];
+}
+
+
 - (IBAction)editingChanged:(id)sender {
   if ([self.nameTextField.text isNotEmpty]
       && [self.emailTextField.text isNotEmpty]
