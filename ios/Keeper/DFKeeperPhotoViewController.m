@@ -135,7 +135,8 @@
      self.imageView.image = rotatedImage;
      
      // Write the new image rotation locally and to the server
-     int newExifOrientation = [UIImage exifImageOrientationLeftFromOrientation:image.orientation.intValue];
+     NSNumber *currentOrientation = image.orientation ? image.orientation : @(1); // set default to up
+     int newExifOrientation = [UIImage exifImageOrientationLeftFromOrientation:currentOrientation.intValue];
      DDLogVerbose(@"cgImageOrientation old:%d new:%d", image.orientation.intValue,
                   newExifOrientation);
      [[DFImageManager sharedManager] setExifOrientation:newExifOrientation
