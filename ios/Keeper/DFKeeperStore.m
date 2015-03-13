@@ -59,7 +59,9 @@
     photoRef = [self.photosRef childByAutoId];
     photo.key = photoRef.key;
   }
-  [photoRef setValue:photoDict];
+  [photoRef setValue:photoDict withCompletionBlock:^(NSError *error, Firebase *ref) {
+    if (error) DDLogError(@"%@ savePhoto error: %@", self.class, error);
+  }];
 }
 
 - (void)saveImage:(DFKeeperImage *)image
@@ -72,7 +74,9 @@
     image.key = imageRef.key;
   }
   
-  [imageRef setValue:[image dictionary]];
+  [imageRef setValue:[image dictionary] withCompletionBlock:^(NSError *error, Firebase *ref) {
+    if (error) DDLogError(@"%@ saveImage error: %@", self.class, error);
+  }];
 }
 
 - (void)deletePhoto:(DFKeeperPhoto *)photo
@@ -145,6 +149,8 @@
      }
      
      completion(photos);
+   } withCancelBlock:^(NSError *error) {
+     if (error) DDLogError(@"%@ fetchPhotos error: %@", self.class, error);
    }];
 }
 
@@ -160,6 +166,8 @@
      }
      
      completion(images);
+   } withCancelBlock:^(NSError *error) {
+     if (error) DDLogError(@"%@ fetchImages error: %@", self.class, error);
    }];
 }
 
@@ -197,6 +205,8 @@
   Firebase *imageRef = [self.imageDataRef childByAppendingPath:key];
   [imageRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
     completion([[DFKeeperImage alloc] initWithSnapshot:snapshot]);
+  } withCancelBlock:^(NSError *error) {
+    if (error) DDLogError(@"%@ fetchImage error: %@", self.class, error);
   }];
 }
 
