@@ -1,5 +1,11 @@
 # Keeper
 
+# Mar 13 2015 (20)
+
+- Improved sign up experience
+- More category icons
+- Bug fixes
+
 # Mar 11 2015 (19)
 
 - Enable offline mode!
