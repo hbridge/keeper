@@ -119,17 +119,45 @@ const int NumCategories = 8;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
   NSString *category = [[alertView textFieldAtIndex:0] text];
-  if([category isNotEmpty] && buttonIndex != alertView.cancelButtonIndex) {
+  if(buttonIndex != alertView.cancelButtonIndex) {
+    NSMutableDictionary *userCategories = [[DFSettingsManager
+                                            objectForSetting:DFSettingSpeedDialCategories]
+                                           mutableCopy];
+    
     if (self.buttonToSet < 0) {
+      // if the user is typing in a custom category and there are available spots, fill the first
+      // available one
+      if (userCategories.count < NumCategories
+          && ![userCategories.allKeys containsObject:category]) {
+        for (NSUInteger i = 0; i < NumCategories; i++) {
+          if (!userCategories[[@(i) stringValue]]) {
+            self.buttonToSet = i;
+            break;
+          }
+        }
+        [self setCategoryValue:category forSpeedDialIndex:self.buttonToSet];
+      }
       [self categorySelected:category];
     } else {
-      NSMutableDictionary *userCategories = [[DFSettingsManager objectForSetting:DFSettingSpeedDialCategories]
-                                             mutableCopy];
-      userCategories[[@(self.buttonToSet) stringValue]] = category;
-      [DFSettingsManager setObject:userCategories forSetting:DFSettingSpeedDialCategories];
-      [self reloadItems];
+      [self setCategoryValue:category forSpeedDialIndex:self.buttonToSet];
+      if (!self.isEditModeEnabled) [self categorySelected:category];
     }
   }
+}
+
+- (void)setCategoryValue:(NSString *)categoryValue forSpeedDialIndex:(NSUInteger)speedDialIndex
+{
+  NSMutableDictionary *userCategories = [[DFSettingsManager
+                                          objectForSetting:DFSettingSpeedDialCategories]
+                                         mutableCopy];
+  if ([categoryValue isNotEmpty]) {
+    userCategories[[@(speedDialIndex) stringValue]] = categoryValue;
+  } else {
+    userCategories[[@(speedDialIndex) stringValue]] = @"";
+  }
+  
+  [DFSettingsManager setObject:userCategories forSetting:DFSettingSpeedDialCategories];
+  [self reloadItems];
 }
 
 - (void)categorySelected:(NSString *)category

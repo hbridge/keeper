@@ -26,6 +26,11 @@
              FXFormFieldKey : @"autoimportScreenshots",
              },
            @{
+             FXFormFieldTitle : @"Set Category Speed Dial",
+             FXFormFieldAction : @"configureCategories:",
+             @"textLabel.color" : [DFKeeperConstants ButtonTintColor],
+             },
+           @{
              FXFormFieldHeader : @"Support",
              FXFormFieldTitle : @"Version",
              FXFormFieldKey : @"version",

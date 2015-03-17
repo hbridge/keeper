@@ -17,6 +17,8 @@
 
 @interface DFSettingsViewController ()
 
+@property (nonatomic, retain) DFCategorizeController *categorizeController;
+
 @end
 
 static DFCategorizeController *categorizeController;
@@ -65,6 +67,13 @@ static DFCategorizeController *categorizeController;
   [[DFUserLoginManager sharedManager] logout];
   abort();
 
+}
+
+- (void)configureCategories:(id)sender
+{
+  self.categorizeController = [[DFCategorizeController alloc] init];
+  self.categorizeController.isEditModeEnabled = YES;
+  [self.categorizeController presentInViewController:self];
 }
 
 @end
