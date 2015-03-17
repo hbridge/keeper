@@ -12,6 +12,7 @@
 @interface DFSettings : NSObject<FXForm>
 
 @property (readonly, nonatomic, retain) NSString *version;
+@property (readonly, nonatomic, retain) NSString *email;
 @property (nonatomic) BOOL autosaveToCameraRoll;
 @property (nonatomic) BOOL autoimportScreenshots;
 

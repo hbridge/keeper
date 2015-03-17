@@ -153,4 +153,13 @@ static DFNotLoggedInViewController *notLoggedInController;
   [ref unauth];
 }
 
+- (NSString *)loggedInEmailAddress
+{
+  Firebase *ref = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
+  if (ref.authData) {
+    return ref.authData.providerData[@"email"];
+  }
+  return nil;
+}
+
 @end

@@ -9,6 +9,7 @@
 #import "DFSettings.h"
 #import "DFSettingsManager.h"
 #import "DFAppInfo.h"
+#import "DFUserLoginManager.h"
 
 @implementation DFSettings
 
@@ -38,6 +39,11 @@
 
            @{
              FXFormFieldHeader : @"Account",
+             FXFormFieldTitle : @"Email",
+             FXFormFieldKey : @"email",
+             FXFormFieldType : FXFormFieldTypeLabel
+             },
+           @{
              FXFormFieldTitle : @"Sign Out",
              FXFormFieldAction : @"signOut:",
              @"textLabel.color" : [UIColor redColor],
@@ -70,6 +76,11 @@
 - (BOOL)autoimportScreenshots
 {
   return [[DFSettingsManager objectForSetting:DFSettingAutoImportScreenshots] isEqual:DFSettingValueYes];
+}
+
+- (NSString *)email
+{
+  return [[DFUserLoginManager sharedManager] loggedInEmailAddress];
 }
 
 
