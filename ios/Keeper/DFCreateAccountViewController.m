@@ -10,6 +10,7 @@
 #import "DFUserLoginManager.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "DFUIKit.h"
+#import "UIViewController+DFKeyboardObserving.h"
 
 @interface DFCreateAccountViewController ()
 
@@ -26,13 +27,31 @@
     tf.textInsets = UIEdgeInsetsMake(0, 4, 0, 4);
   }
   
+  self.improveButton.selected = YES;
   [self setButtonEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self.nameTextField becomeFirstResponder];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [self setAutomaticallyAdjustFrameOnKeyboardChange:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  [self setAutomaticallyAdjustFrameOnKeyboardChange:NO];
+}
+
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  self.contentViewWidth.constant = self.view.frame.size.width;
 }
 
 
@@ -72,12 +91,19 @@
   return NO;
 }
 
+- (IBAction)improveButtonPressed:(id)sender {
+  [self.improveButton setSelected:!self.improveButton.selected];
+}
 
 - (IBAction)createAccountPressed:(id)sender {
+  [SVProgressHUD show];
   [[DFUserLoginManager sharedManager]
    createUserWithName:self.nameTextField.text
    email:self.emailTextField.text
    password:self.passwordTextField.text
+   otherInfo:@{
+               @"improveOptIn" : @(YES),
+               }
    success:^{
      dispatch_async(dispatch_get_main_queue(), ^{
        [[DFUserLoginManager sharedManager] dismissNotLoggedInControllerWithCompletion:^{

@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet DFInsetTextField *emailTextField;
 @property (weak, nonatomic) IBOutlet DFInsetTextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *createAccountButton;
+@property (weak, nonatomic) IBOutlet UIButton *improveButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 
 - (IBAction)termsButtonPressed:(id)sender;
 

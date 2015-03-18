@@ -16,6 +16,7 @@
 - (void)createUserWithName:(NSString *)name
                      email:(NSString *)email
                   password:(NSString *)password
+                 otherInfo:(NSDictionary *)otherInfo
                    success:(DFSuccessBlock)success
                    failure:(DFFailureBlock)failure;
 

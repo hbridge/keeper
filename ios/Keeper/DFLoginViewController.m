@@ -65,6 +65,7 @@
 
 - (void)login
 {
+  [SVProgressHUD show];
   [[DFUserLoginManager sharedManager]
    loginWithEmail:self.emailTextField.text
    password:self.passwordTextField.text

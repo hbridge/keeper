@@ -85,6 +85,7 @@ static DFNotLoggedInViewController *notLoggedInController;
 - (void)createUserWithName:(NSString *)name
                      email:(NSString *)email
                   password:(NSString *)password
+                 otherInfo:(NSDictionary *)otherInfo
                    success:(DFSuccessBlock)success
                    failure:(DFFailureBlock)failure
 {
@@ -104,10 +105,12 @@ static DFNotLoggedInViewController *notLoggedInController;
                    password:password
                     success:^{
                       Firebase *userRef = [[rootBase childByAppendingPath:@"users"] childByAppendingPath:result[@"uid"]];
-                      [userRef setValue:@{
-                                          @"name" : name,
-                                          @"email" : email,
-                                          }];
+                      NSMutableDictionary *userInfo = [@{
+                                                        @"name" : name,
+                                                        @"email" : email,
+                                                        } mutableCopy];
+                      [userInfo addEntriesFromDictionary:otherInfo];
+                      [userRef setValue:userInfo];
                       success();
                     }
                     failure:failure];
