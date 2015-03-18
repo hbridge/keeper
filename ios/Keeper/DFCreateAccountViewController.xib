@@ -74,17 +74,31 @@
                         <action selector="createAccountPressed:" destination="-1" eventType="touchUpInside" id="X1w-5n-p0d"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="kJp-f6-wi3" userLabel="By continuing, you agree to our Terms of Use and our Privacy Policy. .">
+                    <rect key="frame" x="20" y="203" width="280" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="By continuing, you agree to our Terms of Use and our Privacy Policy.">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="termsButtonPressed:" destination="-1" eventType="touchUpInside" id="m4i-wH-fPm"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="kJp-f6-wi3" secondAttribute="trailing" constant="20" id="2OC-Vk-B4w"/>
                 <constraint firstItem="6dQ-og-xxS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="7En-93-3ud"/>
                 <constraint firstAttribute="trailing" secondItem="sdZ-HJ-TOT" secondAttribute="trailing" constant="8" id="7aE-Bn-4b2"/>
                 <constraint firstAttribute="trailing" secondItem="TlC-Tv-Adq" secondAttribute="trailing" constant="8" id="9SB-YZ-oIl"/>
+                <constraint firstItem="kJp-f6-wi3" firstAttribute="top" secondItem="TlC-Tv-Adq" secondAttribute="bottom" constant="20" id="B1S-aC-Mo5"/>
                 <constraint firstItem="rh6-BJ-yqL" firstAttribute="top" secondItem="sdZ-HJ-TOT" secondAttribute="bottom" constant="-1" id="Ba6-Df-YOf"/>
                 <constraint firstAttribute="trailing" secondItem="rh6-BJ-yqL" secondAttribute="trailing" constant="8" id="BfJ-q8-Xdx"/>
                 <constraint firstItem="TlC-Tv-Adq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="dTn-KM-dbq"/>
                 <constraint firstItem="rh6-BJ-yqL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="gVo-Cj-VXy"/>
                 <constraint firstItem="sdZ-HJ-TOT" firstAttribute="top" secondItem="6dQ-og-xxS" secondAttribute="bottom" constant="-1" id="h5l-uL-Uud"/>
+                <constraint firstItem="kJp-f6-wi3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="j2E-fU-TB6"/>
                 <constraint firstAttribute="trailing" secondItem="6dQ-og-xxS" secondAttribute="trailing" constant="8" id="jd1-KO-0y4"/>
                 <constraint firstItem="6dQ-og-xxS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="kQc-FP-udB"/>
                 <constraint firstItem="sdZ-HJ-TOT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="nl8-ha-2rn"/>

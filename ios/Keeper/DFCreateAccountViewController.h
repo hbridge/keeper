@@ -16,4 +16,6 @@
 @property (weak, nonatomic) IBOutlet DFInsetTextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *createAccountButton;
 
+- (IBAction)termsButtonPressed:(id)sender;
+
 @end

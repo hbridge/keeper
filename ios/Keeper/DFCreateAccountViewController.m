@@ -9,6 +9,7 @@
 #import "DFCreateAccountViewController.h"
 #import "DFUserLoginManager.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "DFUIKit.h"
 
 @interface DFCreateAccountViewController ()
 
@@ -88,4 +89,29 @@
    }];
 }
 
+- (IBAction)termsButtonPressed:(id)sender {
+  DFAlertController *alertController = [DFAlertController
+                                        alertControllerWithTitle:nil
+                                        message:nil
+                                        preferredStyle:DFAlertControllerStyleActionSheet];
+  [alertController addAction:[DFAlertAction
+                              actionWithTitle:@"Terms and Conditions"
+                              style:DFAlertActionStyleDefault
+                              handler:^(DFAlertAction *action) {
+                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:DFTermsPageURLString]];
+                              }]];
+  [alertController addAction:[DFAlertAction
+                              actionWithTitle:@"Privacy Policy"
+                              style:DFAlertActionStyleDefault
+                              handler:^(DFAlertAction *action) {
+                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:DFPrivacyPageURLString]];
+                              }]];
+  [alertController addAction:[DFAlertAction
+                              actionWithTitle:@"Cancel"
+                              style:DFAlertActionStyleCancel handler:^(DFAlertAction *action) {
+                                
+                              }]];
+  
+  [alertController showWithParentViewController:self animated:YES completion:nil];
+}
 @end

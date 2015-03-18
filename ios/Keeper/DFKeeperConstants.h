@@ -40,4 +40,11 @@ extern const CGFloat DFKeeperPhotoHighQualityMaxLength;
 + (UIColor *)BarForegroundColor;
 + (UIStatusBarStyle)DefaultStatusBarStyle;
 
+
+#pragma mark - Legal
+
+extern NSString *const DFTermsPageURLString;
+extern NSString *const DFPrivacyPageURLString;
+
 @end
+

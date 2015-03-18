@@ -65,4 +65,12 @@ const CGFloat DFKeeperPhotoHighQualityMaxLength = 1920.0;
   return UIStatusBarStyleLightContent;
 }
 
+
+#pragma mark - Legal
+
+NSString *const DFTermsPageURLString = @"http://www.duffyapp.com/strand/terms.html";
+NSString *const DFPrivacyPageURLString = @"http://www.duffyapp.com/strand/privacy.html";
+
+
+
 @end
