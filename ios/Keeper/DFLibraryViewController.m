@@ -21,7 +21,7 @@
 #import <Photos/Photos.h>
 #import "DFImageImportManager.h"
 #import "DFCameraRollScanManager.h"
-#import <Photos/Photos.h>
+#import "UIImage+DFHelpers.h"
 
 @interface DFLibraryViewController ()
 
@@ -50,6 +50,9 @@
   [self configureNav];
   [self configureCollectionView];
   [self configureSearch];
+  
+  self.searchBar.backgroundImage = [UIImage imageWithColor:[DFKeeperConstants BarBackgroundColor]];
+  self.searchBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated

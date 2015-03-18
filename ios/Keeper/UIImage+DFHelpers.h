@@ -14,5 +14,6 @@
 - (int)CGImageOrientation;
 - (UIImageOrientation)orientationRotatedLeft;
 + (int)exifImageOrientationLeftFromOrientation:(int)currentOrientation;
++ (UIImage *) imageWithColor:(UIColor *)color;
 
 @end

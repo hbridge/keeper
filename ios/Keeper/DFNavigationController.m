@@ -44,6 +44,12 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  [self.navigationBar setBackgroundImage:[UIImage new]
+            forBarPosition:UIBarPositionAny
+                barMetrics:UIBarMetricsDefault];
+  
+  [self.navigationBar setShadowImage:[UIImage new]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
