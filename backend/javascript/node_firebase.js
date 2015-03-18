@@ -3,12 +3,25 @@
 // Note: Startup takes 2 seconds since 
 var http = require('http');
 var Firebase = require("firebase");
+var nconf = require('nconf');
+
+//
+// Setup nconf to use (in-order):
+//   1. Command-line arguments
+//   2. Environment variables
+//   3. A file located at 'path/to/config.json'
+//
+nconf.argv()
+	 .env();
+nconf.file({ file: '../config/' + nconf.get('KEEPER_ENV') + '.json' });
+
+console.log();
 
 var startTime = new Date();
 startTime.setSeconds(startTime.getSeconds() + 5);
 
-var imageFirebaseRef = new Firebase("https://keeper-dev.firebaseio.com/imageData");
-imageFirebaseRef.authWithCustomToken("zElIpVVoPvzdTmVtmaYLOZ2P5vrxsMtNy0IDjQUu", function(error, result) {
+var imageFirebaseRef = new Firebase(nconf.get('FIREBASE_URL') + "/imageData");
+imageFirebaseRef.authWithCustomToken(nconf.get('FIREBASE_KEY'), function(error, result) {
   if (error) {
 	console.log("Login Failed!", error);
   } else {
@@ -17,8 +30,8 @@ imageFirebaseRef.authWithCustomToken("zElIpVVoPvzdTmVtmaYLOZ2P5vrxsMtNy0IDjQUu",
   }
 });
 
-var photosFirebaseRef = new Firebase("https://keeper-dev.firebaseio.com/photos");
-photosFirebaseRef.authWithCustomToken("zElIpVVoPvzdTmVtmaYLOZ2P5vrxsMtNy0IDjQUu", function(error, result) {
+var photosFirebaseRef = new Firebase(nconf.get('FIREBASE_URL') + "/photos");
+photosFirebaseRef.authWithCustomToken(nconf.get('FIREBASE_KEY'), function(error, result) {
   if (error) {
 	console.log("Login Failed!", error);
   } else {
