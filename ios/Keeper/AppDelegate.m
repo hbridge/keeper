@@ -165,6 +165,10 @@
 
 - (void)userLoggedOut:(NSNotification *)note
 {
+  DDLogInfo(@"%@ user logged out, resetting app.", self.class);
+  // clear user defaults
+  NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+  [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
   [[DFCameraRollScanManager sharedManager] reset];
   [[DFImageManager sharedManager] performLogoutOperations];
   [[DFKeeperSearchIndexManager sharedManager] resetIndex];
