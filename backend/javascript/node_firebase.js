@@ -3,7 +3,6 @@
 // Note: Startup takes 2 seconds since 
 var http = require('http');
 var Firebase = require("firebase");
-var RMGarbage = require("rmgarbage");
 
 var startTime = new Date();
 startTime.setSeconds(startTime.getSeconds() + 5);
@@ -78,10 +77,12 @@ imageFirebaseRef.on("child_changed", function(imageData) {
 	processImageData(imageData);
 });
 
-
+/*
+// Left here for debugging
 var server = http.createServer(function(req, res) {
 	console.log(RMGarbage.debug("' ' * ,, , E VALUE PROPOSITION UN"))
 	res.writeHead(200);
 	res.end('Success');
 });
 server.listen(8080);
+*/
