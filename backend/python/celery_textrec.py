@@ -12,6 +12,9 @@ import string
 s3_base_url = 'https://duffy-keeper-dev.s3.amazonaws.com/'
 app = Celery('celery_textrec', backend='amqp', broker='amqp://guest@localhost//')
 
+from celery.utils.log import get_task_logger
+logger = get_task_logger(__name__)
+
 def auth():
 	fb = firebase_lib.FirebaseApplication('https://keeper-dev.firebaseio.com', None)
 	authentication = firebase_lib.FirebaseAuthentication('zElIpVVoPvzdTmVtmaYLOZ2P5vrxsMtNy0IDjQUu', 
@@ -20,10 +23,10 @@ def auth():
 	 extra={'id': 1}
 	 )
 	fb.authentication = authentication
-	print authentication.extra
+	logger.info(authentication.extra)
 	user = fb.authentication.get_user()
-	print user.firebase_auth_token
-	print 'fb.authentication.authtoken: ' + fb.authentication.get_user().firebase_auth_token
+	logger.info(user.firebase_auth_token)
+	logger.info('fb.authentication.authtoken: ' + fb.authentication.get_user().firebase_auth_token)
 	return fb
 
 
@@ -33,11 +36,11 @@ def downloadImage(image_key):
 
 	if not os.path.isfile(local_image_path):
 		f = open(local_image_path, 'wb')
-		print 'downloading: ' + remote_image_path + ' to: ' + local_image_path
+		logger.info('Downloading: ' + remote_image_path + ' to: ' + local_image_path)
 		f.write(urllib.urlopen(remote_image_path).read())
 		f.close()
 	else:
-		print local_image_path + ' already exists.'
+		logger.info(local_image_path + ' already exists.')
 
 	return local_image_path
 
@@ -48,7 +51,7 @@ def postToServer(photo_key, text, fb):
 		'user' : user,
 		'text' : text,
 		'date' :  datetime.datetime.utcnow()
-	}    
+	}
 	result = fb.put('/searchDocs/', photo_key, searchDoc)
 	return result
 
@@ -64,7 +67,7 @@ def recognizeText(local_image_path):
 	api.SetOutputName("outputName");
 	api.Init("/usr/share/tesseract-ocr/", "eng", tesseract.OEM_DEFAULT)
 	api.SetPageSegMode(tesseract.PSM_AUTO)
-	print "Evaluating: %s" % local_image_path
+	logger.debug("Evaluating: %s" % local_image_path)
 	pix_image = tesseract.pixRead(str(local_image_path))
 	api.SetImage(pix_image)
 	
@@ -77,21 +80,22 @@ def recognizeText(local_image_path):
 	if output_text:
 		output_text = cleanText(output_text)
 		
-		print "OCR output:\n%s" % output_text
-		print "Confidence Level: %d %%" % conf
-		print "..............."
+		logger.debug("OCR output:\n%s" % output_text)
+		logger.debug("Confidence Level: %d %%" % conf)
 		for word in output_text.split(' '):
 			word = word.strip()
-			if (isWordGarbage(word) or len(word) == 0):
-				print "Throwing out: %s" % word
+			if len(word) == 0:
+				pass
+			elif isWordGarbage(word):
+				logger.debug("Throwing out: %s" % word)
 			else:
-				print "Keeping: %s" % word
+				logger.debug("Keeping: %s" % word)
 				goodWords.append(word)
 	else:
 		output_text = ""
-		print "output_text was None"
+		logger.debug("output_text was None")
 
-	print goodWords
+	logger.debug("Result goodWords: %s" % goodWords)
 	return ' '.join(goodWords)
 
 # Regex's used to tell if a word is garbage
@@ -169,7 +173,7 @@ def processAllPhotos():
 
 	all_photos = fb.get('/photos', None)
 
-	for photo_key, photo_data in all_photos_dict.iteritems():
+	for photo_key, photo_data in all_photos.iteritems():
 		processPhotoData(photo_key, photo_data, fb)
 
 
