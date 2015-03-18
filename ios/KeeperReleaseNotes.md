@@ -1,5 +1,12 @@
 # Keeper
 
+# Mar 18 2015 (21)
+
+- "Other" categories automatically get assigned a speed dial spot
+- Change speed dial assignments from Settings
+- Improved sign up
+- Bug fixes
+
 # Mar 13 2015 (20)
 
 - Improved sign up experience
