@@ -1,0 +1,5 @@
+{
+	"S3_BASE_URL": "https://duffy-keeper.s3.amazonaws.com/",
+	"FIREBASE_URL": "https://blazing-heat-8620.firebaseio.com",
+	"FIREBASE_KEY": "0A4pIoMBlwB5LGOo2MKNxUAG4AWuOT0OKCbJWgjF"
+}

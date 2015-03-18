@@ -13,10 +13,9 @@ if not 'KEEPER_ENV' in os.environ:
 	print "You need to define KEEPER_ENV TO dev or prod"
 	exit()
 
-if os.environ['KEEPER_ENV'] == "prod":
-	from config import prod as conf
-else:
-	from config import dev as conf
+parentPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "..")
+json_data = open(parentPath + "/config/" + os.environ['KEEPER_ENV'] + ".json")
+conf = json.load(json_data)
 
 app = Celery('celery_textrec', backend='amqp', broker='amqp://guest@localhost//')
 
@@ -24,8 +23,8 @@ from celery.utils.log import get_task_logger
 logger = get_task_logger(__name__)
 
 def auth():
-	fb = firebase_lib.FirebaseApplication(conf.FIREBASE_URL, None)
-	authentication = firebase_lib.FirebaseAuthentication(conf.FIREBASE_KEY, 
+	fb = firebase_lib.FirebaseApplication(conf['FIREBASE_URL'], None)
+	authentication = firebase_lib.FirebaseAuthentication(conf['FIREBASE_KEY'], 
 	'henry@duffytech.co',
 	 admin=True,
 	 extra={'id': 1}
@@ -40,7 +39,7 @@ def auth():
 
 def downloadImage(image_key):
 	local_image_path = '/tmp/' + image_key + ".jpg"
-	remote_image_path = conf.S3_BASE_URL + image_key
+	remote_image_path = conf['S3_BASE_URL'] + image_key
 
 	if not os.path.isfile(local_image_path):
 		f = open(local_image_path, 'wb')
