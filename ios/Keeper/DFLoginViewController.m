@@ -18,23 +18,49 @@
 @implementation DFLoginViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)loginButtonPressed:(id)sender {
-  [self login];
+  [super viewDidLoad];
+  [self setButtonEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   [self.emailTextField becomeFirstResponder];
+}
+
+- (IBAction)loginButtonPressed:(id)sender {
+  [self login];
+}
+
+- (IBAction)editingChanged:(id)sender {
+  [self setButtonEnabled:[self isCurrentEntryValid]];
+}
+
+- (BOOL)isCurrentEntryValid
+{
+  return ([self.emailTextField.text isNotEmpty]
+          && [self.passwordTextField.text isNotEmpty]);
+}
+
+- (void)setButtonEnabled:(BOOL)enabled
+{
+  self.loginButton.enabled = enabled;
+  self.loginButton.alpha = enabled ? 1.0 : 0.5;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+  if (textField == self.emailTextField
+      && textField.text.length > 0) {
+    [self.passwordTextField becomeFirstResponder];
+    return YES;
+  } else if (textField == self.passwordTextField
+             && [self isCurrentEntryValid]) {
+    [self login];
+    return YES;
+  }
+  
+  return NO;
 }
 
 - (void)login

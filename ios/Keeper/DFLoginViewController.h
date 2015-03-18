@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DFLoginViewController : UIViewController
+@interface DFLoginViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+
 - (IBAction)loginButtonPressed:(id)sender;
+- (IBAction)editingChanged:(id)sender;
 
 @end

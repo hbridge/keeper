@@ -36,19 +36,39 @@
 
 
 - (IBAction)editingChanged:(id)sender {
-  if ([self.nameTextField.text isNotEmpty]
-      && [self.emailTextField.text isNotEmpty]
-      && [self.passwordTextField.text isNotEmpty]) {
-    [self setButtonEnabled:YES];
-  } else {
-    [self setButtonEnabled:NO];
-  }
+  [self setButtonEnabled:[self isCurrentEntryValid]];
+}
+
+- (BOOL)isCurrentEntryValid
+{
+  return ([self.nameTextField.text isNotEmpty]
+          && [self.emailTextField.text isNotEmpty]
+          && [self.passwordTextField.text isNotEmpty]);
 }
 
 - (void)setButtonEnabled:(BOOL)enabled
 {
   self.createAccountButton.enabled = enabled;
   self.createAccountButton.alpha = enabled ? 1.0 : 0.5;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+  if (textField == self.nameTextField
+      && self.nameTextField.text.length > 0) {
+    [self.emailTextField becomeFirstResponder];
+    return YES;
+  } else if (textField == self.emailTextField
+      && textField.text.length > 0) {
+    [self.passwordTextField becomeFirstResponder];
+    return YES;
+  } else if (textField == self.passwordTextField
+             && [self isCurrentEntryValid]) {
+    [self createAccountPressed:self.passwordTextField];
+    return YES;
+  }
+  
+  return NO;
 }
 
 
