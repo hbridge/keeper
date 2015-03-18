@@ -6,7 +6,7 @@ var Firebase = require("firebase");
 var RMGarbage = require("rmgarbage");
 
 var startTime = new Date();
-startTime.setSeconds(startTime.getSeconds() + 2);
+startTime.setSeconds(startTime.getSeconds() + 5);
 
 var imageFirebaseRef = new Firebase("https://keeper-dev.firebaseio.com/imageData");
 imageFirebaseRef.authWithCustomToken("zElIpVVoPvzdTmVtmaYLOZ2P5vrxsMtNy0IDjQUu", function(error, result) {
