@@ -1,0 +1,3 @@
+S3_BASE_URL = 'https://duffy-keeper-dev.s3.amazonaws.com/'
+FIREBASE_URL = 'https://keeper-dev.firebaseio.com'
+FIREBASE_KEY = 'zElIpVVoPvzdTmVtmaYLOZ2P5vrxsMtNy0IDjQUu'

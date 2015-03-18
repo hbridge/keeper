@@ -9,15 +9,23 @@ import json
 import re
 import string
 
-s3_base_url = 'https://duffy-keeper-dev.s3.amazonaws.com/'
+if not 'KEEPER_ENV' in os.environ:
+	print "You need to define KEEPER_ENV TO dev or prod"
+	exit()
+
+if os.environ['KEEPER_ENV'] == "prod":
+	from config import prod as conf
+else:
+	from config import dev as conf
+
 app = Celery('celery_textrec', backend='amqp', broker='amqp://guest@localhost//')
 
 from celery.utils.log import get_task_logger
 logger = get_task_logger(__name__)
 
 def auth():
-	fb = firebase_lib.FirebaseApplication('https://keeper-dev.firebaseio.com', None)
-	authentication = firebase_lib.FirebaseAuthentication('zElIpVVoPvzdTmVtmaYLOZ2P5vrxsMtNy0IDjQUu', 
+	fb = firebase_lib.FirebaseApplication(conf.FIREBASE_URL, None)
+	authentication = firebase_lib.FirebaseAuthentication(conf.FIREBASE_KEY, 
 	'henry@duffytech.co',
 	 admin=True,
 	 extra={'id': 1}
@@ -32,7 +40,7 @@ def auth():
 
 def downloadImage(image_key):
 	local_image_path = '/tmp/' + image_key + ".jpg"
-	remote_image_path = s3_base_url + image_key
+	remote_image_path = conf.S3_BASE_URL + image_key
 
 	if not os.path.isfile(local_image_path):
 		f = open(local_image_path, 'wb')
