@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DFKeeperPhotoViewController">
@@ -24,7 +24,8 @@
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hez-Cv-yki">
-                            <rect key="frame" x="20" y="5" width="86" height="34"/>
+                            <rect key="frame" x="20" y="0.0" width="106" height="44"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="-4" minY="0.0" maxX="4" maxY="0.0"/>
                             <state key="normal" title="Tag button">
                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -35,7 +36,8 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSZ-Nd-zry">
-                            <rect key="frame" x="564" y="11" width="16" height="22"/>
+                            <rect key="frame" x="544" y="0.0" width="36" height="44"/>
+                            <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="-4" minY="0.0" maxX="4" maxY="0.0"/>
                             <state key="normal" image="Assets/Icons/TrashToolbarIcon.png">
                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -46,7 +48,8 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHM-1d-si8">
-                            <rect key="frame" x="292" y="11" width="16" height="22"/>
+                            <rect key="frame" x="272" y="0.0" width="56" height="44"/>
+                            <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="5"/>
                             <state key="normal" image="Assets/Icons/RotateToolbarIcon.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -58,12 +61,16 @@
                     <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="GSZ-Nd-zry" secondAttribute="trailing" constant="20" id="0Tt-JB-Ui4"/>
+                        <constraint firstAttribute="bottom" secondItem="Hez-Cv-yki" secondAttribute="bottom" id="CYC-rF-eST"/>
+                        <constraint firstItem="GSZ-Nd-zry" firstAttribute="top" secondItem="YD9-mn-9gW" secondAttribute="top" id="Kxt-f0-Wut"/>
                         <constraint firstAttribute="height" constant="44" id="UTf-ke-T6b"/>
-                        <constraint firstItem="GSZ-Nd-zry" firstAttribute="centerY" secondItem="Hez-Cv-yki" secondAttribute="centerY" id="Wz4-P1-ssv"/>
-                        <constraint firstAttribute="centerY" secondItem="xHM-1d-si8" secondAttribute="centerY" id="Wz4-nB-eZD"/>
                         <constraint firstAttribute="centerX" secondItem="xHM-1d-si8" secondAttribute="centerX" id="Ym9-dc-3Ju"/>
                         <constraint firstItem="Hez-Cv-yki" firstAttribute="leading" secondItem="YD9-mn-9gW" secondAttribute="leading" constant="20" id="fUD-94-e3I"/>
+                        <constraint firstAttribute="bottom" secondItem="xHM-1d-si8" secondAttribute="bottom" id="guM-zO-S7E"/>
+                        <constraint firstItem="xHM-1d-si8" firstAttribute="top" secondItem="YD9-mn-9gW" secondAttribute="top" id="qWu-Qa-S8X"/>
+                        <constraint firstAttribute="bottom" secondItem="GSZ-Nd-zry" secondAttribute="bottom" id="sBo-7m-507"/>
                         <constraint firstAttribute="centerY" secondItem="Hez-Cv-yki" secondAttribute="centerY" id="wzM-QE-XdG"/>
+                        <constraint firstItem="Hez-Cv-yki" firstAttribute="top" secondItem="YD9-mn-9gW" secondAttribute="top" id="zBF-ey-J0K"/>
                     </constraints>
                 </view>
             </subviews>
