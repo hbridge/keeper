@@ -11,7 +11,7 @@
 @implementation DFKeeperSearchPhotoTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+  self.indextedTextLabel.font = [[DFKeeperConstants LabelFont] fontWithSize:12.0];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

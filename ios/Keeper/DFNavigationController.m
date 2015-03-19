@@ -19,6 +19,10 @@
 
 @implementation DFNavigationController
 
++ (void)initialize
+{
+  }
+
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
   self = [super initWithNavigationBarClass:[UINavigationBar class] toolbarClass:[UIToolbar class]];
@@ -45,6 +49,12 @@
 {
   [super viewDidLoad];
   
+  [[UINavigationBar appearance]
+   setTitleTextAttributes:@{
+                            NSFontAttributeName: [UIFont fontWithName:@"Avenir-Medium" size:17.0],
+                            NSForegroundColorAttributeName: [UIColor whiteColor],
+                            }];
+
   [self.navigationBar setBackgroundImage:[UIImage new]
             forBarPosition:UIBarPositionAny
                 barMetrics:UIBarMetricsDefault];

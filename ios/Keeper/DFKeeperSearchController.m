@@ -166,6 +166,7 @@ static NSString *PhotosSectionTitle = @"Text";
 - (UITableViewCell *)cellForCategoryAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+  cell.textLabel.font = [[DFKeeperConstants LabelFont] fontWithSize:cell.textLabel.font.pointSize];
   cell.tintColor = [UIColor darkTextColor];
   
   NSString *category = self.categoriesSection[indexPath.row];

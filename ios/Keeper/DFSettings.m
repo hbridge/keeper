@@ -15,45 +15,59 @@
 
 - (NSArray *)fields
 {
-  return @[
-           @{
-             FXFormFieldHeader : @"Preferences",
-             FXFormFieldTitle : @"Autosave to Camera Roll",
-             FXFormFieldKey : @"autosaveToCameraRoll",
-             },
-           @{
-             FXFormFieldTitle : @"Auto Import Screenshots",
-             FXFormFieldKey : @"autoimportScreenshots",
-             },
-           @{
-             FXFormFieldTitle : @"Set Category Speed Dial",
-             FXFormFieldAction : @"configureCategories:",
-             @"textLabel.color" : [DFKeeperConstants ButtonTintColor],
-             },
-           @{
-             FXFormFieldHeader : @"Support",
-             FXFormFieldTitle : @"Version",
-             FXFormFieldKey : @"version",
-             FXFormFieldType : FXFormFieldTypeLabel
-             },
-           @{
-             FXFormFieldTitle : @"Send Diagnostic Info",
-             FXFormFieldAction : @"sendLogs:",
-             @"textLabel.color" : [DFKeeperConstants ButtonTintColor],
-             },
-
-           @{
-             FXFormFieldHeader : @"Account",
-             FXFormFieldTitle : @"Email",
-             FXFormFieldKey : @"email",
-             FXFormFieldType : FXFormFieldTypeLabel
-             },
-           @{
-             FXFormFieldTitle : @"Sign Out",
-             FXFormFieldAction : @"signOut:",
-             @"textLabel.color" : [UIColor redColor],
-             },
-           ];
+  NSMutableArray *fields =
+  [@[
+     @{
+       FXFormFieldHeader : @"Preferences",
+       FXFormFieldTitle : @"Autosave to Camera Roll",
+       FXFormFieldKey : @"autosaveToCameraRoll",
+       },
+     @{
+       FXFormFieldTitle : @"Auto Import Screenshots",
+       FXFormFieldKey : @"autoimportScreenshots",
+       },
+     @{
+       FXFormFieldTitle : @"Set Category Speed Dial",
+       FXFormFieldAction : @"configureCategories:",
+       @"textLabel.color" : [DFKeeperConstants ButtonTintColor],
+       },
+     @{
+       FXFormFieldHeader : @"Support",
+       FXFormFieldTitle : @"Version",
+       FXFormFieldKey : @"version",
+       FXFormFieldType : FXFormFieldTypeLabel,
+       },
+     @{
+       FXFormFieldTitle : @"Send Diagnostic Info",
+       FXFormFieldAction : @"sendLogs:",
+       @"textLabel.color" : [DFKeeperConstants ButtonTintColor],
+       },
+     
+     @{
+       FXFormFieldHeader : @"Account",
+       FXFormFieldTitle : @"Email",
+       FXFormFieldKey : @"email",
+       FXFormFieldType : FXFormFieldTypeLabel
+       },
+     @{
+       FXFormFieldTitle : @"Sign Out",
+       FXFormFieldAction : @"signOut:",
+       @"textLabel.color" : [UIColor redColor],
+       },
+     ] mutableCopy];
+  
+  // apply common attributes to every field
+  for (NSUInteger i = 0; i < fields.count; i++) {
+    NSMutableDictionary *attributes = [fields[i] mutableCopy];
+    [attributes
+     addEntriesFromDictionary:@{
+                                @"textLabel.font" : [[DFKeeperConstants LabelFont] fontWithSize:17.0],
+                                @"detailTextLabel.font" : [[DFKeeperConstants LabelFont] fontWithSize:17.0],
+                                }];
+    fields[i] = attributes;
+  }
+  
+  return fields;
 }
 
 - (NSString *)version

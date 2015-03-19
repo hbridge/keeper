@@ -34,6 +34,15 @@ static DFCategorizeController *categorizeController;
                                 withBackButtonTitle:@"Done"];
 }
 
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    self.navigationItem.title = @"Settings";
+  }
+  return self;
+}
+
 - (void)sendLogs:(id)sender
 {
   #if TARGET_IPHONE_SIMULATOR

@@ -45,6 +45,9 @@ const CGFloat DFKeeperPhotoHighQualityMaxLength = 1920.0;
 
 @implementation DFKeeperConstants
 
+
+#pragma mark - Style and Theme
+
 + (UIColor *)BarBackgroundColor
 {
   return [UIColor paperColorBlue700];
@@ -63,6 +66,16 @@ const CGFloat DFKeeperPhotoHighQualityMaxLength = 1920.0;
 + (UIStatusBarStyle)DefaultStatusBarStyle
 {
   return UIStatusBarStyleLightContent;
+}
+
++ (NSString *)DefaultFontFamily
+{
+  return @"ProximaNova-Regular";
+}
+
++ (UIFont *)LabelFont
+{
+  return [UIFont fontWithName:@"ProximaNova-Regular" size:17.0];
 }
 
 

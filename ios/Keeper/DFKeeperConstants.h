@@ -35,11 +35,14 @@ extern NSString *const DFUserLoggedOutNotification;
 extern const CGFloat DFKeeperPhotoDefaultThumbnailSize;
 extern const CGFloat DFKeeperPhotoHighQualityMaxLength;
 
+#pragma mark - Style and Theme
+
 + (UIColor *)ButtonTintColor;
 + (UIColor *)BarBackgroundColor;
 + (UIColor *)BarForegroundColor;
 + (UIStatusBarStyle)DefaultStatusBarStyle;
-
++ (NSString *)DefaultFontFamily;
++ (UIFont *)LabelFont;
 
 #pragma mark - Legal
 

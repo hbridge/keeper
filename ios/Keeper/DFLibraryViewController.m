@@ -53,6 +53,9 @@
   
   self.searchBar.backgroundImage = [UIImage imageWithColor:[DFKeeperConstants BarBackgroundColor]];
   self.searchBar.tintColor = [UIColor whiteColor];
+  
+  UIFont *labelFont = [DFKeeperConstants LabelFont];
+  [[UILabel appearance] setFont:labelFont];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -136,7 +139,7 @@
   if (self.categoryFilter) {
     self.navigationItem.title = self.categoryFilter;
   } else {
-    self.navigationItem.title = @"Library";
+    self.navigationItem.title = @"Keeper";
     self.navigationItem.leftBarButtonItems = @[
                                                [[UIBarButtonItem alloc]
                                                 initWithImage:[UIImage imageNamed:@"Assets/Icons/SettingsBarButton"]

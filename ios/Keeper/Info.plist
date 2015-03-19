@@ -22,6 +22,19 @@
 	<string>21</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Assets/Fonts/ProximaNova-Regular.otf</string>
+		<string>Assets/Fonts/ProximaNova-Black.otf</string>
+		<string>Assets/Fonts/ProximaNova-Bold.otf</string>
+		<string>Assets/Fonts/ProximaNova-BoldIt.otf</string>
+		<string>Assets/Fonts/ProximaNova-Extrabold.otf</string>
+		<string>Assets/Fonts/ProximaNova-Light.otf</string>
+		<string>Assets/Fonts/ProximaNova-LightItalic.otf</string>
+		<string>Assets/Fonts/ProximaNova-RegularItalic.otf</string>
+		<string>Assets/Fonts/ProximaNova-Semibold.otf</string>
+		<string>AssetsFonts/ProximaNova-SemiboldItalic.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
