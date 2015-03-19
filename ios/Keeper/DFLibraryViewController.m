@@ -55,7 +55,8 @@
   self.searchBar.tintColor = [UIColor whiteColor];
   
   UIFont *labelFont = [DFKeeperConstants LabelFont];
-  [[UILabel appearance] setFont:labelFont];
+  [[UILabel appearanceWhenContainedIn:[UISearchBar class], nil] setFont:labelFont];
+  [[UILabel appearanceWhenContainedIn:[UITableView class], nil] setFont:labelFont];
 }
 
 - (void)viewWillAppear:(BOOL)animated

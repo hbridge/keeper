@@ -30,7 +30,7 @@
                                 <constraint firstAttribute="height" constant="44" id="QD5-HM-T1U"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no" returnKeyType="next"/>
                             <connections>
                                 <action selector="editingChanged:" destination="-1" eventType="editingChanged" id="Ohh-CY-rHA"/>
                                 <outlet property="delegate" destination="-1" id="TKM-gL-Rc2"/>

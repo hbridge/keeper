@@ -10,14 +10,14 @@
 #import <Firebase/Firebase.h>
 #import "DFKeeperStore.h"
 #import "DFUser.h"
-#import <BRFullTextSearch/BRFullTextSearch.h>
-#import <CLuceneSearchService.h>
+#import <FMDB/FMDB.h>
 
 @interface DFKeeperSearchIndexManager()
 
 @property (nonatomic, retain) Firebase *searchDocsRef;
-@property (nonatomic, retain) id<BRSearchService> searchService;
-@property (nonatomic) dispatch_queue_t index_queue;
+@property (nonatomic, retain) FMDatabaseQueue *dbQueue;
+
+
 @end
 
 @implementation DFKeeperSearchIndexManager
@@ -42,11 +42,12 @@
 {
   self = [super init];
   if (self) {
-    dispatch_queue_attr_t queue_attr =  dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL,
-                                            QOS_CLASS_DEFAULT,
-                                            0);
-    self.index_queue = dispatch_queue_create("KeeperSearchIndexManager", queue_attr);
-    self.searchService = [[CLuceneSearchService alloc] initWithIndexPath:[self.class indexPath]];;
+    self.dbQueue = [FMDatabaseQueue databaseQueueWithPath:[self.class indexPath]];
+    [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+      [db executeUpdate:@"CREATE VIRTUAL TABLE IF NOT EXISTS docs USING fts4(id, contents);"];
+      [db executeUpdate:@"CREATE UNIQUE INDEX IF NOT EXISTS idx_ids ON docs (id)"];
+    }];
+    
     self.searchDocsRef= [[[Firebase alloc] initWithUrl:DFFirebaseRootURLString]
                     childByAppendingPath:@"searchDocs"];
     [self printFullIndex];
@@ -64,24 +65,25 @@
 
 - (void)scanForDeletedDocs:(NSSet *)foundSearchDocKeys
 {
-  dispatch_async(self.index_queue, ^{
-    NSMutableSet *notFoundIdentifiersInIndex = [NSMutableSet new];
-    [[self allResultsInIndex] iterateWithBlock:^(NSUInteger index, id<BRSearchResult> result, BOOL *stop) {
-      /// the identifier has the type (?) in front of the ID, so we have to remove it 
-      NSString *identifier = [[result valueForField:kBRSearchFieldNameIdentifier] substringFromIndex:1];
-      [notFoundIdentifiersInIndex addObject:identifier];
-    }];
-    
-    DDLogVerbose(@"%@ delete scan identifiers in index: %@ foundSearchDocs: %@", self.class,
-                 notFoundIdentifiersInIndex,
-                 foundSearchDocKeys);
-    [notFoundIdentifiersInIndex minusSet:foundSearchDocKeys];
-    
-    if (notFoundIdentifiersInIndex.count > 0) {
-      DDLogInfo(@"%@ %@ photos in index need to be deleted", self.class, @(notFoundIdentifiersInIndex.count));
-      [self removeKeysFromIndex:notFoundIdentifiersInIndex.allObjects];
-    }
-  });
+  
+//  dispatch_async(self.index_queue, ^{
+//    NSMutableSet *notFoundIdentifiersInIndex = [NSMutableSet new];
+//    [[self allResultsInIndex] iterateWithBlock:^(NSUInteger index, id<BRSearchResult> result, BOOL *stop) {
+//      /// the identifier has the type (?) in front of the ID, so we have to remove it 
+//      NSString *identifier = [[result valueForField:kBRSearchFieldNameIdentifier] substringFromIndex:1];
+//      [notFoundIdentifiersInIndex addObject:identifier];
+//    }];
+//    
+//    DDLogVerbose(@"%@ delete scan identifiers in index: %@ foundSearchDocs: %@", self.class,
+//                 notFoundIdentifiersInIndex,
+//                 foundSearchDocKeys);
+//    [notFoundIdentifiersInIndex minusSet:foundSearchDocKeys];
+//    
+//    if (notFoundIdentifiersInIndex.count > 0) {
+//      DDLogInfo(@"%@ %@ photos in index need to be deleted", self.class, @(notFoundIdentifiersInIndex.count));
+//      [self removeKeysFromIndex:notFoundIdentifiersInIndex.allObjects];
+//    }
+//  });
 }
 
 - (void)observeSearchDocChanges
@@ -91,6 +93,7 @@
     queryEqualToValue:[DFUser loggedInUser]]
    observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *allDocsSnapshot) {
      NSMutableSet *allKeys = [NSMutableSet new];
+     
      
      for (FDataSnapshot *snapshot in allDocsSnapshot.children) {
        [allKeys addObject:snapshot.key];
@@ -105,32 +108,23 @@
 
 - (void)indexKey:(NSString *)key value:(NSString *)value
 {
-  dispatch_async(self.index_queue, ^{
-    DDLogVerbose(@"%@ indexing %@ with value %@", self.class, key, value);
-    // add a document to the index
-    if (!key || !value) return;
-    id<BRIndexable> doc = [[BRSimpleIndexable alloc]
-                           initWithIdentifier:key
-                           data:@{
-                                  kBRSearchFieldNameValue : value
-                                  }];
-    NSError *error = nil;
-    [self.searchService addObjectToIndexAndWait:doc error:&error];
-    if (error) DDLogError(@"%@ error indexing: %@", self.class, error);
-  });
+  [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+    FMResultSet *resultSet = [db executeQuery:@"SELECT id FROM docs WHERE id = ?", key];
+    if ([resultSet next]) {
+      [db executeUpdate:@"UPDATE docs SET contents = ? WHERE id like ?", value, key];
+    } else {
+      [db executeUpdate:@"INSERT INTO docs (id, contents) VALUES(?, ?);", key, value];
+    }
+  }];
 }
 
 - (void)removeKeysFromIndex:(NSArray *)keys
 {
-  dispatch_async(self.index_queue, ^{
-    NSSet *keySet = [NSSet setWithArray:keys];
-    NSError *error;
-    [self.searchService removeObjectsFromIndexAndWait:BRSearchObjectTypeForString(@"?")
-                                      withIdentifiers:keySet
-                                                error:&error];
-    if (error)DDLogError(@"%@ error removing keys: %@", self.class, error);
-    else DDLogInfo(@"%@ removed key for objects: %@", self.class, keySet);
-  });
+  for (NSString *key in keys) {
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+      [db executeUpdate:@"DELETE FROM docs WHERE id = ?", key];
+    }];
+  }
 }
 
 - (void)deleteIndexedDocumentForObject:(NSString *)objectKey
@@ -146,91 +140,74 @@
     return;
   }
   
-  static NSExpression *ValueExpression; if ( ValueExpression == nil ) {
-    ValueExpression = [NSExpression expressionForKeyPath:kBRSearchFieldNameValue];
+  // split into tokens, add asterisks and make them match for substrings
+  NSMutableArray *tokens = [[[searchString lowercaseString] componentsSeparatedByString:@" "] mutableCopy];
+  for (NSInteger i = tokens.count - 1; i >= 0; i--) {
+    NSString *token = tokens[i];
+    if ([token isNotEmpty]) {
+      tokens[i] = [token stringByAppendingString:@"*"];
+    } else {
+      [tokens removeObjectAtIndex:i];
+    }
   }
-  NSArray *tokens = [[[searchString lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-                     componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-  NSMutableArray *predicates = [NSMutableArray arrayWithCapacity:([tokens count] * 2)];
-  for ( NSString *token in tokens ) {
-    [predicates addObject:[NSComparisonPredicate
-                           predicateWithLeftExpression:ValueExpression
-                           rightExpression:[NSExpression expressionForConstantValue:token]
-                           modifier:NSDirectPredicateModifier
-                           type:NSLikePredicateOperatorType
-                           options:0]];
-    [predicates addObject:[NSComparisonPredicate
-                           predicateWithLeftExpression:ValueExpression
-                           rightExpression:[NSExpression expressionForConstantValue:token]
-                           modifier:NSDirectPredicateModifier
-                           type:NSBeginsWithPredicateOperatorType
-                           options:0]];
-  }
-  NSPredicate *predicateQuery = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
   
-  id<BRSearchResults> results = [self.searchService
-                                 searchWithPredicate:predicateQuery
-                                 sortBy:nil
-                                 sortType:0
-                                 ascending:NO];
-  NSMutableArray *keys = [NSMutableArray new];
-  [results iterateWithBlock:^(NSUInteger index, id<BRSearchResult>result, BOOL *stop) {
-    DDLogVerbose(@"For query %@ found result: %@", predicateQuery, [result valueForField:kBRSearchFieldNameValue]);
-    DFKeeperSearchResult *searchResult = [[DFKeeperSearchResult alloc] init];
-    NSString *photoKey = [result identifier];
-    searchResult.objectKey = photoKey;
-    searchResult.documentString = [result valueForField:kBRSearchFieldNameValue];
-    [keys addObject:searchResult];
+  NSMutableString *queryString = [@"''" mutableCopy];
+  [queryString insertString:[tokens componentsJoinedByString:@" OR "] atIndex:1];
+  [queryString insertString:@"SELECT id, contents FROM docs WHERE docs MATCH " atIndex:0];
+  DDLogVerbose(@"Query:%@", queryString);
+  
+  [self.dbQueue inDatabase:^(FMDatabase *db) {
+    NSMutableArray *results = [NSMutableArray array];
+    FMResultSet *resultSet = [db executeQuery:queryString];
+    while ([resultSet next]) {
+      DFKeeperSearchResult *result = [DFKeeperSearchResult new];
+      result.objectKey = [resultSet stringForColumn:@"id"];
+      result.documentString = [resultSet stringForColumn:@"contents"];
+      [results addObject:result];
+    }
+    completion(results);
   }];
-  
-  completion(keys);
 }
 
 - (void)resultForKey:(NSString *)key completion:(void(^)(DFKeeperSearchResult *result))completion
 {
-  id<BRSearchResult> result = [self.searchService findObject:BRSearchObjectTypeForString(@"?")
-                                              withIdentifier:key];
-  DFKeeperSearchResult *searchResult = [[DFKeeperSearchResult alloc] init];
-  searchResult.objectKey = [result identifier];
-  searchResult.documentString = [result valueForField:kBRSearchFieldNameValue];
-  completion(searchResult);
+  [self.dbQueue inDatabase:^(FMDatabase *db) {
+    NSMutableArray *results = [NSMutableArray array];
+    FMResultSet *resultSet = [db executeQuery:@"SELECT id, contents FROM docs WHERE id = ?", key];
+    while ([resultSet next]) {
+      DFKeeperSearchResult *result = [DFKeeperSearchResult new];
+      result.objectKey = [resultSet stringForColumn:@"id"];
+      result.documentString = [resultSet stringForColumn:@"contents"];
+      [results addObject:result];
+    }
+    completion(results.firstObject);
+  }];
 }
 
 - (void)printFullIndex
 {
-  [[self allResultsInIndex] iterateWithBlock:^(NSUInteger index, id<BRSearchResult>result, BOOL *stop) {
-    DDLogVerbose(@"%@ result in index: %@", self.class, [result dictionaryRepresentation]);
+  [self fetchAllResults:^(FMResultSet *resultSet) {
+    while ([resultSet next]) {
+      DDLogVerbose(@"%@ result in index: %@: %@", self.class,
+                   [resultSet stringForColumn:@"id"],
+                   [resultSet stringForColumn:@"contents"]);
+    }
   }];
 }
 
-- (id<BRSearchResults>)allResultsInIndex
+- (void)fetchAllResults:(void(^)(FMResultSet *resultSet))completion
 {
-  static NSExpression *ValueExpression; if ( ValueExpression == nil ) {
-    ValueExpression = [NSExpression expressionForKeyPath:kBRSearchFieldNameTimestamp];
-  }
-  
-  NSPredicate *predicate = [NSComparisonPredicate
-                            predicateWithLeftExpression:ValueExpression
-                            rightExpression:[NSExpression expressionForConstantValue:@(0)]
-                            modifier:NSDirectPredicateModifier
-                            type:NSGreaterThanOrEqualToPredicateOperatorType
-                            options:0];
-  
-  id<BRSearchResults> results = [self.searchService
-                                 searchWithPredicate:predicate
-                                 sortBy:nil
-                                 sortType:0
-                                 ascending:NO];
-  return results;
+  [self.dbQueue inDatabase:^(FMDatabase *db) {
+    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM docs"];
+    completion(resultSet);
+  }];
 }
-
-
 
 + (NSString *)indexPath
 {
   NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                                 inDomains:NSUserDomainMask] lastObject];
-  NSURL *dbURL = [documentsURL URLByAppendingPathComponent:@"searchindex.clucene"];
+  NSURL *dbURL = [documentsURL URLByAppendingPathComponent:@"searchindex.db"];
   return [dbURL path];
 }
 
@@ -239,13 +216,11 @@
 {
   DDLogInfo(@"%@ resetting index", self.class);
   NSError *error;
-  [self.searchService bulkUpdateIndexAndWait:^(id<BRIndexUpdateContext> updateContext) {
-    [self.searchService removeAllObjectsFromIndex:updateContext];
-  } error:&error];
+  [self.dbQueue inDatabase:^(FMDatabase *db) {
+    [db executeUpdate:@"DROP TABLE docs"];
+  }];
   
   if (error) DDLogError(@"%@ error resetting index: %@", self.class, error);
-  
 }
-
 
 @end
