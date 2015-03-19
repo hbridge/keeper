@@ -149,7 +149,7 @@
   static NSExpression *ValueExpression; if ( ValueExpression == nil ) {
     ValueExpression = [NSExpression expressionForKeyPath:kBRSearchFieldNameValue];
   }
-  NSArray *tokens = [[searchString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
+  NSArray *tokens = [[[searchString lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                      componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
   NSMutableArray *predicates = [NSMutableArray arrayWithCapacity:([tokens count] * 2)];
   for ( NSString *token in tokens ) {
