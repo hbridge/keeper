@@ -88,8 +88,7 @@
 
 - (void)setAutoimportScreenshots:(BOOL)autoimportScreenshots
 {
-  [DFSettingsManager setObject:autoimportScreenshots ? DFSettingValueYes : DFSettingValueNo
-                    forSetting:DFSettingAutoImportScreenshots];
+  [DFSettingsManager setAutoImportScreenshotsEnabled:autoimportScreenshots];
 }
 
 - (BOOL)autoimportScreenshots

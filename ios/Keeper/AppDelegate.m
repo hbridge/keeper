@@ -21,6 +21,7 @@
 #import "DFNavigationController.h"
 #import "DFUserLoginManager.h"
 #import "DFKeeperSearchIndexManager.h"
+#import "DFSettingsManager.h"
 
 @interface AppDelegate ()
 
@@ -35,6 +36,7 @@
   [self printSimulatorInfo];
   [self configureLogs];
   [self configureHockey];
+  [DFSettingsManager validateSettings];
   [self configureNetworking];
   [self configureUI];
   [self observeNotifications];

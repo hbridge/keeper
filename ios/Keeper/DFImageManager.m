@@ -108,10 +108,6 @@ static BOOL logRouting = NO;
                                            selector:@selector(imageUploaded:)
                                                name:DFImageUploadedNotification
                                              object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(newScreenshot:)
-                                               name:DFNewScreenshotNotification
-                                             object:nil];
 }
 
 - (void)handleLowMemory:(NSNotification *)note
@@ -580,17 +576,6 @@ static BOOL logRouting = NO;
   }
 }
 
-- (void)newScreenshot:(NSNotification *)note
-{
-  NSSet *newScrenshotIds = note.userInfo[DFNewScreenshotNotificationIdentifiersSetKey];
-  if ([DFSettingsManager isSettingEnabled:DFSettingAutoImportScreenshots]) {
-    NSMutableDictionary *assetsToCategories = [NSMutableDictionary new];
-    for (NSString *localIdentifier in newScrenshotIds) {
-      assetsToCategories[localIdentifier] = @"Screenshot";
-    }
-    [[DFImageImportManager sharedManager] importAssetsWithIdentifiersToCategories:assetsToCategories];
-  }
-}
 
 - (void)deleteImage:(NSString *)imageKey
 {

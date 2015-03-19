@@ -85,16 +85,13 @@
                                     actionWithTitle:@"Not Now"
                                     style:DFAlertActionStyleCancel
                                     handler:^(DFAlertAction *action) {
-                                      [DFSettingsManager setObject:DFSettingValueNo
-                                                        forSetting:DFSettingAutoImportScreenshots];
+                                      [DFSettingsManager setAutoImportScreenshotsEnabled:NO];
                                     }]];
     [promptForAutoImport addAction:[DFAlertAction
                                     actionWithTitle:@"Yes"
                                     style:DFAlertActionStyleDefault
                                     handler:^(DFAlertAction *action) {
-                                      [DFSettingsManager setObject:DFSettingValueYes
-                                                        forSetting:DFSettingAutoImportScreenshots];
-
+                                      [DFSettingsManager setAutoImportScreenshotsEnabled:YES];
                                       // our first scan should ignore new screenshots
                                       [[DFCameraRollScanManager sharedManager]
                                        scanWithMode:DFCameraRollScanModeIgnoreNewScreenshots

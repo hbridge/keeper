@@ -16,7 +16,16 @@ NSString *const DFSettingValueNo = @"No";
 
 DFSettingType DFSettingAutoSaveToCameraRoll = @"autoSaveToCameraRoll";
 DFSettingType DFSettingAutoImportScreenshots = @"autoImportScreenshots";
+DFSettingType DFSettingAutoImportScreenshotsMinDate = @"autoImportScreenshotsMinDate";
 DFSettingType DFSettingSpeedDialCategories = @"userCategories";
+
++ (void)validateSettings
+{
+  if ([[self objectForSetting:DFSettingAutoImportScreenshots] isEqual:DFSettingValueYes]
+      && ![self objectForSetting:DFSettingAutoImportScreenshotsMinDate]) {
+    [self setObject:[NSDate date] forSetting:DFSettingAutoImportScreenshotsMinDate];
+  }
+}
 
 + (void)setObject:(id)object forSetting:(DFSettingType)setting
 {
@@ -42,5 +51,15 @@ DFSettingType DFSettingSpeedDialCategories = @"userCategories";
 {
   return [[self objectForSetting:setting] isEqual:DFSettingValueYes];
 }
+
++ (void)setAutoImportScreenshotsEnabled:(BOOL)enabled
+{
+  NSString *importValue = enabled ? DFSettingValueYes : DFSettingValueNo;
+  NSDate *minDate = enabled ? [NSDate date] : nil;
+  [self setObject:importValue forSetting:DFSettingAutoImportScreenshots];
+  [self setObject:minDate forSetting:DFSettingAutoImportScreenshotsMinDate];
+}
+
+
 
 @end

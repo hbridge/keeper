@@ -8,6 +8,8 @@
 
 #import "DFCameraRollScanManager.h"
 #import "DFCameraRollScanDB.h"
+#import "DFImageImportManager.h"
+#import "DFSettingsManager.h"
 
 @interface DFCameraRollScanManager()
 
@@ -81,8 +83,11 @@ const int DFCameraRollScanManagerScanVersion = 1;
         }
       }
       
-      // scan for relevant changes
-      if (unscannedAssets.count > 0 && mode != DFCameraRollScanModeIgnoreNewScreenshots) {
+      // scan for screenshots
+      if (unscannedAssets.count > 0
+          && mode != DFCameraRollScanModeIgnoreNewScreenshots
+          && [[DFSettingsManager objectForSetting:DFSettingAutoImportScreenshots]
+              isEqual:DFSettingValueYes]) {
         [self.class findNewScreenshots:unscannedAssets];
       }
       
@@ -98,13 +103,16 @@ const int DFCameraRollScanManagerScanVersion = 1;
 
 + (void)findNewScreenshots:(NSArray *)assetsToScan
 {
-  DDLogInfo(@"%@ scanning %@ assets for new screenshots", self, @(assetsToScan.count));
+  NSDate *minDate = [DFSettingsManager objectForSetting:DFSettingAutoImportScreenshotsMinDate];
+  DDLogInfo(@"%@ scanning %@ assets for new screenshots after %@", self, @(assetsToScan.count), minDate);
   NSSet *knownScreenshotIDs = [[DFCameraRollScanDB sharedDB] localIdentifiersOfScreenshots];
   NSMutableSet *newScreenshots = [NSMutableSet new];
   
   PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
   requestOptions.synchronous = YES;
   for (PHAsset *asset in assetsToScan) {
+    if (![self.class sizeIsScreenshotSize:CGSizeMake(asset.pixelWidth, asset.pixelHeight)]) continue;
+    if ([asset.creationDate compare:minDate] != NSOrderedDescending) continue;
     @autoreleasepool {
       [[PHImageManager defaultManager]
        requestImageDataForAsset:asset
@@ -126,6 +134,29 @@ const int DFCameraRollScanManagerScanVersion = 1;
      object:self
      userInfo:@{DFNewScreenshotNotificationIdentifiersSetKey : newScreenshots}];
   });
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSMutableDictionary *assetsToCategories = [NSMutableDictionary new];
+    for (NSString *assetIdentifier in newScreenshots) {
+      assetsToCategories[assetIdentifier] = @"Screenshot";
+    }
+    [[DFImageImportManager sharedManager] importAssetsWithIdentifiersToCategories:assetsToCategories];
+  });
+}
+
++ (BOOL)sizeIsScreenshotSize:(CGSize)size
+{
+  CGSize sizes[2] = {size, CGSizeMake(size.height, size.width)};
+  for (int i = 0; i < 2; i++) {
+    CGSize s = sizes[i];
+    if (
+        (s.width == 640 && s.height == 960) // iPhone 4
+        || (s.width == 640 && s.height == 1136) // iPhone 5
+        || (s.width == 750 && s.height == 1334) // iPhone 6
+        || (s.width == 2208 && s.height == 1242) // iPhone 6+
+        ) return YES;
+  }
+  
+  return NO;
 }
 
 - (void)reset
