@@ -186,6 +186,16 @@
   completion(keys);
 }
 
+- (void)resultForKey:(NSString *)key completion:(void(^)(DFKeeperSearchResult *result))completion
+{
+  id<BRSearchResult> result = [self.searchService findObject:BRSearchObjectTypeForString(@"?")
+                                              withIdentifier:key];
+  DFKeeperSearchResult *searchResult = [[DFKeeperSearchResult alloc] init];
+  searchResult.objectKey = [result identifier];
+  searchResult.documentString = [result valueForField:kBRSearchFieldNameValue];
+  completion(searchResult);
+}
+
 - (void)printFullIndex
 {
   [[self allResultsInIndex] iterateWithBlock:^(NSUInteger index, id<BRSearchResult>result, BOOL *stop) {

@@ -28,5 +28,6 @@
 - (void)logout;
 - (void)dismissNotLoggedInControllerWithCompletion:(DFVoidBlock)completion;
 - (NSString *)loggedInEmailAddress;
+- (BOOL)isLoggedInUserDeveloper;
 
 @end

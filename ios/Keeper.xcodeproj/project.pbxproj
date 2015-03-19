@@ -88,6 +88,8 @@
 		5AC04E1E1AA51A70008E44A8 /* DFKeeperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E1D1AA51A70008E44A8 /* DFKeeperObject.m */; };
 		5AC04E241AA52C17008E44A8 /* NSDictionary+DFJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E231AA52C17008E44A8 /* NSDictionary+DFJSON.m */; };
 		5AC04E281AA52C70008E44A8 /* NSArray+DFJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E271AA52C70008E44A8 /* NSArray+DFJSON.m */; };
+		5AFF98881ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFF98861ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.m */; };
+		5AFF98891ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AFF98871ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.xib */; };
 		DC2A7B9402905231BE306701 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88AD2FD4651BA4B4CAD0AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -260,6 +262,9 @@
 		5AC04E251AA52C62008E44A8 /* DFJSONConvertible.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFJSONConvertible.h; sourceTree = "<group>"; };
 		5AC04E261AA52C70008E44A8 /* NSArray+DFJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DFJSON.h"; sourceTree = "<group>"; };
 		5AC04E271AA52C70008E44A8 /* NSArray+DFJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DFJSON.m"; sourceTree = "<group>"; };
+		5AFF98851ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperPhotoInfoViewController.h; sourceTree = "<group>"; };
+		5AFF98861ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperPhotoInfoViewController.m; sourceTree = "<group>"; };
+		5AFF98871ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFKeeperPhotoInfoViewController.xib; sourceTree = "<group>"; };
 		C5EA541A400364F5B9C2B943 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F8622FA142075D9EFE24176B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -463,6 +468,9 @@
 				5A677D5A1A9BD8030060B55D /* DFKeeperPhotoViewController.h */,
 				5A677D5B1A9BD8030060B55D /* DFKeeperPhotoViewController.m */,
 				5A677D5C1A9BD8030060B55D /* DFKeeperPhotoViewController.xib */,
+				5AFF98851ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.h */,
+				5AFF98861ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.m */,
+				5AFF98871ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.xib */,
 				5A6DED911A9D08920038EF9F /* DFCategorizeController.h */,
 				5A6DED921A9D08920038EF9F /* DFCategorizeController.m */,
 				5A1241931AAA5F1B0036859E /* DFKeeperSearchIndexManager.h */,
@@ -688,6 +696,7 @@
 				5A8EB8D91A9153F00033C540 /* LaunchScreen.xib in Resources */,
 				5A8EB8D61A9153F00033C540 /* Images.xcassets in Resources */,
 				5A99500A1A96548F00468484 /* DFLibraryViewController.xib in Resources */,
+				5AFF98891ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.xib in Resources */,
 				5A670CB21AAF8C13004D13E0 /* DFKeeperSearchPhotoTableViewCell.xib in Resources */,
 				5AB8217D1AA90AEF000D5781 /* DFNotLoggedInViewController.xib in Resources */,
 			);
@@ -790,6 +799,7 @@
 				5A9950501A97E44A00468484 /* DFImageDownloadManager.m in Sources */,
 				5A9950331A969FC500468484 /* DFLoginViewController.m in Sources */,
 				5A387C1E1AA7BB0400DCB601 /* DFSettingsViewController.m in Sources */,
+				5AFF98881ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.m in Sources */,
 				5A9950511A97E44A00468484 /* DFDeferredCompletionScheduler.m in Sources */,
 				5AA508071AA64AC5007A9375 /* DFKeeperSearchController.m in Sources */,
 				5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */,

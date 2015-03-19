@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DFKeeperPhotoInfoViewController">
+            <connections>
+                <outlet property="contentViewWidthConstraint" destination="vVo-cv-ggd" id="wSs-7f-FaG"/>
+                <outlet property="indexedTextField" destination="U7c-0q-gHJ" id="EdW-HS-MpS"/>
+                <outlet property="saveDateLabel" destination="lfi-eN-NqX" id="bp5-aV-83s"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pzk-ii-lYB">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBJ-Ws-Wak" userLabel="ContentView">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="494"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Saved: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QJ-t7-IfE">
+                                    <rect key="frame" x="8" y="20" width="103" height="21"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Indexed Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6Y-me-fhF">
+                                    <rect key="frame" x="8" y="61" width="103" height="21"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfi-eN-NqX">
+                                    <rect key="frame" x="119" y="21" width="79" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7c-0q-gHJ">
+                                    <rect key="frame" x="8" y="86" width="304" height="400"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="400" id="AJw-r1-8w3"/>
+                                    </constraints>
+                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="lfi-eN-NqX" firstAttribute="centerY" secondItem="0QJ-t7-IfE" secondAttribute="centerY" constant="1" id="JZg-cH-UDV"/>
+                                <constraint firstItem="0QJ-t7-IfE" firstAttribute="leading" secondItem="KBJ-Ws-Wak" secondAttribute="leading" constant="8" id="Op6-T7-6au"/>
+                                <constraint firstItem="f6Y-me-fhF" firstAttribute="leading" secondItem="0QJ-t7-IfE" secondAttribute="leading" id="QlJ-k4-c4B"/>
+                                <constraint firstAttribute="bottom" secondItem="U7c-0q-gHJ" secondAttribute="bottom" constant="8" id="WJN-Vf-JVk"/>
+                                <constraint firstItem="f6Y-me-fhF" firstAttribute="top" secondItem="0QJ-t7-IfE" secondAttribute="bottom" constant="20" id="csX-Th-f1l"/>
+                                <constraint firstItem="0QJ-t7-IfE" firstAttribute="top" secondItem="KBJ-Ws-Wak" secondAttribute="top" constant="20" id="fX6-fb-Zev"/>
+                                <constraint firstItem="lfi-eN-NqX" firstAttribute="leading" secondItem="0QJ-t7-IfE" secondAttribute="trailing" constant="8" id="hPl-We-yqr"/>
+                                <constraint firstAttribute="trailing" secondItem="U7c-0q-gHJ" secondAttribute="trailing" constant="8" id="nrZ-SA-b7p"/>
+                                <constraint firstItem="U7c-0q-gHJ" firstAttribute="leading" secondItem="KBJ-Ws-Wak" secondAttribute="leading" constant="8" id="ox9-Yu-qKR"/>
+                                <constraint firstAttribute="width" constant="320" id="vVo-cv-ggd"/>
+                                <constraint firstItem="U7c-0q-gHJ" firstAttribute="top" secondItem="f6Y-me-fhF" secondAttribute="bottom" constant="4" id="wPw-P5-DwG"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="KBJ-Ws-Wak" firstAttribute="leading" secondItem="Pzk-ii-lYB" secondAttribute="leading" id="7Cw-hg-JwO"/>
+                        <constraint firstItem="KBJ-Ws-Wak" firstAttribute="top" secondItem="Pzk-ii-lYB" secondAttribute="top" id="KVB-sM-qXA"/>
+                        <constraint firstAttribute="trailing" secondItem="KBJ-Ws-Wak" secondAttribute="trailing" id="UIi-Q9-bG8"/>
+                        <constraint firstAttribute="bottom" secondItem="KBJ-Ws-Wak" secondAttribute="bottom" id="x4N-u1-edO"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Pzk-ii-lYB" secondAttribute="trailing" id="9X2-nP-ZvH"/>
+                <constraint firstItem="Pzk-ii-lYB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Z5v-XH-eG8"/>
+                <constraint firstItem="Pzk-ii-lYB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bzB-vC-6fQ"/>
+                <constraint firstAttribute="bottom" secondItem="Pzk-ii-lYB" secondAttribute="bottom" id="zZo-3q-hOI"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

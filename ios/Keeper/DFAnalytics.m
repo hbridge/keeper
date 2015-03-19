@@ -36,6 +36,7 @@ DFAnalyticsEventType DFAnalyticsEventPhotoImported = @"PhotoImported";
 DFAnalyticsEventType DFAnalyticsEventLibraryPhotoTapped = @"LibraryPhotoTapped";
 DFAnalyticsEventType DFAnalyticsEventLibraryFiltered = @"LibraryFiltered";
 DFAnalyticsEventType DFAnalyticsEventSettingChanged = @"SettingChanged";
+DFAnalyticsEventType DFAnalyticsEventPhotoAction = @"PhotoAction";
 
 
 static DFAnalytics *defaultLogger;

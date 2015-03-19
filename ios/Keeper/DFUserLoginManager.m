@@ -165,4 +165,26 @@ static DFNotLoggedInViewController *notLoggedInController;
   return nil;
 }
 
+- (BOOL)isLoggedInUserDeveloper
+{
+  #ifdef DEBUG
+    return YES;
+  #else 
+    NSString *email = [self loggedInEmailAddress];
+    NSArray *devEmails = @[
+                           @"hbridge@gmail.com",
+                           @"aseem123@gmail.com",
+                           @"dparham@gmail.com",
+                           ];
+    
+    for (NSString *devEmail in devEmails) {
+      if ([devEmail isEqualToString:email]) return YES;
+      if ([devEmail containsString:@"@duffytech.co"]) return YES;
+    }
+    
+    return NO;
+  #endif
+}
+
+
 @end

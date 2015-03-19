@@ -17,6 +17,8 @@
 #import "DFUIKit.h"
 #import "UIImage+DFHelpers.h"
 #import "DFKeeperStore.h"
+#import "DFKeeperPhotoInfoViewController.h"
+#import "DFUserLoginManager.h"
 
 @interface DFKeeperPhotoViewController ()
 
@@ -29,8 +31,28 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  [self configureNav];
+  
   if (self.photo)
     [self reloadData];
+}
+
+- (void)configureNav
+{
+  NSMutableArray *items = [NSMutableArray new];
+  [items addObject:
+   [[UIBarButtonItem alloc]
+    initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+    target:self
+    action:@selector(actionPressed:)]];
+  if ([[DFUserLoginManager sharedManager] isLoggedInUserDeveloper]) {
+    [items addObject:[[UIBarButtonItem alloc]
+                      initWithImage:[UIImage imageNamed:@"Assets/Icons/InfoBarButton"]
+                      style:UIBarButtonItemStylePlain
+                      target:self
+                      action:@selector(infoPressed:)]];
+  }
+  self.navigationItem.rightBarButtonItems = items;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -84,6 +106,8 @@
                           
   [self.tagButton setTitle:self.photo.category forState:UIControlStateNormal];
 }
+
+#pragma mark - Actions
 
 - (IBAction)categoryButtonPressed:(id)sender {
   self.categorizeController = [DFCategorizeController new];
@@ -142,6 +166,44 @@
      [[DFImageManager sharedManager] setExifOrientation:newExifOrientation
                                                forImage:image.key];
    }];
+}
+
+- (void)actionPressed:(id)sender
+{
+  [[DFImageManager sharedManager]
+   originalImageForID:self.photo.imageKey
+   completion:^(UIImage *image) {
+     dispatch_async(dispatch_get_main_queue(), ^{
+       UIActivityViewController *avc = [[UIActivityViewController alloc]
+                                        initWithActivityItems:@[image]
+                                        applicationActivities:nil];
+       if ([avc respondsToSelector:@selector(setCompletionWithItemsHandler:)]) {
+         avc.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+           [DFAnalytics logEvent:DFAnalyticsEventPhotoAction
+                  withParameters:@{
+                                   @"completed" : @(completed),
+                                   @"activityType" : activityType ? activityType : @"none"
+                                   }];
+         };
+       } else if ([avc respondsToSelector:@selector(setCompletionHandler:)]) {
+         avc.completionHandler = ^(NSString *activityType, BOOL completed) {
+           [DFAnalytics logEvent:DFAnalyticsEventPhotoAction
+                  withParameters:@{
+                                   @"completed" : @(completed),
+                                   @"activityType" : activityType ? activityType : @"none"
+                                   }];
+         };
+       }
+       [self presentViewController:avc animated:YES completion:nil];
+     });
+   }];
+}
+
+- (void)infoPressed:(id)sender
+{
+  DFKeeperPhotoInfoViewController *infoVC = [[DFKeeperPhotoInfoViewController alloc]
+                                             initWithPhoto:self.photo];
+  [self.navigationController pushViewController:infoVC animated:YES];
 }
 
 @end
