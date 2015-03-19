@@ -74,8 +74,9 @@ static DFCategorizeController *categorizeController;
 {
   DDLogInfo(@"Sign Out");
   [[DFUserLoginManager sharedManager] logout];
-  abort();
-
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      abort();
+  });
 }
 
 - (void)configureCategories:(id)sender
