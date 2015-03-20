@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) DFKeeperPhoto *keeperPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *saveDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *keyLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet UITextView *indexedTextField;
 

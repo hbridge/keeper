@@ -28,6 +28,7 @@
   [super viewDidLoad];
   
   self.saveDateLabel.text = self.keeperPhoto.saveDate.description;
+  self.keyLabel.text = self.keeperPhoto.key;
   
   [[DFKeeperSearchIndexManager sharedManager]
    resultForKey:self.keeperPhoto.key
