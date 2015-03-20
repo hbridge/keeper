@@ -1,5 +1,12 @@
 # Keeper
 
+# Mar 19 2015 (22)
+
+- Visual facelift
+- Support for sending/saving photos stored in Keeper
+- Search improvements
+- Bug fixes
+
 # Mar 18 2015 (21)
 
 - "Other" categories automatically get assigned a speed dial spot
