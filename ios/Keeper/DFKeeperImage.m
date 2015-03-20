@@ -7,6 +7,7 @@
 //
 
 #import "DFKeeperImage.h"
+#import "NSDictionary+DFJSON.h"
 
 @implementation DFKeeperImage
 
@@ -30,6 +31,11 @@
   NSMutableDictionary *mutableMetadata = [NSMutableDictionary dictionaryWithDictionary:self.metadata];
   mutableMetadata[@"Orientation"] = orientation;
   self.metadata = mutableMetadata;
+}
+
+- (void)setMetadata:(NSDictionary *)metadata
+{
+  _metadata = [metadata dictionaryWithNonJSONRemoved];
 }
 
 
