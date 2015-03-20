@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="PaC-XL-Fyk">
-                    <rect key="frame" x="0.0" y="36" width="320" height="468"/>
+                    <rect key="frame" x="0.0" y="44" width="320" height="460"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="6bm-z0-aZf">
                         <size key="itemSize" width="106" height="106"/>
@@ -31,12 +31,12 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <searchBar contentMode="redraw" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znH-Jw-1fM">
-                    <rect key="frame" x="0.0" y="-8" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <color key="barTintColor" red="0.20392156859999999" green="0.26274509800000001" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="hl6-Vy-e5s">
-                    <rect key="frame" x="20" y="139" width="280" height="68"/>
+                    <rect key="frame" x="20" y="147" width="280" height="68"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="280" id="YdR-JC-dO7"/>
                     </constraints>
@@ -114,7 +114,7 @@ Cg
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="W92-Zp-2od">
-                    <rect key="frame" x="0.0" y="36" width="320" height="468"/>
+                    <rect key="frame" x="0.0" y="44" width="320" height="460"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -128,7 +128,7 @@ Cg
                 <constraint firstItem="PaC-XL-Fyk" firstAttribute="centerX" secondItem="hl6-Vy-e5s" secondAttribute="centerX" id="NEU-GF-1hB"/>
                 <constraint firstAttribute="trailing" secondItem="W92-Zp-2od" secondAttribute="trailing" id="Obq-Ud-bgI"/>
                 <constraint firstAttribute="trailing" secondItem="znH-Jw-1fM" secondAttribute="trailing" id="Wpy-dA-ZWP"/>
-                <constraint firstItem="znH-Jw-1fM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-8" id="b7D-V2-cYG"/>
+                <constraint firstItem="znH-Jw-1fM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="b7D-V2-cYG"/>
                 <constraint firstItem="W92-Zp-2od" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bRL-bl-HeE"/>
                 <constraint firstAttribute="bottom" secondItem="PaC-XL-Fyk" secondAttribute="bottom" id="bnq-CM-KDu"/>
                 <constraint firstItem="znH-Jw-1fM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hoe-ja-v8r"/>
