@@ -32,7 +32,8 @@
   
   // simple mappings
   for (NSString *key in [self.class directMappingKeys]) {
-    [self setValue:snapshot.value[key] forKey:key];
+    if (snapshot.value != [NSNull null])
+      [self setValue:snapshot.value[key] forKey:key];
   }
   
   return self;

@@ -163,8 +163,17 @@
      int newExifOrientation = [UIImage exifImageOrientationLeftFromOrientation:currentOrientation.intValue];
      DDLogVerbose(@"cgImageOrientation old:%d new:%d", image.orientation.intValue,
                   newExifOrientation);
-     [[DFImageManager sharedManager] setExifOrientation:newExifOrientation
-                                               forImage:image.key];
+     
+     
+     if (image.key) {
+       [[DFImageManager sharedManager] setExifOrientation:newExifOrientation
+                                                 forImage:image.key];
+
+     } else {
+       DDLogError(@"%@ error couldn't fetch image to set rotation: %@", self.class, self.photo.imageKey);
+       return ;
+     }
+
    }];
 }
 
