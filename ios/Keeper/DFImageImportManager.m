@@ -188,6 +188,7 @@ RLM_ARRAY_TYPE(DFAssetImport)
   [realm beginWriteTransaction];
   [realm deleteAllObjects];
   [realm commitWriteTransaction];
+  [[NSFileManager defaultManager] removeItemAtPath:[self.class dbPath] error:nil];
 }
 
 
