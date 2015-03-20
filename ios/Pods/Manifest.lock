@@ -1,5 +1,5 @@
 PODS:
-  - AWSiOSSDKv2/AWSCore (2.0.16):
+  - AWSiOSSDKv2/AWSCore (2.0.17):
     - Bolts (~> 1.1.0)
     - FMDB (~> 2.4)
     - GZIP (~> 1.0.3)
@@ -8,7 +8,7 @@ PODS:
     - TMCache (~> 1.2.1)
     - UICKeyChainStore (< 3.0)
     - XMLDictionary (~> 1.4.0)
-  - AWSiOSSDKv2/S3 (2.0.16):
+  - AWSiOSSDKv2/S3 (2.0.17):
     - AWSiOSSDKv2/AWSCore
     - Bolts (~> 1.1.0)
     - FMDB (~> 2.4)
@@ -19,34 +19,6 @@ PODS:
     - UICKeyChainStore (< 3.0)
     - XMLDictionary (~> 1.4.0)
   - Bolts (1.1.4)
-  - BRFullTextSearch (1.0.3):
-    - BRFullTextSearch/Core (= 1.0.3)
-  - BRFullTextSearch/API (1.0.3)
-  - BRFullTextSearch/CLucene-Config (1.0.3)
-  - BRFullTextSearch/CLucene-Contribs-Lib (1.0.3):
-    - BRFullTextSearch/CLucene-Core-API
-    - BRFullTextSearch/CLucene-Shared-API
-  - BRFullTextSearch/CLucene-Core (1.0.3):
-    - BRFullTextSearch/CLucene-Core-API
-    - BRFullTextSearch/CLucene-Shared-API
-  - BRFullTextSearch/CLucene-Core-API (1.0.3):
-    - BRFullTextSearch/CLucene-Config
-  - BRFullTextSearch/CLucene-Shared (1.0.3):
-    - BRFullTextSearch/CLucene-Core-API
-    - BRFullTextSearch/CLucene-Shared-API
-  - BRFullTextSearch/CLucene-Shared-API (1.0.3):
-    - BRFullTextSearch/CLucene-Config
-  - BRFullTextSearch/Core (1.0.3):
-    - BRFullTextSearch/API
-    - BRFullTextSearch/CLucene-Contribs-Lib
-    - BRFullTextSearch/CLucene-Core
-    - BRFullTextSearch/CLucene-Shared
-    - BRFullTextSearch/Implementation-CLucene
-  - BRFullTextSearch/Implementation-CLucene (1.0.3):
-    - BRFullTextSearch/API
-    - BRFullTextSearch/CLucene-Contribs-Lib
-    - BRFullTextSearch/CLucene-Core-API
-    - BRFullTextSearch/CLucene-Shared-API
   - CNPGridMenu (0.2.2)
   - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions (= 1.9.2)
@@ -69,9 +41,9 @@ PODS:
     - Mantle/extobjc (= 1.5.4)
   - Mantle/extobjc (1.5.4)
   - Reachability (3.2)
-  - Realm (0.90.6):
-    - Realm/Headers (= 0.90.6)
-  - Realm/Headers (0.90.6)
+  - Realm (0.91.1):
+    - Realm/Headers (= 0.91.1)
+  - Realm/Headers (0.91.1)
   - SAMGradientView (0.2.1)
   - SVProgressHUD (1.1.2)
   - TMCache (1.2.3)
@@ -82,7 +54,6 @@ PODS:
 DEPENDENCIES:
   - AWSiOSSDKv2/AWSCore (~> 2.0)
   - AWSiOSSDKv2/S3 (~> 2.0)
-  - BRFullTextSearch (~> 1.0)
   - CNPGridMenu (from `https://github.com/hbridge/CNPGridMenu.git`)
   - CocoaLumberjack (~> 1.9)
   - Firebase (~> 2.2)
@@ -110,9 +81,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/bitstadium/HockeySDK-iOS.git
 
 SPEC CHECKSUMS:
-  AWSiOSSDKv2: bcf17afda187f45901b07369f1f59bfbc68922bc
+  AWSiOSSDKv2: a463e466164c52814a624b5f3f70c986807f48e1
   Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
-  BRFullTextSearch: a2b527c2c7fae00eab16161760a8167f1ae2afdb
   CNPGridMenu: c677e34579ac42df6477b3d49aac3229fa2cee2d
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   Firebase: e7a2ea2ffeff99f9c37028b354194dcc9718d36b
@@ -123,7 +93,7 @@ SPEC CHECKSUMS:
   Localytics: 588e9ed57f86baadb740f4f165c22f8305c5907a
   Mantle: d5fbaf30fbc58031223af13812c060e15934a1fe
   Reachability: 1ef8adf5c4e3d362f96515d4278f68dad3c26930
-  Realm: 6c3facc11964ab9f828f47de6d0e9bf9c4d9c818
+  Realm: 81adfc7f43f9301f40bbc46d5e8a10aaf71b9504
   SAMGradientView: 37ef027b0da8b5fd85bfdfef49801b5262160998
   SVProgressHUD: da7a49e789af645d9279ffbca62318945a832438
   TMCache: 11589ef8c40909114a5e60132711c9a559e01d97

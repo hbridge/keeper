@@ -1,1 +1,0 @@
-../../../../../../BRFullTextSearch/clucene/src/core/CLucene/queryParser/legacy/_Lexer.h
