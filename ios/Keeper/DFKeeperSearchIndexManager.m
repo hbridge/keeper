@@ -67,27 +67,28 @@
   });
 }
 
-- (void)scanForDeletedDocs:(NSSet *)foundSearchDocKeys
+- (void)scanForDeletedDocs:(NSSet *)serverSearchDocKeys
 {
-  
-//  dispatch_async(self.index_queue, ^{
-//    NSMutableSet *notFoundIdentifiersInIndex = [NSMutableSet new];
-//    [[self allResultsInIndex] iterateWithBlock:^(NSUInteger index, id<BRSearchResult> result, BOOL *stop) {
-//      /// the identifier has the type (?) in front of the ID, so we have to remove it 
-//      NSString *identifier = [[result valueForField:kBRSearchFieldNameIdentifier] substringFromIndex:1];
-//      [notFoundIdentifiersInIndex addObject:identifier];
-//    }];
-//    
-//    DDLogVerbose(@"%@ delete scan identifiers in index: %@ foundSearchDocs: %@", self.class,
-//                 notFoundIdentifiersInIndex,
-//                 foundSearchDocKeys);
-//    [notFoundIdentifiersInIndex minusSet:foundSearchDocKeys];
-//    
-//    if (notFoundIdentifiersInIndex.count > 0) {
-//      DDLogInfo(@"%@ %@ photos in index need to be deleted", self.class, @(notFoundIdentifiersInIndex.count));
-//      [self removeKeysFromIndex:notFoundIdentifiersInIndex.allObjects];
-//    }
-//  });
+  NSMutableSet __block *identifiersFoundInIndex = [NSMutableSet new];
+  [self iterateAllResults:^(NSString *identifier, NSString *contents) {
+    [identifiersFoundInIndex addObject:identifier];
+  } complete:^{
+    DDLogVerbose(@"%@ delete scan identifiers in index: %@ foundSearchDocs: %@", self.class,
+                 identifiersFoundInIndex,
+                 serverSearchDocKeys);
+    
+    NSMutableSet *notFoundIdentifiersInIndex = [identifiersFoundInIndex mutableCopy];
+    [notFoundIdentifiersInIndex minusSet:serverSearchDocKeys];
+    
+    if (notFoundIdentifiersInIndex.count > 0) {
+      DDLogInfo(@"%@ %@ photos in index need to be deleted", self.class, @(notFoundIdentifiersInIndex.count));
+      // need to dispatch to prevent deadlock
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self removeKeysFromIndex:notFoundIdentifiersInIndex.allObjects];
+      });
+
+    }
+  }];
 }
 
 - (void)observeSearchDocChanges
@@ -119,6 +120,7 @@
     } else {
       [db executeUpdate:@"INSERT INTO docs (id, contents) VALUES(?, ?);", key, value];
     }
+    [resultSet close];
   }];
 }
 
@@ -126,6 +128,7 @@
 {
   for (NSString *key in keys) {
     [self.dbQueue inDatabase:^(FMDatabase *db) {
+      DDLogInfo(@"%@ removing key from DB: %@", self.class, key);
       [db executeUpdate:@"DELETE FROM docs WHERE id = ?", key];
     }];
   }
@@ -211,6 +214,18 @@
   [self.dbQueue inDatabase:^(FMDatabase *db) {
     FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM docs"];
     completion(resultSet);
+  }];
+}
+
+- (void)iterateAllResults:(void(^)(NSString *identifier, NSString *contents))iterBlock
+                 complete:(DFVoidBlock)complete
+{
+  [self fetchAllResults:^(FMResultSet *resultSet) {
+    while ([resultSet next]) {
+      iterBlock([resultSet stringForColumn:@"id"],
+                [resultSet stringForColumn:@"contents"]);
+    }
+    complete();
   }];
 }
 
