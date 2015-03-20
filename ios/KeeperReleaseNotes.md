@@ -1,5 +1,9 @@
 # Keeper
 
+# Mar 19 2015 (25)
+
+- Fix a crash on importing some photos
+
 # Mar 19 2015 (22-24)
 
 - Visual facelift
