@@ -11,6 +11,7 @@
 #import "DFKeeperStore.h"
 #import "DFUser.h"
 #import <FMDB/FMDB.h>
+#import "DFSQLRankFunc.h"
 
 @interface DFKeeperSearchIndexManager()
 
@@ -45,7 +46,10 @@
     self.dbQueue = [FMDatabaseQueue databaseQueueWithPath:[self.class indexPath]];
     [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
       [db executeUpdate:@"CREATE VIRTUAL TABLE IF NOT EXISTS docs USING fts4(id, contents);"];
-      [db executeUpdate:@"CREATE UNIQUE INDEX IF NOT EXISTS idx_ids ON docs (id)"];
+      sqlite3 *sqllite_db = [db sqliteHandle];
+      sqlite3_create_function(sqllite_db, "rank", -1, SQLITE_UTF8, NULL,
+                              &rankfunc, NULL, NULL);
+      
     }];
     
     self.searchDocsRef= [[[Firebase alloc] initWithUrl:DFFirebaseRootURLString]
@@ -150,15 +154,22 @@
       [tokens removeObjectAtIndex:i];
     }
   }
-  
-  NSMutableString *queryString = [@"''" mutableCopy];
-  [queryString insertString:[tokens componentsJoinedByString:@" OR "] atIndex:1];
-  [queryString insertString:@"SELECT id, contents FROM docs WHERE docs MATCH " atIndex:0];
-  DDLogVerbose(@"Query:%@", queryString);
+
+  NSString *queryString = [NSString stringWithFormat:@" '%@'", [tokens componentsJoinedByString:@" OR "]];
+  NSMutableString *sqlString = [@"SELECT id, contents FROM docs JOIN(" mutableCopy];
+  [sqlString appendString:@"SELECT docid, id, rank(matchinfo(docs)) AS rank"];
+  [sqlString appendString:@" FROM docs"];
+  [sqlString appendString:@" WHERE docs MATCH"];
+  [sqlString appendString:queryString];
+  [sqlString appendString:@" ORDER BY rank DESC"];
+  [sqlString appendString:@" LIMIT 10 OFFSET 0"];
+  [sqlString appendString:@") AS ranktable USING(id)"];
+  [sqlString appendString:@" ORDER BY ranktable.rank DESC"];
+  DDLogVerbose(@"Query:%@", sqlString);
   
   [self.dbQueue inDatabase:^(FMDatabase *db) {
     NSMutableArray *results = [NSMutableArray array];
-    FMResultSet *resultSet = [db executeQuery:queryString];
+    FMResultSet *resultSet = [db executeQuery:sqlString];
     while ([resultSet next]) {
       DFKeeperSearchResult *result = [DFKeeperSearchResult new];
       result.objectKey = [resultSet stringForColumn:@"id"];
@@ -222,5 +233,11 @@
   
   if (error) DDLogError(@"%@ error resetting index: %@", self.class, error);
 }
+
+
+
+
+
+
 
 @end

@@ -90,6 +90,7 @@
 		5AC04E281AA52C70008E44A8 /* NSArray+DFJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC04E271AA52C70008E44A8 /* NSArray+DFJSON.m */; };
 		5AFF98881ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFF98861ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.m */; };
 		5AFF98891ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AFF98871ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.xib */; };
+		5AFF988B1ABC6FDF0035E6E7 /* DFSQLRankFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFF988A1ABC6FDF0035E6E7 /* DFSQLRankFunc.m */; };
 		DC2A7B9402905231BE306701 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88AD2FD4651BA4B4CAD0AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -265,6 +266,8 @@
 		5AFF98851ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperPhotoInfoViewController.h; sourceTree = "<group>"; };
 		5AFF98861ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperPhotoInfoViewController.m; sourceTree = "<group>"; };
 		5AFF98871ABB2B9B0035E6E7 /* DFKeeperPhotoInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFKeeperPhotoInfoViewController.xib; sourceTree = "<group>"; };
+		5AFF988A1ABC6FDF0035E6E7 /* DFSQLRankFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSQLRankFunc.m; sourceTree = "<group>"; };
+		5AFF988C1ABC79500035E6E7 /* DFSQLRankFunc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFSQLRankFunc.h; sourceTree = "<group>"; };
 		C5EA541A400364F5B9C2B943 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F8622FA142075D9EFE24176B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -475,6 +478,8 @@
 				5A6DED921A9D08920038EF9F /* DFCategorizeController.m */,
 				5A1241931AAA5F1B0036859E /* DFKeeperSearchIndexManager.h */,
 				5A1241941AAA5F1B0036859E /* DFKeeperSearchIndexManager.m */,
+				5AFF988C1ABC79500035E6E7 /* DFSQLRankFunc.h */,
+				5AFF988A1ABC6FDF0035E6E7 /* DFSQLRankFunc.m */,
 				5A32CC781AAE1B270036790B /* DFKeeperSearchResult.h */,
 				5A32CC791AAE1B270036790B /* DFKeeperSearchResult.m */,
 			);
@@ -793,6 +798,7 @@
 				5A1C6A101A9B97F600A43A07 /* DFCGRectHelpers.m in Sources */,
 				5AC04E281AA52C70008E44A8 /* NSArray+DFJSON.m in Sources */,
 				5A1C6A0A1A9B978500A43A07 /* DFPhotoResizer.m in Sources */,
+				5AFF988B1ABC6FDF0035E6E7 /* DFSQLRankFunc.m in Sources */,
 				5A8EB90F1A91628C0033C540 /* DFLogConfig.m in Sources */,
 				5A8EB8F71A915E030033C540 /* DFCameraViewController.m in Sources */,
 				5A9FE0401AB0970F00B151BF /* DFSettings.m in Sources */,
