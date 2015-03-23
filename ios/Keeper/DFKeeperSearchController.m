@@ -14,6 +14,7 @@
 #import "DFImageManager.h"
 #import "DFKeeperSearchPhotoTableViewCell.h"
 #import "NSDateFormatter+DFPhotoDateFormatters.h"
+#import "DFAnalytics.h"
 
 @interface DFKeeperSearchController()
 
@@ -51,6 +52,7 @@
 - (void)setSearchBar:(UISearchBar *)searchBar
 {
   _searchBar = searchBar;
+  [self updateSearchResults:searchBar.text];
   searchBar.delegate = self;
 }
 
@@ -59,7 +61,6 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
   self.tableView.hidden = NO;
-  [self updateSearchResults:searchBar.text];
   [self.searchBar setShowsCancelButton:YES animated:YES];
 }
 
@@ -238,20 +239,34 @@ static NSString *PhotosSectionTitle = @"Text";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if ([self.sectionTitles[indexPath.section] isEqual:CategoriesSectionTitle]) {
-    NSString *query = self.categoriesSection[indexPath.row];
+    NSString *selectedCategory = self.categoriesSection[indexPath.row];
     NSArray *allPhotos = [[DFKeeperStore sharedStore] photos];
     NSArray *searchResults = [allPhotos objectsPassingTestBlock:^BOOL(DFKeeperPhoto *photo){
-      return [photo.category isEqual:query];
+      return [photo.category isEqual:selectedCategory];
     }];
     
     [self.delegate searchController:self
-                 completedWithQuery:query
+                 completedWithQuery:selectedCategory
                             results:searchResults];
+    [DFAnalytics logEvent:DFAnalyticsEventSearchCompleted
+           withParameters:@{
+                            @"resultType" : @"category",
+                            @"selectedCategory" : selectedCategory,
+                            @"query" : self.searchBar.text,
+                            @"resultIndex" : @(indexPath.row),
+                            }];
   } else if([self.sectionTitles[indexPath.section] isEqual:PhotosSectionTitle]) {
     DFKeeperSearchResult *searchResult = self.photosSection[indexPath.row];
     [self.delegate searchController:self
                  completedWithQuery:self.searchBar.text
                          selectedId:searchResult.objectKey];
+    [DFAnalytics logEvent:DFAnalyticsEventSearchCompleted
+           withParameters:@{
+                            @"resultType" : @"text",
+                            @"query" : self.searchBar.text,
+                            @"resultIndex" : @(indexPath.row),
+                            }];
+
   }
 }
 

@@ -29,6 +29,7 @@ extern DFAnalyticsEventType DFAnalyticsEventLibraryPhotoTapped;
 extern DFAnalyticsEventType DFAnalyticsEventLibraryFiltered;
 extern DFAnalyticsEventType DFAnalyticsEventSettingChanged;
 extern DFAnalyticsEventType DFAnalyticsEventPhotoAction;
+extern DFAnalyticsEventType DFAnalyticsEventSearchCompleted;
 
 /* Stop and Start Session Helpers */
 

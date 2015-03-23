@@ -10,7 +10,7 @@
 #import <Localytics/Localytics.h>
 #import "DFUserLoginManager.h"
 
-static BOOL DebugLogging = NO;
+static BOOL DebugLogging = YES;
 
 @interface DFAnalytics()
 
@@ -38,6 +38,7 @@ DFAnalyticsEventType DFAnalyticsEventLibraryPhotoTapped = @"LibraryPhotoTapped";
 DFAnalyticsEventType DFAnalyticsEventLibraryFiltered = @"LibraryFiltered";
 DFAnalyticsEventType DFAnalyticsEventSettingChanged = @"SettingChanged";
 DFAnalyticsEventType DFAnalyticsEventPhotoAction = @"PhotoAction";
+DFAnalyticsEventType DFAnalyticsEventSearchCompleted = @"SearchCompleted";
 
 
 static DFAnalytics *defaultLogger;
