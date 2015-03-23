@@ -11,6 +11,7 @@
 #import "DFNotLoggedInViewController.h"
 #import "AppDelegate.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "DFAnalytics.h"
 
 @implementation DFUserLoginManager
 
@@ -46,7 +47,9 @@ static DFNotLoggedInViewController *notLoggedInController;
   dispatch_once(&onceToken, ^{
     Firebase *ref = [[Firebase alloc] initWithUrl:DFFirebaseRootURLString];
     [ref observeAuthEventWithBlock:^(FAuthData *authData) {
-      if (!authData) {
+      if (authData) {
+        [DFAnalytics setCustomerId:authData.uid];
+      } else {
         DDLogInfo(@"User not logged in, showing login");
         dispatch_async(dispatch_get_main_queue(), ^{
           notLoggedInController = [[DFNotLoggedInViewController alloc] init];
@@ -175,7 +178,7 @@ static DFNotLoggedInViewController *notLoggedInController;
   
     NSArray *devEmails = @[
                            @"hbridge@gmail.com",
-                           @"aseem123@gmail.com",
+                           @"asood123@gmail.com",
                            @"dparham@gmail.com",
                            ];
   

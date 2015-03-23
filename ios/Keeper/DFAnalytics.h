@@ -31,9 +31,11 @@ extern DFAnalyticsEventType DFAnalyticsEventSettingChanged;
 extern DFAnalyticsEventType DFAnalyticsEventPhotoAction;
 
 /* Stop and Start Session Helpers */
+
 + (void)StartAnalyticsSession;
 + (void)ResumeAnalyticsSession;
 + (void)CloseAnalyticsSession;
++ (void)setCustomerId:(NSString *)customerId;
 
 /* Generic logging for view controllers */
 + (void)logViewController:(UIViewController *)viewController

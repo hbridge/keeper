@@ -70,6 +70,12 @@ static DFAnalytics *defaultLogger;
   [Localytics upload];
 }
 
++ (void)setCustomerId:(NSString *)customerId
+{
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [Localytics setCustomerId:customerId];
+  });
+}
 
 + (void)logEvent:(NSString *)eventName withParameters:(NSDictionary *)parameters
 {
