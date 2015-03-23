@@ -8,6 +8,7 @@
 
 #import "DFAnalytics.h"
 #import <Localytics/Localytics.h>
+#import "DFUserLoginManager.h"
 
 static BOOL DebugLogging = NO;
 
@@ -43,12 +44,15 @@ static DFAnalytics *defaultLogger;
 
 + (void)StartAnalyticsSession
 {
-#ifdef DEBUG
-  [Localytics integrate:@"9630379c33cbeb730f3d801-e30ec20c-bbb1-11e4-ad26-009c5fda0a25"];
-#else
-  [Localytics integrate:@"1f0f9ab17ebeff8753e9ee9-002ad6e6-bbb3-11e4-ad25-009c5fda0a25"];
-  DebugLogging = NO;
-#endif
+  if ([[DFUserLoginManager sharedManager] isLoggedInUserDeveloper]) {
+    [Localytics integrate:@"9630379c33cbeb730f3d801-e30ec20c-bbb1-11e4-ad26-009c5fda0a25"];
+  } else {
+    [Localytics integrate:@"1f0f9ab17ebeff8753e9ee9-002ad6e6-bbb3-11e4-ad25-009c5fda0a25"];
+  }
+  #ifndef DEBUG
+    DebugLogging = NO;
+  #endif
+  
   [Localytics setLoggingEnabled:DebugLogging];
 
   [DFAnalytics ResumeAnalyticsSession];
