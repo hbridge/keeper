@@ -1,5 +1,9 @@
 # Keeper
 
+# Mar 23 2015 (26)
+
+- Analytics tweaks
+
 # Mar 19 2015 (25)
 
 - Fix a crash on importing some photos
