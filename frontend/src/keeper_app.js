@@ -178,7 +178,6 @@ var KeeperApp = React.createClass({
     this.setState({selectedPhoto: photo});
   },
   
-  // Create a callback which logs the current auth state
   authDataCallback: function (authData) {
     if (authData) {
       console.log("User " + authData.uid + " is logged in with " + authData.provider);
@@ -187,6 +186,7 @@ var KeeperApp = React.createClass({
     } else {
       console.log("User is logged out");
       this.setState({loggedIn: false});
+      this.unbind("photos");
     }
   },
   
