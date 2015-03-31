@@ -18,6 +18,9 @@
     // App name
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *appName = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+    if (![appName isNotEmpty]) {
+      appName = [infoDictionary objectForKey:@"CFBundleName"];
+    }
     
     // version and build type
     NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];

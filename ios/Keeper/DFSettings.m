@@ -42,6 +42,11 @@
        FXFormFieldAction : @"sendLogs:",
        @"textLabel.color" : [DFKeeperConstants ButtonTintColor],
        },
+     @{
+       FXFormFieldTitle : @"Send Feedback",
+       FXFormFieldAction : @"sendFeedback:",
+       @"textLabel.color" : [DFKeeperConstants ButtonTintColor],
+       },
      
      @{
        FXFormFieldHeader : @"Account",

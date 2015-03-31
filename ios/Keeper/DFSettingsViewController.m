@@ -70,6 +70,18 @@ static DFCategorizeController *categorizeController;
   #endif
 }
 
+- (void)sendFeedback:(id)sender
+{
+  DFDiagnosticInfoMailComposeController *mailComposer =
+  [[DFDiagnosticInfoMailComposeController alloc] initWithMailType:DFMailTypeFeedback];
+  if (mailComposer) { // if the user hasn't setup email, this will come back nil
+    [self presentViewController:mailComposer animated:YES completion:nil];
+  } else {
+    [UIAlertView showSimpleAlertWithTitle:@"No mail accounts"
+                            formatMessage:@"You have no mail accounts set up to send email."];
+  }
+}
+
 - (void)signOut:(id)sender
 {
   DDLogInfo(@"Sign Out");

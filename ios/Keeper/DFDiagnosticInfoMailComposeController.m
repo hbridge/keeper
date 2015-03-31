@@ -18,12 +18,12 @@
   if (self) {
     if (mailType == DFMailTypeIssue) {
       NSData *errorLogData = [DFLogs aggregatedLogData];
-      [self addAttachmentData:errorLogData mimeType:@"text/plain" fileName:@"StrandLog.txt"];
+      [self addAttachmentData:errorLogData mimeType:@"text/plain" fileName:@"KeeperLog.txt"];
       [self setSubject:[NSString stringWithFormat:@"Issue report for %@", [DFAppInfo appInfoString]]];
-      [self setToRecipients:[NSArray arrayWithObject:@"strand-support@duffytech.co"]];
+      [self setToRecipients:[NSArray arrayWithObject:@"keeper-support@duffytech.co"]];
     } else if (mailType == DFMailTypeFeedback) {
       [self setSubject:[NSString stringWithFormat:@"Feedback for %@", [DFAppInfo appInfoString]]];
-      [self setToRecipients:[NSArray arrayWithObject:@"strand-feedback@duffytech.co"]];
+      [self setToRecipients:[NSArray arrayWithObject:@"keeper-feedback@duffytech.co"]];
     }
     
     self.mailComposeDelegate = self;
