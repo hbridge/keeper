@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DFKeeperPhotoViewController">
             <connections>
+                <outlet property="bottomBar" destination="YD9-mn-9gW" id="5yl-HF-fAt"/>
+                <outlet property="bottomBarBottomConstraint" destination="TGX-YG-ti5" id="7Cc-1F-4NR"/>
                 <outlet property="imageView" destination="TgM-0v-NSV" id="fN8-Ns-1EZ"/>
                 <outlet property="imageZoomScrollView" destination="LXa-JD-RnD" id="HCQ-BP-fXX"/>
                 <outlet property="tagButton" destination="Hez-Cv-yki" id="Qkt-zO-avU"/>
@@ -23,8 +25,13 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-0v-NSV">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                            <gestureRecognizers/>
                         </imageView>
                     </subviews>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="Qtq-3A-NQG" appends="YES" id="Ii7-uF-Tdv"/>
+                    </connections>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YD9-mn-9gW" userLabel="Bottom bar">
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
@@ -91,6 +98,11 @@
                 <constraint firstAttribute="trailing" secondItem="LXa-JD-RnD" secondAttribute="trailing" id="sWi-NE-FdW"/>
             </constraints>
         </view>
+        <tapGestureRecognizer id="Qtq-3A-NQG">
+            <connections>
+                <action selector="imageViewTapped:" destination="-1" id="EMZ-tn-qMM"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="Assets/Icons/RotateToolbarIcon.png" width="16" height="16"/>

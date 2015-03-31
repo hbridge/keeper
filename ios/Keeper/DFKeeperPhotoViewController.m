@@ -67,6 +67,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
+  [self.navigationController setNavigationBarHidden:NO];
   [[DFRootViewController rootViewController] setSwipingEnabled:YES];
 }
 
@@ -174,6 +175,17 @@
      }
 
    }];
+}
+
+- (IBAction)imageViewTapped:(id)sender {
+  self.chromeHidden = !self.chromeHidden;
+}
+
+- (void)setChromeHidden:(BOOL)hidden
+{
+  _chromeHidden = hidden;
+  [self.navigationController setNavigationBarHidden:(hidden) animated:NO];
+  self.bottomBarBottomConstraint.constant = hidden ? -self.bottomBar.frame.size.height : 0;
 }
 
 - (void)actionPressed:(id)sender
