@@ -18,6 +18,7 @@
 #import "DFSettingsManager.h"
 #import "DFImageDataHelper.h"
 #import "DFImageImportManager.h"
+#import "UIImage+Resize.h"
 
 @interface DFImageManager()
 
@@ -272,8 +273,8 @@ static BOOL logRouting = NO;
       && request.imageType == DFImageFull) {
     // if this is an opportunistic request for a full image, try to serve a thumb first
     DFImageManagerRequest *thumbRequest = [request
-                                           copyWithSize:CGSizeMake(DFKeeperPhotoDefaultThumbnailSize,
-                                                                   DFKeeperPhotoDefaultThumbnailSize)];
+                                           copyWithSize:CGSizeMake([DFKeeperConstants DefaultThumbnailSize],
+                                                                   [DFKeeperConstants DefaultThumbnailSize])];
     if ([[DFImageDiskCache sharedStore] canServeRequest:thumbRequest]) {
       [self serveRequestWithDiskCache:thumbRequest completion:completionBlock];
     } else {
@@ -288,11 +289,19 @@ static BOOL logRouting = NO;
      fetchImageForKey:request.key
      completion:^(UIImage *image, NSError *error) {
        result = image;
-       if (image)
+       if (image) {
          [[DFImageDiskCache sharedStore] setImage:image
-                                             type:request.imageType
+                                             type:DFImageFull
                                            forKey:request.key
                                        completion:nil];
+         [[DFImageDiskCache sharedStore] setImage:[image thumbnailImage:[DFKeeperConstants DefaultThumbnailSize]
+                                                      transparentBorder:0
+                                                           cornerRadius:0
+                                                   interpolationQuality:kCGInterpolationDefault]
+                                             type:DFImageThumbnail
+                                           forKey:request.key
+                                       completion:nil];
+       }
        dispatch_semaphore_signal(downloadSema);
      }];
     

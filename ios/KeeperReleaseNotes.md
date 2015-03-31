@@ -1,5 +1,10 @@
 # Keeper
 
+# Mar 31 2015 (27)
+
+- Enable zooming in on images and hiding chrome
+- Prettier launch screen
+
 # Mar 23 2015 (26)
 
 - Analytics tweaks

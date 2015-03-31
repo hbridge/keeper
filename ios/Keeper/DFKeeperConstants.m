@@ -39,12 +39,26 @@ NSString *const DFNewScreenshotNotification = @"com.duffyapp.DFNewScreenshotNoti
 NSString *const DFNewScreenshotNotificationIdentifiersSetKey = @"assetIdentifiers";
 NSString *const DFUserLoggedOutNotification = @"com.duffyapp.DFUserLoggedOutNotification";
 
+#pragma mark - Photo Sizes
 
-const CGFloat DFKeeperPhotoDefaultThumbnailSize = 157.0;
+const CGFloat DFKeeperPhotoThumbnailCellsPerRow = 3.0;
 const CGFloat DFKeeperPhotoHighQualityMaxLength = 1920.0;
 
 @implementation DFKeeperConstants
 
+#pragma mark - Photo Sizes
+
++ (CGFloat)DefaultThumbnailSize
+{
+  static CGFloat thumbnailSize = 0.0;
+  if (thumbnailSize == 0.0) {
+    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    thumbnailSize = (screenWidth / DFKeeperPhotoThumbnailCellsPerRow)
+      - (DFKeeperPhotoThumbnailCellsPerRow - 1.0)/[[UIScreen mainScreen] scale];
+  }
+  
+  return thumbnailSize;
+}
 
 #pragma mark - Style and Theme
 

@@ -54,7 +54,7 @@
     
     self.searchDocsRef= [[[Firebase alloc] initWithUrl:DFFirebaseRootURLString]
                     childByAppendingPath:@"searchDocs"];
-    [self printFullIndex];
+    //[self printFullIndex];
   }
   return self;
 }
@@ -73,9 +73,9 @@
   [self iterateAllResults:^(NSString *identifier, NSString *contents) {
     [identifiersFoundInIndex addObject:identifier];
   } complete:^{
-    DDLogVerbose(@"%@ delete scan identifiers in index: %@ foundSearchDocs: %@", self.class,
-                 identifiersFoundInIndex,
-                 serverSearchDocKeys);
+//    DDLogVerbose(@"%@ delete scan identifiers in index: %@ foundSearchDocs: %@", self.class,
+//                 identifiersFoundInIndex,
+//                 serverSearchDocKeys);
     
     NSMutableSet *notFoundIdentifiersInIndex = [identifiersFoundInIndex mutableCopy];
     [notFoundIdentifiersInIndex minusSet:serverSearchDocKeys];
@@ -168,7 +168,7 @@
   [sqlString appendString:@" LIMIT 10 OFFSET 0"];
   [sqlString appendString:@") AS ranktable USING(id)"];
   [sqlString appendString:@" ORDER BY ranktable.rank DESC"];
-  DDLogVerbose(@"Query:%@", sqlString);
+  //DDLogVerbose(@"Query:%@", sqlString);
   
   [self.dbQueue inDatabase:^(FMDatabase *db) {
     NSMutableArray *results = [NSMutableArray array];

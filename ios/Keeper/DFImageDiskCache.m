@@ -66,6 +66,9 @@ static DFImageDiskCache *defaultStore;
   if (![_db tableExists:@"downloadedImages"]) {
     [_db executeUpdate:@"CREATE TABLE downloadedImages (image_type NUMBER, photo_key STRING)"];
   }
+  if (![_db tableExists:@"thumbnailSizes"]) {
+    [_db executeUpdate:@"CREATE TABLE thumbnailSizes (photo_key STRING, size NUMBER, UNIQUE(photo_key))"];
+  }
   
   _dbQueue = [FMDatabaseQueue databaseQueueWithPath:[self.class dbPath]];
 }
@@ -153,12 +156,39 @@ static DFImageDiskCache *defaultStore;
   DDLogInfo(@"%@ thumbnailFiles: %@ thumbnailsInDB: %@ fullFiles: %@ fulsInDB: %@",
             self.class, @(thumnbailFiles.count), @(thumbnailsInDB.count), @(fullFiles.count), @(fullsInDB.count));
   
+  BOOL clearCache = NO;
+  
+  // check to make sure the number of thumbnails matches our db
   if (thumbnailsInDB.count != thumnbailFiles.count
       || fullsInDB.count != fullFiles.count) {
     DDLogWarn(@"%@ count mismatch. Clearing disk cache.", self.class);
-    [self clearCache];
+    clearCache = YES;
   }
   
+  // check to make sure that the size of the thumbnails matches our default size
+  FMResultSet *results = [self.db executeQuery:@"SELECT * FROM thumbnailSizes"];
+  NSUInteger numResults = 0;
+  while ([results next]) {
+    numResults++;
+    // we have to use the floor of the thumbnail size here, because when the image gets set in the
+    // cache we use the image.size (an int) to store this value.
+    if ([results doubleForColumn:@"size"] != floor([DFKeeperConstants DefaultThumbnailSize])) {
+      DDLogInfo(@"%@ thumbnail size %f does not match default size %f.  Clearing cache.",
+                self.class,
+                [results doubleForColumn:@"size"],
+                floor([DFKeeperConstants DefaultThumbnailSize]));
+      clearCache = YES;
+      break;
+    }
+  }
+  
+  if (numResults != thumbnailsInDB.count) {
+    DDLogInfo(@"%@ thumbnail sizes count does not match thumbnail DB.  Clearing cache.", self.class);
+    clearCache = YES;
+  }
+  [results close];
+  
+  if (clearCache) [self clearCache];
 }
 
 - (void)setImage:(UIImage *)image
@@ -182,6 +212,11 @@ static DFImageDiskCache *defaultStore;
           [photoKeys addObject:key];
           [self addToDBImageForType:type forKey:key];
           if (completion) completion(nil);
+          if (type == DFImageThumbnail) {
+            [self.dbQueue inDatabase:^(FMDatabase *db) {
+              [db executeUpdate:@"INSERT OR IGNORE INTO thumbnailSizes VALUES (?,?)", key, @(image.size.width)];
+            }];
+          }
         } else {
           NSString *description = [NSString stringWithFormat:@"%@ writing %@ bytes failed.",
                                    self.class,
@@ -190,6 +225,8 @@ static DFImageDiskCache *defaultStore;
                                                          code:-1030
                                                      userInfo:@{NSLocalizedDescriptionKey : description}]);
         }
+        
+
       } else {
         NSError *error;
         NSFileManager *fm = [NSFileManager defaultManager];
@@ -316,12 +353,14 @@ static DFImageDiskCache *defaultStore;
   }
 
   // clear the DB table
-  if ([self.db tableExists:@"downloadedImages"]) {
-    DDLogInfo(@"%@ clearing all rows from downloadedImagesTable", self.class);
-    //[self.db executeUpdate:@"DELETE FROM downloadedImages"];
-    [self.db executeUpdate:@"DROP TABLE downloadedImages"];
+  NSArray *tables = @[@"downloadedImages", @"thumbnailSizes"];
+  for (NSString *table in tables) {
+    if ([self.db tableExists:table]) {
+      DDLogInfo(@"%@ clearing all rows from %@", self.class, table);
+      //[self.db executeUpdate:@"DELETE FROM downloadedImages"];
+      [self.db executeUpdate:[NSString stringWithFormat:@"DROP TABLE %@", table]];
+    }
   }
-  
   
   [self.class createCacheDirectories];
   [self initDB];

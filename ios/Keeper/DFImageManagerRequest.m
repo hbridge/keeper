@@ -33,7 +33,8 @@
   if (imageType == DFImageFull) {
     size = CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength);
   } else if (imageType == DFImageThumbnail) {
-    size = CGSizeMake(DFKeeperPhotoDefaultThumbnailSize, DFKeeperPhotoDefaultThumbnailSize);
+    size = CGSizeMake([DFKeeperConstants DefaultThumbnailSize],
+                      [DFKeeperConstants DefaultThumbnailSize]);
   }
   return [self
           initWithKey:key
@@ -74,8 +75,8 @@
 - (DFImageType)imageType
 {
   DFImageType imageRequestType;
-  if (self.size.width <= DFKeeperPhotoDefaultThumbnailSize
-      && self.size.height <= DFKeeperPhotoDefaultThumbnailSize) {
+  if (self.size.width <= [DFKeeperConstants DefaultThumbnailSize]
+      && self.size.height <= [DFKeeperConstants DefaultThumbnailSize]) {
     imageRequestType = DFImageThumbnail;
   } else {
     imageRequestType = DFImageFull;
@@ -85,8 +86,8 @@
 
 - (BOOL)isDefaultThumbnail
 {
-  return CGSizeEqualToSize(self.size, CGSizeMake(DFKeeperPhotoDefaultThumbnailSize,
-                                                 DFKeeperPhotoDefaultThumbnailSize));
+  return CGSizeEqualToSize(self.size, CGSizeMake([DFKeeperConstants DefaultThumbnailSize],
+                                                 [DFKeeperConstants DefaultThumbnailSize]));
 }
 
 - (DFImageManagerRequest *)copyWithKey:(NSString *)key
