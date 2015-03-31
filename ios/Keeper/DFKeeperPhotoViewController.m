@@ -31,6 +31,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.imageZoomScrollView.imageView = self.imageView;
+  
   [self configureNav];
   
   if (self.photo)
@@ -79,16 +81,13 @@
 - (void)reloadData
 {
   [[DFImageManager sharedManager]
-   imageForKey:self.photo.imageKey
-   pointSize:[[UIScreen mainScreen] bounds].size
-   contentMode:DFImageRequestContentModeAspectFit
-   deliveryMode:DFImageRequestOptionsDeliveryModeHighQualityFormat
+   originalImageForID:self.photo.imageKey
    completion:^(UIImage *image) {
      dispatch_async(dispatch_get_main_queue(), ^{
        self.imageView.image = image;
      });
    }];
-  
+
   [self reloadCategory];
 }
 

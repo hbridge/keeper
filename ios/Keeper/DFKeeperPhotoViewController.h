@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "DFKeeperPhoto.h"
 #import "DFCategorizeController.h"
+#import "DFImageZoomScrollView.h"
 
 
 @interface DFKeeperPhotoViewController : UIViewController <DFCategorizeControllerDelegate>
+@property (weak, nonatomic) IBOutlet DFImageZoomScrollView *imageZoomScrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *tagButton;
 
