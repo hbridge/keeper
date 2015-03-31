@@ -268,6 +268,7 @@ static NSString *PhotosSectionTitle = @"Text";
                             }];
 
   }
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
