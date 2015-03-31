@@ -129,31 +129,33 @@ RLM_ARRAY_TYPE(DFAssetImport)
       // go through the assets and import the data
       PHFetchResult *assets = [PHAsset fetchAssetsWithLocalIdentifiers:localIdentifiers options:nil];
       for (PHAsset *asset in assets) {
-        DFAssetImport *assetImport = [self.class assetImportWithLocalIdentifier:asset.localIdentifier
-                                                                      inResults:assetImports];
-        DDLogInfo(@"%@ importing %@ with category: %@",
-                  self.class,
-                  assetImport.localIdentifier,
-                  assetImport.category);
-        
-        PHImageRequestOptions *requestOptions = [PHImageRequestOptions new];
-        requestOptions.synchronous = YES;
-        [[PHImageManager defaultManager]
-         requestImageDataForAsset:asset
-         options:requestOptions
-         resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
-           NSDictionary *metadata = [DFImageDataHelper metadataForImageData:imageData];
-           UIImage *image = [UIImage imageWithData:imageData];
-           [[DFImageManager sharedManager] saveImage:image
-                                            category:assetImport.category
-                                        withMetadata:metadata];
-         }];
-        
-        // mark the record as imported in the DB
-        DDLogInfo(@"%@ imported: %@", self.class, assetImport.localIdentifier);
-        [realm beginWriteTransaction];
-        assetImport.imported = YES;
-        [realm commitWriteTransaction];
+        @autoreleasepool {
+          DFAssetImport *assetImport = [self.class assetImportWithLocalIdentifier:asset.localIdentifier
+                                                                        inResults:assetImports];
+          DDLogInfo(@"%@ importing %@ with category: %@",
+                    self.class,
+                    assetImport.localIdentifier,
+                    assetImport.category);
+          
+          PHImageRequestOptions *requestOptions = [PHImageRequestOptions new];
+          requestOptions.synchronous = YES;
+          [[PHImageManager defaultManager]
+           requestImageDataForAsset:asset
+           options:requestOptions
+           resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+             NSDictionary *metadata = [DFImageDataHelper metadataForImageData:imageData];
+             UIImage *image = [UIImage imageWithData:imageData];
+             [[DFImageManager sharedManager] saveImage:image
+                                              category:assetImport.category
+                                          withMetadata:metadata];
+           }];
+          
+          // mark the record as imported in the DB
+          DDLogInfo(@"%@ imported: %@", self.class, assetImport.localIdentifier);
+          [realm beginWriteTransaction];
+          assetImport.imported = YES;
+          [realm commitWriteTransaction];
+        }
       }
     }
 

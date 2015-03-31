@@ -487,10 +487,17 @@ static BOOL logRouting = NO;
   keeperImage.orientation = @(1); // all photos we save will be up orientated after the resize
   [[DFKeeperStore sharedStore] saveImage:keeperImage];
   
-  UIImage *imageToUpload = [image
-                            resizedImageWithContentMode:UIViewContentModeScaleAspectFit
-                            bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
-                            interpolationQuality:kCGInterpolationDefault];
+  UIImage *imageToUpload;
+  if (image.size.width > DFKeeperPhotoHighQualityMaxLength ||
+      image.size.height > DFKeeperPhotoHighQualityMaxLength) {
+    imageToUpload = [image
+                     resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+                     bounds:CGSizeMake(DFKeeperPhotoHighQualityMaxLength, DFKeeperPhotoHighQualityMaxLength)
+                     interpolationQuality:kCGInterpolationDefault];
+  } else {
+    imageToUpload = image;
+  }
+  
   [self setImage:imageToUpload forKey:keeperImage.key completion:^{
     // don't create the photo until apfter the image has been stored, this way views won't reload
     // until the image is there
