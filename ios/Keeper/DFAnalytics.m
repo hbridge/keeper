@@ -10,7 +10,7 @@
 #import <Localytics/Localytics.h>
 #import "DFUserLoginManager.h"
 
-static BOOL DebugLogging = YES;
+static BOOL DebugLogging = NO;
 
 @interface DFAnalytics()
 
