@@ -33,8 +33,7 @@ const NSUInteger MaxFirstTokenLocation = 15;
   
   
   // highlight search string
-  NSString *baseFontName = [[baseFont.fontName componentsSeparatedByString:@"-"] firstObject];
-  UIFont *highlightFont = [UIFont fontWithName:[NSString stringWithFormat:@"%@-Bold", baseFontName]
+  UIFont *highlightFont = [UIFont fontWithName:@"Avenir-Medium"
                                           size:baseFont.pointSize];
   NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:trimmedString];
 
