@@ -21,7 +21,16 @@
 
 + (void)initialize
 {
-  }
+  NSDictionary *attributes = @{
+                               NSFontAttributeName: [DFKeeperConstants NavigationBarFont],
+                               NSForegroundColorAttributeName: [DFKeeperConstants BarForegroundColor],
+                               };
+
+  [[UINavigationBar appearanceWhenContainedIn:[DFNavigationController class], nil] setTitleTextAttributes:attributes];
+  [[UIBarButtonItem appearanceWhenContainedIn:[DFNavigationController class], nil]
+   setTitleTextAttributes:attributes
+   forState:UIControlStateNormal];
+}
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
@@ -31,10 +40,6 @@
     self.navigationBar.translucent = NO;
     self.navigationBar.barTintColor = [DFKeeperConstants BarBackgroundColor];
     self.navigationBar.tintColor = [DFKeeperConstants BarForegroundColor];
-    self.navigationBar.titleTextAttributes = @{
-                                 NSForegroundColorAttributeName:
-                                   [DFKeeperConstants BarForegroundColor]
-                                 };
   }
   
   return self;
@@ -49,12 +54,6 @@
 {
   [super viewDidLoad];
   
-  [[UINavigationBar appearance]
-   setTitleTextAttributes:@{
-                            NSFontAttributeName: [UIFont fontWithName:@"Avenir-Medium" size:17.0],
-                            NSForegroundColorAttributeName: [UIColor whiteColor],
-                            }];
-
   [self.navigationBar setBackgroundImage:[UIImage new]
             forBarPosition:UIBarPositionAny
                 barMetrics:UIBarMetricsDefault];

@@ -43,6 +43,7 @@ extern const CGFloat DFKeeperPhotoHighQualityMaxLength;
 + (UIStatusBarStyle)DefaultStatusBarStyle;
 + (NSString *)DefaultFontFamily;
 + (UIFont *)LabelFont;
++ (UIFont *)NavigationBarFont;
 
 #pragma mark - Legal
 

@@ -70,12 +70,17 @@ const CGFloat DFKeeperPhotoHighQualityMaxLength = 1920.0;
 
 + (NSString *)DefaultFontFamily
 {
-  return @"ProximaNova-Regular";
+  return @"Avenir-Light";
 }
 
 + (UIFont *)LabelFont
 {
-  return [UIFont fontWithName:@"ProximaNova-Regular" size:17.0];
+  return [UIFont fontWithName:@"Avenir-Light" size:17.0];
+}
+
++ (UIFont *)NavigationBarFont
+{
+  return [UIFont fontWithName:@"Avenir-Medium" size:17.0];
 }
 
 
