@@ -1,25 +1,5 @@
-.appTitle
-{
-  font-family: Avenir-Light;
-  color: #FFF;
-  font-size: 20pt;
-  width: 90%;
-  float: left;
-}
+/*main containers */
 
-.signOut
-{
-  text-align: right;
-  float:left;
-  margin-top: 10px;
-}
-
-.signOut a
-{
-  font-family: Avenir-Light;
-  font-size: 14pt;
-  color:#DDD;
-}
 
 #keeper_app
 {
@@ -49,7 +29,42 @@
   height: 95%;
   border-radius: 4pt;
   overflow: hidden;
+  margin-top:40px;
 }
+
+/* header */
+
+#headerBar
+{
+  position: absolute;
+  width: 100%;
+  height: 40px;
+}
+
+.appTitle
+{
+  font-family: Avenir-Light;
+  color: #FFF;
+  font-size: 20pt;
+  position: absolute;
+}
+
+.signOut
+{
+  text-align: right;
+  position: absolute;
+  right: 0pt;
+  margin-top: 10px;
+}
+
+.signOut a
+{
+  font-family: Avenir-Light;
+  font-size: 14pt;
+  color:#DDD;
+}
+
+/* login */
 
 .loginArea
 {
@@ -110,6 +125,8 @@
   line-height: 1.0;
 }
 
+/* content */
+
 .photoList 
 {
   float: left;
@@ -123,9 +140,8 @@
 {
   padding: 20px;
   background-color: #FFF;
-  width: 70%;
+  margin-left: 250px;
   height: 100%;
-  float: left;
 }
 
 .detailImageView
@@ -164,6 +180,8 @@
 .clear {
   clear: both;
 }
+
+/* base styles */
 
 
 body {

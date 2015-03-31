@@ -90,9 +90,9 @@ var HeaderBar = React.createClass({
   render: function() {
     if (this.props.loggedIn) {
       return (
-          <div className="headerBar">
-            <div className="appTitle">Keeper</div> 
-            <div className="signOut" onClick={ this.handleLogOut }><a href="">Sign Out</a></div>
+          <div id="headerBar">
+            <span className="appTitle">Keeper</span> 
+            <span className="signOut" onClick={ this.handleLogOut }><a href="">Sign Out</a></span>
             <div className="clear"></div>
           </div>
       );
