@@ -137,14 +137,15 @@
 - (void)URLSession:(NSURLSession *)session
               task:(NSURLSessionTask *)task
 didCompleteWithError:(NSError *)error {
-  if (!error) {
+  NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
+  if (!error && httpResponse.statusCode == 200) {
     NSString *urlString = [NSString stringWithFormat:@"%@://%@%@",
                            task.currentRequest.URL.scheme,
                            task.currentRequest.URL.host,
                            task.currentRequest.URL.path
                            ];
     
-    DDLogInfo(@"S3 upload completed %@", urlString);
+    DDLogInfo(@"S3 upload completed %@ with response:%@", urlString, @(httpResponse.statusCode));
     NSDictionary *userInfo;
     if (task.taskDescription) userInfo = @{DFImageUploadedNotificationImageKey : task.taskDescription};
     [[NSNotificationCenter defaultCenter]
@@ -152,7 +153,7 @@ didCompleteWithError:(NSError *)error {
      object:self
      userInfo:userInfo];
   }else {
-    DDLogError(@"S3 upload error: %@", error);
+    DDLogError(@"S3 upload error: %@, response: %@", error, task.response);
   }
   [self setKey:task.taskDescription inProgress:NO];
 }
