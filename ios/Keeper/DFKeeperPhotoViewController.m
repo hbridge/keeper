@@ -57,26 +57,10 @@
   self.navigationItem.rightBarButtonItems = items;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  self.navigationController.navigationBar.translucent = YES;
-  self.navigationController.navigationBar.backgroundColor = [DFKeeperConstants BarBackgroundColor];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
   [DFAnalytics logViewController:self appearedWithParameters:@{@"category" : NonNull(self.photo.category)}];
-  [[DFRootViewController rootViewController] setSwipingEnabled:NO];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-  [super viewWillDisappear:animated];
-  self.navigationController.navigationBar.translucent = NO;
-  [self.navigationController setNavigationBarHidden:NO];
-  [[DFRootViewController rootViewController] setSwipingEnabled:YES];
 }
 
 - (void)setPhoto:(DFKeeperPhoto *)photo
@@ -193,8 +177,9 @@
 {
   _chromeHidden = hidden;
   [self.navigationController setNavigationBarHidden:(hidden) animated:NO];
-  self.bottomBarBottomConstraint.constant = hidden ? -self.bottomBar.frame.size.height : 0;
+  self.bottomBar.hidden = hidden;
   [[DFRootViewController rootViewController] setHideStatusBar:hidden];
+  self.view.backgroundColor = hidden ? [UIColor blackColor] : [UIColor whiteColor];
 }
 
 - (void)actionPressed:(id)sender

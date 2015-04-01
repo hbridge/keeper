@@ -31,6 +31,8 @@
 		5A6DED931A9D08920038EF9F /* DFCategorizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6DED921A9D08920038EF9F /* DFCategorizeController.m */; };
 		5A6DED961A9E6C890038EF9F /* DFAssetLibraryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6DED951A9E6C890038EF9F /* DFAssetLibraryHelper.m */; };
 		5A77355D1ACB240F00A3A4E9 /* DFImageZoomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A77355C1ACB240F00A3A4E9 /* DFImageZoomScrollView.m */; };
+		5A7735601ACC84C100A3A4E9 /* DFItemPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A77355F1ACC84C100A3A4E9 /* DFItemPageViewController.m */; };
+		5A7735631ACC8A0B00A3A4E9 /* DFKeeperPhotoPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7735621ACC8A0B00A3A4E9 /* DFKeeperPhotoPager.m */; };
 		5A88B7E41A9FBC020008F548 /* DFSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A88B7E31A9FBC020008F548 /* DFSettingsManager.m */; };
 		5A8EB8CB1A9153F00033C540 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CA1A9153F00033C540 /* main.m */; };
 		5A8EB8CE1A9153F00033C540 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8EB8CD1A9153F00033C540 /* AppDelegate.m */; };
@@ -155,6 +157,10 @@
 		5A6DED951A9E6C890038EF9F /* DFAssetLibraryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFAssetLibraryHelper.m; sourceTree = "<group>"; };
 		5A77355B1ACB240F00A3A4E9 /* DFImageZoomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageZoomScrollView.h; sourceTree = "<group>"; };
 		5A77355C1ACB240F00A3A4E9 /* DFImageZoomScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageZoomScrollView.m; sourceTree = "<group>"; };
+		5A77355E1ACC84C100A3A4E9 /* DFItemPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFItemPageViewController.h; sourceTree = "<group>"; };
+		5A77355F1ACC84C100A3A4E9 /* DFItemPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFItemPageViewController.m; sourceTree = "<group>"; };
+		5A7735611ACC8A0B00A3A4E9 /* DFKeeperPhotoPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFKeeperPhotoPager.h; sourceTree = "<group>"; };
+		5A7735621ACC8A0B00A3A4E9 /* DFKeeperPhotoPager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFKeeperPhotoPager.m; sourceTree = "<group>"; };
 		5A88B7E21A9FBC020008F548 /* DFSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFSettingsManager.h; sourceTree = "<group>"; };
 		5A88B7E31A9FBC020008F548 /* DFSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSettingsManager.m; sourceTree = "<group>"; };
 		5A8EB8C51A9153F00033C540 /* Keeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -326,6 +332,8 @@
 		5A77355A1ACB23E800A3A4E9 /* Photo Detail */ = {
 			isa = PBXGroup;
 			children = (
+				5A7735611ACC8A0B00A3A4E9 /* DFKeeperPhotoPager.h */,
+				5A7735621ACC8A0B00A3A4E9 /* DFKeeperPhotoPager.m */,
 				5A677D5A1A9BD8030060B55D /* DFKeeperPhotoViewController.h */,
 				5A677D5B1A9BD8030060B55D /* DFKeeperPhotoViewController.m */,
 				5A677D5C1A9BD8030060B55D /* DFKeeperPhotoViewController.xib */,
@@ -522,6 +530,8 @@
 		5A99501C1A965D9E00468484 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				5A77355E1ACC84C100A3A4E9 /* DFItemPageViewController.h */,
+				5A77355F1ACC84C100A3A4E9 /* DFItemPageViewController.m */,
 				5AA508081AA662D7007A9375 /* UIViewController+DFKeyboardObserving.h */,
 				5AA508091AA662D7007A9375 /* UIViewController+DFKeyboardObserving.m */,
 				5AC04E111AA10D26008E44A8 /* UIAlertView+DFHelpers.h */,
@@ -802,6 +812,7 @@
 				5A387C131AA79FEA00DCB601 /* DFCameraRollScanManager.m in Sources */,
 				5AB821851AA91430000D5781 /* DFInsetTextField.m in Sources */,
 				5A99502F1A96983800468484 /* UINib+DFHelpers.m in Sources */,
+				5A7735631ACC8A0B00A3A4E9 /* DFKeeperPhotoPager.m in Sources */,
 				5AB821781AA8E93A000D5781 /* DFImageImportManager.m in Sources */,
 				5A99501F1A965DFA00468484 /* DFNavigationController.m in Sources */,
 				5A99502B1A968DC900468484 /* DFImageCollectionViewCell.m in Sources */,
@@ -825,6 +836,7 @@
 				5A99501B1A965BD500468484 /* DFKeeperConstants.m in Sources */,
 				5A1241951AAA5F1B0036859E /* DFKeeperSearchIndexManager.m in Sources */,
 				5AB821811AA90FCD000D5781 /* DFCreateAccountViewController.m in Sources */,
+				5A7735601ACC84C100A3A4E9 /* DFItemPageViewController.m in Sources */,
 				5A677D671A9BEC2D0060B55D /* DFAnalytics.m in Sources */,
 				5A99504D1A97E44A00468484 /* DFImageDiskCache.m in Sources */,
 				5A1C6A1D1A9B9F8300A43A07 /* NSString+DFHelpers.m in Sources */,

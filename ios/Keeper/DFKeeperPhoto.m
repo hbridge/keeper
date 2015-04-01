@@ -60,4 +60,14 @@
   return self;
 }
 
+- (BOOL)isEqual:(id)object
+{
+  return [self.key isEqual:((DFKeeperPhoto *)object).key];
+}
+
+- (NSUInteger)hash
+{
+  return self.key.hash;
+}
+
 @end

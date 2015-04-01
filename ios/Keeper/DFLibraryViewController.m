@@ -22,6 +22,7 @@
 #import "DFImageImportManager.h"
 #import "DFCameraRollScanManager.h"
 #import "UIImage+DFHelpers.h"
+#import "DFKeeperPhotoPager.h"
 
 @interface DFLibraryViewController ()
 
@@ -300,9 +301,18 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  DFKeeperPhotoViewController *pvc = [[DFKeeperPhotoViewController alloc] init];
-  pvc.photo = self.allPhotos[indexPath.row];
-  [self.navigationController pushViewController:pvc animated:YES];
+  DFItemPageViewController *itemPVC = [[DFKeeperPhotoPager alloc]
+                                       initWithStartingItem:self.allPhotos[indexPath.row]
+                                       inItems:self.allPhotos
+                                       itemToViewController:^UIViewController *(id item) {
+                                         DFKeeperPhotoViewController *pvc = [[DFKeeperPhotoViewController alloc] init];
+                                         pvc.photo = item;
+                                         return pvc;
+                                       } viewControllerToItem:^id(UIViewController *vc) {
+                                         DFKeeperPhotoViewController *pvc = (DFKeeperPhotoViewController *)vc;
+                                         return pvc.photo;
+                                       }];
+  [self.navigationController pushViewController:itemPVC animated:YES];
   [DFAnalytics logEvent:DFAnalyticsEventLibraryPhotoTapped
          withParameters:@{@"categoryFilter" : self.categoryFilter ? self.categoryFilter : @"none"}];
 }
