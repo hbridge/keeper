@@ -2,8 +2,9 @@
 
 # Mar 31 2015 (27)
 
-- Enable zooming in on images and hiding chrome
+- When viewing photos, you can now zoom in on them and tap to hide the chrome around them
 - Prettier launch screen
+- Performance improvements
 
 # Mar 23 2015 (26)
 
