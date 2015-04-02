@@ -514,8 +514,10 @@ static BOOL logRouting = NO;
 {
   [[DFImageDiskCache sharedStore] setImage:image type:DFImageFull forKey:key completion:^(NSError *error) {
     [self clearCacheForImage:key];
-    [[DFImageUploadManager sharedManager]
-     uploadImageFile:[[DFImageDiskCache sharedStore] urlForFullImageWithKey:key] forKey:key];
+    NSURL *imageURL = [[DFImageDiskCache sharedStore] urlForFullImageWithKey:key];
+    [[DFImageUploadManager sharedManager] uploadImageFile:imageURL
+                                              contentType:@"image/jpeg"
+                                                   forKey:key];
     if (completion) completion();
   }];
 }
@@ -561,15 +563,7 @@ static BOOL logRouting = NO;
 {
   DDLogInfo(@"%@ performing foreground ops.", self.class);
   [[DFKeeperStore sharedStore] fetchImagesWithCompletion:^(NSArray *images) {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      for (DFKeeperImage *image in images) {
-        if (!image.uploaded.boolValue) {
-          NSURL *url = [[DFImageDiskCache sharedStore] urlForFullImageWithKey:image.key];
-          [[DFImageUploadManager sharedManager] uploadImageFile:url forKey:image.key];
-        }
-      }
-    });
-    
+    [[DFImageUploadManager sharedManager] resumeUploads];
     [[DFImageDownloadManager sharedManager] fetchNewImages];
   }];
   [[DFImageImportManager sharedManager] resumeImports];

@@ -12,7 +12,13 @@
 
 + (DFImageUploadManager *)sharedManager;
 
-- (void)uploadImageFile:(NSURL *)imageFile forKey:(NSString *)key;
+- (void)uploadImageFile:(NSURL *)imageFile
+            contentType:(NSString *)contentType
+                 forKey:(NSString *)key;
+- (void)uploadImageData:(NSData *)imageData
+            contentType:(NSString *)contentType
+                 forKey:(NSString *)key;
+- (void)resumeUploads;
 - (void)deleteImageWithKey:(NSString *)key;
 
 @end
