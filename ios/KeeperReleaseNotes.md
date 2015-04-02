@@ -1,5 +1,9 @@
 # Keeper
 
+# Apr 1 2015 (28)
+
+- When viewing photos, you can now swipe between them
+
 # Mar 31 2015 (27)
 
 - When viewing photos, you can now zoom in on them and tap to hide the chrome around them
