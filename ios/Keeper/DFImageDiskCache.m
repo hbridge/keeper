@@ -13,6 +13,8 @@
 #import "DFImageDownloadManager.h"
 #import "DFPhotoResizer.h"
 #import "DFImageManager.h"
+#import "DFKeeperStore.h"
+#import "DFImageUploadManager.h"
 
 @interface DFImageDiskCache()
 
@@ -50,7 +52,9 @@ static DFImageDiskCache *defaultStore;
     [DFImageDiskCache createCacheDirectories];
     [self initDB];
     [self loadDownloadedImagesCache];
-    [self integrityCheck];
+    [self uploadUnuploadedFullsWithCompletion:^{
+      [self integrityCheck];
+    }];
   }
   return self;
 }
@@ -135,6 +139,27 @@ static DFImageDiskCache *defaultStore;
   
   imageKeys = [self keysFromDBForType:DFImageFull];
   [self.idsByImageTypeCache setObject:imageKeys forKey:@(DFImageFull)];
+}
+
+- (void)uploadUnuploadedFullsWithCompletion:(DFVoidBlock)completion
+{
+  /* This is a temporary hack to make sure we don't lose people's data as we used to store
+   files to upload in the cache */
+  
+  [[DFKeeperStore sharedStore] fetchImagesWithCompletion:^(NSArray *images) {
+    for (DFKeeperImage *image in images) {
+      if (!image.uploaded.boolValue) {
+        NSURL *fileURL = [self urlForFullImageWithKey:image.key];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:fileURL.path]) {
+          DDLogInfo(@"%@ image not uploaded, uploading from:%@", self.class, fileURL);
+          [[DFImageUploadManager sharedManager] uploadImageFile:fileURL
+                                                    contentType:@"image/jpeg"
+                                                         forKey:image.key];
+        }
+      }
+    }
+    if (completion) completion();
+  }];
 }
 
 - (void)integrityCheck
