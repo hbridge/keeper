@@ -23,6 +23,7 @@
 @interface DFKeeperPhotoViewController ()
 
 @property (nonatomic, retain) DFCategorizeController *categorizeController;
+@property (nonatomic, retain) NSNumber *numberOfRotations;
 
 @end
 
@@ -61,6 +62,12 @@
 {
   [super viewDidAppear:animated];
   [DFAnalytics logViewController:self appearedWithParameters:@{@"category" : NonNull(self.photo.category)}];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  [self saveChangedOrientation];
 }
 
 - (void)setPhoto:(DFKeeperPhoto *)photo
@@ -139,34 +146,43 @@
 }
 
 - (IBAction)rotateButtonPressed:(id)sender {
-  // fetch the correct image orientation from the DFKeeperImage
-  [[DFKeeperStore sharedStore]
-   fetchImageWithKey:self.photo.imageKey
-   completion:^(DFKeeperImage *image) {
      // rotate in UI
      UIImageOrientation newOrientation = [self.imageView.image orientationRotatedLeft];
      UIImage *rotatedImage = [[UIImage alloc] initWithCGImage:self.imageView.image.CGImage
                                                         scale:1.0
                                                   orientation:newOrientation];
      self.imageView.image = rotatedImage;
-     
+  
+  if (!self.numberOfRotations) self.numberOfRotations = @(0);
+  self.numberOfRotations = @(self.numberOfRotations.intValue + 1);
+}
+
+- (void)saveChangedOrientation
+{
+  if (!self.numberOfRotations || (self.numberOfRotations.intValue % 4 == 0)) return;
+  [[DFKeeperStore sharedStore]
+   fetchImageWithKey:self.photo.imageKey
+   completion:^(DFKeeperImage *image) {
      // Write the new image rotation locally and to the server
      NSNumber *currentOrientation = image.orientation ? image.orientation : @(1); // set default to up
-     int newExifOrientation = [UIImage exifImageOrientationLeftFromOrientation:currentOrientation.intValue];
+     int newExifOrientation = currentOrientation.intValue;
+     for (int i = 0; i < self.numberOfRotations.intValue % 4; i++) {
+       newExifOrientation = [UIImage exifImageOrientationLeftFromOrientation:newExifOrientation];
+     }
+     
      DDLogVerbose(@"cgImageOrientation old:%d new:%d", image.orientation.intValue,
                   newExifOrientation);
-     
-     
+
      if (image.key) {
        [[DFImageManager sharedManager] setExifOrientation:newExifOrientation
                                                  forImage:image.key];
-
+       
      } else {
        DDLogError(@"%@ error couldn't fetch image to set rotation: %@", self.class, self.photo.imageKey);
        return ;
      }
-
    }];
+  
 }
 
 - (IBAction)imageViewTapped:(id)sender {
