@@ -1,5 +1,9 @@
 # Keeper
 
+# Apr 2 2015 (29)
+
+- Bug fixes
+
 # Apr 1 2015 (28)
 
 - When viewing photos, you can now swipe between them
